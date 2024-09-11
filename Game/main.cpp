@@ -1,37 +1,25 @@
 #include "pch.h"
 
-GLvoid drawScene()
-{
-	glClearColor(0.f, 0.f, 0.f, 1.f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glutSwapBuffers();
-}
 
 int main(int argc, char** argv)
 {
-	int width = 500;
-	int height = 500;
+	shared_ptr<Game> game = make_shared<Game>();
 
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(width, height);
-	glutCreateWindow("Example");
-
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK)
+	GameDesc& desc = game->GetDesc();
 	{
-		std::cerr << "Unable to init GLEW" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		std::cout << "GLEW Initialized" << std::endl;
+		desc.width = 800;
+		desc.height = 600;
+		desc.windowName = "Billards";
+		desc.windowPos = { 100.f, 100.f };
+		desc.clearColor = { 0.f, 1.f, 0.f };
 	}
 
-	glutDisplayFunc(drawScene);
+	game->Init(argc, argv);
 
-	glutMainLoop();
+	while (true)
+	{
+		game->Update();
+		game->Render();
+	}
 
 }
