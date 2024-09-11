@@ -9,6 +9,10 @@
 #include <algorithm>
 #include <functional>
 #include <memory>
+#include <vector>
+#include <unordered_map>
+#include <type_traits>
+#include <array>
 
 using namespace std;
 

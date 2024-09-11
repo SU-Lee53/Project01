@@ -5,7 +5,7 @@
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-struct RGB
+struct Color
 {
 	union
 	{

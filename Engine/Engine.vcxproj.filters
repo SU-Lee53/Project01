@@ -12,24 +12,52 @@
     <Filter Include="소스 파일\Headers">
       <UniqueIdentifier>{fe4e327b-8538-4869-b74a-777ffea51203}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Graphics">
+      <UniqueIdentifier>{faa1d5f6-3ae5-416b-893a-0cad74733bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Graphics\Buffers">
+      <UniqueIdentifier>{4f4300d5-fb03-49cf-bc53-0c47b35af5ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="EnginePch.cpp">
       <Filter>소스 파일\Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="EBO.cpp">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="EnginePch.h">
       <Filter>소스 파일\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>소스 파일\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="EBO.h">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
 </Project>
