@@ -1,18 +1,19 @@
 #pragma once
+#include "VBO.h"
+
 class VAO
 {
+public:
+	VAO();
+	~VAO();
+
+	void MakeVAO(unsigned int shader);
+
+public:
+	VBO& GetVBO() { return _vbo; }
 
 private:
-	template <typename T, typename = enable_if_t<disjunction_v<is_integral<T>, is_floating_point<T>>>>
-	struct Buffer
-	{
-		int id = 0;
-		vector<T> buffer;
-	};
-
-
-	Buffer<float> _vertices;
-	Buffer<unsigned int> _indices;
-	Buffer<float> _colors;
+	unsigned int id;
+	VBO _vbo;
 };
 

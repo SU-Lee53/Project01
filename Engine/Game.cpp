@@ -5,9 +5,9 @@ void Game::Init(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(desc.windowPos.x, desc.windowPos.y);
-	glutInitWindowSize(desc.width, desc.height);
-	glutCreateWindow(desc.windowName.c_str());
+	glutInitWindowPosition(_desc.windowPos.x, _desc.windowPos.y);
+	glutInitWindowSize(_desc.width, _desc.height);
+	glutCreateWindow(_desc.windowName.c_str());
 
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
@@ -20,6 +20,8 @@ void Game::Init(int argc, char** argv)
 		std::cout << "GLEW Initialized" << std::endl;
 	}
 
+	MANAGER.Init();
+
 }
 
 void Game::Update()
@@ -28,9 +30,8 @@ void Game::Update()
 
 void Game::Render()
 {
-
-	glClearColor(desc.clearColor.r, desc.clearColor.g, desc.clearColor.b, desc.clearColor.a);
+	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
 	glClear(GL_COLOR_BUFFER_BIT);
-
+	MANAGER.GetManager<ManagerType::Time>();
 	glutSwapBuffers();
 }

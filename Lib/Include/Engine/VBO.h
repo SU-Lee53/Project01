@@ -1,10 +1,24 @@
 #pragma once
 
+enum class BufferType
+{
+	Vertex = 0,
+	Color,
+	Element,
+
+	End
+};
+
+enum
+{
+	BUFFER_TYPE_COUNT = static_cast<int>(BufferType::End)
+};
+
 class VBO
 {
 public:
-
-
+	VBO();
+	~VBO();
 
 public:
 	// Getter
@@ -18,12 +32,12 @@ public:
 	vector<unsigned>& GetIndexBuffer() { return _indices; }
 
 private:
-	int _id;
+	array<unsigned int, BUFFER_TYPE_COUNT> _ids;
 
 private:
-
 	vector<float> _vertices;
 	vector<unsigned int> _indices;
 	vector<float> _colors;
+
 };
 

@@ -17,12 +17,12 @@ public:
 	void Update();
 	void Render();
 
-	GameDesc& GetDesc() { return desc; }
+	GameDesc& GetDesc() { return _desc; }
 
 private:
 
 private:
-	GameDesc desc;
+	GameDesc _desc;
 
 };
 

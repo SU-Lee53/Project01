@@ -2,6 +2,7 @@
 
 // Types
 #include "Types.h"
+#include "Define.h"
 
 // STL
 #include <iostream>
@@ -13,6 +14,7 @@
 #include <unordered_map>
 #include <type_traits>
 #include <array>
+#include <variant>
 
 using namespace std;
 
@@ -28,3 +30,8 @@ using namespace std;
 
 // PreCompile
 #include "Game.h"
+#include "Utils.h"
+#include "Manager.h"
+#include "TimeManager.h"
+#include "InputManager.h"
+#include "SceneManager.h"
