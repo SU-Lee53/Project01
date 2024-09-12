@@ -56,3 +56,20 @@ std::string Utils::ToString(wstring value)
 {
 	return string(value.begin(), value.end());
 }
+
+string Utils::FileToBuf(ifstream& is)
+{
+	int fileLength;
+	{
+		is.seekg(0, ios::end);
+		fileLength = is.tellg();
+		is.seekg(0, ios::beg);
+	}
+
+	string buf;
+	buf.resize(fileLength);
+	
+	is.read(buf.data(), fileLength);
+
+	return buf;
+}

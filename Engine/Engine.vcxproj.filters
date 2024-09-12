@@ -66,7 +66,7 @@
       <Filter>소스 파일\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>소스 파일\Scene</Filter>
+      <Filter>소스 파일\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +110,7 @@
       <Filter>소스 파일\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>소스 파일\Scene</Filter>
+      <Filter>소스 파일\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

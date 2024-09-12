@@ -1,5 +1,6 @@
 #pragma once
 
+
 struct GameDesc
 {
 	int width;
@@ -22,6 +23,6 @@ private:
 
 private:
 	GameDesc _desc;
-
+	shared_ptr<class Shader> _shader;
 };
 

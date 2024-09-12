@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "Game.h"
+#include "Shader.h"
 
 void Game::Init(int argc, char** argv)
 {
@@ -21,6 +22,7 @@ void Game::Init(int argc, char** argv)
 	}
 
 	MANAGER.Init();
+	_shader = make_shared<Shader>(L"vs", L"fs");
 
 }
 

@@ -33,7 +33,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vs.glsl" />
-    <None Include="global.glsl" />
+    <None Include="..\Shader\global.glsl">
+      <Filter>소스 파일\Shader</Filter>
+    </None>
+    <None Include="..\Shader\vs.glsl">
+      <Filter>소스 파일\Shader</Filter>
+    </None>
+    <None Include="..\Shader\fs.glsl">
+      <Filter>소스 파일\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

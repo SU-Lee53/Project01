@@ -145,8 +145,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="global.glsl" />
-    <None Include="vs.glsl" />
+    <None Include="..\Shader\fs.glsl" />
+    <None Include="..\Shader\global.glsl" />
+    <None Include="..\Shader\vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
