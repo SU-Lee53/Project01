@@ -1,25 +1,36 @@
 #include "pch.h"
 
+Game game{};
+
+void Render()
+{
+	glClearColor(game.GetDesc().clearColor.r, game.GetDesc().clearColor.g, game.GetDesc().clearColor.b, game.GetDesc().clearColor.a);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glutSwapBuffers();
+}
 
 int main(int argc, char** argv)
 {
-	shared_ptr<Game> game = make_shared<Game>();
-
-	GameDesc& desc = game->GetDesc();
+	GameDesc& desc = game.GetDesc();
 	{
 		desc.width = 800;
 		desc.height = 600;
 		desc.windowName = "Billards";
 		desc.windowPos = { 100.f, 100.f };
-		desc.clearColor = { 0.f, 1.f, 0.f };
+		desc.clearColor = { 0.f, 0.f, 0.f };
 	}
 
-	game->Init(argc, argv);
+	game.Init(argc, argv);
+
+	glutDisplayFunc(Render);
 
 	while (true)
 	{
-		game->Update();
-		game->Render();
+		game.Update();
+
+		glutPostRedisplay();
+		glutMainLoopEvent();
 	}
 
 }

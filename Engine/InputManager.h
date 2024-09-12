@@ -74,20 +74,19 @@ public:
 	void Init();
 	void Update();
 
-
-private:
-	void UpdateKeyboard();
+public:
 	bool GetButton(KEY_TYPE key) { return GetState(key) == KEY_STATE::PRESS; }
 	bool GetButtonDown(KEY_TYPE key) { return GetState(key) == KEY_STATE::DOWN; }
 	bool GetButtonUp(KEY_TYPE key) { return GetState(key) == KEY_STATE::UP; }
 
 private:
+	void UpdateKeyboard();
+private:
 	void UpdateMouse();
 
 private:
-	inline KEY_STATE GetState(KEY_TYPE key) {return _states[static_cast<UINT8>(key)] }
+	inline KEY_STATE GetState(KEY_TYPE key) { return _states[static_cast<UINT8>(key)]; }
 
 private:
 	vector<KEY_STATE> _states;
 };
-

@@ -16,17 +16,19 @@ void InputManager::Init()
 
 void InputManager::Update()
 {
+	UpdateKeyboard();
 }
 
 void InputManager::UpdateKeyboard()
 {
-	array<BYTE, KEY_TYPE_COUNT> keys;
-	if (::GetKeyboardState(keys.data()) == false)
+	//array<BYTE, KEY_TYPE_COUNT> asciiKeys;
+	BYTE asciiKeys[KEY_TYPE_COUNT] = {};
+	if (::GetKeyboardState(asciiKeys) == false)
 		return;
 
-	for (auto& key : keys)
+	for (int key = 0; key < KEY_TYPE_COUNT; key++)
 	{
-		if (key & 0x80)
+		if (asciiKeys[key] & 0x80)
 		{
 			KEY_STATE& state = _states[key];
 

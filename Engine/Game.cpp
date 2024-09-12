@@ -24,14 +24,15 @@ void Game::Init(int argc, char** argv)
 
 }
 
+static float _temp = 0.0f;
 void Game::Update()
 {
-}
+	MANAGER.Update();
 
-void Game::Render()
-{
-	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
-	glClear(GL_COLOR_BUFFER_BIT);
-	MANAGER.GetManager<ManagerType::Time>();
-	glutSwapBuffers();
+	//cout << MANAGER.GetManager<ManagerType::Time>()->GetFps() << endl;
+	_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
+	_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
+	_desc.clearColor.b = glm::clamp(glm::acos(_temp), 0.0f, 1.0f);
+
+	_temp += 1.0f * MANAGER.GetManager<ManagerType::Time>()->GetDeltaTime();
 }

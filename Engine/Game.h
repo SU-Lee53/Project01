@@ -15,7 +15,6 @@ public:
 
 	void Init(int argc, char** argv);
 	void Update();
-	void Render();
 
 	GameDesc& GetDesc() { return _desc; }
 
