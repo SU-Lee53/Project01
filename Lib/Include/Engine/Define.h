@@ -15,3 +15,5 @@ public:										\
 
 #define MANAGER		GET_SINGLE(Manager)
 #define TIME		MANAGER.GetManager<ManagerType::Time>()
+#define INPUT		MANAGER.GetManager<ManagerType::Input>()
+#define SCENE		MANAGER.GetManager<ManagerType::Scene>()

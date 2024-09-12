@@ -37,4 +37,13 @@ void Game::Update()
 	_desc.clearColor.b = glm::clamp(glm::acos(_temp), 0.0f, 1.0f);
 
 	_temp += 1.0f * MANAGER.GetManager<ManagerType::Time>()->GetDeltaTime();
+
+	if (INPUT->GetButton(KEY_TYPE::W))
+		cout << "W" << endl;
+	else if (INPUT->GetButton(KEY_TYPE::A))
+		cout << "A" << endl;
+	else if (INPUT->GetButton(KEY_TYPE::S))
+		cout << "S" << endl;
+	else if (INPUT->GetButton(KEY_TYPE::D))
+		cout << "D" << endl;
 }
