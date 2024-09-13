@@ -7,7 +7,7 @@ public:
 	~Shader();
 
 public:
-	void LoadShaderFiles();
+	void MakeShaderProgram();
 
 private:
 	void LoadVertexShader();
@@ -15,6 +15,15 @@ private:
 
 private:
 	void LoadShaderImpl(wstring path, OUT unsigned int& id);
+
+private:
+	void LinkShader();
+
+public:
+	unsigned int GetID() { return _shaderId; }
+
+private:
+	unsigned int _shaderId;
 
 private:
 	wstring _vsName;

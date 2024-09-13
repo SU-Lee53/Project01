@@ -13,5 +13,8 @@ public:
 	static string ToString(wstring value);
 
 	static string FileToBuf(ifstream& is);
+
+	static void MakeCubeGeometry(OUT shared_ptr<VAO>& vao);
+
 };
 

@@ -16,6 +16,7 @@ public:
 
 	void Init(int argc, char** argv);
 	void Update();
+	void Render();
 
 	GameDesc& GetDesc() { return _desc; }
 
@@ -24,5 +25,7 @@ private:
 private:
 	GameDesc _desc;
 	shared_ptr<class Shader> _shader;
+
+	shared_ptr<class VAO> _vao;
 };
 

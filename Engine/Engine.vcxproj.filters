@@ -35,9 +35,6 @@
     <ClCompile Include="EnginePch.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
-    <ClCompile Include="EBO.cpp">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
-    </ClCompile>
     <ClCompile Include="VAO.cpp">
       <Filter>소스 파일\Graphics\Buffers</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
     <ClCompile Include="Utils.cpp">
       <Filter>소스 파일\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="UBO.cpp">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -75,9 +75,6 @@
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>소스 파일\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="EBO.h">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="VAO.h">
       <Filter>소스 파일\Graphics\Buffers</Filter>
@@ -111,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>소스 파일\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UBO.h">
+      <Filter>소스 파일\Graphics\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

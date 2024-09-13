@@ -5,7 +5,9 @@ Game game{};
 void Render()
 {
 	glClearColor(game.GetDesc().clearColor.r, game.GetDesc().clearColor.g, game.GetDesc().clearColor.b, game.GetDesc().clearColor.a);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	game.Render();
 
 	glutSwapBuffers();
 }

@@ -41,3 +41,4 @@ using namespace std;
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "VAO.h"

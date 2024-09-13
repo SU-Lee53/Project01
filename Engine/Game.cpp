@@ -22,28 +22,39 @@ void Game::Init(int argc, char** argv)
 	}
 
 	MANAGER.Init();
+
 	_shader = make_shared<Shader>(L"vs", L"fs");
+
+	_vao = make_shared<VAO>();
+	Utils::MakeCubeGeometry(_vao);
+	_vao->MakeVAO();
 
 }
 
 static float _temp = 0.0f;
+
 void Game::Update()
 {
 	MANAGER.Update();
 
-	//cout << MANAGER.GetManager<ManagerType::Time>()->GetFps() << endl;
 	_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
 	_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
-	_desc.clearColor.b = glm::clamp(glm::acos(_temp), 0.0f, 1.0f);
+	_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
 
-	_temp += 1.0f * MANAGER.GetManager<ManagerType::Time>()->GetDeltaTime();
+	_temp += 1.0f * TIME->GetDeltaTime();
 
-	if (INPUT->GetButton(KEY_TYPE::W))
-		cout << "W" << endl;
-	else if (INPUT->GetButton(KEY_TYPE::A))
-		cout << "A" << endl;
-	else if (INPUT->GetButton(KEY_TYPE::S))
-		cout << "S" << endl;
-	else if (INPUT->GetButton(KEY_TYPE::D))
-		cout << "D" << endl;
+}
+
+void Game::Render()
+{
+	glUseProgram(_shader->GetID());
+	glBindVertexArray(_vao->GetID());
+	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBuffer().size();
+
+	glDrawElements(
+		GL_TRIANGLES,
+		count,
+		GL_UNSIGNED_INT,
+		0
+	);
 }

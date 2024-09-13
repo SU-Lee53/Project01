@@ -1,43 +1,51 @@
 #pragma once
 
-enum class BufferType
+enum class BUFFER_TYPE
 {
 	Vertex = 0,
 	Color,
-	Element,
+	Index,
 
 	End
 };
 
 enum
 {
-	BUFFER_TYPE_COUNT = static_cast<int>(BufferType::End)
+	BUFFER_TYPE_COUNT = static_cast<int>(BUFFER_TYPE::End)
 };
 
+template <typename T, BUFFER_TYPE bufTy>
 class VBO
 {
+public:
+	using elementType = T;
+
 public:
 	VBO();
 	~VBO();
 
 public:
 	// Getter
-	void SetVertexBuffer(const vector<float>& buffer) { _vertices = vector<float>(buffer.begin(), buffer.end()); }
-	void SetColorBuffer(const vector<float>& buffer) { _colors = vector<float>(buffer.begin(), buffer.end()); }
-	void SetIndexBuffer(const vector<unsigned int>& buffer) { _indices = vector<unsigned int>(buffer.begin(), buffer.end()); }
+	void SetBuffer(const vector<T>& buffer) { _data = vector<T>(buffer.begin(), buffer.end()); }
 
 	// Setter
-	vector<float>& GetVertexBuffer() { return _vertices; }
-	vector<float>& GetColorBuffer() { return _colors; }
-	vector<unsigned>& GetIndexBuffer() { return _indices; }
+	vector<T>& GetBuffer() { return _data; }
+	unsigned int& GetID() { return _id; }
 
 private:
-	array<unsigned int, BUFFER_TYPE_COUNT> _ids;
+	unsigned int _id;
 
 private:
-	vector<float> _vertices;
-	vector<unsigned int> _indices;
-	vector<float> _colors;
+	vector<T> _data;
 
 };
 
+template<typename T, BUFFER_TYPE bufTy>
+inline VBO<T, bufTy>::VBO()
+{
+}
+
+template<typename T, BUFFER_TYPE bufTy>
+inline VBO<T, bufTy>::~VBO()
+{
+}
