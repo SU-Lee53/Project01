@@ -29,6 +29,8 @@ void Game::Init(int argc, char** argv)
 	Utils::MakeCubeGeometry(_vao);
 	_vao->MakeVAO();
 
+
+
 }
 
 static float _temp = 0.0f;
@@ -42,13 +44,16 @@ void Game::Update()
 	_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
 
 	_temp += 1.0f * TIME->GetDeltaTime();
-
 }
 
 void Game::Render()
 {
+	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+
 	glUseProgram(_shader->GetID());
-	glBindVertexArray(_vao->GetID());
+
 	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBuffer().size();
 
 	glDrawElements(
@@ -57,4 +62,7 @@ void Game::Render()
 		GL_UNSIGNED_INT,
 		0
 	);
+
+
+	glutSwapBuffers();
 }

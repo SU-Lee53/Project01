@@ -25,7 +25,7 @@ private:
 private:
 	GameDesc _desc;
 	shared_ptr<class Shader> _shader;
-
 	shared_ptr<class VAO> _vao;
+
 };
 

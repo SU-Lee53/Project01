@@ -4,12 +4,12 @@ Game game{};
 
 void Render()
 {
-	glClearColor(game.GetDesc().clearColor.r, game.GetDesc().clearColor.g, game.GetDesc().clearColor.b, game.GetDesc().clearColor.a);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	game.Render();
+}
 
-	glutSwapBuffers();
+void Reshape(int w, int h)
+{
+	glViewport(0, 0, w, h);
 }
 
 int main(int argc, char** argv)
@@ -26,6 +26,7 @@ int main(int argc, char** argv)
 	game.Init(argc, argv);
 
 	glutDisplayFunc(Render);
+	glutReshapeFunc(Reshape);
 
 	while (true)
 	{
@@ -36,3 +37,4 @@ int main(int argc, char** argv)
 	}
 
 }
+
