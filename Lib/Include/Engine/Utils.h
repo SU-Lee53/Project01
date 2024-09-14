@@ -14,7 +14,7 @@ public:
 
 	static string FileToBuf(ifstream& is);
 
-	static void MakeCubeGeometry(OUT shared_ptr<VAO>& vao);
+	static void MakeCubeGeometry(OUT shared_ptr<class VAO>& vao);
 
 };
 

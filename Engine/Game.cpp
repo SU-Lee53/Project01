@@ -29,8 +29,6 @@ void Game::Init(int argc, char** argv)
 	Utils::MakeCubeGeometry(_vao);
 	_vao->MakeVAO();
 
-
-
 }
 
 static float _temp = 0.0f;
@@ -51,11 +49,8 @@ void Game::Render()
 	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-
-	glUseProgram(_shader->GetID());
-
 	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBuffer().size();
-
+	
 	glDrawElements(
 		GL_TRIANGLES,
 		count,
