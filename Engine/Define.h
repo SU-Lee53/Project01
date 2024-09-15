@@ -17,3 +17,6 @@ public:										\
 #define TIME		MANAGER.GetManager<ManagerType::Time>()
 #define INPUT		MANAGER.GetManager<ManagerType::Input>()
 #define SCENE		MANAGER.GetManager<ManagerType::Scene>()
+
+
+#define IDENTITY	glm::mat4(1.0f);

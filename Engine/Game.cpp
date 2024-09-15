@@ -28,7 +28,6 @@ void Game::Init(int argc, char** argv)
 	_vao = make_shared<VAO>();
 	Utils::MakeCubeGeometry(_vao);
 	_vao->MakeVAO();
-
 }
 
 static float _temp = 0.0f;

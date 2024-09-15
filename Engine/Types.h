@@ -34,3 +34,18 @@ struct Pos2D
 		float values[2];
 	};
 };
+
+struct Pos3D
+{
+	union
+	{
+		struct
+		{
+			float x;
+			float y;
+			float z;
+		};
+		glm::vec2 xyz;
+		float values[3];
+	};
+};
