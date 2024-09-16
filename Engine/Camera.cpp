@@ -9,8 +9,9 @@ Camera::~Camera()
 {
 }
 
-void Camera::Update()
+void Camera::Update_impl()
 {
+	cout << "Camera Updated" << '\n';
 }
 
 void Camera::SetCamera()

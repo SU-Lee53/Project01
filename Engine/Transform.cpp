@@ -10,7 +10,7 @@ Transform::~Transform()
 	
 }
 
-void Transform::Update()
+void Transform::Update_impl()
 {
 	_world = _local;
 }

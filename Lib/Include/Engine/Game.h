@@ -25,25 +25,7 @@ private:
 private:
 	GameDesc _desc;
 	shared_ptr<class Shader> _shader;
-	//shared_ptr<class VAO> _vao;
-
-	unsigned int _vao;
-	unsigned int _vbo[2];
-
-	float vertex[3][3] =
-	{
-		{-0.5f,	-0.5f,	0.0f},
-		{0.5f,	-0.5f,	0.0f},
-		{0.0f,	0.5f,	0.0f}
-	};
-
-	float color[3][3] =
-	{
-		{1.0f, 0.0f, 0.0f},
-		{0.0f, 1.0f, 0.0f},
-		{0.0f, 0.0f, 1.0f}
-	};
-
-	
+	shared_ptr<class VAO> _vao;
+	shared_ptr<class GameObject> _obj;
 };
 

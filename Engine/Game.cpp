@@ -1,6 +1,8 @@
 #include "EnginePch.h"
 #include "Game.h"
 #include "Shader.h"
+#include "GameObject.h"
+#include "Camera.h"
 
 void Game::Init(int argc, char** argv)
 {
@@ -28,6 +30,11 @@ void Game::Init(int argc, char** argv)
 	_vao = make_shared<VAO>();
 	Utils::MakeCubeGeometry(_vao);
 	_vao->MakeVAO();
+
+	_obj = make_shared<GameObject>();
+	_obj->AddComponent<Camera>();
+	_obj->AddComponent<Transform>();
+
 }
 
 static float _temp = 0.0f;
@@ -36,11 +43,16 @@ void Game::Update()
 {
 	MANAGER.Update();
 
-	_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
-	_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
-	_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
+	{
+		_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
+		_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
+		_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
 
-	_temp += 1.0f * TIME->GetDeltaTime();
+		_temp += 1.0f * TIME->GetDeltaTime();
+	}
+
+	auto cam = _obj->GetComponent<Camera>();
+	cam->Update();
 }
 
 void Game::Render()

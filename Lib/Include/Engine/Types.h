@@ -5,6 +5,16 @@
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+struct Global
+{
+	glm::mat4 view;
+	glm::mat4 projection;
+};
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+
 struct Color
 {
 	union
@@ -21,6 +31,10 @@ struct Color
 	};
 };
 
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+
 struct Pos2D
 {
 	union
@@ -32,5 +46,20 @@ struct Pos2D
 		};
 		glm::vec2 xy;
 		float values[2];
+	};
+};
+
+struct Pos3D
+{
+	union
+	{
+		struct
+		{
+			float x;
+			float y;
+			float z;
+		};
+		glm::vec2 xyz;
+		float values[3];
 	};
 };

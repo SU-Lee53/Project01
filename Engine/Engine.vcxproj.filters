@@ -33,6 +33,9 @@
     <Filter Include="소스 파일\Component">
       <UniqueIdentifier>{c87ecd2a-6c57-47e8-b2f0-0e4ec058f142}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\GameObject">
+      <UniqueIdentifier>{27bd30a3-f8d0-4569-9950-1129c8e45ea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>소스 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
