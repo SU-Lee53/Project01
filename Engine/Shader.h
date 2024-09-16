@@ -27,6 +27,10 @@ private:
 	void LinkShader();
 
 public:
+	unsigned int GetUniformBlockLocation(string name);
+	unsigned int GetUniformLocation(string name);
+
+public:
 	unsigned int GetID() { return _shaderId; }
 
 private:

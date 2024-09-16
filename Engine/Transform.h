@@ -8,10 +8,23 @@ public:
 	Transform();
 	virtual ~Transform();
 
-	glm::quat q;
+public:
+	virtual void Update() override;
+
+	void SetPosition(const glm::vec3& pos);
+	void SetRotation(const glm::vec3& rot);
+	void SetScale(const glm::vec3& scale);
+	
+	glm::vec3 GetPosition() { return _position; }
+	glm::vec3 GetRotation() { return _rotation; }
+	glm::vec3 GetScale() { return _scale; }
 
 private:
-	glm::mat4 _local = glm::mat4(1.0f);
-	glm::mat4 _world = glm::mat4(1.0f);
+	glm::vec3 _position = { 0.f, 0.f, 0.f };
+	glm::vec3 _rotation = { 0.f, 0.f, 0.f };
+	glm::vec3 _scale = { 1.f, 1.f, 1.f };
+
+	glm::mat4 _local = IDENTITY;
+	glm::mat4 _world = IDENTITY;
 };
 

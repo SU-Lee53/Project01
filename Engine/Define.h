@@ -19,4 +19,8 @@ public:										\
 #define SCENE		MANAGER.GetManager<ManagerType::Scene>()
 
 
-#define IDENTITY	glm::mat4(1.0f);
+#define IDENTITY	glm::mat4(1.0f)
+
+#define AXIS_X		glm::vec3{1.0f, 0.0f, 0.0f}
+#define AXIS_Y		glm::vec3{0.0f, 1.0f, 0.0f}
+#define AXIS_Z		glm::vec3{0.0f, 0.0f, 1.0f}

@@ -19,13 +19,13 @@ public:
 
 public:
 	virtual void Update();
-
 	void SetCamera();
+	void PushCamera();
 
 public:
 	void SetNear(float __near) { _near = __near; }
 	void SetFar(float __far) { _far = __far; }
-	void SetFov(float fov) { _fov = fov; }
+	void SetFovY(float fovy) { _fovy = fovy; }
 	void SetWidth(float width) { _width = width; }
 	void SetHeight(float height) { _height = height; }
 
@@ -34,11 +34,12 @@ public:
 
 private:
 	PROJECTION_TYPE _type = PROJECTION_TYPE::Perspective;
-	float _near;
-	float _far;
-	float _fov;
-	float _width;
-	float _height;
+	
+	float _near = 1.f;
+	float _far = 1000.f;
+	float _fovy = 45.f;
+	float _width = 800.f;
+	float _height = 600.f;
 
 private:
 	glm::mat4 _view;

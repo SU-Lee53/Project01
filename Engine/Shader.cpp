@@ -55,3 +55,13 @@ void Shader::LinkShader()
 		cout << "Link Success" << endl;
 	}
 }
+
+unsigned int Shader::GetUniformBlockLocation(string name)
+{
+	return glGetUniformBlockIndex(_shaderId, name.c_str());
+}
+
+unsigned int Shader::GetUniformLocation(string name)
+{
+	return glGetUniformLocation(_shaderId, name.c_str());
+}
