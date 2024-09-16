@@ -8,7 +8,7 @@ public:
 	Transform();
 	virtual ~Transform();
 	
-private:
+public:
 	virtual void Update_impl() override;
 
 	void SetPosition(const glm::vec3& pos);

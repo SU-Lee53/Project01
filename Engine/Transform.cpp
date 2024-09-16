@@ -12,6 +12,7 @@ Transform::~Transform()
 
 void Transform::Update_impl()
 {
+	cout << "Transform Updated" << '\n';
 	_world = _local;
 }
 

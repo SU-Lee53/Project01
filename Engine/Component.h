@@ -21,6 +21,10 @@ class Component_Base
 public:
 	Component_Base() {}
 	~Component_Base() {}
+
+public:
+	virtual void Init() {}
+	virtual void Update() {}
 };
 
 template <typename T>
@@ -31,11 +35,11 @@ public:
 	virtual ~Component();
 
 public:
-	void Init()
+	virtual void Init() override
 	{
 		(static_cast<T*>(this))->Init_impl();
 	}
-	void Update()
+	virtual void Update() override
 	{
 		(static_cast<T*>(this))->Update_impl();
 	}

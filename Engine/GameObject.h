@@ -9,6 +9,10 @@ public:
 	~GameObject();
 
 public:
+	void Init();
+	void Update();
+
+public:
 	template <typename T,
 	typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	void AddComponent()

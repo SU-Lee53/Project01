@@ -35,6 +35,7 @@ void Game::Init(int argc, char** argv)
 	_obj->AddComponent<Camera>();
 	_obj->AddComponent<Transform>();
 
+	_obj->Init();
 }
 
 static float _temp = 0.0f;
@@ -51,8 +52,7 @@ void Game::Update()
 		_temp += 1.0f * TIME->GetDeltaTime();
 	}
 
-	auto cam = _obj->GetComponent<Camera>();
-	cam->Update();
+	_obj->Update();
 }
 
 void Game::Render()
