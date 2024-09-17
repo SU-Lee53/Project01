@@ -55,14 +55,16 @@ void Game::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBufferData().size();
-	
+
+	glUseProgram(_shader->GetID());
+	glBindVertexArray(_vao->GetID());
+
 	glDrawElements(
 		GL_TRIANGLES,
 		count,
 		GL_UNSIGNED_INT,
 		0
 	);
-
 
 	glutSwapBuffers();
 }
