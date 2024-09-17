@@ -7,7 +7,7 @@ public:
 	VAO();
 	~VAO();
 
-	void MakeVAO();
+	void Create();
 
 public:
 	template <BUFFER_TYPE ty>

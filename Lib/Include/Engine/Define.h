@@ -14,9 +14,11 @@ public:										\
 #define GET_SINGLE(classname)	classname::GetInstance()
 
 #define MANAGER		GET_SINGLE(Manager)
-#define TIME		MANAGER.GetManager<ManagerType::Time>()
-#define INPUT		MANAGER.GetManager<ManagerType::Input>()
-#define SCENE		MANAGER.GetManager<ManagerType::Scene>()
+#define TIME		MANAGER.GetManager<MANAGER_TYPE::Time>()
+#define INPUT		MANAGER.GetManager<MANAGER_TYPE::Input>()
+#define SCENE		MANAGER.GetManager<MANAGER_TYPE::Scene>()
+#define RENDER		MANAGER.GetManager<MANAGER_TYPE::Render>()
+
 
 
 #define IDENTITY	glm::mat4(1.0f)

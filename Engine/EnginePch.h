@@ -37,9 +37,14 @@ using namespace std;
 // PreCompile
 #include "Game.h"
 #include "Utils.h"
-#include "Manager.h"
+#include "Shader.h"
+#include "VAO.h"
 #include "GameObject.h"
+
+
+
+#include "Manager.h"
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "VAO.h"
+#include "RenderManager.h"

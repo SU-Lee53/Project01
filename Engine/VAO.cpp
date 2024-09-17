@@ -10,7 +10,7 @@ VAO::~VAO()
 {
 }
 
-void VAO::MakeVAO()
+void VAO::Create()
 {
 	glGenVertexArrays(1, &_id);
 	glGenBuffers(1, &_vertex.GetID());
@@ -21,24 +21,24 @@ void VAO::MakeVAO()
 
 	// Vertex
 	{
-		int size = _vertex.GetBuffer().size() * sizeof(decltype(_vertex)::elementType);
+		int size = _vertex.GetBufferData().size() * sizeof(decltype(_vertex)::elementType);
 		glBindBuffer(GL_ARRAY_BUFFER, _vertex.GetID());
 		glBufferData(
 			GL_ARRAY_BUFFER,
 			size,
-			_vertex.GetBuffer().data(),
+			_vertex.GetBufferData().data(),
 			GL_STATIC_DRAW
 		);
 	}
 
 	// Index
 	{
-		int size = _index.GetBuffer().size() * sizeof(decltype(_index)::elementType);
+		int size = _index.GetBufferData().size() * sizeof(decltype(_index)::elementType);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _index.GetID());
 		glBufferData(
 			GL_ELEMENT_ARRAY_BUFFER,
 			size,
-			_index.GetBuffer().data(),
+			_index.GetBufferData().data(),
 			GL_STATIC_DRAW
 		);
 	}
@@ -48,12 +48,12 @@ void VAO::MakeVAO()
 
 	// Color
 	{
-		int size = _color.GetBuffer().size() * sizeof(decltype(_color)::elementType);
+		int size = _color.GetBufferData().size() * sizeof(decltype(_color)::elementType);
 		glBindBuffer(GL_ARRAY_BUFFER, _color.GetID());
 		glBufferData(
 			GL_ARRAY_BUFFER,
 			size,
-			_color.GetBuffer().data(),
+			_color.GetBufferData().data(),
 			GL_STATIC_DRAW
 		);
 	}

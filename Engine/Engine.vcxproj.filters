@@ -86,6 +86,9 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>소스 파일\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -141,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>소스 파일\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>소스 파일\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

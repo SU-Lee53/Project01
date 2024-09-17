@@ -29,7 +29,7 @@ public:
 	void SetBuffer(const vector<T>& buffer) { _data = vector<T>(buffer.begin(), buffer.end()); }
 
 	// Setter
-	vector<T>& GetBuffer() { return _data; }
+	vector<T>& GetBufferData() { return _data; }
 	unsigned int& GetID() { return _id; }
 
 private:

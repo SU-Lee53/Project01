@@ -1,8 +1,8 @@
 #include "EnginePch.h"
 #include "Game.h"
 #include "Shader.h"
-#include "GameObject.h"
 #include "Camera.h"
+#include "Transform.h"
 
 void Game::Init(int argc, char** argv)
 {
@@ -29,13 +29,8 @@ void Game::Init(int argc, char** argv)
 
 	_vao = make_shared<VAO>();
 	Utils::MakeCubeGeometry(_vao);
-	_vao->MakeVAO();
+	_vao->Create();
 
-	_obj = make_shared<GameObject>();
-	_obj->AddComponent<Camera>();
-	_obj->AddComponent<Transform>();
-
-	_obj->Init();
 }
 
 static float _temp = 0.0f;
@@ -52,7 +47,6 @@ void Game::Update()
 		_temp += 1.0f * TIME->GetDeltaTime();
 	}
 
-	_obj->Update();
 }
 
 void Game::Render()
@@ -60,7 +54,7 @@ void Game::Render()
 	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBuffer().size();
+	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBufferData().size();
 	
 	glDrawElements(
 		GL_TRIANGLES,
