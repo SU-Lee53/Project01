@@ -38,6 +38,7 @@ using namespace std;
 #include "Game.h"
 #include "Utils.h"
 #include "Manager.h"
+#include "GameObject.h"
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"

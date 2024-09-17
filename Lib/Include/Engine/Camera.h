@@ -18,7 +18,7 @@ public:
 	PROJECTION_TYPE GetProjectionType() { return _type; }
 
 public:
-	virtual void Update_impl() override;
+	void Update_impl();
 	void SetCamera();
 	void PushCamera();
 

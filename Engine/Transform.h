@@ -9,7 +9,7 @@ public:
 	virtual ~Transform();
 	
 public:
-	virtual void Update_impl() override;
+	void Update_impl();
 
 	void SetPosition(const glm::vec3& pos);
 	void SetRotation(const glm::vec3& rot);

@@ -20,7 +20,7 @@ class Component_Base
 {
 public:
 	Component_Base() {}
-	~Component_Base() {}
+	virtual ~Component_Base() {}
 
 public:
 	virtual void Init() {}
@@ -51,6 +51,7 @@ private:
 private:
 	friend class GameObject;
 	void SetOwner(shared_ptr<GameObject> gameObject) { _owner = gameObject; }
+	shared_ptr<class GameObject> GetOwner();
 
 private:
 	weak_ptr<class GameObject> _owner;
@@ -65,4 +66,10 @@ inline Component<T>::Component()
 template<typename T>
 inline Component<T>::~Component()
 {
+}
+
+template<typename T>
+inline shared_ptr<class GameObject> Component<T>::GetOwner()
+{
+	return _owner.lock();
 }
