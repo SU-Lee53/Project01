@@ -2,11 +2,13 @@
 
 class GameObject;
 class Transform;
+class MeshRenderer;
 
 enum class COMPONENT_TYPE
 {
-	Camera,
 	Transform,
+	Camera,
+	MeshRenderer,
 
 	End,
 

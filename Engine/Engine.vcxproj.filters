@@ -95,6 +95,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>소스 파일\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -156,6 +159,9 @@
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>소스 파일\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>소스 파일\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

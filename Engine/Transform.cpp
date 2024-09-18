@@ -13,7 +13,6 @@ Transform::~Transform()
 void Transform::Update_impl()
 {
 	_world = _local;
-	PushTransform();
 }
 
 void Transform::SetPosition(const glm::vec3& pos)
@@ -25,9 +24,10 @@ void Transform::SetPosition(const glm::vec3& pos)
 void Transform::SetRotation(const glm::vec3& rot)
 {
 	_rotation = rot;
-	_local = glm::rotate(IDENTITY, glm::radians(_rotation.x), AXIS_X);
-	_local = glm::rotate(IDENTITY, glm::radians(_rotation.y), AXIS_Y);
-	_local = glm::rotate(IDENTITY, glm::radians(_rotation.z), AXIS_Z);
+	glm::mat4 rotate = glm::rotate(IDENTITY, glm::radians(_rotation.x), AXIS_X);
+	rotate = glm::rotate(IDENTITY, glm::radians(_rotation.y), AXIS_Y) * rotate;
+	rotate = glm::rotate(IDENTITY, glm::radians(_rotation.z), AXIS_Z) * rotate;
+	_local = rotate;
 }
 
 void Transform::SetScale(const glm::vec3& scale)

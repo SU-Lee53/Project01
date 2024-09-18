@@ -15,7 +15,8 @@ void GameObject::Init()
 {
 	for (const auto& component : _components)
 	{
-		component->Init();
+		if(component)
+			component->Init();
 	}
 }
 
@@ -23,6 +24,7 @@ void GameObject::Update()
 {
 	for (const auto& component : _components)
 	{
-		component->Update();
+		if (component)
+			component->Update();
 	}
 }

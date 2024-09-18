@@ -3,6 +3,8 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Transform.h"
+#include "Mesh.h"
+#include "MeshRenderer.h"
 
 void Game::Init(int argc, char** argv)
 {
@@ -27,17 +29,29 @@ void Game::Init(int argc, char** argv)
 
 	MANAGER.Init(_shader);
 
-	_vao = make_shared<VAO>();
-	Utils::MakeCubeGeometry(_vao);
-	_vao->Create();
+	{
+		_camera = make_shared<GameObject>();
+		_camera->AddComponent<Camera>();
+		_camera->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 3.0f });
+	}
 
-	_obj = make_shared<GameObject>();
-	_obj->AddComponent<Camera>();
-	_obj->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 3.0f });
+	{
+		_vao = make_shared<VAO>();
+		Utils::MakeCubeGeometry(_vao);
+		_vao->Create();
+		shared_ptr<Mesh> m = make_shared<Mesh>(_vao);
+
+		_obj = make_shared<GameObject>();
+		_obj->AddComponent<MeshRenderer>();
+		_obj->GetComponent<MeshRenderer>()->SetMesh(m);
+		_obj->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 0.0f });
+
+	}
 
 }
 
 static float _temp = 0.0f;
+static glm::vec3 rotation{ 45.f,0.f,0.f };
 
 void Game::Update()
 {
@@ -47,10 +61,14 @@ void Game::Update()
 		_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
 		_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
 
+		rotation.y += 10.0f * TIME->GetDeltaTime();
+		_obj->GetComponent<Transform>()->SetRotation(rotation);
+
 		_temp += 1.0f * TIME->GetDeltaTime();
 	}
 
 	_obj->Update();
+
 }
 
 void Game::Render()
@@ -58,18 +76,12 @@ void Game::Render()
 	// Render begin
 	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
 	glClear(GL_COLOR_BUFFER_BIT);
-	
+	glEnable(GL_CULL_FACE);
+	//glEnable(GL_DEPTH_TEST);
+
 	// Whole render part
 	{
-		glUseProgram(_shader->GetID());
-		glBindVertexArray(_vao->GetID());
-
-		glDrawElements(
-			GL_TRIANGLES,
-			_vao->GetVBO<BUFFER_TYPE::Index>().GetBufferData().size(),
-			GL_UNSIGNED_INT,
-			0
-		);
+		RENDER->Render(_obj);
 	}
 
 	// Render end

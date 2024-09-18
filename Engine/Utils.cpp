@@ -184,23 +184,23 @@ void Utils::MakeCubeGeometry(OUT shared_ptr<class VAO>& vao)
 	//Index
 	{
 		// Front
-		idx[0] = 0; idx[1] = 1; idx[2] = 2;
-		idx[3] = 0; idx[4] = 2; idx[5] = 3;
+		idx[0] = 2; idx[1] = 1; idx[2] = 0;
+		idx[3] = 3; idx[4] = 2; idx[5] = 0;
 		// Back
-		idx[6] = 4; idx[7] = 5; idx[8] = 6;
-		idx[9] = 4; idx[10] = 6; idx[11] = 7;
+		idx[6] = 6; idx[7] = 5; idx[8] = 4;
+		idx[9] = 7; idx[10] = 6; idx[11] = 4;
 		// Upper
-		idx[12] = 8; idx[13] = 9; idx[14] = 10;
-		idx[15] = 8; idx[16] = 10; idx[17] = 11;
+		idx[12] = 10; idx[13] = 9; idx[14] = 8;
+		idx[15] = 11; idx[16] = 10; idx[17] = 8;
 		// Lower
-		idx[18] = 12; idx[19] = 13; idx[20] = 14;
-		idx[21] = 12; idx[22] = 14; idx[23] = 15;
+		idx[18] = 14; idx[19] = 13; idx[20] = 12;
+		idx[21] = 15; idx[22] = 14; idx[23] = 12;
 		// Left
-		idx[24] = 16; idx[25] = 17; idx[26] = 18;
-		idx[27] = 16; idx[28] = 18; idx[29] = 19;
+		idx[24] = 18; idx[25] = 17; idx[26] = 16;
+		idx[27] = 19; idx[28] = 18; idx[29] = 16;
 		// Right
-		idx[30] = 20; idx[31] = 21; idx[32] = 22;
-		idx[33] = 20; idx[34] = 22; idx[35] = 23;
+		idx[30] = 22; idx[31] = 21; idx[32] = 20;
+		idx[33] = 23; idx[34] = 22; idx[35] = 20;
 	}
 
 	vao->GetVBO<BUFFER_TYPE::Vertex>().SetBuffer(vtx);
