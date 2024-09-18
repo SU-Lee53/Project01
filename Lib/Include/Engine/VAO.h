@@ -26,8 +26,8 @@ public:
 private:
 	unsigned int _id;
 
-	VBO<float, BUFFER_TYPE::Vertex> _vertex;
-	VBO<float, BUFFER_TYPE::Color> _color;
+	VBO<glm::vec3, BUFFER_TYPE::Vertex> _vertex;
+	VBO<RGB, BUFFER_TYPE::Color> _color;
 	VBO<unsigned int, BUFFER_TYPE::Index> _index;
 	
 };

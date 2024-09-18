@@ -7,7 +7,7 @@ struct GameDesc
 	int height;
 	Pos2D windowPos;
 	string windowName;
-	Color clearColor;
+	RGBA clearColor;
 };
 
 class Game

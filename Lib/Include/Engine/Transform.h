@@ -19,6 +19,12 @@ public:
 	glm::vec3 GetRotation() { return _rotation; }
 	glm::vec3 GetScale() { return _scale; }
 
+	glm::mat4 GetLocal() { return _local; }
+	glm::mat4 GetWorld() { return _world; }
+
+public:
+	void PushTransform();
+
 private:
 	glm::vec3 _position = { 0.f, 0.f, 0.f };
 	glm::vec3 _rotation = { 0.f, 0.f, 0.f };
@@ -26,7 +32,6 @@ private:
 
 	glm::mat4 _local = IDENTITY;
 	glm::mat4 _world = IDENTITY;
-
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Transform;

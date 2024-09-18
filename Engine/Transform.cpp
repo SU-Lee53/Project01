@@ -13,6 +13,7 @@ Transform::~Transform()
 void Transform::Update_impl()
 {
 	_world = _local;
+	PushTransform();
 }
 
 void Transform::SetPosition(const glm::vec3& pos)
@@ -33,4 +34,9 @@ void Transform::SetScale(const glm::vec3& scale)
 {
 	_scale = scale;
 	_local = glm::scale(IDENTITY, _scale);
+}
+
+void Transform::PushTransform()
+{
+	RENDER->GetShader()->SetMat4("world", _world);
 }

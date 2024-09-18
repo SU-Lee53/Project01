@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "UBO.h"
 
 enum class PROJECTION_TYPE
 {
@@ -44,6 +45,9 @@ private:
 private:
 	glm::mat4 _view = IDENTITY;
 	glm::mat4 _projection = IDENTITY;
+
+private:
+	UBO<Global> _ubo;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Camera;

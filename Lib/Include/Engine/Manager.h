@@ -1,9 +1,9 @@
 #pragma once
 
-class TimeManager;
-class InputManager;
-class SceneManager;
-class RenderManager;
+#include "TimeManager.h"
+#include "InputManager.h"
+#include "SceneManager.h"
+#include "RenderManager.h"
 
 enum class MANAGER_TYPE
 {
@@ -26,10 +26,11 @@ class Manager
 	DECLARE_SINGLE(Manager);
 
 public:
-	void Init();
+	void Init(shared_ptr<Shader> shader);
 	void Update();
 
 public:
+
 	template<MANAGER_TYPE Type>
 	constexpr auto GetManager()
 	{

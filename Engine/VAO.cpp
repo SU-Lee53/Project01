@@ -43,7 +43,7 @@ void VAO::Create()
 		);
 	}
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(decltype(_vertex)::elementType), 0);
 	glEnableVertexAttribArray(0);
 
 	// Color
@@ -58,6 +58,6 @@ void VAO::Create()
 		);
 	}
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(decltype(_color)::elementType), 0);
 	glEnableVertexAttribArray(1);
 }

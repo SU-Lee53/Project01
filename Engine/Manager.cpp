@@ -4,16 +4,17 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 
-void Manager::Init()
+void Manager::Init(shared_ptr<Shader> shader)
 {
 	_time = make_shared<TimeManager>();
 	_input = make_shared<InputManager>();
 	_scene = make_shared<SceneManager>();
+	_render = make_shared<RenderManager>();
 
 	_time->Init();
 	_input->Init();
 	// _scene->Init();
-	
+	_render->Init(shader);
 }
 
 void Manager::Update()

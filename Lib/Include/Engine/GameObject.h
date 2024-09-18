@@ -2,7 +2,7 @@
 #include "Camera.h"
 #include "transform.h"
 
-class GameObject
+class GameObject : public enable_shared_from_this<GameObject>
 {
 public:
 	GameObject();
@@ -19,6 +19,7 @@ public:
 	{
 		int idx = static_cast<int>(T::ty);
 		_components[idx] = make_shared<T>();
+		_components[idx]->SetOwner(shared_from_this());
 	}
 
 	template <typename T,
@@ -26,6 +27,9 @@ public:
 	shared_ptr<T> GetComponent()
 	{
 		int idx = static_cast<int>(T::ty);
+		
+		// Every GameObject has Transform
+		if (T::ty == COMPONENT_TYPE::Transform and _components[idx] == nullptr) AddComponent<T>();
 		return static_pointer_cast<T>(_components[idx]);
 	}
 

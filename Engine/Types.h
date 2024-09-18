@@ -15,7 +15,27 @@ struct Global
 //////////////////////////////////////////////
 //////////////////////////////////////////////
 
-struct Color
+struct RGB
+{
+	union
+	{
+		struct
+		{
+			float r;
+			float g;
+			float b;
+		};
+		glm::vec3 rgb;
+		float values[3];
+	};
+
+	operator glm::vec3()
+	{
+		return glm::vec3{ r,g,b };
+	}
+};
+
+struct RGBA
 {
 	union
 	{
@@ -26,7 +46,7 @@ struct Color
 			float b;
 			float a;
 		};
-		glm::vec4 rgb;
+		glm::vec4 rgba;
 		float values[4];
 	};
 };

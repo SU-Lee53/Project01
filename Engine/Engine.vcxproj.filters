@@ -36,6 +36,9 @@
     <Filter Include="소스 파일\GameObject">
       <UniqueIdentifier>{27bd30a3-f8d0-4569-9950-1129c8e45ea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Resources">
+      <UniqueIdentifier>{54705ed0-6180-41ca-9945-c2f8b5d26567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -88,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>소스 파일\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>소스 파일\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>소스 파일\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>소스 파일\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

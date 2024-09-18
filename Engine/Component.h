@@ -1,5 +1,7 @@
 #pragma once
 
+class GameObject;
+class Transform;
 
 enum class COMPONENT_TYPE
 {
@@ -25,6 +27,18 @@ public:
 public:
 	virtual void Init() {}
 	virtual void Update() {}
+
+public:
+	shared_ptr<GameObject> GetOwner()
+	{
+		return _owner.lock();
+	}
+
+protected:
+	friend class GameObject;
+	void SetOwner(shared_ptr<GameObject> gameObject) { _owner = gameObject; }
+	weak_ptr<GameObject> _owner;
+
 };
 
 template <typename T>
@@ -44,17 +58,9 @@ public:
 		(static_cast<T*>(this))->Update_impl();
 	}
 
-private:
+protected:
 	virtual void Init_impl() {};
 	virtual void Update_impl() {};
-
-private:
-	friend class GameObject;
-	void SetOwner(shared_ptr<GameObject> gameObject) { _owner = gameObject; }
-	shared_ptr<class GameObject> GetOwner();
-
-private:
-	weak_ptr<class GameObject> _owner;
 
 };
 
@@ -66,10 +72,4 @@ inline Component<T>::Component()
 template<typename T>
 inline Component<T>::~Component()
 {
-}
-
-template<typename T>
-inline shared_ptr<class GameObject> Component<T>::GetOwner()
-{
-	return _owner.lock();
 }

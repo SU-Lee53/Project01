@@ -27,6 +27,20 @@ private:
 	void LinkShader();
 
 public:
+	void Use() { glUseProgram(_shaderId); }
+
+public:
+	void SetBool(const string& name, const bool value);
+	void SetInt(const string& name, const int value);
+	void Setfloat(const string& name, const float value);
+	
+	void SetVec3(const string& name, const glm::vec3 value);
+	void SetVec4(const string& name, const glm::vec4 value);
+	
+	void SetMat3(const string& name, const glm::mat3 value);
+	void SetMat4(const string& name, const glm::mat4 value);
+
+public:
 	unsigned int GetUniformBlockLocation(string name);
 	unsigned int GetUniformLocation(string name);
 

@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "GameObject.h"
+#include "Transform.h"
 
 GameObject::GameObject()
 {

@@ -23,13 +23,17 @@ void Game::Init(int argc, char** argv)
 		std::cout << "GLEW Initialized" << std::endl;
 	}
 
-	MANAGER.Init();
-
 	_shader = make_shared<Shader>(L"vs", L"fs");
+
+	MANAGER.Init(_shader);
 
 	_vao = make_shared<VAO>();
 	Utils::MakeCubeGeometry(_vao);
 	_vao->Create();
+
+	_obj = make_shared<GameObject>();
+	_obj->AddComponent<Camera>();
+	_obj->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 3.0f });
 
 }
 
@@ -38,7 +42,6 @@ static float _temp = 0.0f;
 void Game::Update()
 {
 	MANAGER.Update();
-
 	{
 		_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
 		_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
@@ -47,24 +50,28 @@ void Game::Update()
 		_temp += 1.0f * TIME->GetDeltaTime();
 	}
 
+	_obj->Update();
 }
 
 void Game::Render()
 {
+	// Render begin
 	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	// Whole render part
+	{
+		glUseProgram(_shader->GetID());
+		glBindVertexArray(_vao->GetID());
 
-	int count = _vao->GetVBO<BUFFER_TYPE::Index>().GetBufferData().size();
+		glDrawElements(
+			GL_TRIANGLES,
+			_vao->GetVBO<BUFFER_TYPE::Index>().GetBufferData().size(),
+			GL_UNSIGNED_INT,
+			0
+		);
+	}
 
-	glUseProgram(_shader->GetID());
-	glBindVertexArray(_vao->GetID());
-
-	glDrawElements(
-		GL_TRIANGLES,
-		count,
-		GL_UNSIGNED_INT,
-		0
-	);
-
+	// Render end
 	glutSwapBuffers();
 }
