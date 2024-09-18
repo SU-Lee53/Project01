@@ -57,18 +57,12 @@ void Game::Update()
 {
 	MANAGER.Update();
 	{
-		_desc.clearColor.r = glm::clamp(glm::sin(_temp), 0.0f, 1.0f);
-		_desc.clearColor.g = glm::clamp(glm::cos(_temp), 0.0f, 1.0f);
-		_desc.clearColor.b = glm::clamp(glm::sin(_temp + 0.5f), 0.0f, 1.0f);
-
 		rotation.y += 10.0f * TIME->GetDeltaTime();
 		_obj->GetComponent<Transform>()->SetRotation(rotation);
-
-		_temp += 1.0f * TIME->GetDeltaTime();
 	}
 
 	_obj->Update();
-
+	_camera->Update();
 }
 
 void Game::Render()
