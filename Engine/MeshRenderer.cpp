@@ -1,6 +1,8 @@
 #include "EnginePch.h"
 #include "MeshRenderer.h"
 #include "Mesh.h"
+#include "VAO.h"
+
 MeshRenderer::MeshRenderer()
 {
 }

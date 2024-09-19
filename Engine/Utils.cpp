@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "Utils.h"
+#include "VAO.h"
 
 bool Utils::StartsWith(string str, string comp)
 {

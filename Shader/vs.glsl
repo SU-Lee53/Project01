@@ -11,8 +11,6 @@ layout(std140) uniform Global
 };
 
 uniform mat4 world;
-//uniform mat4 view;
-//uniform mat4 projection;
 
 void main()
 {

@@ -40,6 +40,5 @@ using namespace std;
 
 #include "Utils.h"
 #include "Shader.h"
-#include "VAO.h"
 #include "GameObject.h"
 #include "Game.h"

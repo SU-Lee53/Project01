@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
-#include "UBO.h"
+
+template <typename T>
+class UBO;
 
 enum class PROJECTION_TYPE
 {

@@ -1,10 +1,9 @@
 #include "EnginePch.h"
-#include "Game.h"
-#include "Shader.h"
 #include "Camera.h"
 #include "Transform.h"
 #include "Mesh.h"
 #include "MeshRenderer.h"
+#include "VAO.h"
 
 void Game::Init(int argc, char** argv)
 {
