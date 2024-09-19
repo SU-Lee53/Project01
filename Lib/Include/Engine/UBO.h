@@ -1,9 +1,5 @@
 #pragma once
 
-
-// To get _bindingPoint, you MUST use UBO<T>::GetBindingPoint()
-static unsigned int _bindingPointCounter = 0;
-
 template <typename T>
 class UBO
 {
@@ -12,73 +8,59 @@ public:
 	~UBO();
 
 public:
-	void Create();
+	void Create(string blockName);
 
 public:
-	unsigned int GetID() { return _id; }
-
-	template<typename U>
-	void SetSubData(const U& data);
-private:
-	unsigned int GetBindingPoint() { return ++_bindingPointCounter; }
-	void SetBindingPoint() { _bindingPoint = GetBindingPoint(); }
+	void SetName(const string& name) { _name = name; }
+	string GetName() { return _name; }
 
 public:
-	void BindUniformBlock(string blockName);
+	template <typename U>
+	void PushData(U& data);
 
 private:
-	unsigned int _id = 0;
+	string _name;
+	unsigned int _id;
+	unsigned int _index;
 
 private:
-	unsigned int _bindingPoint = 0;
-	unsigned int _offset = 0;
+	int _currOffset = 0;
 };
 
 template<typename T>
 inline UBO<T>::UBO()
 {
-	_bindingPoint = GetBindingPoint();
 }
 
 template<typename T>
 inline UBO<T>::~UBO()
 {
+	glDeleteBuffers(1, &_id);
 }
 
 template<typename T>
-inline void UBO<T>::Create()
+inline void UBO<T>::Create(string blockName)
 {
+	_name = blockName;
+
+	auto& shader = RENDER->GetShader();
+	_index = shader->GetUniformBlockLocation(_name.c_str());
+	glUniformBlockBinding(shader->GetID(), _index, 0);
+
 	glGenBuffers(1, &_id);
 	glBindBuffer(GL_UNIFORM_BUFFER, _id);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(T), /* ? */NULL, GL_STATIC_DRAW);
-	glBindBuffer(GL_UNIFORM_BUFFER, _bindingPoint);
-	glBindBufferRange(
-		GL_UNIFORM_BUFFER,
-		_bindingPoint,
-		_id,
-		0,
-		sizeof(T)
-	);
-}
-
-template<typename T>
-inline void UBO<T>::BindUniformBlock(string blockName)
-{
-	unsigned int loc = RENDER->GetShader()->GetUniformBlockLocation(blockName);
-	
-	SetBindingPoint();
-	glUniformBlockBinding(RENDER->GetShader()->GetID(), loc, _bindingPoint);
-
-	Manager::GetInstance().GetManager<MANAGER_TYPE::Render>();
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(T), nullptr, GL_STATIC_DRAW);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glBindBufferRange(GL_UNIFORM_BUFFER, 0, _id, 0, sizeof(T));
 }
 
 template<typename T>
 template<typename U>
-inline void UBO<T>::SetSubData(const U& data)
+inline void UBO<T>::PushData(U& data)
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, _id);
-	glBufferSubData(GL_UNIFORM_BUFFER, _offset, sizeof(U), &data);
-	glBindBuffer(GL_UNIFORM_BUFFER, _bindingPoint);
+	glBufferSubData(GL_UNIFORM_BUFFER, _currOffset, sizeof(U), value_ptr(data));
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-	_offset += sizeof(U);
+	_currOffset += sizeof(U);
 }

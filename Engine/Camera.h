@@ -47,7 +47,8 @@ private:
 	glm::mat4 _projection = IDENTITY;
 
 private:
-	UBO<Global> _ubo;
+	shared_ptr<UBO<Global>> _ubo;
+	vector<string> _uniformName = { "view", "projection" };
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Camera;

@@ -1,8 +1,11 @@
 #include "EnginePch.h"
 #include "Camera.h"
+#include "UBO.h"
 
 Camera::Camera()
 {
+	_ubo = make_shared<UBO<Global>>();
+	_ubo->Create("Global");
 }
 
 Camera::~Camera()
@@ -34,13 +37,11 @@ void Camera::SetCamera()
 
 void Camera::PushCamera()
 {
-	Global globalData{ _view, _projection };
+	//	TODO : make UBO and push
+	_ubo->PushData(_view);
+	_ubo->PushData(_projection);
 
-	//TODO : make UBO and push
-	_ubo.BindUniformBlock("Global");
-	_ubo.Create();
-	_ubo.SetSubData(globalData);
+	//	RENDER->GetShader()->SetMat4("view", _view);
+	//	RENDER->GetShader()->SetMat4("projection", _projection);
 
-	RENDER->GetShader()->SetMat4("view", _view);
-	RENDER->GetShader()->SetMat4("projection", _projection);
 }

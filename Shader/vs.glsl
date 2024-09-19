@@ -16,7 +16,6 @@ uniform mat4 world;
 
 void main()
 {
-	//gl_Position = projection * view * world * vec4(vPos, 1.0f);
 	gl_Position = projection * view * world * vec4(vPos, 1.0f);
 
 	out_Color = vColor;
