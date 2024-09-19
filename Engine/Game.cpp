@@ -29,12 +29,14 @@ void Game::Init(int argc, char** argv)
 
 	MANAGER.Init(_shader);
 
+	// Camera
 	{
 		_camera = make_shared<GameObject>();
 		_camera->AddComponent<Camera>();
 		_camera->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 3.0f });
 	}
 
+	// Cube
 	{
 		_vao = make_shared<VAO>();
 		Utils::MakeCubeGeometry(_vao);
@@ -45,8 +47,37 @@ void Game::Init(int argc, char** argv)
 		_obj->AddComponent<MeshRenderer>();
 		_obj->GetComponent<MeshRenderer>()->SetMesh(m);
 		_obj->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 0.0f });
-
 	}
+
+
+	// Shader Test
+	{
+		GLuint blockIndex = _shader->GetUniformBlockLocation("Global");
+		cout << "Global Index is " << blockIndex << endl;
+
+		GLint blockSize = 0;
+		glGetActiveUniformBlockiv(_shader->GetID(), blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+		cout << "Global block size is " << blockSize << endl;
+
+		GLubyte* blockBuffer = (GLubyte*)malloc(blockSize);
+		const GLchar* names[] = { "view", "projection" };
+		GLuint indices[2];
+		glGetUniformIndices(_shader->GetID(), 2, names, indices);
+
+		GLint offset[2];
+		glGetActiveUniformsiv(_shader->GetID(), 2, indices, GL_UNIFORM_OFFSET, offset);
+
+		for (int i = 0; i < 2; i++)
+		{
+			cout << "attribute : \"" << names[i]
+				<< "\" has index : " << indices[i]
+				<< " offset : " << offset[i] << "bytes" 
+				<< endl;
+		}
+
+		free(blockBuffer);
+	}
+
 
 }
 
@@ -57,7 +88,7 @@ void Game::Update()
 {
 	MANAGER.Update();
 	{
-		rotation.y += 10.0f * TIME->GetDeltaTime();
+		rotation.y += 20.0f * TIME->GetDeltaTime();
 		_obj->GetComponent<Transform>()->SetRotation(rotation);
 	}
 

@@ -65,8 +65,6 @@ template<typename T>
 inline void UBO<T>::BindUniformBlock(string blockName)
 {
 	unsigned int loc = RENDER->GetShader()->GetUniformBlockLocation(blockName);
-	if (loc == 0)
-		assert(false);
 	
 	SetBindingPoint();
 	glUniformBlockBinding(RENDER->GetShader()->GetID(), loc, _bindingPoint);

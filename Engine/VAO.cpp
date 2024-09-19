@@ -8,6 +8,10 @@ VAO::VAO()
 
 VAO::~VAO()
 {
+	glDeleteBuffers(1, &_vertex.GetID());
+	glDeleteBuffers(1, &_color.GetID());
+	glDeleteBuffers(1, &_index.GetID());
+	glDeleteBuffers(1, &_id);
 }
 
 void VAO::Create()
