@@ -10,6 +10,7 @@ public:
 	
 public:
 	void Update_impl();
+	void UpdateMatrix();
 
 	void SetPosition(const glm::vec3& pos);
 	void SetRotation(const glm::vec3& rot);

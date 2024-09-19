@@ -37,10 +37,10 @@ private:
 	PROJECTION_TYPE _type = PROJECTION_TYPE::Perspective;
 	
 	float _near = 1.f;
-	float _far = 1000.f;
+	float _far = 100.f;
 	float _fovy = 45.f;
-	float _width = 800.f;
-	float _height = 600.f;
+	float _width = glutGet(GLUT_WINDOW_WIDTH);
+	float _height = glutGet(GLUT_WINDOW_HEIGHT);
 
 private:
 	glm::mat4 _view = IDENTITY;

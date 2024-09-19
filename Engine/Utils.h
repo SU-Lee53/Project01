@@ -17,5 +17,7 @@ public:
 	static void MakeQuadGeometry(OUT shared_ptr<class VAO>& vao);
 	static void MakeCubeGeometry(OUT shared_ptr<class VAO>& vao);
 
+	glm::mat4 GetMatrixWithoutTranslate(glm::mat4 m);
+
 };
 
