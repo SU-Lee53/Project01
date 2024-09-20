@@ -33,14 +33,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Shader\global.glsl">
+    <FxCompile Include="..\Shader\test.hlsl">
       <Filter>소스 파일\Shader</Filter>
-    </None>
-    <None Include="..\Shader\vs.glsl">
+    </FxCompile>
+    <FxCompile Include="..\Shader\global.hlsl">
       <Filter>소스 파일\Shader</Filter>
-    </None>
-    <None Include="..\Shader\fs.glsl">
-      <Filter>소스 파일\Shader</Filter>
-    </None>
+    </FxCompile>
   </ItemGroup>
 </Project>

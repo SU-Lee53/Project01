@@ -5,10 +5,9 @@ struct GameDesc
 {
 	int width;
 	int height;
-	string windowName;
 	Color clearColor;
 
-	wstring appName = L"Billards";
+	wstring windowName = L"Billards";
 	HINSTANCE hInstance = 0;
 	HWND hWnd = 0;
 };

@@ -7,6 +7,21 @@ void Graphics::Init(HWND hWnd)
 	CreateDeviceAndSwapChain();
 	CreateRTV();
 	CreateDSV();
+	_viewPort = Viewport(GAME.GetDesc().width, GAME.GetDesc().height);
+}
+
+void Graphics::RenderBegin()
+{
+	_deviceContext->OMSetRenderTargets(1, _rtv.GetAddressOf(), _dsv.Get());
+	_deviceContext->ClearRenderTargetView(_rtv.Get(), (float*)(&GAME.GetDesc().clearColor));
+	_deviceContext->ClearDepthStencilView(_dsv.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 0);
+	_viewPort.SetViewport();
+}
+
+void Graphics::RenderEnd()
+{
+	HRESULT hr = _swapChain->Present(1, 0);
+	HR_ASSERT(hr);
 }
 
 void Graphics::CreateDeviceAndSwapChain()

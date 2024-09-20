@@ -13,6 +13,7 @@ WPARAM Game::Run(GameDesc& desc)
 
 	{
 		// TODO : Init
+		GRAPHICS.Init(_desc.hWnd);
 	}
 
 	MSG msg = { 0 };
@@ -48,7 +49,7 @@ ATOM Game::MyRegisterClass()
 	wcex.hCursor = ::LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = NULL;
-	wcex.lpszClassName = _desc.appName.c_str();
+	wcex.lpszClassName = _desc.windowName.c_str();
 	wcex.hIconSm = wcex.hIcon;
 
 	return RegisterClassExW(&wcex);
@@ -59,7 +60,7 @@ BOOL Game::InitInstance(int cmdShow)
 	RECT windowRect = { 0, 0, _desc.width, _desc.height };
 	::AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, false);
 
-	_desc.hWnd = CreateWindowW(_desc.appName.c_str(), _desc.appName.c_str(), WS_OVERLAPPEDWINDOW,
+	_desc.hWnd = CreateWindowW(_desc.windowName.c_str(), _desc.windowName.c_str(), WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, nullptr, nullptr, _desc.hInstance, nullptr);
 
 	if (!_desc.hWnd)
@@ -93,5 +94,9 @@ void Game::Update()
 
 void Game::Render()
 {
+	GRAPHICS.RenderBegin();
+	{
 
+	}
+	GRAPHICS.RenderEnd();
 }

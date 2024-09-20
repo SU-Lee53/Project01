@@ -107,35 +107,32 @@
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>소스 파일\04. Component</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_widgets.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_demo.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_draw.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_tables.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
     <ClCompile Include="GuiManager.cpp">
       <Filter>소스 파일\05. Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_opengl3.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_win32.cpp">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>소스 파일\01. Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Viewport.cpp">
       <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeline.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayout.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterizerState.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
+    </ClCompile>
+    <ClCompile Include="SamplerState.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\04. PS</Filter>
+    </ClCompile>
+    <ClCompile Include="BlendState.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\05. OM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,35 +187,8 @@
     <ClInclude Include="MeshRenderer.h">
       <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
-    <ClInclude Include="imstb_rectpack.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_textedit.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_truetype.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imconfig.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_internal.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
     <ClInclude Include="GuiManager.h">
       <Filter>소스 파일\05. Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_opengl3.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_opengl3_loader.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_win32.h">
-      <Filter>소스 파일\99. Utils\ImGUI</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
       <Filter>소스 파일\99. Utils</Filter>
@@ -228,6 +198,24 @@
     </ClInclude>
     <ClInclude Include="Viewport.h">
       <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeline.h">
+      <Filter>소스 파일\01. Graphics\Pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>소스 파일\01. Graphics\Pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterizerState.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
+    </ClInclude>
+    <ClInclude Include="SamplerState.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\04. PS</Filter>
+    </ClInclude>
+    <ClInclude Include="BlendState.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\05. OM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

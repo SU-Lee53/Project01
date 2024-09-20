@@ -3,10 +3,12 @@
 
 Viewport::Viewport()
 {
+	Set(800, 600);
 }
 
 Viewport::Viewport(float width, float height, float x, float y, float minDepth, float maxDepth)
 {
+	Set(width, height, x, y, minDepth, maxDepth);
 }
 
 Viewport::~Viewport()
@@ -15,7 +17,7 @@ Viewport::~Viewport()
 
 void Viewport::SetViewport()
 {
-	DEVICE->
+	DC->RSSetViewports(1, &_viewport);
 }
 
 void Viewport::Set(float width, float height, float x, float y, float minDepth, float maxDepth)
