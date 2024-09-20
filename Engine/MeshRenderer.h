@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 
+class Mesh;
+
 class MeshRenderer : public Component<MeshRenderer>
 {
 public:

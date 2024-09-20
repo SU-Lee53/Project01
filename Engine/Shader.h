@@ -1,28 +1,37 @@
 #pragma once
 
+template <ShaderType T>
 class Shader
 {
 public:
-	Shader(wstring filename);
+	Shader(string file, const string& name, const string& version);
 	~Shader();
 
 public:
-	void Create();
-
-private:
-	void LoadFromFile(const string& name, const string& version);
-	void CreateVertexShader();
-	void CreatePixelShader();
+	void Create(string file, const string& name, const string& version);
 
 public:
-	auto GetVertexShader() { return _vs; }
-	auto GetPixelShader() { return _ps; }
+	ComPtr<T> GetShader() { return _shader; }
 
 private:
 	wstring _filePath;
-	ComPtr<ID3DBlob> _blob;
-	ComPtr<ID3D11VertexShader> _vs;
-	ComPtr<ID3D11PixelShader> _ps;
-
+	ComPtr<T> _shader;
 };
 
+template<ShaderType T>
+inline Shader<T>::Shader(string file, const string& name, const string& version)
+	: _filePath(L"..\\Shader\\" + Utils::ToWString(file))
+{
+	Create(_filePath, name, version);
+}
+
+template<ShaderType T>
+inline Shader<T>::~Shader()
+{
+}
+
+template<ShaderType T>
+inline void Shader<T>::Create(string file, const string& name, const string& version)
+{
+	SHADER->Create<T>(_filePath, name, version);
+}

@@ -2,8 +2,6 @@
 
 #include "InputLayout.h"
 #include "Shader.h"
-
-// TODO : Complete Classes below
 #include "RasterizerState.h"
 #include "SamplerState.h"
 #include "BlendState.h"

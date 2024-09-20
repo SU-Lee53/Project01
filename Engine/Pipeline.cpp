@@ -16,8 +16,8 @@ Pipeline::~Pipeline()
 
 void Pipeline::Update(PipelineDesc desc)
 {
-	DC->IASetInputLayout(desc.inputLayout->GetComPtr().Get());
-	DC->IASetPrimitiveTopology(desc.topology);
+	//DC->IASetInputLayout(desc.inputLayout->GetComPtr().Get());
+	//DC->IASetPrimitiveTopology(desc.topology);
 
 	// TODO : Fill Pipelines (IA - VS - RS - PS - OM)
 }

@@ -10,6 +10,10 @@ RenderManager::~RenderManager()
 {
 }
 
+void RenderManager::Init()
+{
+}
+
 void RenderManager::Update()
 {
 	_renderObj.clear();

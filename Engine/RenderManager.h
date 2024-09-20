@@ -1,7 +1,5 @@
 #pragma once
 
-class Shader;
-class Mesh;
 class GameObject;
 
 class RenderManager
@@ -11,7 +9,7 @@ public:
 	~RenderManager();
 
 public:
-	void Init(shared_ptr<Shader> shader) { _shader = shader; };
+	void Init();
 	void Update();
 	void Render();
 
@@ -19,10 +17,10 @@ public:
 	void PushToRenderQueue(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
 
 public:
-	shared_ptr<Shader>& GetShader() { return _shader; }
+	//shared_ptr<Shader>& GetShader() { return _shader; }
 
 private:
-	shared_ptr<Shader> _shader;
+	//shared_ptr<Shader> _shader;
 	vector<shared_ptr<GameObject>> _renderObj;
 };
 

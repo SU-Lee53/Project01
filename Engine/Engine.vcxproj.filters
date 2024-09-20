@@ -54,11 +54,11 @@
     <Filter Include="소스 파일\01. Graphics\Pipelines\03. RS">
       <UniqueIdentifier>{a3b46fbd-1aa8-494c-b562-465beb5958af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Graphics\Pipelines\04. PS">
-      <UniqueIdentifier>{7ca5e112-3da1-42cf-9d5a-48422d839fa7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01. Graphics\Pipelines\05. OM">
       <UniqueIdentifier>{b6c7e022-ded8-413b-b99a-9a42872092fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\04. PS">
+      <UniqueIdentifier>{7ca5e112-3da1-42cf-9d5a-48422d839fa7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +133,15 @@
     </ClCompile>
     <ClCompile Include="BlendState.cpp">
       <Filter>소스 파일\01. Graphics\Pipelines\05. OM</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\04. PS</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\02. VS</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,13 @@
     <ClInclude Include="BlendState.h">
       <Filter>소스 파일\01. Graphics\Pipelines\05. OM</Filter>
     </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\04. PS</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\02. VS</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

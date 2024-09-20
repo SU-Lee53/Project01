@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "RenderManager.h"
 #include "GuiManager.h"
+#include "ShaderManager.h"
 
 enum class MANAGER_TYPE
 {
@@ -14,6 +15,7 @@ enum class MANAGER_TYPE
 	Scene,
 	Render,
 	Gui,
+	Shader,
 
 	end
 };
@@ -28,7 +30,7 @@ class Manager
 	DECLARE_SINGLE(Manager);
 
 public:
-	void Init(shared_ptr<Shader> shader);
+	void Init();
 	void Update();
 
 public:
@@ -46,6 +48,8 @@ public:
 			return _render;
 		else if constexpr (Type == MANAGER_TYPE::Gui)
 			return _gui;
+		else if constexpr (Type == MANAGER_TYPE::Shader)
+			return _shader;
 	}
 
 
@@ -55,5 +59,6 @@ private:
 	shared_ptr<SceneManager> _scene;
 	shared_ptr<RenderManager> _render;
 	shared_ptr<GuiManager> _gui;
+	shared_ptr<ShaderManager> _shader;
 	
 };

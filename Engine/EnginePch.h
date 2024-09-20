@@ -17,6 +17,7 @@
 #include <string>
 #include <fstream>
 #include <type_traits>
+#include <concepts>
 using namespace std;
 
 // WIN
@@ -49,7 +50,7 @@ using namespace Microsoft::WRL;
 #include "Graphics.h"
 #include "Manager.h"
 #include "Component.h"
+#include "Utils.h"
 
-//#include "Utils.h"
 //#include "Shader.h"
 //#include "GameObject.h"
