@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "Mesh.h"
+#include "VAO.h"
 
 Mesh::Mesh()
 {

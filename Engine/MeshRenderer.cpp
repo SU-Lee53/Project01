@@ -12,6 +12,7 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::Update_impl()
 {
+	RENDER->PushToRenderQueue(GetOwner());
 }
 
 void MeshRenderer::Render()

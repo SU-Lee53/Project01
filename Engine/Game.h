@@ -28,5 +28,6 @@ private:
 	shared_ptr<class VAO> _vao;
 	shared_ptr<class GameObject> _obj;
 	shared_ptr<class GameObject> _camera;
+
 };
 

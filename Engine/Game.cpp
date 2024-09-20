@@ -86,6 +86,7 @@ static glm::vec3 rotation{ 45.f,0.f,0.f };
 void Game::Update()
 {
 	MANAGER.Update();
+
 	{
 		rotation.y += 20.0f * TIME->GetDeltaTime();
 		_obj->GetComponent<Transform>()->SetRotation(rotation);
@@ -105,7 +106,7 @@ void Game::Render()
 
 	// Whole render part
 	{
-		RENDER->Render(_obj);
+		RENDER->Render();
 	}
 
 	// Render end

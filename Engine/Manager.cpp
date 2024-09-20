@@ -22,4 +22,5 @@ void Manager::Update()
 	_time->Update();
 	_input->Update();
 	//_scene->Update();
+	_render->Update();
 }

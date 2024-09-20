@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "RenderManager.h"
+#include "GameObject.h"
 
 RenderManager::RenderManager()
 {
@@ -9,11 +10,16 @@ RenderManager::~RenderManager()
 {
 }
 
-void RenderManager::Render(shared_ptr<GameObject>& obj)
+void RenderManager::Update()
 {
-	if(obj->GetComponent<MeshRenderer>() != nullptr)
+	_renderObj.clear();
+}
+
+void RenderManager::Render()
+{
+	for (const auto& o : _renderObj)
 	{
-		obj->GetComponent<Transform>()->PushTransform();
-		obj->GetComponent<MeshRenderer>()->Render();
+		o->GetComponent<Transform>()->PushTransform();
+		o->GetComponent<MeshRenderer>()->Render();
 	}
 }
