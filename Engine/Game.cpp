@@ -1,114 +1,97 @@
 #include "EnginePch.h"
-#include "Camera.h"
-#include "Transform.h"
-#include "Mesh.h"
-#include "MeshRenderer.h"
-#include "VAO.h"
+#include "Game.h"
 
-void Game::Init(int argc, char** argv)
+WPARAM Game::Run(GameDesc& desc)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(_desc.windowPos.x, _desc.windowPos.y);
-	glutInitWindowSize(_desc.width, _desc.height);
-	glutCreateWindow(_desc.windowName.c_str());
+	_desc = desc;
+	// assert(_desc.app != nullptr);
 
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK)
+	MyRegisterClass();
+
+	if (!InitInstance(SW_SHOWNORMAL))
+		return FALSE;
+
 	{
-		std::cerr << "Unable to init GLEW" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		std::cout << "GLEW Initialized" << std::endl;
+		// TODO : Init
 	}
 
-	_shader = make_shared<Shader>(L"vs", L"fs");
+	MSG msg = { 0 };
 
-	MANAGER.Init(_shader);
-
-	// Camera
+	while (msg.message != WM_QUIT)
 	{
-		_camera = make_shared<GameObject>();
-		_camera->AddComponent<Camera>();
-		_camera->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 3.0f });
+		if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			::TranslateMessage(&msg);
+			::DispatchMessage(&msg);
+		}
+		else
+		{
+			Update();
+		}
 	}
 
-	// Cube
-	{
-		_vao = make_shared<VAO>();
-		Utils::MakeCubeGeometry(_vao);
-		_vao->Create();
-		shared_ptr<Mesh> m = make_shared<Mesh>(_vao);
-
-		_obj = make_shared<GameObject>();
-		_obj->AddComponent<MeshRenderer>();
-		_obj->GetComponent<MeshRenderer>()->SetMesh(m);
-		_obj->GetComponent<Transform>()->SetPosition(glm::vec3{ 0.0f, 0.0f, 0.0f });
-	}
-
-
-	// Shader Test
-	//{
-	//	GLuint blockIndex = _shader->GetUniformBlockLocation("Global");
-	//	cout << "Global Index is " << blockIndex << endl;
-	//
-	//	GLint blockSize = 0;
-	//	glGetActiveUniformBlockiv(_shader->GetID(), blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
-	//	cout << "Global block size is " << blockSize << endl;
-	//
-	//	GLubyte* blockBuffer = (GLubyte*)malloc(blockSize);
-	//	const GLchar* names[] = { "view", "projection" };
-	//	GLuint indices[2];
-	//	glGetUniformIndices(_shader->GetID(), 2, names, indices);
-	//
-	//	GLint offset[2];
-	//	glGetActiveUniformsiv(_shader->GetID(), 2, indices, GL_UNIFORM_OFFSET, offset);
-	//
-	//	for (int i = 0; i < 2; i++)
-	//	{
-	//		cout << "attribute : \"" << names[i]
-	//			<< "\" has index : " << indices[i]
-	//			<< " offset : " << offset[i] << "bytes" 
-	//			<< endl;
-	//	}
-	//
-	//	free(blockBuffer);
-	//}
-
-
+	return msg.wParam;
 }
 
-static float _temp = 0.0f;
-static glm::vec3 rotation{ 45.f,0.f,0.f };
+ATOM Game::MyRegisterClass()
+{
+	WNDCLASSEXW wcex;
+
+	wcex.cbSize = sizeof(WNDCLASSEX);
+
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = WndProc;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = _desc.hInstance;
+	wcex.hIcon = ::LoadIcon(NULL, IDI_WINLOGO);
+	wcex.hCursor = ::LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wcex.lpszMenuName = NULL;
+	wcex.lpszClassName = _desc.appName.c_str();
+	wcex.hIconSm = wcex.hIcon;
+
+	return RegisterClassExW(&wcex);
+}
+
+BOOL Game::InitInstance(int cmdShow)
+{
+	RECT windowRect = { 0, 0, _desc.width, _desc.height };
+	::AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, false);
+
+	_desc.hWnd = CreateWindowW(_desc.appName.c_str(), _desc.appName.c_str(), WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, nullptr, nullptr, _desc.hInstance, nullptr);
+
+	if (!_desc.hWnd)
+		return FALSE;
+
+	::ShowWindow(_desc.hWnd, cmdShow);
+	::UpdateWindow(_desc.hWnd);
+
+	return TRUE;
+}
+
+LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_SIZE:
+		break;
+	case WM_CLOSE:
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return ::DefWindowProc(handle, message, wParam, lParam);
+	}
+}
 
 void Game::Update()
 {
-	MANAGER.Update();
 
-	{
-		rotation.y += 20.0f * TIME->GetDeltaTime();
-		_obj->GetComponent<Transform>()->SetRotation(rotation);
-	}
-
-	_obj->Update();
-	_camera->Update();
 }
 
 void Game::Render()
 {
-	// Render begin
-	glClearColor(_desc.clearColor.r, _desc.clearColor.g, _desc.clearColor.b, _desc.clearColor.a);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_CULL_FACE);
-	//glEnable(GL_DEPTH_TEST);
 
-	// Whole render part
-	{
-		RENDER->Render();
-	}
-
-	// Render end
-	glutSwapBuffers();
 }

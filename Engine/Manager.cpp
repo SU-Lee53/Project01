@@ -1,8 +1,5 @@
 #include "EnginePch.h"
 #include "Manager.h"
-#include "TimeManager.h"
-#include "InputManager.h"
-#include "SceneManager.h"
 
 void Manager::Init(shared_ptr<Shader> shader)
 {
@@ -10,11 +7,13 @@ void Manager::Init(shared_ptr<Shader> shader)
 	_input = make_shared<InputManager>();
 	_scene = make_shared<SceneManager>();
 	_render = make_shared<RenderManager>();
+	_gui = make_shared<GuiManager>();
 
 	_time->Init();
 	_input->Init();
 	// _scene->Init();
 	_render->Init(shader);
+	_gui->Init();
 }
 
 void Manager::Update()
@@ -23,4 +22,5 @@ void Manager::Update()
 	_input->Update();
 	//_scene->Update();
 	_render->Update();
+	_gui->Update();
 }

@@ -17,9 +17,9 @@ void RenderManager::Update()
 
 void RenderManager::Render()
 {
-	for (const auto& o : _renderObj)
-	{
-		o->GetComponent<Transform>()->PushTransform();
-		o->GetComponent<MeshRenderer>()->Render();
-	}
+	//for (const auto& o : _renderObj)
+	//{
+	//	o->GetComponent<Transform>()->PushTransform();
+	//	o->GetComponent<MeshRenderer>()->Render();
+	//}
 }

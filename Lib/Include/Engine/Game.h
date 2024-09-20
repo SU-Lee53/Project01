@@ -5,16 +5,23 @@ struct GameDesc
 {
 	int width;
 	int height;
-	Pos2D windowPos;
 	string windowName;
-	RGBA clearColor;
+	Color clearColor;
+
+	wstring appName = L"Billards";
+	HINSTANCE hInstance = 0;
+	HWND hWnd = 0;
 };
 
 class Game
 {
 public:
+	WPARAM Run(GameDesc& desc);
+	ATOM MyRegisterClass();
+	BOOL InitInstance(int cmdShow);
+	static LRESULT CALLBACK WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam);
 
-	void Init(int argc, char** argv);
+public:
 	void Update();
 	void Render();
 
@@ -28,5 +35,6 @@ private:
 	shared_ptr<class VAO> _vao;
 	shared_ptr<class GameObject> _obj;
 	shared_ptr<class GameObject> _camera;
+
 };
 

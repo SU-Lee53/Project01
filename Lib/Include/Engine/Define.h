@@ -18,6 +18,7 @@ public:										\
 #define INPUT		MANAGER.GetManager<MANAGER_TYPE::Input>()
 #define SCENE		MANAGER.GetManager<MANAGER_TYPE::Scene>()
 #define RENDER		MANAGER.GetManager<MANAGER_TYPE::Render>()
+#define GUI			MANAGER.GetManager<MANAGER_TYPE::Gui>()
 
 
 

@@ -1,16 +1,5 @@
 #include "pch.h"
-
 Game game{};
-
-void Render()
-{
-	game.Render();
-}
-
-void Reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
-}
 
 int main(int argc, char** argv)
 {
@@ -23,18 +12,21 @@ int main(int argc, char** argv)
 		desc.clearColor = { 0.f, 0.f, 0.f };
 	}
 
-	game.Init(argc, argv);
+	game = Game();
+	game.Run(desc);
 
-	glutDisplayFunc(Render);
-	glutReshapeFunc(Reshape);
-
-	while (true)
-	{
-		game.Update();
-
-		glutPostRedisplay();
-		glutMainLoopEvent();
-	}
+	//game.Init(argc, argv);
+	//
+	//glutDisplayFunc(Render);
+	//glutReshapeFunc(Reshape);
+	//
+	//while (true)
+	//{
+	//	game.Update();
+	//
+	//	glutPostRedisplay();
+	//	glutMainLoopEvent();
+	//}
 
 }
 

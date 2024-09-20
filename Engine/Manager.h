@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "RenderManager.h"
+#include "GuiManager.h"
 
 enum class MANAGER_TYPE
 {
@@ -12,6 +13,7 @@ enum class MANAGER_TYPE
 	Input,
 	Scene,
 	Render,
+	Gui,
 
 	end
 };
@@ -42,6 +44,8 @@ public:
 			return _scene;
 		else if constexpr (Type == MANAGER_TYPE::Render)
 			return _render;
+		else if constexpr (Type == MANAGER_TYPE::Gui)
+			return _gui;
 	}
 
 
@@ -50,6 +54,6 @@ private:
 	shared_ptr<InputManager> _input;
 	shared_ptr<SceneManager> _scene;
 	shared_ptr<RenderManager> _render;
-
+	shared_ptr<GuiManager> _gui;
 	
 };

@@ -9,159 +9,230 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Headers">
-      <UniqueIdentifier>{fe4e327b-8538-4869-b74a-777ffea51203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Graphics">
+    <Filter Include="소스 파일\01. Graphics">
       <UniqueIdentifier>{faa1d5f6-3ae5-416b-893a-0cad74733bc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Graphics\Buffers">
+    <Filter Include="소스 파일\01. Graphics\Buffers">
       <UniqueIdentifier>{4f4300d5-fb03-49cf-bc53-0c47b35af5ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Scene">
-      <UniqueIdentifier>{86e830f3-6771-4218-9fec-97c555dfec12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Game">
+    <Filter Include="소스 파일\02. Game">
       <UniqueIdentifier>{a3ce1d7f-29f8-42e8-8714-eab14f5ce281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Managers">
-      <UniqueIdentifier>{d134fb8a-b162-4dd2-ad97-87e08d38549d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Utils">
-      <UniqueIdentifier>{462a06c0-bc1a-4fdf-9be8-c71c9f5ea580}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Component">
-      <UniqueIdentifier>{c87ecd2a-6c57-47e8-b2f0-0e4ec058f142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\GameObject">
+    <Filter Include="소스 파일\03. GameObject">
       <UniqueIdentifier>{27bd30a3-f8d0-4569-9950-1129c8e45ea4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Resources">
+    <Filter Include="소스 파일\04. Component">
+      <UniqueIdentifier>{c87ecd2a-6c57-47e8-b2f0-0e4ec058f142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05. Managers">
+      <UniqueIdentifier>{d134fb8a-b162-4dd2-ad97-87e08d38549d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\06. Resources">
       <UniqueIdentifier>{54705ed0-6180-41ca-9945-c2f8b5d26567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. Scene">
+      <UniqueIdentifier>{86e830f3-6771-4218-9fec-97c555dfec12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Headers">
+      <UniqueIdentifier>{fe4e327b-8538-4869-b74a-777ffea51203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Utils">
+      <UniqueIdentifier>{462a06c0-bc1a-4fdf-9be8-c71c9f5ea580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Utils\ImGUI">
+      <UniqueIdentifier>{17605c32-ab2d-4aea-892a-00d8acbb8249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines">
+      <UniqueIdentifier>{e424d43d-72e6-45bf-ab18-6c134a75314f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\01. IA">
+      <UniqueIdentifier>{c9a1d484-0128-4e10-b1c0-b878143afa43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\02. VS">
+      <UniqueIdentifier>{2d5cb9c2-4bf5-4476-94c7-4c05ad5177d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\03. RS">
+      <UniqueIdentifier>{a3b46fbd-1aa8-494c-b562-465beb5958af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\04. PS">
+      <UniqueIdentifier>{7ca5e112-3da1-42cf-9d5a-48422d839fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\05. OM">
+      <UniqueIdentifier>{b6c7e022-ded8-413b-b99a-9a42872092fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
-      <Filter>소스 파일\Headers</Filter>
-    </ClCompile>
-    <ClCompile Include="VAO.cpp">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="VBO.cpp">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>소스 파일\Graphics</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>소스 파일\Game</Filter>
+      <Filter>소스 파일\02. Game</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일\Scene</Filter>
+      <Filter>소스 파일\07. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>소스 파일\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="UBO.cpp">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
+      <Filter>소스 파일\99. Utils</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일\GameObject</Filter>
+      <Filter>소스 파일\03. GameObject</Filter>
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>소스 파일\Resources</Filter>
+      <Filter>소스 파일\06. Resources</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiManager.cpp">
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>소스 파일\01. Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
-      <Filter>소스 파일\Headers</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
-      <Filter>소스 파일\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VAO.h">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBO.h">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>소스 파일\Graphics</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>소스 파일\Game</Filter>
+      <Filter>소스 파일\02. Game</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>소스 파일\Scene</Filter>
+      <Filter>소스 파일\07. Scene</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>소스 파일\Headers</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>소스 파일\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="UBO.h">
-      <Filter>소스 파일\Graphics\Buffers</Filter>
+      <Filter>소스 파일\99. Utils</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>소스 파일\GameObject</Filter>
+      <Filter>소스 파일\03. GameObject</Filter>
     </ClInclude>
     <ClInclude Include="RenderManager.h">
-      <Filter>소스 파일\Managers</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>소스 파일\Resources</Filter>
+      <Filter>소스 파일\06. Resources</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderer.h">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiManager.h">
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3_loader.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>소스 파일\99. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>소스 파일\01. Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\03. RS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>소스 파일\99. Utils</Filter>
+    </None>
   </ItemGroup>
 </Project>

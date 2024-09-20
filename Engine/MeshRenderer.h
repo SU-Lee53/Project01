@@ -14,6 +14,8 @@ public:
 public:
 	void SetMesh(shared_ptr<Mesh> mesh) { _mesh = mesh; }
 
+	shared_ptr<Mesh> GetMesh() { return _mesh; }
+
 private:
 	shared_ptr<Mesh> _mesh;
 

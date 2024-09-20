@@ -1,85 +1,25 @@
 #pragma once
+#include <windows.h>
+#include "DirectXMath.h"
+#include "SimpleMath.h"
 
-// glm types are included here
-#include <glm/glm.hpp>
-#include <glm/ext.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+using int8 = __int8;
+using int16 = __int16;
+using int32 = __int32;
+using int64 = __int64;
+using uint8 = unsigned __int8;
+using uint16 = unsigned __int16;
+using uint32 = unsigned __int32;
+using uint64 = unsigned __int64;
 
-struct Global
-{
-	glm::mat4 view;
-	glm::mat4 projection;
-};
+using Color = DirectX::XMFLOAT4;
 
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-//////////////////////////////////////////////
+using Vec2 = DirectX::SimpleMath::Vector2;
+using Vec3 = DirectX::SimpleMath::Vector3;
+using Vec4 = DirectX::SimpleMath::Vector4;
+using Matrix = DirectX::SimpleMath::Matrix;
+using Quaternion = DirectX::SimpleMath::Quaternion;
+using Ray = DirectX::SimpleMath::Ray;
 
-struct RGB
-{
-	union
-	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-		};
-		glm::vec3 rgb;
-		float values[3];
-	};
-
-	operator glm::vec3()
-	{
-		return glm::vec3{ r,g,b };
-	}
-};
-
-struct RGBA
-{
-	union
-	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		};
-		glm::vec4 rgba;
-		float values[4];
-	};
-};
-
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-
-struct Pos2D
-{
-	union
-	{
-		struct
-		{
-			float x;
-			float y;
-		};
-		glm::vec2 xy;
-		float values[2];
-	};
-};
-
-struct Pos3D
-{
-	union
-	{
-		struct
-		{
-			float x;
-			float y;
-			float z;
-		};
-		glm::vec2 xyz;
-		float values[3];
-	};
-};
+// MeshID / MaterialID
+using InstanceID = std::pair<uint64, uint64>;
