@@ -122,6 +122,7 @@
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>VS</EntryPointName>
+      <ShaderType>Vertex</ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

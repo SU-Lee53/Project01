@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "Graphics.h"
+#include "Pipeline.h"
 
 void Graphics::Init(HWND hWnd)
 {
@@ -8,6 +9,7 @@ void Graphics::Init(HWND hWnd)
 	CreateRTV();
 	CreateDSV();
 	_viewPort = Viewport(GAME.GetDesc().width, GAME.GetDesc().height);
+	_pipeLine = make_shared<Pipeline>();
 }
 
 void Graphics::RenderBegin()

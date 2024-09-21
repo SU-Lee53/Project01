@@ -1,6 +1,8 @@
 #pragma once
 #include "Viewport.h";
 
+class Pipeline;
+
 class Graphics
 {
 	DECLARE_SINGLE(Graphics);
@@ -18,8 +20,11 @@ private:
 	void CreateDSV();
 
 public:
-	auto GetDevice() { return _device; }
-	auto GetDeviceContext() { return _deviceContext; }
+	auto GetDevice() const { return _device; }
+	auto GetDeviceContext() const { return _deviceContext; }
+
+public:
+	shared_ptr<Pipeline> GetPipeline() const { return _pipeLine; }
 
 private:
 	HWND _hWnd;
@@ -37,5 +42,8 @@ private:
 	ComPtr<ID3D11DepthStencilView> _dsv;
 
 	Viewport _viewPort;
+
+	// Pipelines
+	shared_ptr<Pipeline> _pipeLine;
 };
 

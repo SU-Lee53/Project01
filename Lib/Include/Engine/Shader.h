@@ -10,10 +10,8 @@ public:
 public:
 	void Create(string file, const string& name, const string& version);
 
-private:
-
 public:
-	ComPtr<T> GetShader() { return _shader; }
+	ComPtr<T> GetComPtr() const { return _shader; }
 
 private:
 	wstring _filePath;

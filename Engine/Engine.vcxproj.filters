@@ -141,7 +141,19 @@
       <Filter>소스 파일\01. Graphics\Pipelines\02. VS</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\06. Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +244,21 @@
     <ClInclude Include="VertexShader.h">
       <Filter>소스 파일\01. Graphics\Pipelines\02. VS</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>소스 파일\01. Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>소스 파일\06. Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
