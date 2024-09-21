@@ -13,8 +13,8 @@
 struct PipelineDesc
 {
 	shared_ptr<InputLayout> inputLayout;
-	shared_ptr<Shader<ID3D11VertexShader>> vertexShader;
-	shared_ptr<Shader<ID3D11PixelShader>> pixelShader;
+	shared_ptr<VertexShader> vertexShader;
+	shared_ptr<PixelShader> pixelShader;
 	shared_ptr<RasterizerState> rasterizerState;
 	shared_ptr<BlendState> blendState;
 	D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -33,7 +33,11 @@ public:
 	void SetVertexBuffer(shared_ptr<VertexBuffer> buffer);
 	void SetIndexBuffer(shared_ptr<IndexBuffer> buffer);
 
-	void SetSamplerState(uint32 slot, uint32 scope, shared_ptr<SamplerState> samplerState);
+	//	template <typename T, ShaderType shaderTy>
+	//	void SetTexture(uint32 slot, shared_ptr<class Texture> texture);
+	
+	template <typename T, ShaderType shaderTy>
+	void SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState);
 
 	template <typename T, ShaderType shaderTy>
 	void SetConstantBuffer(uint32 slot, shared_ptr<ConstantBuffer<T>> buffer);
@@ -41,8 +45,32 @@ public:
 };
 
 template<typename T, ShaderType shaderTy>
+inline void Pipeline::SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState)
+{
+	if constexpr (is_same_v<shaderTy, VertexShader>)
+	{
+		DC->VSSetSamplers(slot, 1, samplerState->GetComPtr().GetAddressOf());
+	}
+	else if constexpr (is_same_v<shaderTy, PixelShader>)
+	{
+		DC->PSSetSamplers(slot, 1, samplerState->GetComPtr().GetAddressOf());
+	}
+	else
+		assert(false);
+}
+
+template<typename T, ShaderType shaderTy>
 inline void Pipeline::SetConstantBuffer(uint32 slot, shared_ptr<ConstantBuffer<T>> buffer)
 {
-	if constexpr (is_same_v<shaderTy, id3d11)
+	if constexpr (is_same_v<shaderTy, VertexShader>)
+	{
+		DC->VSSetConstantBuffers(slot, 1, buffer->GetComPtr().GetAddressOf());
+	}
+	else if constexpr (is_same_v<shaderTy, PixelShader>)
+	{
+		DC->PSSetConstantBuffers(slot, 1, buffer->GetComPtr().GetAddressOf());
+	}
+	else
+		assert(false);
 
 }

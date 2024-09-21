@@ -35,3 +35,7 @@ inline void Shader<T>::Create(string file, const string& name, const string& ver
 {
 	SHADER->Create<T>(_filePath, name, version);
 }
+
+
+using VertexShader = Shader<ID3D11VertexShader>;
+using PixelShader = Shader<ID3D11PixelShader>;

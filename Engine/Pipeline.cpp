@@ -27,3 +27,17 @@ void Pipeline::Update(PipelineDesc desc)
     if (desc.blendState)
         DC->OMSetBlendState(desc.blendState->GetComPtr().Get(), desc.blendState->GetBlendFactor(), desc.blendState->GetSampleMask());
 }
+
+void Pipeline::SetVertexBuffer(shared_ptr<VertexBuffer> buffer)
+{
+    uint32 stride = buffer->GetStride();
+    uint32 offset = buffer->GetOffset();
+    DC->IASetVertexBuffers(0, 1, buffer->GetComPtr().GetAddressOf(), &stride, &offset);
+}
+
+void Pipeline::SetIndexBuffer(shared_ptr<IndexBuffer> buffer)
+{
+    uint32 stride = buffer->GetStride();
+    uint32 offset = buffer->GetOffset();
+    DC->IASetIndexBuffer(buffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
+}
