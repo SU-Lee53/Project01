@@ -37,20 +37,20 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Pipeline.cpp" />
-    <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Shader_Base.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,13 +71,14 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Pipeline.h" />
-    <ClInclude Include="PixelShader.h" />
     <ClInclude Include="RasterizerState.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Shader_Base.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="Texture.h" />
@@ -86,7 +87,6 @@
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>

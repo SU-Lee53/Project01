@@ -5,7 +5,7 @@
 #include "ConstantBuffer.h"
 
 #include "InputLayout.h"
-#include "Shader.h"
+#include "Shader_Base.h"
 #include "RasterizerState.h"
 #include "SamplerState.h"
 #include "BlendState.h"

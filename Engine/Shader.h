@@ -1,41 +1,21 @@
 #pragma once
 
-template <ShaderType T>
+#include "Shader_Base.h"
+
+class InputLayout;
+
 class Shader
 {
 public:
-	Shader(string file, const string& name, const string& version);
+	Shader();
 	~Shader();
 
 public:
-	void Create(string file, const string& name, const string& version);
-
-public:
-	ComPtr<T> GetComPtr() const { return _shader; }
+	void Init();
 
 private:
-	wstring _filePath;
-	ComPtr<T> _shader;
+	shared_ptr<InputLayout> _inputLayout;
+	shared_ptr<VertexShader> _vs;
+	shared_ptr<PixelShader> _ps;
 };
 
-template<ShaderType T>
-inline Shader<T>::Shader(string file, const string& name, const string& version)
-	: _filePath(L"..\\Shader\\" + Utils::ToWString(file))
-{
-	Create(_filePath, name, version);
-}
-
-template<ShaderType T>
-inline Shader<T>::~Shader()
-{
-}
-
-template<ShaderType T>
-inline void Shader<T>::Create(string file, const string& name, const string& version)
-{
-	SHADER->Create<T>(_filePath, name, version);
-}
-
-
-using VertexShader = Shader<ID3D11VertexShader>;
-using PixelShader = Shader<ID3D11PixelShader>;
