@@ -27,4 +27,3 @@ public:										\
 #define RENDER		MANAGER.GetManager<MANAGER_TYPE::Render>()
 #define GUI			MANAGER.GetManager<MANAGER_TYPE::Gui>()
 #define SHADER		MANAGER.GetManager<MANAGER_TYPE::Shader>()
-

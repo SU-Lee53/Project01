@@ -33,6 +33,9 @@ public:
 	void SetVertexBuffer(shared_ptr<VertexBuffer> buffer);
 	void SetIndexBuffer(shared_ptr<IndexBuffer> buffer);
 
+	//	template <typename T, ShaderType shaderTy>
+	//	void SetTexture(uint32 slot, shared_ptr<class Texture> texture);
+	
 	template <typename T, ShaderType shaderTy>
 	void SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState);
 

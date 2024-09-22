@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "RenderManager.h"
 #include "GameObject.h"
+#include "Pipeline.h"
 
 RenderManager::RenderManager()
 {
@@ -12,6 +13,7 @@ RenderManager::~RenderManager()
 
 void RenderManager::Init()
 {
+
 }
 
 void RenderManager::Update()
@@ -21,9 +23,5 @@ void RenderManager::Update()
 
 void RenderManager::Render()
 {
-	//for (const auto& o : _renderObj)
-	//{
-	//	o->GetComponent<Transform>()->PushTransform();
-	//	o->GetComponent<MeshRenderer>()->Render();
-	//}
+
 }

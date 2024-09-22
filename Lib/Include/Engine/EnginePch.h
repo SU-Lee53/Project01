@@ -45,12 +45,12 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "DirectXTex/DirectXTex.lib")
 #endif
 
-// PreCompile
-#include "Game.h"
+// Engine
 #include "Graphics.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "ConstantBuffer.h"
 #include "Manager.h"
 #include "Component.h"
 #include "Utils.h"
-
-//#include "Shader.h"
-//#include "GameObject.h"
+#include "Game.h"

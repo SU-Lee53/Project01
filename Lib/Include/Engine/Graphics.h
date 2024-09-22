@@ -23,9 +23,6 @@ public:
 	auto GetDevice() const { return _device; }
 	auto GetDeviceContext() const { return _deviceContext; }
 
-public:
-	shared_ptr<Pipeline> GetPipeline() const { return _pipeLine; }
-
 private:
 	HWND _hWnd;
 
@@ -44,6 +41,5 @@ private:
 	Viewport _viewPort;
 
 	// Pipelines
-	shared_ptr<Pipeline> _pipeLine;
 };
 
