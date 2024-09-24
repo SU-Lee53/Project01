@@ -1,4 +1,5 @@
 #pragma once
+#include "Manager.h"
 
 template <typename C>
 concept IsShaderType = requires(C c)
@@ -14,14 +15,14 @@ concept IsShaderType = requires(C c)
 template <typename C>
 concept ShaderType = IsShaderType<C>;
 	
-class ShaderManager
+class ShaderManager : public Manager_Base
 {
 public:
 	ShaderManager();
-	~ShaderManager();
+	virtual ~ShaderManager();
 
 public:
-	void Init();
+	virtual void Init() override;
 
 	template <ShaderType T>
 	ComPtr<T> Create(const wstring& path, const string& name, const string& version);
@@ -31,12 +32,14 @@ private:
 
 private:
 	ComPtr<ID3DBlob> _blob;
+public:
+	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
 };
 
 template <ShaderType T>
 inline ComPtr<T> ShaderManager::Create(const wstring& path, const string& name, const string& version)
 {
-	LoadFromFile(name, path, version);
+	LoadFromFile(path, name, version);
 
 	ComPtr<T> shader;
 	HRESULT hr;

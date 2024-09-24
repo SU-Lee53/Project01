@@ -1,4 +1,5 @@
 #pragma once
+#include "Manager.h"
 
 enum class KEY_TYPE
 {
@@ -64,15 +65,16 @@ enum
 	KEY_TYPE_COUNT = static_cast<int>(UINT8_MAX + 1),
 	KEY_STATE_COUNT = static_cast<int>(KEY_STATE::END),
 };
-class InputManager
+
+class InputManager : public Manager_Base
 {
 public:
 	InputManager();
-	~InputManager();
+	virtual ~InputManager();
 
 public:
-	void Init();
-	void Update();
+	virtual void Init() override;
+	virtual void Update() override;
 
 public:
 	bool GetButton(KEY_TYPE key) { return GetState(key) == KEY_STATE::PRESS; }
@@ -89,4 +91,7 @@ private:
 
 private:
 	vector<KEY_STATE> _states;
+
+public:
+	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Input;
 };

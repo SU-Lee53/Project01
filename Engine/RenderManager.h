@@ -1,4 +1,5 @@
 #pragma once
+#include "Manager.h"
 
 class GameObject;
 class RasterizerState;
@@ -17,15 +18,15 @@ struct TransformData
 	Matrix matWorld = Matrix::Identity;
 };
 
-class RenderManager
+class RenderManager : public Manager_Base
 {
 public:
 	RenderManager();
-	~RenderManager();
+	virtual ~RenderManager();
 
 public:
-	void Init();
-	void Update();
+	virtual void Init() override;
+	virtual void Update() override;
 	void Render();
 
 public:
@@ -43,5 +44,7 @@ private:
 	shared_ptr<SamplerState> _samplerState;
 	shared_ptr<BlendState> _blendState;
 
+public:
+	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Render;
 };
 

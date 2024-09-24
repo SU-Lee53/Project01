@@ -1,11 +1,11 @@
 #pragma once
 
-#include "TimeManager.h"
-#include "InputManager.h"
-#include "SceneManager.h"
-#include "RenderManager.h"
-#include "GuiManager.h"
-#include "ShaderManager.h"
+class TimeManager;
+class InputManager;
+class SceneManager;
+class RenderManager;
+class GuiManager;
+class ShaderManager;
 
 enum class MANAGER_TYPE
 {
@@ -25,6 +25,27 @@ enum
 	MANAGER_TYPE_COUNT = static_cast<int>(MANAGER_TYPE::end)
 };
 
+class Manager_Base
+{
+public:
+	Manager_Base();
+	virtual ~Manager_Base();
+
+public:
+	virtual void Init() {}
+	virtual void Update() {}
+
+};
+
+template <typename C>
+concept IsManagerType = requires(C c)
+{
+	derived_from<C, Manager_Base>;
+};
+
+template <typename C>
+concept ManagerType = IsManagerType<C>;
+
 class Manager
 {
 	DECLARE_SINGLE(Manager);
@@ -35,25 +56,17 @@ public:
 
 public:
 
-	template<MANAGER_TYPE Type>
-	constexpr auto GetManager()
+	template<ManagerType Ty>
+	constexpr shared_ptr<Ty> GetManager()
 	{
-		if constexpr (Type == MANAGER_TYPE::Time)
-			return _time;
-		else if constexpr (Type == MANAGER_TYPE::Input)
-			return _input;
-		else if constexpr (Type == MANAGER_TYPE::Scene)
-			return _scene;
-		else if constexpr (Type == MANAGER_TYPE::Render)
-			return _render;
-		else if constexpr (Type == MANAGER_TYPE::Gui)
-			return _gui;
-		else if constexpr (Type == MANAGER_TYPE::Shader)
-			return _shader;
+		int idx = (int)Ty::ty;
+		return any_cast<shared_ptr<Ty>>(_managers[idx]);
 	}
 
 
 private:
+	array<any, MANAGER_TYPE_COUNT> _managers;
+
 	shared_ptr<TimeManager> _time;
 	shared_ptr<InputManager> _input;
 	shared_ptr<SceneManager> _scene;

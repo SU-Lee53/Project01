@@ -1,30 +1,27 @@
 #pragma once
+#include "ShaderManager.h"
 
 template <ShaderType T>
 class Shader_Base
 {
 public:
 	Shader_Base() = default;
-	Shader_Base(string file, const string& name, const string& version);
 	~Shader_Base();
 
 public:
-	void Create(string file, const string& name, const string& version);
+	void Create(const string& file, const string& name, const string& version);
 
 public:
 	ComPtr<T> GetComPtr() const { return _shader; }
 
 private:
 	wstring _filePath;
+	string _name;
+	string _version;
+
+private:
 	ComPtr<T> _shader;
 };
-
-template<ShaderType T>
-inline Shader_Base<T>::Shader_Base(string file, const string& name, const string& version)
-	: _filePath(L"..\\Shader\\" + Utils::ToWString(file))
-{
-	Create(_filePath, name, version);
-}
 
 template<ShaderType T>
 inline Shader_Base<T>::~Shader_Base()
@@ -32,9 +29,12 @@ inline Shader_Base<T>::~Shader_Base()
 }
 
 template<ShaderType T>
-inline void Shader_Base<T>::Create(string file, const string& name, const string& version)
+inline void Shader_Base<T>::Create(const string& file, const string& name, const string& version)
 {
-	SHADER->Create<T>(_filePath, name, version);
+	_filePath = L"..\\Shader\\" + Utils::ToWString(file);
+	_name = name;
+	_version = version;
+	SHADER->Create<T>(_filePath, _name, _version);
 }
 
 

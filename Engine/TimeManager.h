@@ -1,15 +1,15 @@
 #pragma once
 #include "Manager.h"
 
-class TimeManager
+class TimeManager : public Manager_Base
 {
 public:
 	TimeManager();
-	~TimeManager();
+	virtual ~TimeManager();
 
 public:
-	void Init();
-	void Update();
+	virtual void Init() override;
+	virtual void Update() override;
 
 public:
 	UINT32 GetFps() { return _fps; }
@@ -24,4 +24,6 @@ private:
 	UINT32	_frameCount	= 0;
 	UINT32	_fps		= 0;
 	float	_frameTime	= 0.f;
+public:
+	constexpr static MANAGER_TYPE ty = MANAGER_TYPE::Time;
 };

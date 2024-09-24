@@ -1,15 +1,18 @@
 #pragma once
+#include "Manager.h"
 
-class GuiManager
+class GuiManager : public Manager_Base
 {
 public:
 	GuiManager();
-	~GuiManager();
+	virtual ~GuiManager();
 
 public:
-	void Init();
-	void Update();
+	virtual void Init() override;
+	virtual void Update() override;
 	void Render();
 
+public:
+	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Gui;
 };
 

@@ -1,14 +1,20 @@
 #include "EnginePch.h"
 #include "Manager.h"
+#include "TimeManager.h"
+#include "InputManager.h"
+#include "SceneManager.h"
+#include "RenderManager.h"
+#include "GuiManager.h"
+#include "ShaderManager.h"
 
 void Manager::Init()
 {
-	_time = make_shared<TimeManager>();
-	_input = make_shared<InputManager>();
-	_scene = make_shared<SceneManager>();
-	_render = make_shared<RenderManager>();
-	_gui = make_shared<GuiManager>();
-	_shader = make_shared<ShaderManager>();
+	_managers[(int)MANAGER_TYPE::Time] = make_shared<TimeManager>();
+	_managers[(int)MANAGER_TYPE::Input] = make_shared<InputManager>();
+	_managers[(int)MANAGER_TYPE::Scene] = make_shared<SceneManager>();
+	_managers[(int)MANAGER_TYPE::Render] = make_shared<RenderManager>();
+	_managers[(int)MANAGER_TYPE::Gui] = make_shared<GuiManager>();
+	_managers[(int)MANAGER_TYPE::Shader] = make_shared<ShaderManager>();
 
 	_time->Init();
 	_input->Init();
@@ -26,4 +32,16 @@ void Manager::Update()
 	_render->Update();
 	_gui->Update();
 	//_shader->Update();
+}
+
+
+//////////////////////////////////////////////
+
+
+Manager_Base::Manager_Base()
+{
+}
+
+Manager_Base::~Manager_Base()
+{
 }

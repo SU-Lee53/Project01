@@ -1,4 +1,5 @@
 #pragma once
+#include "ShaderManager.h"
 
 template <ShaderType T>
 class Shader_Base
