@@ -31,6 +31,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GuiManager.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="InputData.cpp" />
     <ClCompile Include="InputLayout.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -38,7 +39,6 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -65,6 +65,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GuiManager.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="InputData.h" />
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Manager.h" />
@@ -72,7 +73,6 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="RasterizerState.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="Scene.h" />

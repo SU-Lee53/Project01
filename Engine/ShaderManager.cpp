@@ -13,7 +13,7 @@ void ShaderManager::Init()
 {
 }
 
-void ShaderManager::LoadFromFile(const wstring& path, const string& name, const string& version)
+void ShaderManager::LoadFromFile(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob)
 {
     const uint32 compileFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
     HRESULT hr = ::D3DCompileFromFile(
@@ -24,7 +24,7 @@ void ShaderManager::LoadFromFile(const wstring& path, const string& name, const 
         version.c_str(),
         compileFlag,
         0,
-        _blob.GetAddressOf(),
+        blob.GetAddressOf(),
         nullptr
     );
 

@@ -16,22 +16,22 @@ void Manager::Init()
 	_managers[(int)MANAGER_TYPE::Gui] = make_shared<GuiManager>();
 	_managers[(int)MANAGER_TYPE::Shader] = make_shared<ShaderManager>();
 
-	_time->Init();
-	_input->Init();
-	// _scene->Init();
-	_render->Init();
-	_gui->Init();
-	_shader->Init();
+	TIME->Init();
+	INPUT->Init();
+	SCENE->Init();
+	RENDER->Init();
+	GUI->Init();
+	SHADER->Init();
 }
 
 void Manager::Update()
 {
-	_time->Update();
-	_input->Update();
-	//_scene->Update();
-	_render->Update();
-	_gui->Update();
-	//_shader->Update();
+	TIME->Update();
+	INPUT->Update();
+	SCENE->Update();
+	RENDER->Update();
+	GUI->Update();
+	SHADER->Update();
 }
 
 

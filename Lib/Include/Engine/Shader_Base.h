@@ -21,6 +21,7 @@ private:
 
 private:
 	ComPtr<T> _shader;
+	ComPtr<ID3DBlob> _blob;
 };
 
 template<ShaderType T>
@@ -34,7 +35,7 @@ inline void Shader_Base<T>::Create(const string& file, const string& name, const
 	_filePath = L"..\\Shader\\" + Utils::ToWString(file);
 	_name = name;
 	_version = version;
-	SHADER->Create<T>(_filePath, _name, _version);
+	SHADER->Create<T>(_filePath, _name, _version, _blob);
 }
 
 

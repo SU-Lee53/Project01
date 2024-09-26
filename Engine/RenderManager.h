@@ -40,9 +40,7 @@ private:
 	shared_ptr<ConstantBuffer<TransformData>> _transform;
 
 private:
-	shared_ptr<RasterizerState> _rasterizerState;
-	shared_ptr<SamplerState> _samplerState;
-	shared_ptr<BlendState> _blendState;
+	shared_ptr<Shader> _shader;
 
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Render;

@@ -2,6 +2,7 @@
 #include "Component.h"
 
 class Mesh;
+class Shader;
 
 class MeshRenderer : public Component<MeshRenderer>
 {
@@ -19,6 +20,7 @@ public:
 	shared_ptr<Mesh> GetMesh() { return _mesh; }
 
 private:
+	shared_ptr<Shader> _shader;
 	shared_ptr<Mesh> _mesh;
 
 public:

@@ -6,6 +6,7 @@ class RasterizerState;
 class SamplerState;
 class BlendState;
 class Pipeline;
+class Renderer;
 
 struct CameraData
 {
@@ -40,9 +41,7 @@ private:
 	shared_ptr<ConstantBuffer<TransformData>> _transform;
 
 private:
-	shared_ptr<RasterizerState> _rasterizerState;
-	shared_ptr<SamplerState> _samplerState;
-	shared_ptr<BlendState> _blendState;
+	shared_ptr<Renderer> _renderer;
 
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Render;

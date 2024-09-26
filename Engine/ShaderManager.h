@@ -25,21 +25,19 @@ public:
 	virtual void Init() override;
 
 	template <ShaderType T>
-	ComPtr<T> Create(const wstring& path, const string& name, const string& version);
+	ComPtr<T> Create(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob);
 
 private:
-	void LoadFromFile(const wstring& path, const string& name, const string& version);
+	void LoadFromFile(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob);
 
-private:
-	ComPtr<ID3DBlob> _blob;
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
 };
 
 template <ShaderType T>
-inline ComPtr<T> ShaderManager::Create(const wstring& path, const string& name, const string& version)
+inline ComPtr<T> ShaderManager::Create(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob)
 {
-	LoadFromFile(path, name, version);
+	LoadFromFile(path, name, version, blob);
 
 	ComPtr<T> shader;
 	HRESULT hr;
@@ -47,8 +45,8 @@ inline ComPtr<T> ShaderManager::Create(const wstring& path, const string& name, 
 	if constexpr (is_same_v<T, ID3D11VertexShader>)
 	{
 		hr = DEVICE->CreateVertexShader(
-			_blob->GetBufferPointer(),
-			_blob->GetBufferSize(),
+			blob->GetBufferPointer(),
+			blob->GetBufferSize(),
 			nullptr,
 			shader.GetAddressOf()
 		);
@@ -56,8 +54,8 @@ inline ComPtr<T> ShaderManager::Create(const wstring& path, const string& name, 
 	else if constexpr (is_same_v<T, ID3D11PixelShader>)
 	{
 		hr = DEVICE->CreatePixelShader(
-			_blob->GetBufferPointer(),
-			_blob->GetBufferSize(),
+			blob->GetBufferPointer(),
+			blob->GetBufferSize(),
 			nullptr,
 			shader.GetAddressOf()
 		);
