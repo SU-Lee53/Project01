@@ -2,6 +2,7 @@
 
 class SamplerState
 {
+public:
     SamplerState();
     ~SamplerState();
 

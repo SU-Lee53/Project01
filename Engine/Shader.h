@@ -11,7 +11,13 @@ public:
 	~Shader();
 
 public:
-	void Init();
+	void Create();
+
+public:
+	shared_ptr<InputLayout> GetInputLayout() const { return _inputLayout; }
+	shared_ptr<VertexShader> GetVertexShader() const { return _vs; }
+	shared_ptr<PixelShader> GetPixelShader() const { return _ps; }
+
 
 private:
 	shared_ptr<InputLayout> _inputLayout;

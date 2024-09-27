@@ -13,6 +13,7 @@ public:
 
 public:
 	ComPtr<T> GetComPtr() const { return _shader; }
+	ComPtr<ID3DBlob> GetBlob() const { return _blob; }
 
 private:
 	wstring _filePath;
@@ -35,7 +36,7 @@ inline void Shader_Base<T>::Create(const string& file, const string& name, const
 	_filePath = L"..\\Shader\\" + Utils::ToWString(file);
 	_name = name;
 	_version = version;
-	SHADER->Create<T>(_filePath, _name, _version, _blob);
+	_shader = SHADER->Create<T>(_filePath, _name, _version, _blob);
 }
 
 

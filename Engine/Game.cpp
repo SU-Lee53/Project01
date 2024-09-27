@@ -14,6 +14,7 @@ WPARAM Game::Run(GameDesc& desc)
 	{
 		// TODO : Init
 		GRAPHICS.Init(_desc.hWnd);
+		MANAGER.Init();
 	}
 
 	MSG msg = { 0 };
@@ -28,11 +29,14 @@ WPARAM Game::Run(GameDesc& desc)
 		else
 		{
 			Update();
+			Render();
 		}
 	}
 
 	return msg.wParam;
 }
+
+#pragma region WinCallbacks
 
 ATOM Game::MyRegisterClass()
 {
@@ -86,6 +90,8 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 		return ::DefWindowProc(handle, message, wParam, lParam);
 	}
 }
+
+#pragma endregion WinCallbacks
 
 void Game::Update()
 {

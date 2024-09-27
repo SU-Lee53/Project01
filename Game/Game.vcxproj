@@ -122,7 +122,8 @@
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>VS</EntryPointName>
-      <ShaderType>Vertex</ShaderType>
+      <ShaderType>
+      </ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,10 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\Shader\global.hlsl" />
-    <FxCompile Include="..\Shader\test.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

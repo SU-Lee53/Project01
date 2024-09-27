@@ -32,12 +32,4 @@
       <Filter>소스 파일\Headers</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\Shader\test.hlsl">
-      <Filter>소스 파일\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shader\global.hlsl">
-      <Filter>소스 파일\Shader</Filter>
-    </FxCompile>
-  </ItemGroup>
 </Project>

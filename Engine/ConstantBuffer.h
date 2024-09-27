@@ -11,7 +11,7 @@ public:
 	ComPtr<ID3D11Buffer> GetComPtr() const { return _buffer; }
 
 public:
-	void Crteate()
+	void Create()
 	{
 		D3D11_BUFFER_DESC desc;
 		memset(&desc, 0, sizeof(desc));
