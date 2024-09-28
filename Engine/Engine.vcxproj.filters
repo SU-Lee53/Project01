@@ -63,8 +63,8 @@
     <Filter Include="소스 파일\01. Graphics\Shader">
       <UniqueIdentifier>{96c8ba02-a659-433e-81a3-2de7d1dd34f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Graphics\Resources">
-      <UniqueIdentifier>{74af6bf4-cd7b-480e-99a6-169dab145791}</UniqueIdentifier>
+    <Filter Include="소스 파일\01. Graphics\Pipelines\00. Geometry">
+      <UniqueIdentifier>{8cf5d42a-9520-448d-8a61-3655376493f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="InputData.cpp">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\00. Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource_Base.cpp">
+      <Filter>소스 파일\06. Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +270,12 @@
     </ClInclude>
     <ClInclude Include="InputData.h">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\00. Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource_Base.h">
+      <Filter>소스 파일\06. Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

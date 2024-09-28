@@ -28,6 +28,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GuiManager.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="Resource_Base.cpp" />
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -62,6 +64,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="EnginePch.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GuiManager.h" />
     <ClInclude Include="IndexBuffer.h" />
@@ -74,6 +77,7 @@
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="RasterizerState.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="Resource_Base.h" />
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
