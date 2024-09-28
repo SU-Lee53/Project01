@@ -1,6 +1,12 @@
 #pragma once
 #include "Component.h"
 
+/*
+
+	No local matrix
+		-> no hierarchy models this time!!
+
+*/
 
 class Transform : public Component<Transform>
 {
@@ -20,7 +26,6 @@ public:
 	Vec3 GetRotation() { return _rotation; }
 	Vec3 GetScale() { return _scale; }
 
-	Matrix GetLocal() { return _local; }
 	Matrix GetWorld() { return _world; }
 
 public:
@@ -31,7 +36,6 @@ private:
 	Vec3 _rotation = { 0.f, 0.f, 0.f };
 	Vec3 _scale = { 1.f, 1.f, 1.f };
 
-	Matrix _local = Matrix::Identity;
 	Matrix _world = Matrix::Identity;
 
 public:

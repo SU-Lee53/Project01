@@ -56,5 +56,27 @@ void RenderManager::Update()
 
 void RenderManager::Render()
 {
+	for (const auto obj : _renderObj)
+	{
+		auto meshRenderer = obj->GetComponent<MeshRenderer>();
+		if (meshRenderer == nullptr)
+			continue;
 
+		auto transform = obj->GetComponent<Transform>();
+		if (transform == nullptr)
+			continue;
+
+
+
+	}
+
+
+}
+
+void RenderManager::PushCameraData()
+{
+}
+
+void RenderManager::PushTransformData()
+{
 }

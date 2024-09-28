@@ -18,7 +18,7 @@ void Camera::Update_impl()
 
 void Camera::SetCamera()
 {
-	Vec3 eye = GetTransform()->
+	// TODO : Fill
 }
 
 void Camera::PushCamera()

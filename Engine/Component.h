@@ -1,8 +1,7 @@
 #pragma once
 
-class GameObject;
+#include "GameObject.h"
 class Transform;
-class MeshRenderer;
 
 enum class COMPONENT_TYPE
 {

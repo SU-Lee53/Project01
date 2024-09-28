@@ -1,7 +1,8 @@
 #pragma once
-#include "Camera.h"
-#include "transform.h"
-#include "MeshRenderer.h"
+#include "Component.h"
+#include "Transform.h"
+
+class Component_Base;
 
 class GameObject : public enable_shared_from_this<GameObject>
 {

@@ -23,6 +23,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Constant_Types.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="EnginePch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -60,6 +61,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Constant_Types.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="EnginePch.h" />

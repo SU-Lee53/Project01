@@ -16,7 +16,16 @@ void Transform::Update_impl()
 
 void Transform::UpdateMatrix()
 {
-	// TODO : Fill
+	Matrix m = Matrix::Identity;
+	{
+		m *= Matrix::CreateTranslation(_position);
+		m *= Matrix::CreateRotationX(_rotation.x);
+		m *= Matrix::CreateRotationY(_rotation.y);
+		m *= Matrix::CreateRotationZ(_rotation.z);
+		m *= Matrix::CreateScale(_scale);
+	}
+
+	_world = m;
 }
 
 void Transform::SetPosition(const Vec3& pos)

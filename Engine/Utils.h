@@ -1,7 +1,4 @@
 #pragma once
-#include "Geometry.h"
-
-struct VertexColorData;	// forward decl
 
 class Utils
 {

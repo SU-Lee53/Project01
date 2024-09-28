@@ -1,8 +1,7 @@
 #pragma once
 
-class GameObject;
+#include "GameObject.h"
 class Transform;
-class MeshRenderer;
 
 enum class COMPONENT_TYPE
 {
@@ -34,6 +33,11 @@ public:
 	shared_ptr<GameObject> GetOwner()
 	{
 		return _owner.lock();
+	}
+
+	shared_ptr<Transform> GetTransform()
+	{
+		return _owner.lock()->GetComponent<Transform>();
 	}
 
 protected:

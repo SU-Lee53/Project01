@@ -1,8 +1,6 @@
 #pragma once
 #include "Component.h"
-
-template <typename T>
-class UBO;
+#include "Constant_Types.h"
 
 enum class PROJECTION_TYPE
 {
@@ -41,12 +39,15 @@ private:
 	float _near = 1.f;
 	float _far = 100.f;
 	float _fovy = 45.f;
-	//float _width = glutGet(GLUT_WINDOW_WIDTH);
-	//float _height = glutGet(GLUT_WINDOW_HEIGHT);
+	float _width = GAME.GetDesc().width;
+	float _height = GAME.GetDesc().height;
 
 private:
-	//glm::mat4 _view = IDENTITY;
-	//glm::mat4 _projection = IDENTITY;
+	Matrix _view = Matrix::Identity;
+	Matrix _projection = Matrix::Identity;
+
+private:
+	shared_ptr<ConstantBuffer<CameraData>> _cbuffer;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Camera;

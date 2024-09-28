@@ -1,8 +1,6 @@
 #pragma once
 #include "Component.h"
-
-template <typename T>
-class UBO;
+#include "Constant_Types.h"
 
 enum class PROJECTION_TYPE
 {
@@ -47,6 +45,9 @@ private:
 private:
 	Matrix _view = Matrix::Identity;
 	Matrix _projection = Matrix::Identity;
+
+private:
+	shared_ptr<ConstantBuffer<CameraData>> _cbuffer;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Camera;

@@ -167,6 +167,9 @@
     <ClCompile Include="Resource_Base.cpp">
       <Filter>소스 파일\06. Resources</Filter>
     </ClCompile>
+    <ClCompile Include="Constant_Types.cpp">
+      <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -276,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="Resource_Base.h">
       <Filter>소스 파일\06. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant_Types.h">
+      <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

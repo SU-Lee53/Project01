@@ -1,26 +1,64 @@
 #pragma once
-
+#define WIN32_LEAN_AND_MEAN
+#pragma warning disable 2027
 // Types
 #include "Types.h"
+#include "Define.h"
 
 // STL
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <functional>
 #include <memory>
-
+#include <iostream>
+#include <array>
+#include <vector>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <algorithm>
+#include <string>
+#include <fstream>
+#include <type_traits>
+#include <concepts>
+#include <any>
 using namespace std;
 
-// OPENGL
-#pragma comment (lib, "freeglut/freeglut.lib")
-#pragma comment (lib, "glew/glew32.lib")
+// WIN
+#include <windows.h>
+#include <assert.h>
+#include <optional>
 
-#include <gl/glew.h>
-#include <freeglut/freeglut.h>
-#include <freeglut/freeglut_ext.h>
-// glm types are included in Types.h
+// DX
+#include <d3d11.h>
+#include <d3dcompiler.h>
+#include <d3d11shader.h>
+#include <wrl.h>
+#include <DirectXMath.h>
+#include <DirectXTex/DirectXTex.h>
+#include <DirectXTex/DirectXTex.inl>
+using namespace DirectX;
+using namespace Microsoft::WRL;
 
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
 
-// PreCompile
-#include "Game.h"
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex/DirectXTex_debug.lib")
+#else
+#pragma comment(lib, "DirectXTex/DirectXTex.lib")
+#endif
+
+// Engine
+#include "Graphics.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "InputLayout.h"
+#include "Geometry.h"
+#include "InputData.h"
+#include "Shader_Base.h"
+#include "ConstantBuffer.h"
+#include "Texture.h"
+#include "RasterizerState.h"
+#include "SamplerState.h"
+#include "BlendState.h"
+#include "Pipeline.h"
+#include "Transform.h"
+#include "Utils.h"
