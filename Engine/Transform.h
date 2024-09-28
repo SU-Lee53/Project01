@@ -8,31 +8,31 @@ public:
 	Transform();
 	virtual ~Transform();
 	
-//public:
-//	void Update_impl();
-//	void UpdateMatrix();
-//
-//	void SetPosition(const glm::vec3& pos);
-//	void SetRotation(const glm::vec3& rot);
-//	void SetScale(const glm::vec3& scale);
-//	
-//	glm::vec3 GetPosition() { return _position; }
-//	glm::vec3 GetRotation() { return _rotation; }
-//	glm::vec3 GetScale() { return _scale; }
-//
-//	glm::mat4 GetLocal() { return _local; }
-//	glm::mat4 GetWorld() { return _world; }
-//
-//public:
-//	void PushTransform();
-//
-//private:
-//	glm::vec3 _position = { 0.f, 0.f, 0.f };
-//	glm::vec3 _rotation = { 0.f, 0.f, 0.f };
-//	glm::vec3 _scale = { 1.f, 1.f, 1.f };
-//
-//	glm::mat4 _local = IDENTITY;
-//	glm::mat4 _world = IDENTITY;
+public:
+	void Update_impl();
+	void UpdateMatrix();
+
+	void SetPosition(const Vec3& pos);
+	void SetRotation(const Vec3& rot);
+	void SetScale(const Vec3& scale);
+	
+	Vec3 GetPosition() { return _position; }
+	Vec3 GetRotation() { return _rotation; }
+	Vec3 GetScale() { return _scale; }
+
+	Matrix GetLocal() { return _local; }
+	Matrix GetWorld() { return _world; }
+
+public:
+	void PushTransform();
+
+private:
+	Vec3 _position = { 0.f, 0.f, 0.f };
+	Vec3 _rotation = { 0.f, 0.f, 0.f };
+	Vec3 _scale = { 1.f, 1.f, 1.f };
+
+	Matrix _local = Matrix::Identity;
+	Matrix _world = Matrix::Identity;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Transform;

@@ -1,4 +1,7 @@
 #pragma once
+#include "Geometry.h"
+
+struct VertexColorData;	// forward decl
 
 class Utils
 {
@@ -14,8 +17,7 @@ public:
 
 	static string FileToBuf(ifstream& is);
 
-	static void MakeQuadGeometry(OUT shared_ptr<class VAO>& vao);
-	static void MakeCubeGeometry(OUT shared_ptr<class VAO>& vao);
+	static void MakeCubeGeometry(shared_ptr<Geometry<VertexColorData>> geometry);
 
 };
 

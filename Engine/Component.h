@@ -36,6 +36,11 @@ public:
 		return _owner.lock();
 	}
 
+	shared_ptr<Transform> GetTransform()
+	{
+		return _owner.lock()->GetComponent<Transform>();
+	}
+
 protected:
 	friend class GameObject;
 	void SetOwner(shared_ptr<GameObject> gameObject) { _owner = gameObject; }

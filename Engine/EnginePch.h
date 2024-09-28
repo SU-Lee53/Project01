@@ -53,5 +53,6 @@ using namespace Microsoft::WRL;
 #include "ConstantBuffer.h"
 #include "Manager.h"
 #include "Component.h"
+#include "GameObject.h"
 #include "Utils.h"
 #include "Game.h"

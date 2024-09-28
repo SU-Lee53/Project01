@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "Game.h"
+#include "Mesh.h"
 
 WPARAM Game::Run(GameDesc& desc)
 {
@@ -15,6 +16,24 @@ WPARAM Game::Run(GameDesc& desc)
 		// TODO : Init
 		GRAPHICS.Init(_desc.hWnd);
 		MANAGER.Init();
+
+		{
+			_obj = make_shared<GameObject>();
+			_obj->AddComponent<Transform>();
+			_obj->AddComponent<MeshRenderer>();
+
+			auto mesh = make_shared<Mesh>();
+			mesh->CreateTestGeometry();
+
+			_obj->GetComponent<MeshRenderer>()->SetMesh(mesh);
+		}
+
+		{
+			_cam = make_shared<GameObject>();
+			_cam->AddComponent<Transform>();
+			_cam->AddComponent<Camera>();
+		}
+
 	}
 
 	MSG msg = { 0 };

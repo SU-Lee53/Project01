@@ -1,6 +1,5 @@
 #pragma once
 
-
 struct GameDesc
 {
 	int width;
@@ -32,6 +31,7 @@ private:
 
 private:
 	GameDesc _desc;
-
+	shared_ptr<GameObject> _obj;
+	shared_ptr<GameObject> _cam;
 };
 
