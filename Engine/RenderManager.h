@@ -21,6 +21,9 @@ public:
 	virtual void Update() override;
 	void Render();
 
+public:
+	void PushToRenderObject(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
+
 private:
 	void PushCameraData();
 	void PushTransformData();
@@ -31,15 +34,18 @@ public:
 	void SetRasterizerState(shared_ptr<SamplerState> ss) { _samplerState = ss; }
 
 public:
-	void SetCameraData(shared_ptr<ConstantBuffer<CameraData>> cam) { _camera = cam; }
+	void SetCameraData(CameraData cam) { _cameraData = cam; }
 
 private:
 	shared_ptr<Pipeline> _pipeline;
 	vector<shared_ptr<GameObject>> _renderObj;
 
 private:
-	shared_ptr<ConstantBuffer<CameraData>> _camera;
-	shared_ptr<ConstantBuffer<TransformData>> _transform;
+	CameraData _cameraData;
+	shared_ptr<ConstantBuffer<CameraData>> _cameraBuffer;
+
+	TransformData _transformData;
+	shared_ptr<ConstantBuffer<TransformData>> _transformBuffer;
 
 private:
 	shared_ptr<Shader> _shader;

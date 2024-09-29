@@ -42,6 +42,8 @@ public:
 	template <typename T, ShaderType shaderTy>
 	void SetConstantBuffer(uint32 slot, shared_ptr<ConstantBuffer<T>> buffer);
 	
+	void DrawIndexed(uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation);
+
 };
 
 template<typename T, ShaderType shaderTy>

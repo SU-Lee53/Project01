@@ -22,6 +22,7 @@
     <ClCompile Include="BlendState.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Constant_Types.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -49,6 +50,9 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shader_Base.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="SimpleMath.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -60,6 +64,7 @@
     <ClInclude Include="BlendState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Component_Base.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Constant_Types.h" />
     <ClInclude Include="Define.h" />

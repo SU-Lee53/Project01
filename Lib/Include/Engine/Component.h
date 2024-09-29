@@ -1,7 +1,5 @@
 #pragma once
-
-#include "GameObject.h"
-class Transform;
+#include "Component_Base.h"
 
 enum class COMPONENT_TYPE
 {
@@ -17,34 +15,6 @@ enum class COMPONENT_TYPE
 enum
 {
 	COMPONENT_COUNT = static_cast<int>(COMPONENT_TYPE::End)
-};
-
-class Component_Base
-{
-public:
-	Component_Base() {}
-	virtual ~Component_Base() {}
-
-public:
-	virtual void Init() {}
-	virtual void Update() {}
-
-public:
-	shared_ptr<GameObject> GetOwner()
-	{
-		return _owner.lock();
-	}
-
-	shared_ptr<Transform> GetTransform()
-	{
-		return _owner.lock()->GetComponent<Transform>();
-	}
-
-protected:
-	friend class GameObject;
-	void SetOwner(shared_ptr<GameObject> gameObject) { _owner = gameObject; }
-	weak_ptr<GameObject> _owner;
-
 };
 
 template <typename T>

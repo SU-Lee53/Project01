@@ -14,6 +14,7 @@ public:
 	shared_ptr<VertexBuffer> GetVertexBuffer() const { return _vertexBuffer; }
 	shared_ptr<IndexBuffer> GetIndexBuffer() const { return _indexBuffer; }
 
+	void CreateBuffers();
 
 private:
 	using MeshType = VertexColorData;

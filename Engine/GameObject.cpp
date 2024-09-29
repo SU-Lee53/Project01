@@ -8,14 +8,14 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	
+
 }
 
 void GameObject::Init()
 {
 	for (const auto& component : _components)
 	{
-		if(component)
+		if (component)
 			component->Init();
 	}
 }

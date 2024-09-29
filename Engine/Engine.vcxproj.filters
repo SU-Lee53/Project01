@@ -101,9 +101,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일\04. Component</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일\03. GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>소스 파일\05. Managers</Filter>
     </ClCompile>
@@ -170,6 +167,15 @@
     <ClCompile Include="Constant_Types.cpp">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
     </ClCompile>
+    <ClCompile Include="Component_Base.cpp">
+      <Filter>소스 파일\04. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\03. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMath.cpp">
+      <Filter>소스 파일\99. Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -211,9 +217,6 @@
     <ClInclude Include="Transform.h">
       <Filter>소스 파일\04. Component</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>소스 파일\03. GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
@@ -225,9 +228,6 @@
     </ClInclude>
     <ClInclude Include="GuiManager.h">
       <Filter>소스 파일\05. Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleMath.h">
-      <Filter>소스 파일\99. Utils</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>소스 파일\01. Graphics</Filter>
@@ -282,6 +282,15 @@
     </ClInclude>
     <ClInclude Include="Constant_Types.h">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Component_Base.h">
+      <Filter>소스 파일\04. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\03. GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>소스 파일\99. Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

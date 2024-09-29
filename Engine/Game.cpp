@@ -1,6 +1,9 @@
 #include "EnginePch.h"
 #include "Game.h"
 #include "Mesh.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
+#include "Camera.h"
 
 WPARAM Game::Run(GameDesc& desc)
 {
@@ -31,6 +34,7 @@ WPARAM Game::Run(GameDesc& desc)
 		{
 			_cam = make_shared<GameObject>();
 			_cam->AddComponent<Transform>();
+			_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
 			_cam->AddComponent<Camera>();
 		}
 
@@ -114,14 +118,16 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 
 void Game::Update()
 {
-
+	MANAGER.Update();
+	_obj->Update();
+	_cam->Update();
 }
 
 void Game::Render()
 {
 	GRAPHICS.RenderBegin();
 	{
-
+		RENDER->Render();
 	}
 	GRAPHICS.RenderEnd();
 }

@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Pipeline.h"
 #include "Shader.h"
+#include "MeshRenderer.h"
+#include "Mesh.h"
 
 RenderManager::RenderManager()
 {
@@ -16,8 +18,8 @@ void RenderManager::Init()
 {
 	_pipeline = make_shared<Pipeline>();
 
-	_camera = make_shared<ConstantBuffer<CameraData>>();
-	_transform = make_shared<ConstantBuffer<TransformData>>();
+	_cameraBuffer = make_shared<ConstantBuffer<CameraData>>();
+	_transformBuffer = make_shared<ConstantBuffer<TransformData>>();
 
 	_rasterizerState = make_shared<RasterizerState>();
 	_blendState = make_shared<BlendState>();
@@ -25,8 +27,8 @@ void RenderManager::Init()
 
 	_shader = make_shared<Shader>();
 
-	_camera->Create();
-	_transform->Create();
+	_cameraBuffer->Create();
+	_transformBuffer->Create();
 
 	_rasterizerState->Create();
 	_blendState->Create();
@@ -56,6 +58,8 @@ void RenderManager::Update()
 
 void RenderManager::Render()
 {
+	PushCameraData();
+
 	for (const auto obj : _renderObj)
 	{
 		auto meshRenderer = obj->GetComponent<MeshRenderer>();
@@ -66,8 +70,31 @@ void RenderManager::Render()
 		if (transform == nullptr)
 			continue;
 
+		// TODO : Fill
+		_transformData.matWorld = transform->GetWorld();
+		PushTransformData();
 
 
+		PipelineDesc desc;
+		{
+			desc.inputLayout = _shader->GetInputLayout();
+			desc.vertexShader = _shader->GetVertexShader();
+			desc.pixelShader = _shader->GetPixelShader();
+			desc.rasterizerState = _rasterizerState;
+			desc.blendState = _blendState;
+		}
+		_pipeline->Update(desc);
+
+		_pipeline->SetVertexBuffer(meshRenderer->GetMesh()->GetVertexBuffer());
+		_pipeline->SetIndexBuffer(meshRenderer->GetMesh()->GetIndexBuffer());
+
+		_pipeline->SetConstantBuffer<CameraData, VertexShader>(0, _cameraBuffer);
+		_pipeline->SetConstantBuffer<TransformData, VertexShader>(1, _transformBuffer);
+
+		//_pipeline->SetSamplerState
+
+		// TODO : Draw
+		_pipeline->DrawIndexed(meshRenderer->GetMesh()->GetIndexBuffer()->GetCount(), 0, 0);
 	}
 
 
@@ -75,8 +102,10 @@ void RenderManager::Render()
 
 void RenderManager::PushCameraData()
 {
+	_cameraBuffer->PushData(_cameraData);
 }
 
 void RenderManager::PushTransformData()
 {
+	_transformBuffer->PushData(_transformData);
 }

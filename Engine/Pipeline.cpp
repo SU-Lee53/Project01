@@ -42,3 +42,8 @@ void Pipeline::SetIndexBuffer(shared_ptr<IndexBuffer> buffer)
     uint32 offset = buffer->GetOffset();
     DC->IASetIndexBuffer(buffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
 }
+
+void Pipeline::DrawIndexed(uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation)
+{
+    DC->DrawIndexed(indexCount, startIndexLocation, baseVertexLocation);
+}

@@ -78,7 +78,6 @@ string Utils::FileToBuf(ifstream& is)
 
 void Utils::MakeCubeGeometry(shared_ptr<Geometry<VertexColorData>> geometry)
 {
-
 	float w2 = 0.5f;
 	float h2 = 0.5f;
 	float d2 = 0.5f;

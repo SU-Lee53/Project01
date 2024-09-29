@@ -26,6 +26,9 @@ public:
 	Vec3 GetRotation() { return _rotation; }
 	Vec3 GetScale() { return _scale; }
 
+	Vec3 GetLook() { return _world.Backward(); }
+	Vec3 GetUp() { return _world.Up(); }
+
 	Matrix GetWorld() { return _world; }
 
 public:

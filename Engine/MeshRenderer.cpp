@@ -11,6 +11,7 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::Update_impl()
 {
+	RENDER->PushToRenderObject(GetOwner());
 }
 
 void MeshRenderer::Render()

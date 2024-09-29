@@ -62,3 +62,4 @@ using namespace Microsoft::WRL;
 #include "Pipeline.h"
 #include "Transform.h"
 #include "Utils.h"
+#include "Game.h"

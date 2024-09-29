@@ -15,13 +15,11 @@ public:
 	{
 		D3D11_BUFFER_DESC desc;
 		memset(&desc, 0, sizeof(desc));
-		{
-			desc.Usage = D3D11_USAGE_DYNAMIC;
-			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-			desc.ByteWidth = sizeof(T);
-			desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		}
-
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		desc.ByteWidth = sizeof(T);
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		
 		HRESULT hr = DEVICE->CreateBuffer(&desc, nullptr, _buffer.GetAddressOf());
 		HR_ASSERT(hr);
 	}
@@ -33,7 +31,7 @@ public:
 
 		DC->Map(_buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
 		{
-			memcpy(&subResource, &data, sizeof(T));
+			memcpy(subResource.pData, &data, sizeof(data));
 		}
 		DC->Unmap(_buffer.Get(), 0);
 	}
