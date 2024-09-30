@@ -25,6 +25,7 @@
     <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Constant_Types.cpp" />
+    <ClCompile Include="Execute.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="EnginePch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -33,6 +34,27 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GuiManager.cpp" />
+    <ClCompile Include="imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputData.cpp" />
     <ClCompile Include="InputLayout.cpp" />
@@ -47,6 +69,7 @@
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shader_Base.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
@@ -68,12 +91,21 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Constant_Types.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Execute.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="EnginePch.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GuiManager.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_dx11.h" />
+    <ClInclude Include="imgui_impl_win32.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputData.h" />
     <ClInclude Include="InputLayout.h" />
@@ -88,6 +120,7 @@
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shader_Base.h" />
     <ClInclude Include="ShaderManager.h" />

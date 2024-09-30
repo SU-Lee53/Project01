@@ -18,6 +18,12 @@
     <Filter Include="소스 파일\Shader">
       <UniqueIdentifier>{c32c5ce6-32fe-4a81-9ae3-bd89d447ddb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Execute">
+      <UniqueIdentifier>{8d1ca29e-c87c-4641-82c6-4a97afe364d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Script">
+      <UniqueIdentifier>{2e6ededd-dc7b-4b79-9aac-d4adf3f46bfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,10 +32,22 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>소스 파일\Execute</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScript.cpp">
+      <Filter>소스 파일\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>소스 파일\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>소스 파일\Execute</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScript.h">
+      <Filter>소스 파일\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,17 +11,27 @@ InputManager::~InputManager()
 
 void InputManager::Init()
 {
+	_hWnd = GAME.GetDesc().hWnd;
 	_states.resize(KEY_TYPE_COUNT, KEY_STATE::NONE);
 }
 
 void InputManager::Update()
 {
 	UpdateKeyboard();
+	UpdateMouse();
 }
 
 void InputManager::UpdateKeyboard()
 {
-	//array<BYTE, KEY_TYPE_COUNT> asciiKeys;
+	HWND hwnd = ::GetActiveWindow();
+	if (_hWnd != hwnd)
+	{
+		for (uint32 key = 0; key < KEY_TYPE_COUNT; key++)
+			_states[key] = KEY_STATE::NONE;
+
+		return;
+	}
+
 	BYTE asciiKeys[KEY_TYPE_COUNT] = {};
 	if (::GetKeyboardState(asciiKeys) == false)
 		return;
@@ -51,4 +61,6 @@ void InputManager::UpdateKeyboard()
 
 void InputManager::UpdateMouse()
 {
+	::GetCursorPos(&_mousePos);
+	::ScreenToClient(_hWnd, &_mousePos);
 }

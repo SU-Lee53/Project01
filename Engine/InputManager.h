@@ -83,14 +83,18 @@ public:
 
 private:
 	void UpdateKeyboard();
-private:
 	void UpdateMouse();
+
+public:
+	const POINT& GetMousePos() { return _mousePos; }
 
 private:
 	inline KEY_STATE GetState(KEY_TYPE key) { return _states[static_cast<UINT8>(key)]; }
 
 private:
+	HWND _hWnd;
 	vector<KEY_STATE> _states;
+	POINT _mousePos = {};
 
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Input;

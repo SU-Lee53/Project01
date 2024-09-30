@@ -4,6 +4,9 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Camera.h"
+#include "Execute.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 WPARAM Game::Run(GameDesc& desc)
 {
@@ -19,28 +22,7 @@ WPARAM Game::Run(GameDesc& desc)
 		// TODO : Init
 		GRAPHICS.Init(_desc.hWnd);
 		MANAGER.Init();
-
-		{
-			_obj = make_shared<GameObject>();
-			_obj->AddComponent<Transform>();
-			_obj->AddComponent<MeshRenderer>();
-			_obj->Init();
-
-
-			auto mesh = make_shared<Mesh>();
-			mesh->CreateTestGeometry();
-			_obj->GetComponent<MeshRenderer>()->SetMesh(mesh);
-		}
-
-		{
-			_cam = make_shared<GameObject>();
-			_cam->AddComponent<Transform>();
-			_cam->AddComponent<Camera>();
-			_cam->Init();
-
-			_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
-		}
-
+		desc.program->Init();
 	}
 
 	MSG msg = { 0 };
@@ -104,6 +86,9 @@ BOOL Game::InitInstance(int cmdShow)
 
 LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam))
+		return true;
+
 	switch (message)
 	{
 	case WM_SIZE:
@@ -119,27 +104,19 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 
 #pragma endregion WinCallbacks
 
-float temp = 0.0f;
-
 void Game::Update()
 {
 	MANAGER.Update();
 
-	{
-		_obj->GetComponent<Transform>()->SetRotation(Vec3{ 45.f, temp, 45.f });
-		temp += 50.f * DELTA_TIME;
-	}
-
-
-	_obj->Update();
-	_cam->Update();
+	_desc.program->Update();
 }
 
 void Game::Render()
 {
 	GRAPHICS.RenderBegin();
 	{
-		RENDER->Render();
+		_desc.program->Render();
+		GUI->Render();
 	}
 	GRAPHICS.RenderEnd();
 }

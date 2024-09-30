@@ -23,6 +23,7 @@ using namespace std;
 
 // WIN
 #include <windows.h>
+#include <WinUser.h>
 #include <assert.h>
 #include <optional>
 
@@ -46,6 +47,11 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "DirectXTex/DirectXTex.lib")
 #endif
 
+// ImGUI
+#include "imgui.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
+
 #include "Game.h"
 #include "Graphics.h"
 #include "Manager.h"
@@ -54,6 +60,7 @@ using namespace Microsoft::WRL;
 #include "SceneManager.h"
 #include "ShaderManager.h"
 #include "RenderManager.h"
+#include "GuiManager.h"
 
 // Engine
 #include "VertexBuffer.h"

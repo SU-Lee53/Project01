@@ -24,14 +24,14 @@ public:
 	void PushCamera();
 
 public:
-	//void SetNear(float __near) { _near = __near; }
-	//void SetFar(float __far) { _far = __far; }
-	//void SetFovY(float fovy) { _fovy = fovy; }
-	//void SetWidth(float width) { _width = width; }
-	//void SetHeight(float height) { _height = height; }
+	void SetNear(float __near) { _near = __near; }
+	void SetFar(float __far) { _far = __far; }
+	void SetFovY(float fovy) { _fovy = fovy; }
+	void SetWidth(float width) { _width = width; }
+	void SetHeight(float height) { _height = height; }
 	
-	//float GetWidth() { return _width; }
-	//float GetHeight() { return _height; }
+	float GetWidth() { return _width; }
+	float GetHeight() { return _height; }
 
 private:
 	PROJECTION_TYPE _type = PROJECTION_TYPE::Perspective;

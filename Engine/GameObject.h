@@ -3,7 +3,6 @@
 #include "Component.h"
 #include "Transform.h"
 
-
 class GameObject : public enable_shared_from_this<GameObject>
 {
 public:
@@ -35,7 +34,17 @@ public:
 		return static_pointer_cast<T>(_components[idx]);
 	}
 
+	shared_ptr<Transform> GetTransform() const
+	{
+		return static_pointer_cast<Transform>(_components[(int)COMPONENT_TYPE::Transform]);
+	}
+
+public:
+	void AddScript(shared_ptr<class Script> script);
+
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
 
+	// Scripts
+	vector<shared_ptr<Script>> _scripts;
 };

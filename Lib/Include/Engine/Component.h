@@ -7,6 +7,14 @@ enum class COMPONENT_TYPE
 	Camera,
 	MeshRenderer,
 
+	/*
+		- TODO : Add Below
+		Light,
+		Gravity
+	*/
+
+	Script,
+
 	End,
 
 	ERROR_TYPE
@@ -14,7 +22,7 @@ enum class COMPONENT_TYPE
 
 enum
 {
-	COMPONENT_COUNT = static_cast<int>(COMPONENT_TYPE::End)
+	COMPONENT_COUNT = static_cast<int>(COMPONENT_TYPE::End) - 1
 };
 
 template <typename T>

@@ -6,11 +6,12 @@ struct GameDesc
 {
 	int width;
 	int height;
-	Color clearColor;
+	Color clearColor = Color{ 0.f, 0.f, 0.f, 1.f };
 
 	wstring windowName = L"Billards";
 	HINSTANCE hInstance = 0;
 	HWND hWnd = 0;
+	shared_ptr<class Execute> program;
 };
 
 class Game

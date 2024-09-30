@@ -28,6 +28,7 @@ public:
 
 	Vec3 GetLook() { return _world.Backward(); }
 	Vec3 GetUp() { return _world.Up(); }
+	Vec3 GetRight() { return _world.Right(); }
 
 	Matrix GetWorld() { return _world; }
 

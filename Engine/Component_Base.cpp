@@ -9,7 +9,7 @@ shared_ptr<GameObject> Component_Base::GetOwner()
 
 shared_ptr<Transform> Component_Base::GetTransform()
 {
-	return _owner.lock()->GetComponent<Transform>();
+	return _owner.lock()->GetTransform();
 }
 
 void Component_Base::SetOwner(shared_ptr<GameObject> gameObject)
