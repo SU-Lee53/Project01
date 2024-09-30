@@ -35,8 +35,8 @@ public:
 	}
 
 protected:
-	virtual void Init_impl() {};
-	virtual void Update_impl() {};
+	void Init_impl() {};
+	void Update_impl() {};
 
 };
 

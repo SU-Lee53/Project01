@@ -14,16 +14,19 @@ public:										\
 #define HR_ASSERT(p)	assert(SUCCEEDED(p))
 #define GET_SINGLE(classname)	classname::GetInstance()
 
-#define GRAPHICS	GET_SINGLE(Graphics)
-#define DEVICE		GET_SINGLE(Graphics).GetDevice()
-#define DC			GET_SINGLE(Graphics).GetDeviceContext()
+#define GRAPHICS		GET_SINGLE(Graphics)
+#define DEVICE			GET_SINGLE(Graphics).GetDevice()
+#define DC				GET_SINGLE(Graphics).GetDeviceContext()
 
-#define GAME		GET_SINGLE(Game)
+#define GAME			GET_SINGLE(Game)
 
-#define MANAGER		GET_SINGLE(Manager)
-#define TIME		MANAGER.GetManager<TimeManager>()
-#define INPUT		MANAGER.GetManager<InputManager>()
-#define SCENE		MANAGER.GetManager<SceneManager>()
-#define RENDER		MANAGER.GetManager<RenderManager>()
-#define GUI			MANAGER.GetManager<GuiManager>()
-#define SHADER		MANAGER.GetManager<ShaderManager>()
+#define MANAGER			GET_SINGLE(Manager)
+#define TIME			MANAGER.GetManager<TimeManager>()
+#define INPUT			MANAGER.GetManager<InputManager>()
+#define SCENE			MANAGER.GetManager<SceneManager>()
+#define RENDER			MANAGER.GetManager<RenderManager>()
+#define GUI				MANAGER.GetManager<GuiManager>()
+#define SHADER			MANAGER.GetManager<ShaderManager>()
+
+
+#define DELTA_TIME		TIME->GetDeltaTime();

@@ -46,8 +46,16 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "DirectXTex/DirectXTex.lib")
 #endif
 
-// Engine
+#include "Game.h"
 #include "Graphics.h"
+#include "Manager.h"
+#include "InputManager.h"
+#include "TimeManager.h"
+#include "SceneManager.h"
+#include "ShaderManager.h"
+#include "RenderManager.h"
+
+// Engine
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "InputLayout.h"
@@ -62,4 +70,3 @@ using namespace Microsoft::WRL;
 #include "Pipeline.h"
 #include "Transform.h"
 #include "Utils.h"
-#include "Game.h"

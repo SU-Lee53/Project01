@@ -1,6 +1,7 @@
 #pragma once
 #include "Manager.h"
 #include "Constant_Types.h"
+#include "ConstantBuffer.h"
 
 class GameObject;
 class RasterizerState;

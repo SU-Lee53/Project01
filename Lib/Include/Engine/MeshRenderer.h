@@ -11,6 +11,7 @@ public:
 	~MeshRenderer();
 
 public:
+	void Init_impl();
 	void Update_impl();
 	void Render();
 

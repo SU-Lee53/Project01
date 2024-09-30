@@ -14,6 +14,7 @@ void Mesh::CreateTestGeometry()
 {
 	_geometry = make_shared<Geometry<MeshType>>();
 	Utils::MakeCubeGeometry(_geometry);
+	CreateBuffers();
 }
 
 void Mesh::CreateBuffers()

@@ -16,16 +16,23 @@ void Transform::Update_impl()
 
 void Transform::UpdateMatrix()
 {
-	Matrix m = Matrix::Identity;
-	{
-		m *= Matrix::CreateTranslation(_position);
-		m *= Matrix::CreateRotationX(_rotation.x);
-		m *= Matrix::CreateRotationY(_rotation.y);
-		m *= Matrix::CreateRotationZ(_rotation.z);
-		m *= Matrix::CreateScale(_scale);
-	}
+	Matrix translate	= Matrix::Identity;
+	Matrix rotate		= Matrix::Identity;
+	Matrix scale		= Matrix::Identity;
 
-	_world = m;
+	Vec3 rotDegree = {
+		XMConvertToRadians(_rotation.x),
+		XMConvertToRadians(_rotation.y),
+		XMConvertToRadians(_rotation.z)
+	};
+
+	translate *= Matrix::CreateTranslation(_position);
+	rotate *= Matrix::CreateRotationX(rotDegree.x);
+	rotate *= Matrix::CreateRotationY(rotDegree.y);
+	rotate *= Matrix::CreateRotationZ(rotDegree.z);
+	scale *= Matrix::CreateScale(_scale);
+	
+	_world = scale * rotate * translate;
 }
 
 void Transform::SetPosition(const Vec3& pos)
