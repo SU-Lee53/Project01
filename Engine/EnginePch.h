@@ -27,6 +27,16 @@ using namespace std;
 #include <assert.h>
 #include <optional>
 
+// ImGUI
+#include "imgui.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
+
+// Assimp
+#include <Assimp/Importer.hpp>
+#include <Assimp/scene.h>
+#include <Assimp/postprocess.h>
+
 // DX
 #include <d3d11.h>
 #include <d3dcompiler.h>
@@ -43,14 +53,11 @@ using namespace Microsoft::WRL;
 
 #ifdef _DEBUG
 #pragma comment(lib, "DirectXTex/DirectXTex_debug.lib")
+#pragma comment(lib, "Assimp/assimp-vc143-mtd.lib")
 #else
 #pragma comment(lib, "DirectXTex/DirectXTex.lib")
+#pragma comment(lib, "Assimp/assimp-vc143-mt.lib")
 #endif
-
-// ImGUI
-#include "imgui.h"
-#include "imgui_impl_dx11.h"
-#include "imgui_impl_win32.h"
 
 #include "Game.h"
 #include "Graphics.h"
