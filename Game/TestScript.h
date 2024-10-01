@@ -12,6 +12,8 @@ public:
 private:
 	friend class Test;
 
+	bool _mouseOnOff = false;
+
 	int _speed = 10.f;
 	POINT _prevPoint;
 

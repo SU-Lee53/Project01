@@ -31,34 +31,60 @@ void TestScript::Update()
 
 	GetOwner()->GetTransform()->SetPosition(pos);
 
+
+
+	if (INPUT->GetButtonDown(KEY_TYPE::E))
+	{
+		if (_mouseOnOff)
+			_mouseOnOff = false;
+		else
+			_mouseOnOff = true;
+	}
+
 	POINT point = INPUT->GetMousePos();
-	int32 diffx = _prevPoint.x - point.x;
 
 	Vec3 rot = GetOwner()->GetTransform()->GetRotation();
 
+	if(_mouseOnOff)
 	{
-		_tempx = (_prevPoint.x - point.x) * DELTA_TIME;	// Yaw
-		_tempy = (_prevPoint.y - point.y) * DELTA_TIME;	// Pitch
 
-		rot.x -= _tempy * _sensitivity;
-		rot.y -= _tempx * _sensitivity;
+		int32 diffx = _prevPoint.x - point.x;
 
+		{
+			_tempx = (_prevPoint.x - point.x) * DELTA_TIME;	// Yaw
+			_tempy = (_prevPoint.y - point.y) * DELTA_TIME;	// Pitch
+
+			rot.x -= _tempy * _sensitivity;
+			rot.y -= _tempx * _sensitivity;
+
+		}
+
+		MouseToCenter();
+
+	}
+	else
+	{
+		ImGui::Begin("Test on Testscript");
+		ImGui::SliderFloat("Pitch", &rot.x, -180.f, 180.f);
+		ImGui::SliderFloat("Yaw", &rot.y, -180.f, 180.f);
+		ImGui::End();
 	}
 
 	GetOwner()->GetTransform()->SetRotation(rot);
-	//MouseToCenter();
 
 
 	_prevPoint = point;
-
 
 }
 
 void TestScript::MouseToCenter()
 {
-	SetCursorPos(GAME.GetDesc().width / 2, GAME.GetDesc().height / 2);
-
 	//RECT rect;
+	SetCursorPos(GAME.GetDesc().width / 2, GAME.GetDesc().height / 2);
+	_prevPoint = POINT{ GAME.GetDesc().width / 2, GAME.GetDesc().height / 2 };
+	_tempx = 0.f;
+	_tempy = 0.f;
+
 	//GetClientRect(GAME.GetDesc().hWnd, &rect);
 	//
 	//POINT ul;	// upper-left

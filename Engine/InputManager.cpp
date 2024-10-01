@@ -63,4 +63,6 @@ void InputManager::UpdateMouse()
 {
 	::GetCursorPos(&_mousePos);
 	::ScreenToClient(_hWnd, &_mousePos);
+
+
 }

@@ -6,6 +6,7 @@
 #include "MeshRenderer.h"
 #include "Mesh.h"
 #include "TestScript.h"
+#include "Script.h"
 
 void Test::Init()
 {
@@ -41,10 +42,10 @@ void Test::Update()
 	}
 
 	{
+		ImGui::Begin("Test on TestExe");
 		ImGui::Text("MousePos.x : %li", INPUT->GetMousePos().x);
 		ImGui::Text("MousePos.y : %li", INPUT->GetMousePos().y);
-		ImGui::Text("diff.x : %f", _script->_tempx);
-		ImGui::Text("diff.y : %f", _script->_tempy);
+		ImGui::End();
 	}
 
 	_obj->Update();
