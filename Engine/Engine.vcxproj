@@ -65,6 +65,7 @@
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Resource_Base.cpp" />
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="RasterizerState.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Resource_Base.h" />
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="Scene.h" />

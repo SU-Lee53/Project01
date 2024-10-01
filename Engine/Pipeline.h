@@ -1,15 +1,5 @@
 #pragma once
 
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
-
-#include "InputLayout.h"
-#include "Shader_Base.h"
-#include "RasterizerState.h"
-#include "SamplerState.h"
-#include "BlendState.h"
-
 struct PipelineDesc
 {
 	shared_ptr<InputLayout> inputLayout;
@@ -33,20 +23,35 @@ public:
 	void SetVertexBuffer(shared_ptr<VertexBuffer> buffer);
 	void SetIndexBuffer(shared_ptr<IndexBuffer> buffer);
 
-	//	template <typename T, ShaderType shaderTy>
-	//	void SetTexture(uint32 slot, shared_ptr<class Texture> texture);
+	template <ShaderType shaderTy>
+	void SetTexture(uint32 slot, shared_ptr<Texture> texture);
 	
-	template <typename T, ShaderType shaderTy>
+	template <ShaderType shaderTy>
 	void SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState);
 
 	template <typename T, ShaderType shaderTy>
-	void SetConstantBuffer(uint32 slot, shared_ptr<ConstantBuffer<T>> buffer);
+	void SetConstantBuffer(shared_ptr<ConstantBuffer<T>> buffer);
 	
 	void DrawIndexed(uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation);
 
 };
 
-template<typename T, ShaderType shaderTy>
+template<ShaderType shaderTy>
+inline void Pipeline::SetTexture(uint32 slot, shared_ptr<Texture> texture)
+{
+	if constexpr (is_same_v<shaderTy, VertexShader>)
+	{
+		DC->VSSetShaderResources(slot, 1, texture->GetComPtr().GetAddressOf());
+	}
+	else if constexpr (is_same_v<shaderTy, PixelShader>)
+	{
+		DC->PSSetShaderResources(slot, 1, texture->GetComPtr().GetAddressOf());
+	}
+	else
+		assert(false);
+}
+
+template<ShaderType shaderTy>
 inline void Pipeline::SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState)
 {
 	if constexpr (is_same_v<shaderTy, VertexShader>)
@@ -62,15 +67,15 @@ inline void Pipeline::SetSamplerState(uint32 slot, shared_ptr<SamplerState> samp
 }
 
 template<typename T, ShaderType shaderTy>
-inline void Pipeline::SetConstantBuffer(uint32 slot, shared_ptr<ConstantBuffer<T>> buffer)
+inline void Pipeline::SetConstantBuffer(shared_ptr<ConstantBuffer<T>> buffer)
 {
 	if constexpr (is_same_v<shaderTy, VertexShader>)
 	{
-		DC->VSSetConstantBuffers(slot, 1, buffer->GetComPtr().GetAddressOf());
+		DC->VSSetConstantBuffers(T::slot, 1, buffer->GetComPtr().GetAddressOf());
 	}
 	else if constexpr (is_same_v<shaderTy, PixelShader>)
 	{
-		DC->PSSetConstantBuffers(slot, 1, buffer->GetComPtr().GetAddressOf());
+		DC->PSSetConstantBuffers(T::slot, 1, buffer->GetComPtr().GetAddressOf());
 	}
 	else
 		assert(false);

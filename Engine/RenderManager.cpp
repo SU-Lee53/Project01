@@ -40,19 +40,6 @@ void RenderManager::Init()
 
 void RenderManager::Update()
 {
-	PipelineDesc desc;
-	memset(&desc, 0, sizeof(desc));
-	{
-		desc.inputLayout = _shader->GetInputLayout();
-		desc.vertexShader = _shader->GetVertexShader();
-		desc.pixelShader = _shader->GetPixelShader();
-		desc.rasterizerState = _rasterizerState;
-		desc.blendState = _blendState;
-	}
-
-	_pipeline->Update(desc);
-
-
 	_renderObj.clear();
 }
 
@@ -70,10 +57,10 @@ void RenderManager::Render()
 		if (transform == nullptr)
 			continue;
 
-		// TODO : Fill
 		_transformData.matWorld = transform->GetWorld();
 		PushTransformData();
-
+		
+		_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetTexture());
 
 		PipelineDesc desc;
 		{
@@ -88,12 +75,11 @@ void RenderManager::Render()
 		_pipeline->SetVertexBuffer(meshRenderer->GetMesh()->GetVertexBuffer());
 		_pipeline->SetIndexBuffer(meshRenderer->GetMesh()->GetIndexBuffer());
 
-		_pipeline->SetConstantBuffer<CameraData, VertexShader>(0, _cameraBuffer);
-		_pipeline->SetConstantBuffer<TransformData, VertexShader>(1, _transformBuffer);
+		_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
+		_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
 
-		//_pipeline->SetSamplerState
+		_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
 
-		// TODO : Draw
 		_pipeline->DrawIndexed(meshRenderer->GetMesh()->GetIndexBuffer()->GetCount(), 0, 0);
 	}
 

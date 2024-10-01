@@ -68,6 +68,7 @@ using namespace Microsoft::WRL;
 #include "ShaderManager.h"
 #include "RenderManager.h"
 #include "GuiManager.h"
+#include "ResourceManager.h"
 
 // Engine
 #include "VertexBuffer.h"

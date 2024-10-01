@@ -121,7 +121,8 @@
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
-      <EntryPointName>VS</EntryPointName>
+      <EntryPointName>
+      </EntryPointName>
       <ShaderType>
       </ShaderType>
     </FxCompile>

@@ -6,6 +6,7 @@ class SceneManager;
 class RenderManager;
 class GuiManager;
 class ShaderManager;
+class ResourceManager;
 
 enum class MANAGER_TYPE
 {
@@ -16,6 +17,7 @@ enum class MANAGER_TYPE
 	Render,
 	Gui,
 	Shader,
+	Resource,
 
 	end
 };
@@ -73,5 +75,6 @@ private:
 	shared_ptr<RenderManager> _render;
 	shared_ptr<GuiManager> _gui;
 	shared_ptr<ShaderManager> _shader;
+	shared_ptr<ResourceManager> _resource;
 	
 };

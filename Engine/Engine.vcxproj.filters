@@ -209,6 +209,9 @@
     <ClCompile Include="imgui.cpp">
       <Filter>소스 파일\99. Utils\ImGUI</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -249,9 +252,6 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>소스 파일\04. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderManager.h">
-      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>소스 파일\06. Resources</Filter>
@@ -354,6 +354,12 @@
     </ClInclude>
     <ClInclude Include="imstb_truetype.h">
       <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>소스 파일\05. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "MeshRenderer.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 MeshRenderer::MeshRenderer()
 {
@@ -17,6 +18,9 @@ void MeshRenderer::Init_impl()
 
 	if(_mesh == nullptr) // If _mesh was not set
 		_mesh = make_shared<Mesh>();	// set default mesh
+
+	if(_texture == nullptr) // If _mesh was not set
+		_texture = make_shared<Texture>();	// set default mesh
 }
 
 void MeshRenderer::Update_impl()

@@ -7,18 +7,30 @@
 #include "Mesh.h"
 #include "TestScript.h"
 #include "Script.h"
+#include "Texture.h"
 
 void Test::Init()
 {
+	{
+		auto tex = make_shared<Texture>();
+		tex->Create(L"../Resources/Texture/wood.jpg");
+		RESOURCE->Add("wood", tex);
+
+
+		auto mesh = make_shared<Mesh>();
+		mesh->CreateTestGeometry();
+		RESOURCE->Add("mesh", mesh);
+	}
+
 	{
 		_obj = make_shared<GameObject>();
 		_obj->AddComponent<Transform>();
 		_obj->AddComponent<MeshRenderer>();
 		_obj->Init();
 
-		auto mesh = make_shared<Mesh>();
-		mesh->CreateTestGeometry();
-		_obj->GetComponent<MeshRenderer>()->SetMesh(mesh);
+		_obj->GetComponent<MeshRenderer>()->SetMesh(RESOURCE->Get<Mesh>("mesh"));
+
+		_obj->GetComponent<MeshRenderer>()->SetTexture(RESOURCE->Get<Texture>("wood"));
 	}
 
 	{
@@ -45,6 +57,12 @@ void Test::Update()
 		ImGui::Begin("Test on TestExe");
 		ImGui::Text("MousePos.x : %li", INPUT->GetMousePos().x);
 		ImGui::Text("MousePos.y : %li", INPUT->GetMousePos().y);
+
+		auto pos = _cam->GetComponent<Transform>()->GetPosition();
+		ImGui::Text("CameraPos.x : %f", pos.x);
+		ImGui::Text("CameraPos.y : %f", pos.y);
+		ImGui::Text("CameraPos.z : %f", pos.z);
+
 		ImGui::End();
 	}
 

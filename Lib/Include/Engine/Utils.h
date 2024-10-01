@@ -14,7 +14,7 @@ public:
 
 	static string FileToBuf(ifstream& is);
 
-	static void MakeCubeGeometry(shared_ptr<Geometry<VertexColorData>> geometry);
+	static void MakeCubeGeometry(shared_ptr<Geometry<VertexType>> geometry);
 
 };
 

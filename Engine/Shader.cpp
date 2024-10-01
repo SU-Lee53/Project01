@@ -20,6 +20,6 @@ void Shader::Create()
 	_ps->Create("test.hlsl", "PS", "ps_5_0");
 
 	_inputLayout = make_shared<InputLayout>();
-	_inputLayout->Create(VertexColorData::descs, _vs->GetBlob());
+	_inputLayout->Create(VertexType::descs, _vs->GetBlob());
 
 }

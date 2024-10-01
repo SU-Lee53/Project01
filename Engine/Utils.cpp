@@ -76,43 +76,43 @@ string Utils::FileToBuf(ifstream& is)
 	return buf;
 }
 
-void Utils::MakeCubeGeometry(shared_ptr<Geometry<VertexColorData>> geometry)
+void Utils::MakeCubeGeometry(shared_ptr<Geometry<VertexType>> geometry)
 {
 	float w2 = 0.5f;
 	float h2 = 0.5f;
 	float d2 = 0.5f;
-	vector<VertexColorData> vtx(24);
+	vector<VertexType> vtx(24);
 
 	// Front
-	vtx[0] = VertexColorData{ Vec3(-w2, -h2, -d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[1] = VertexColorData{ Vec3(-w2, +h2, -d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[2] = VertexColorData{ Vec3(+w2, +h2, -d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[3] = VertexColorData{ Vec3(+w2, -h2, -d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[0] = VertexType{ Vec3(-w2, -h2, -d2), Vec2(0.0f, 1.0f) };
+	vtx[1] = VertexType{ Vec3(-w2, +h2, -d2), Vec2(0.0f, 0.0f) };
+	vtx[2] = VertexType{ Vec3(+w2, +h2, -d2), Vec2(1.0f, 0.0f) };
+	vtx[3] = VertexType{ Vec3(+w2, -h2, -d2), Vec2(1.0f, 1.0f) };
 	// Back
-	vtx[4] = VertexColorData{ Vec3(-w2, -h2, +d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[5] = VertexColorData{ Vec3(+w2, -h2, +d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[6] = VertexColorData{ Vec3(+w2, +h2, +d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[7] = VertexColorData{ Vec3(-w2, +h2, +d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[4] = VertexType{ Vec3(-w2, -h2, +d2), Vec2(1.0f, 1.0f) };
+	vtx[5] = VertexType{ Vec3(+w2, -h2, +d2), Vec2(0.0f, 1.0f) };
+	vtx[6] = VertexType{ Vec3(+w2, +h2, +d2), Vec2(0.0f, 0.0f) };
+	vtx[7] = VertexType{ Vec3(-w2, +h2, +d2), Vec2(1.0f, 0.0f) };
 	// Upper
-	vtx[8] = VertexColorData{ Vec3(-w2, +h2, -d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[9] = VertexColorData{ Vec3(-w2, +h2, +d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[10] = VertexColorData{ Vec3(+w2, +h2, +d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[11] = VertexColorData{ Vec3(+w2, +h2, -d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[8] = VertexType{ Vec3(-w2, +h2, -d2), Vec2(0.0f, 1.0f) };
+	vtx[9] = VertexType{ Vec3(-w2, +h2, +d2), Vec2(0.0f, 0.0f) };
+	vtx[10] = VertexType{ Vec3(+w2, +h2, +d2), Vec2(1.0f, 0.0f) };
+	vtx[11] = VertexType{ Vec3(+w2, +h2, -d2), Vec2(1.0f, 1.0f) };
 	// Lower
-	vtx[12] = VertexColorData{ Vec3(-w2, -h2, -d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[13] = VertexColorData{ Vec3(+w2, -h2, -d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[14] = VertexColorData{ Vec3(+w2, -h2, +d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[15] = VertexColorData{ Vec3(-w2, -h2, +d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[12] = VertexType{ Vec3(-w2, -h2, -d2), Vec2(0.0f, 1.0f) };
+	vtx[13] = VertexType{ Vec3(+w2, -h2, -d2), Vec2(0.0f, 0.0f) };
+	vtx[14] = VertexType{ Vec3(+w2, -h2, +d2), Vec2(1.0f, 0.0f) };
+	vtx[15] = VertexType{ Vec3(-w2, -h2, +d2), Vec2(1.0f, 1.0f) };
 	// Left
-	vtx[16] = VertexColorData{ Vec3(-w2, -h2, +d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[17] = VertexColorData{ Vec3(-w2, +h2, +d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[18] = VertexColorData{ Vec3(-w2, +h2, -d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[19] = VertexColorData{ Vec3(-w2, -h2, -d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[16] = VertexType{ Vec3(-w2, -h2, +d2), Vec2(0.0f, 1.0f) };
+	vtx[17] = VertexType{ Vec3(-w2, +h2, +d2), Vec2(0.0f, 0.0f) };
+	vtx[18] = VertexType{ Vec3(-w2, +h2, -d2), Vec2(1.0f, 0.0f) };
+	vtx[19] = VertexType{ Vec3(-w2, -h2, -d2), Vec2(1.0f, 1.0f) };
 	// Right
-	vtx[20] = VertexColorData{ Vec3(+w2, -h2, -d2), Color(1.0f, 0.0f, 0.0f, 1.0f) };
-	vtx[21] = VertexColorData{ Vec3(+w2, +h2, -d2), Color(0.0f, 1.0f, 0.0f, 1.0f) };
-	vtx[22] = VertexColorData{ Vec3(+w2, +h2, +d2), Color(0.0f, 0.0f, 1.0f, 1.0f) };
-	vtx[23] = VertexColorData{ Vec3(+w2, -h2, +d2), Color(1.0f, 0.0f, 1.0f, 1.0f) };
+	vtx[20] = VertexType{ Vec3(+w2, -h2, -d2), Vec2(0.0f, 1.0f) };
+	vtx[21] = VertexType{ Vec3(+w2, +h2, -d2), Vec2(0.0f, 0.0f) };
+	vtx[22] = VertexType{ Vec3(+w2, +h2, +d2), Vec2(1.0f, 0.0f) };
+	vtx[23] = VertexType{ Vec3(+w2, -h2, +d2), Vec2(1.0f, 1.0f) };
 
 	geometry->SetVertices(vtx);
 

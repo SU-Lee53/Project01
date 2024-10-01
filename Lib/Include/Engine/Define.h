@@ -27,6 +27,7 @@ public:										\
 #define RENDER			MANAGER.GetManager<RenderManager>()
 #define GUI				MANAGER.GetManager<GuiManager>()
 #define SHADER			MANAGER.GetManager<ShaderManager>()
+#define RESOURCE		MANAGER.GetManager<ResourceManager>()
 
 
 #define DELTA_TIME		TIME->GetDeltaTime();
