@@ -17,9 +17,7 @@ public:
 	void CreateBuffers();
 
 private:
-	using MeshType = VertexColorData;
-
-	shared_ptr<Geometry<MeshType>> _geometry;
+	shared_ptr<Geometry<VertexType>> _geometry;
 	shared_ptr<VertexBuffer> _vertexBuffer;
 	shared_ptr<IndexBuffer> _indexBuffer;
 

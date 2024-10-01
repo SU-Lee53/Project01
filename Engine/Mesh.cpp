@@ -12,7 +12,7 @@ Mesh::~Mesh()
 
 void Mesh::CreateTestGeometry()
 {
-	_geometry = make_shared<Geometry<MeshType>>();
+	_geometry = make_shared<Geometry<VertexType>>();
 	Utils::MakeCubeGeometry(_geometry);
 	CreateBuffers();
 }
