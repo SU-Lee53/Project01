@@ -8,3 +8,28 @@ struct asBone
 	Matrix transform;
 };
 
+struct asMesh
+{
+	string name;
+	aiMesh* mesh;
+	vector<VertexType> vertices;
+	vector<uint32> indices;
+
+	int32 boneIndex;
+	string materialName;
+};
+
+struct asMaterial
+{
+	string name;
+
+	Color ambient;
+	Color diffuse;
+	Color specular;
+	Color emissive;
+
+	string ambientFile;
+	string diffuseFile;
+	string specularFile;
+	string normalFile;
+};
