@@ -14,7 +14,7 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	wstring path = L"../Models/source/pool_table_scene.fbx";
+	wstring path = L"../Models/pool_table/pool_table.fbx";
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
