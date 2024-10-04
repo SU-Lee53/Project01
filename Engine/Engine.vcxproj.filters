@@ -72,6 +72,9 @@
     <Filter Include="소스 파일\04. Component\Script">
       <UniqueIdentifier>{3f637bf6-4c6d-481e-91ca-9a10307c33d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\06. Resources\Model">
+      <UniqueIdentifier>{0c0ca88b-5892-4d52-817a-6eb7356de94e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -211,6 +214,15 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>소스 파일\05. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>소스 파일\06. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>소스 파일\06. Resources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelTypes.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +373,13 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>소스 파일\05. Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>소스 파일\06. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>소스 파일\06. Resources\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

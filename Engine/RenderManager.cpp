@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "MeshRenderer.h"
 #include "Mesh.h"
+#include "Material.h"
 
 RenderManager::RenderManager()
 {
@@ -60,7 +61,17 @@ void RenderManager::Render()
 		_transformData.matWorld = transform->GetWorld();
 		PushTransformData();
 		
-		_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetTexture());
+		if(meshRenderer->GetMaterial() == nullptr)
+		{
+			_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetTexture());
+		}
+		else
+		{
+			_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetMaterial()->GetDiffuseMap());
+			_pipeline->SetTexture<PixelShader>(1, meshRenderer->GetMaterial()->GetNormalMap());
+			_pipeline->SetTexture<PixelShader>(2, meshRenderer->GetMaterial()->GetSpecularMap());
+		}
+
 
 		PipelineDesc desc;
 		{

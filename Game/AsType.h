@@ -28,7 +28,6 @@ struct asMaterial
 	Color specular;
 	Color emissive;
 
-	string ambientFile;
 	string diffuseFile;
 	string specularFile;
 	string normalFile;

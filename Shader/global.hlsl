@@ -13,6 +13,10 @@
 //    float4 color : COLOR;
 //};
 
+////////////////////
+// IN_OUT structs //
+////////////////////
+
 struct VS_INPUT
 {
     float4 position : POSITION;
@@ -25,6 +29,23 @@ struct VS_OUTPUT
     float2 uv : TEXCOORD;
 };
 
+//////////////
+// Material //
+//////////////
+
+struct MaterialDesc
+{
+    float4 ambient;
+    float4 diffuse;
+    float4 specular;
+    float4 emissive;
+};
+
+
+/////////////////////
+// ConstantBuffers //
+/////////////////////
+
 cbuffer CameraData : register(b0)
 {
     row_major matrix matView;
@@ -35,5 +56,17 @@ cbuffer TransformData : register(b1)
 {
     row_major matrix matWorld;
 }
+
+cbuffer MaterialData : register(b2)
+{
+    MaterialDesc desc;
+}
+
+
+
+
+
+
+
 
 #endif

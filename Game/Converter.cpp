@@ -14,7 +14,7 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	wstring path = L"../Models/pool_table/pool_table.fbx";
+	wstring path = L"../Models/source/poolballs.fbx";
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -136,9 +136,6 @@ void Converter::ReadMaterial()
 		{
 			srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
 			material->ambient = Color(color.r, color.g, color.b, 1.0f);
-
-			srcMaterial->GetTexture(aiTextureType_AMBIENT, 0, &file);
-			material->ambientFile = file.C_Str();
 		}
 		
 		// Diffuse

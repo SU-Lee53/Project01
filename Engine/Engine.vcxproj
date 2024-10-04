@@ -60,8 +60,11 @@
     <ClCompile Include="InputLayout.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelTypes.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
     <ClCompile Include="RenderManager.cpp" />
@@ -112,8 +115,11 @@
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelTypes.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="RasterizerState.h" />
     <ClInclude Include="RenderManager.h" />
