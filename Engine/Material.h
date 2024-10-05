@@ -26,6 +26,11 @@ private:
 	shared_ptr<Texture> _normalMap;
 	shared_ptr<Texture> _specularMap;
 
+public:
+	static const int32 _diffuseSlot = 0; 
+	static const int32 _normalSlot = 1;
+	static const int32 _specularSlot = 2;
 
+	using Ty = Material;
 };
 

@@ -16,7 +16,6 @@ void Test::Init()
 		tex->Create(L"../Resources/Texture/wood.jpg");
 		RESOURCE->Add("wood", tex);
 
-
 		auto mesh = make_shared<Mesh>();
 		mesh->CreateTestGeometry();
 		RESOURCE->Add("mesh", mesh);

@@ -14,7 +14,7 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	wstring path = L"../Models/source/poolballs.fbx";
+	wstring path = L"../Models/Kachujin/Mesh.fbx";
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -170,5 +170,25 @@ void Converter::ReadMaterial()
 
 		_materials.push_back(material);
 	}
+}
+
+void Converter::ExportAssetFile()
+{
+
+}
+
+void Converter::ExportModel()
+{
+
+}
+
+void Converter::ExportMesh()
+{
+
+}
+
+void Converter::ExportMaterial()
+{
+
 }
 

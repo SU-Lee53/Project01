@@ -67,6 +67,4 @@ cbuffer MaterialData : register(b2)
 
 
 
-
-
 #endif

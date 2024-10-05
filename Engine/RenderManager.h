@@ -22,6 +22,10 @@ public:
 	virtual void Update() override;
 	void Render();
 
+private:
+	void RenderLagacy(shared_ptr<GameObject> obj);
+	void RenderModel(shared_ptr<GameObject> obj);
+
 public:
 	void PushToRenderObject(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
 
@@ -47,6 +51,9 @@ private:
 
 	TransformData _transformData;
 	shared_ptr<ConstantBuffer<TransformData>> _transformBuffer;
+
+	MaterialData _materialData;
+	shared_ptr<ConstantBuffer<MaterialData>> _materialBuffer;
 
 private:
 	shared_ptr<Shader> _shader;

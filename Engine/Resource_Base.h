@@ -6,6 +6,7 @@ enum class RESOURCE_TYPE
 
 	Mesh = 0,
 	Texture,
+	Material,
 
 	End
 };

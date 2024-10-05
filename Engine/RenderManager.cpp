@@ -6,6 +6,7 @@
 #include "MeshRenderer.h"
 #include "Mesh.h"
 #include "Material.h"
+#include "Model.h"
 
 RenderManager::RenderManager()
 {
@@ -58,19 +59,69 @@ void RenderManager::Render()
 		if (transform == nullptr)
 			continue;
 
-		_transformData.matWorld = transform->GetWorld();
-		PushTransformData();
-		
-		if(meshRenderer->GetMaterial() == nullptr)
+		if (obj->GetComponent<MeshRenderer>()->GetModel() == nullptr)
 		{
-			_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetTexture());
+			RenderLagacy(obj);
 		}
 		else
 		{
-			_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetMaterial()->GetDiffuseMap());
-			_pipeline->SetTexture<PixelShader>(1, meshRenderer->GetMaterial()->GetNormalMap());
-			_pipeline->SetTexture<PixelShader>(2, meshRenderer->GetMaterial()->GetSpecularMap());
+			RenderModel(obj);
 		}
+	}
+}
+
+void RenderManager::RenderLagacy(shared_ptr<GameObject> obj)
+{
+	auto meshRenderer = obj->GetComponent<MeshRenderer>();
+
+	auto transform = obj->GetComponent<Transform>();
+
+	_transformData.matWorld = transform->GetWorld();
+	PushTransformData();
+	
+	_pipeline->SetTexture<PixelShader>(0, meshRenderer->GetTexture());
+
+	PipelineDesc desc;
+	{
+		desc.inputLayout = _shader->GetInputLayout();
+		desc.vertexShader = _shader->GetVertexShader();
+		desc.pixelShader = _shader->GetPixelShader();
+		desc.rasterizerState = _rasterizerState;
+		desc.blendState = _blendState;
+	}
+	_pipeline->Update(desc);
+
+	_pipeline->SetVertexBuffer(meshRenderer->GetMesh()->GetVertexBuffer());
+	_pipeline->SetIndexBuffer(meshRenderer->GetMesh()->GetIndexBuffer());
+
+	_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
+	_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
+
+	_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
+
+	_pipeline->DrawIndexed(meshRenderer->GetMesh()->GetIndexBuffer()->GetCount(), 0, 0);
+}
+
+void RenderManager::RenderModel(shared_ptr<GameObject> obj)
+{
+	auto meshRenderer = obj->GetComponent<MeshRenderer>();
+
+	auto model = meshRenderer->GetModel();
+
+	auto bones = model->GetBones();
+	auto meshes = model->GetMeshes();
+
+	for (const auto mesh : meshes)
+	{
+		int32 boneIndex = mesh->boneIndex;
+		_transformData.matWorld = bones[boneIndex]->transform;
+		PushTransformData();
+
+		auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));
+
+		_pipeline->SetTexture<PixelShader>(Material::_diffuseSlot, material->GetDiffuseMap());
+		_pipeline->SetTexture<PixelShader>(Material::_normalSlot, material->GetNormalMap());
+		_pipeline->SetTexture<PixelShader>(Material::_specularSlot, material->GetSpecularMap());
 
 		PipelineDesc desc;
 		{
@@ -92,8 +143,6 @@ void RenderManager::Render()
 
 		_pipeline->DrawIndexed(meshRenderer->GetMesh()->GetIndexBuffer()->GetCount(), 0, 0);
 	}
-
-
 }
 
 void RenderManager::PushCameraData()
