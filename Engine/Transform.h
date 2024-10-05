@@ -1,13 +1,6 @@
 #pragma once
 #include "Component.h"
 
-/*
-
-	No local matrix
-		-> no hierarchy models this time!!
-
-*/
-
 class Transform : public Component<Transform>
 {
 public:
@@ -36,10 +29,16 @@ public:
 	void PushTransform();
 
 private:
+	Vec3 _localPosition = { 0.f, 0.f, 0.f };
+	Vec3 _localRotation = { 0.f, 0.f, 0.f };
+	Vec3 _localScale = { 1.f, 1.f, 1.f };
+	
 	Vec3 _position = { 0.f, 0.f, 0.f };
 	Vec3 _rotation = { 0.f, 0.f, 0.f };
 	Vec3 _scale = { 1.f, 1.f, 1.f };
 
+
+	Matrix _local = Matrix::Identity;
 	Matrix _world = Matrix::Identity;
 
 public:

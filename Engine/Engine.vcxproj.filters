@@ -222,7 +222,7 @@
       <Filter>소스 파일\06. Resources\Model</Filter>
     </ClCompile>
     <ClCompile Include="ModelTypes.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\06. Resources\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -379,7 +379,9 @@
     <ClInclude Include="Model.h">
       <Filter>소스 파일\06. Resources\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ModelTypes.h" />
+    <ClInclude Include="ModelTypes.h">
+      <Filter>소스 파일\06. Resources\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

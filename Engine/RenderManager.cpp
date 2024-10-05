@@ -72,7 +72,6 @@ void RenderManager::Render()
 			_pipeline->SetTexture<PixelShader>(2, meshRenderer->GetMaterial()->GetSpecularMap());
 		}
 
-
 		PipelineDesc desc;
 		{
 			desc.inputLayout = _shader->GetInputLayout();

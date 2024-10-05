@@ -76,6 +76,7 @@ using namespace Microsoft::WRL;
 #include "InputLayout.h"
 #include "Geometry.h"
 #include "InputData.h"
+#include "ModelTypes.h"
 #include "Shader_Base.h"
 #include "ConstantBuffer.h"
 #include "Texture.h"

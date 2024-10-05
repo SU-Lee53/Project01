@@ -14,7 +14,9 @@ public:
 
 
 private:
-	vector<shared_ptr<Mesh>> _meshes;
+	shared_ptr<ModelBone> _root;
+	vector<shared_ptr<ModelBone>> _bones;
+	vector<shared_ptr<ModelMesh>> _meshes;
 	vector<shared_ptr<Material>> _material;
 
 
