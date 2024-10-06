@@ -17,8 +17,5 @@ private:
 	float temp = 0.f;
 
 	shared_ptr<Script> _script;
-
-	bool show_demo_window = true;
-	bool show_another_window = false;
 };
 

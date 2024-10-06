@@ -11,7 +11,7 @@ public:
 	Model();
 	virtual ~Model();
 
-	void SetBone(vector<shared_ptr<ModelBone>> bone) { _bones = bone; }
+	void SetBone(vector<shared_ptr<ModelBone>> bone);
 	void AddBone(shared_ptr<ModelBone> bone) { _bones.push_back(bone); }
 
 	void SetMesh(vector<shared_ptr<ModelMesh>> mesh) { _meshes = mesh;}

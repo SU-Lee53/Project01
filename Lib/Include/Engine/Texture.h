@@ -10,6 +10,8 @@ public:
 public:
 	void Create(const wstring& path);
 
+	void CreateErrorTexture();
+
 	ComPtr<ID3D11ShaderResourceView> GetComPtr() const { return _srv; }
 	Vec2 GetSize() const { return _size; }
 

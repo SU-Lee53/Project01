@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Converter.h"
+#include "Model.h"
+#include "Material.h"
+#include "Texture.h"
 #include <filesystem>
 
 Converter::Converter()
@@ -14,7 +17,7 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	wstring path = L"../Models/Kachujin/Mesh.fbx";
+	wstring path = L"../Models/car_test/source/silvia_varietta.fbx";
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -190,5 +193,157 @@ void Converter::ExportMesh()
 void Converter::ExportMaterial()
 {
 
+}
+
+wstring GetTextureName(const wstring& origin)
+{
+	wstring ret = L"";
+
+	auto it = find(origin.rbegin(), origin.rend(), L'\\');
+	if (it == origin.rend())
+	{
+		assert(false);
+	}
+	else
+	{
+		ret = wstring(origin.rbegin(), it);
+		reverse(ret.begin(), ret.end());
+	}
+
+	return ret;
+}
+
+shared_ptr<Model> Converter::MakeModel()
+{
+	auto model = make_shared<Model>();
+
+	vector<shared_ptr<ModelBone>> modelBones;
+
+	for (const auto asbone : _bones)
+	{
+		shared_ptr<ModelBone> bone = make_shared<ModelBone>();
+		bone->index = asbone->index;
+		bone->name = Utils::ToWString(asbone->name);
+		bone->parentIndex = asbone->parent;
+		bone->transform = asbone->transform;
+
+		modelBones.push_back(bone);
+	}
+	
+	vector<shared_ptr<ModelMesh>> modelMeshes;
+
+	for (const auto asMesh : _meshes)
+	{
+		shared_ptr<ModelMesh> mesh = make_shared<ModelMesh>();
+		mesh->boneIndex = asMesh->boneIndex;
+		mesh->materialName = Utils::ToWString(asMesh->materialName);
+		mesh->name = Utils::ToWString(asMesh->name);
+		mesh->geometry = make_shared<Geometry<VertexType>>();
+		mesh->geometry->SetVertices(asMesh->vertices);
+		mesh->geometry->SetIndices(asMesh->indices);
+		mesh->MakeBuffers();
+
+		uint32 index = 0;
+		auto it = find_if(_materials.begin(), _materials.end(),
+			[&index, asMesh](auto m) -> bool
+			{
+				if (m->name == asMesh->materialName)
+					return true;
+				else
+					index++;
+
+				return false;
+			}
+		);
+
+		if (it == _materials.end()) assert(false);
+
+		mesh->materialIndex = index;
+		
+
+
+
+		modelMeshes.push_back(mesh);
+	}
+
+	vector<shared_ptr<Material>> materials;
+
+	for (const auto asMaterial : _materials)
+	{
+		shared_ptr<Material> material = make_shared<Material>();
+
+		material->SetName(Utils::ToWString(asMaterial->name));
+
+		MaterialData data;
+		{
+			data.ambient = asMaterial->ambient;
+			data.diffuse = asMaterial->diffuse;
+			data.specular = asMaterial->specular;
+			data.emissive = asMaterial->emissive;
+		}
+		material->SetMaterialData(data);
+		
+		wstring path = L"../Models/car_test/textures/";
+		wstring originName;
+		wstring fileName;
+
+		{
+			// Diffuse
+			if(!asMaterial->diffuseFile.empty())
+			{
+				originName = Utils::ToWString(asMaterial->diffuseFile);
+				fileName = GetTextureName(originName);
+				auto diff = make_shared<Texture>();
+				diff->Create(path + fileName);
+				material->SetDiffuseMap(diff);
+			}
+			else
+			{
+				auto err = make_shared<Texture>();
+				err->CreateErrorTexture();
+				material->SetDiffuseMap(err);
+			}
+
+			// Normal
+			if (!asMaterial->normalFile.empty())
+			{
+				originName = Utils::ToWString(asMaterial->normalFile);
+				fileName = GetTextureName(originName);
+				auto normal = make_shared<Texture>();
+				normal->Create(path + fileName);
+				material->SetNormalMap(normal);
+			}
+			else
+			{
+				auto err = make_shared<Texture>();
+				err->CreateErrorTexture();
+				material->SetNormalMap(err);
+			}
+
+			// Specular
+			if (!asMaterial->specularFile.empty())
+			{
+				originName = Utils::ToWString(asMaterial->specularFile);
+				fileName = GetTextureName(originName);
+				auto specular = make_shared<Texture>();
+				specular->Create(path + fileName);
+				material->SetSpecularMap(specular);
+			}
+			else
+			{
+				auto err = make_shared<Texture>();
+				err->CreateErrorTexture();
+				material->SetSpecularMap(err);
+			}
+		}
+
+		materials.push_back(material);
+	}
+
+	model->SetBone(modelBones);
+	model->SetMesh(modelMeshes);
+	model->SetMaterial(materials);
+
+	return model;
 }
 

@@ -110,6 +110,7 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 
 	auto bones = model->GetBones();
 	auto meshes = model->GetMeshes();
+	auto materials = model->GetMaterials();
 
 	for (const auto mesh : meshes)
 	{
@@ -117,7 +118,8 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 		_transformData.matWorld = bones[boneIndex]->transform;
 		PushTransformData();
 
-		auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));
+		//auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));
+		auto material = materials[mesh->materialIndex];
 
 		_pipeline->SetTexture<PixelShader>(Material::_diffuseSlot, material->GetDiffuseMap());
 		_pipeline->SetTexture<PixelShader>(Material::_normalSlot, material->GetNormalMap());
@@ -133,15 +135,15 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 		}
 		_pipeline->Update(desc);
 
-		_pipeline->SetVertexBuffer(meshRenderer->GetMesh()->GetVertexBuffer());
-		_pipeline->SetIndexBuffer(meshRenderer->GetMesh()->GetIndexBuffer());
+		_pipeline->SetVertexBuffer(mesh->vertexBuffer);
+		_pipeline->SetIndexBuffer(mesh->indexBuffer);
 
 		_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
 		_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
 
 		_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
 
-		_pipeline->DrawIndexed(meshRenderer->GetMesh()->GetIndexBuffer()->GetCount(), 0, 0);
+		_pipeline->DrawIndexed(mesh->indexBuffer->GetCount(), 0, 0);
 	}
 }
 

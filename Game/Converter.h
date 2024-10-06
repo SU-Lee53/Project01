@@ -1,6 +1,8 @@
 #pragma once
 #include "AsType.h"
 
+class Model;
+
 class Converter
 {
 public:
@@ -22,6 +24,10 @@ private:
 	void ExportModel();
 	void ExportMesh();
 	void ExportMaterial();
+
+public:
+	// Just for test : Make model
+	shared_ptr<Model> MakeModel();
 
 private:
 	shared_ptr<Assimp::Importer> _importer;
