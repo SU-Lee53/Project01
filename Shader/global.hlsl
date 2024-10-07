@@ -54,6 +54,7 @@ cbuffer CameraData : register(b0)
 
 cbuffer TransformData : register(b1)
 {
+    row_major matrix matLocal;
     row_major matrix matWorld;
 }
 

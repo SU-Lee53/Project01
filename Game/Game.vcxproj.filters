@@ -53,6 +53,9 @@
     <ClCompile Include="AsType.cpp">
       <Filter>소스 파일\Execute\ModelLoader</Filter>
     </ClCompile>
+    <ClCompile Include="ModelScript.cpp">
+      <Filter>소스 파일\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -72,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="AsType.h">
       <Filter>소스 파일\Execute\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelScript.h">
+      <Filter>소스 파일\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

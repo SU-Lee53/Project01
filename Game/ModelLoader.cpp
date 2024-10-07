@@ -7,6 +7,7 @@
 #include "MeshRenderer.h"
 #include "Camera.h"
 #include "MouseScript.h"
+#include "ModelScript.h"
 
 void ModelLoader::Init()
 {
@@ -28,6 +29,8 @@ void ModelLoader::Init()
 
 		_obj->GetComponent<MeshRenderer>()->SetModel(RESOURCE->Get<Model>("Car"));
 
+		_mouseScript = make_shared<ModelScript>();
+		_obj->AddScript(_mouseScript);
 	}
 
 	{
@@ -37,10 +40,12 @@ void ModelLoader::Init()
 		_cam->Init();
 
 		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
+
+		_mouseScript = make_shared<MouseScript>();
+		_cam->AddScript(_mouseScript);
 	}
 
-	_script = make_shared<MouseScript>();
-	_cam->AddScript(_script);
+
 }
 
 void ModelLoader::Update()

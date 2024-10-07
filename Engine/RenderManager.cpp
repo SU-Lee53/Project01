@@ -105,6 +105,8 @@ void RenderManager::RenderLagacy(shared_ptr<GameObject> obj)
 void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 {
 	auto meshRenderer = obj->GetComponent<MeshRenderer>();
+	auto transform = obj->GetTransform();
+	_transformData.matWorld = transform->GetWorld();
 
 	auto model = meshRenderer->GetModel();
 
@@ -115,7 +117,7 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 	for (const auto mesh : meshes)
 	{
 		int32 boneIndex = mesh->boneIndex;
-		_transformData.matWorld = bones[boneIndex]->transform;
+		_transformData.matLocal = bones[boneIndex]->transform;
 		PushTransformData();
 
 		//auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));

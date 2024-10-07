@@ -10,7 +10,8 @@ struct CameraData
 
 struct TransformData
 {
-	Matrix matWorld = Matrix::Identity;
+	Matrix matLocal = Matrix::Identity;	// bone local -> model local
+	Matrix matWorld = Matrix::Identity; // model local -> world
 
 	const static uint32 slot = 1;
 };

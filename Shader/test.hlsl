@@ -5,7 +5,8 @@ VS_OUTPUT VS(VS_INPUT input)
 {
     VS_OUTPUT output;
     
-    float4 position = mul(input.position, matWorld);
+    float4 position = mul(input.position, matLocal);
+    position = mul(position, matWorld);
     position = mul(position, matView);
     position = mul(position, matProjection);
     
