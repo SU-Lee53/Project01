@@ -152,7 +152,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Test.cpp" />
-    <ClCompile Include="TestScript.cpp" />
+    <ClCompile Include="MouseScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsType.h" />
@@ -160,7 +160,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Test.h" />
-    <ClInclude Include="TestScript.h" />
+    <ClInclude Include="MouseScript.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

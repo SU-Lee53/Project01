@@ -24,7 +24,7 @@ public:
 
 private:
     ComPtr<ID3D11BlendState> _blendState;
-    float _blendFactor = 0xFFFFFFFF;
+    float _blendFactor = 0.f;
     uint32 _sampleMask = 0xFFFFFFFF;
 };
 

@@ -41,7 +41,7 @@
     <ClCompile Include="Test.cpp">
       <Filter>소스 파일\Execute</Filter>
     </ClCompile>
-    <ClCompile Include="TestScript.cpp">
+    <ClCompile Include="MouseScript.cpp">
       <Filter>소스 파일\Script</Filter>
     </ClCompile>
     <ClCompile Include="Converter.cpp">
@@ -61,7 +61,7 @@
     <ClInclude Include="Test.h">
       <Filter>소스 파일\Execute</Filter>
     </ClInclude>
-    <ClInclude Include="TestScript.h">
+    <ClInclude Include="MouseScript.h">
       <Filter>소스 파일\Script</Filter>
     </ClInclude>
     <ClInclude Include="Converter.h">

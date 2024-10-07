@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "Mesh.h"
-#include "TestScript.h"
+#include "MouseScript.h"
 #include "Script.h"
 #include "Texture.h"
 
@@ -41,7 +41,7 @@ void Test::Init()
 		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
 	}
 
-	_script = make_shared<TestScript>();
+	_script = make_shared<MouseScript>();
 	_cam->AddScript(_script);
 }
 

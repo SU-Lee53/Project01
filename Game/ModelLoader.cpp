@@ -6,7 +6,7 @@
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "Camera.h"
-#include "TestScript.h"
+#include "MouseScript.h"
 
 void ModelLoader::Init()
 {
@@ -39,8 +39,7 @@ void ModelLoader::Init()
 		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
 	}
 
-
-	_script = make_shared<TestScript>();
+	_script = make_shared<MouseScript>();
 	_cam->AddScript(_script);
 }
 
