@@ -2,7 +2,6 @@
 #include "Execute.h"
 
 class TestScript;
-class Script;
 
 class Test : public Execute
 {
@@ -16,6 +15,6 @@ private:
 	shared_ptr<GameObject> _cam;
 	float temp = 0.f;
 
-	shared_ptr<Script> _script;
+	shared_ptr<Script<GameObject>> _script;
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Script.h"
 
-class MouseScript : public Script
+class MouseScript : public Script<GameObject>
 {
 public:
 	virtual void Init() override;

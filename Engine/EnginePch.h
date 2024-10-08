@@ -86,4 +86,5 @@ using namespace Microsoft::WRL;
 #include "BlendState.h"
 #include "Pipeline.h"
 #include "Transform.h"
+#include "Script.h"
 #include "Utils.h"

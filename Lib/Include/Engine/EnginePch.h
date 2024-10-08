@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <concepts>
 #include <any>
+#include <variant>
 using namespace std;
 
 // WIN
@@ -85,4 +86,5 @@ using namespace Microsoft::WRL;
 #include "BlendState.h"
 #include "Pipeline.h"
 #include "Transform.h"
+#include "Script.h"
 #include "Utils.h"

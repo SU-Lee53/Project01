@@ -40,7 +40,7 @@ void GameObject::Update()
 	}
 }
 
-void GameObject::AddScript(shared_ptr<Script> script)
+void GameObject::AddScript(shared_ptr<Script<GameObject>> script)
 {
 	script->SetOwner(shared_from_this());
 	_scripts.push_back(script);

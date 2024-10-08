@@ -2,7 +2,6 @@
 #include "Execute.h"
 
 class Converter;
-class Script;
 
 class ModelLoader : public Execute
 {
@@ -18,8 +17,8 @@ private:
 	// Test
 	shared_ptr<GameObject> _obj;
 	shared_ptr<GameObject> _cam;
-	shared_ptr<Script> _mouseScript;
-	shared_ptr<Script> _ModelScript;
+	shared_ptr<Script<GameObject>> _mouseScript;
+	shared_ptr<Script<GameObject>> _modelScript;
 
 };
 

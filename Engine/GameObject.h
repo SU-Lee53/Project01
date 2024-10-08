@@ -40,11 +40,11 @@ public:
 	}
 
 public:
-	void AddScript(shared_ptr<class Script> script);
+	void AddScript(shared_ptr<Script<GameObject>> script);
 
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
 
 	// Scripts
-	vector<shared_ptr<Script>> _scripts;
+	vector<shared_ptr<Script<GameObject>>> _scripts;
 };

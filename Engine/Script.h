@@ -12,11 +12,13 @@ concept IsOwnerType = requires (C c)
 };
 
 template <typename C>
-concept OwnerType = IsOwnerType<C>;
+concept ScriptOwnerType = IsOwnerType<C>;
 
+template <ScriptOwnerType T>
 class Script
 {
-	using Owner_Ty = variant<monostate, weak_ptr<GameObject>, weak_ptr<Scene>>;
+	using OwnerTy = T;
+
 public:
 	Script();
 	virtual ~Script();
@@ -26,41 +28,43 @@ public:
 	virtual void Update();
 
 public:
-	template <OwnerType T>
-	void SetOwner(T owner);
-
-	template <OwnerType T>
+	void SetOwner(shared_ptr<T> owner);
 	shared_ptr<T> GetOwner() const;
 
 
 private:
-	Owner_Ty _owner;
-
-
-public:
-	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Script;
+	weak_ptr<T> _owner;
 
 };
 
-template<OwnerType T>
-inline void Script::SetOwner(T owner)
+template<ScriptOwnerType T>
+inline Script<T>::Script()
 {
-	// TODO : Fill
-	if constexpr (is_same_v<T, GameObject>)
-	{
-
-	}
-	else if constexpr (is_same_v<T, Scene>)
-	{
-
-	}
-	else
-		assert(false);
 }
 
-template<OwnerType T>
-inline shared_ptr<T> Script::GetOwner() const
+template<ScriptOwnerType T>
+inline Script<T>::~Script()
 {
-	// TODO : Fill
-	return shared_ptr<T>();
+}
+
+template<ScriptOwnerType T>
+inline void Script<T>::Init()
+{
+}
+
+template<ScriptOwnerType T>
+inline void Script<T>::Update()
+{
+}
+
+template<ScriptOwnerType T>
+inline void Script<T>::SetOwner(shared_ptr<T> owner)
+{
+	_owner = owner;
+}
+
+template<ScriptOwnerType T>
+inline shared_ptr<T> Script<T>::GetOwner() const
+{
+	return _owner.lock();
 }

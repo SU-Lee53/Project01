@@ -3,7 +3,7 @@
 
 class Model;
 
-class ModelScript : public Script
+class ModelScript : public Script<GameObject>
 {
 public:
 	virtual void Init() override;

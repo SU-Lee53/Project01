@@ -18,6 +18,8 @@ void Converter::LoadAssetFile()
 {
 	// Test
 	wstring path = L"../Models/car_test/source/silvia_varietta.fbx";
+	//wstring path = L"../Models/pool_table/pool_table.fbx";	-> Texture loading fail
+	//wstring path = L"../Models/balls/source/poolballs.fbx";	-> Too big + PoolStick missing...
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -215,6 +217,8 @@ wstring GetTextureName(const wstring& origin)
 
 shared_ptr<Model> Converter::MakeModel()
 {
+	// Recycle the code below to export bones/models/materials
+
 	auto model = make_shared<Model>();
 
 	vector<shared_ptr<ModelBone>> modelBones;
@@ -284,6 +288,10 @@ shared_ptr<Model> Converter::MakeModel()
 		material->SetMaterialData(data);
 		
 		wstring path = L"../Models/car_test/textures/";
+		//wstring path = L"../Models/pool_table/pool_text/";
+		//wstring path = L"../Models/balls/textures/";
+
+
 		wstring originName;
 		wstring fileName;
 
