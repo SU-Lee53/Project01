@@ -20,5 +20,6 @@ private:
 	weak_ptr<Model> _model;
 	Matrix _transform;
 	float _dragSpeed = 0.1f;
+	bool _scaleType = true;
 };
 

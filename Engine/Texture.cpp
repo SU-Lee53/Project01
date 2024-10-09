@@ -21,7 +21,11 @@ void Texture::Create(const wstring& path)
 		img
 	);
 
-	HR_ASSERT(hr);
+	if (FAILED(hr))
+	{
+		CreateErrorTexture();
+		return;
+	}
 
 	hr = CreateShaderResourceView(
 		DEVICE.Get(),

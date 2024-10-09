@@ -30,12 +30,13 @@ void ModelScript::Update()
 	{
 		Vec3 pos = GetOwner()->GetTransform()->GetPosition();
 		Vec3 rot = GetOwner()->GetTransform()->GetRotation();
+		Vec3 scale = GetOwner()->GetTransform()->GetScale();
 
-		if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.1f; }
+		if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.05f; }
 		ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
-		if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { _dragSpeed += 0.1f; }
+		if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { _dragSpeed += 0.05f; }
 		ImGui::SameLine();
-		ImGui::Text("%f", _dragSpeed);
+		ImGui::Text("Drag Speed : %f", _dragSpeed);
 
 		ImGui::InputFloat3("Pos", (float*)&pos);
 		ImGui::DragFloat("Pos.x", &pos.x, _dragSpeed, -10.f, 10.f);
@@ -50,9 +51,26 @@ void ModelScript::Update()
 		ImGui::DragFloat("Rot.x", &rot.x, _dragSpeed, -180.f, 180.f);
 		ImGui::DragFloat("Rot.y", &rot.y, _dragSpeed, -180.f, 180.f);
 		ImGui::DragFloat("Rot.z", &rot.z, _dragSpeed, -180.f, 180.f);
+		
+		ImGui::Checkbox("Scale type", &_scaleType);
+
+		if(_scaleType)
+		{
+			ImGui::InputFloat3("Scale", (float*)&scale, "%.3f");
+			ImGui::DragFloat("Scale.x", &scale.x, _dragSpeed, -180.f, 180.f);
+			ImGui::DragFloat("Scale.y", &scale.y, _dragSpeed, -180.f, 180.f);
+			ImGui::DragFloat("Scale.z", &scale.z, _dragSpeed, -180.f, 180.f);
+		}
+		else
+		{
+			ImGui::DragFloat("Scale", &scale.x, _dragSpeed, 0.0f, 2.0f);
+
+			scale = Vec3{ scale.x, scale.x, scale.x };
+		}
 
 		GetOwner()->GetTransform()->SetPosition(pos);
 		GetOwner()->GetTransform()->SetRotation(rot);
+		GetOwner()->GetTransform()->SetScale(scale);
 
 		ImGui::Text("Position");
 		ImGui::Text("X: %3f", pos.x);
@@ -64,6 +82,11 @@ void ModelScript::Update()
 		ImGui::Text("X: %3f", rot.x);
 		ImGui::Text("Y: %3f", rot.y);
 		ImGui::Text("Z: %3f", rot.z);
+
+		ImGui::Text("Scale");
+		ImGui::Text("X: %3f", scale.x);
+		ImGui::Text("Y: %3f", scale.y);
+		ImGui::Text("Z: %3f", scale.z);
 	}
 	ImGui::End();
 

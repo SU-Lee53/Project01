@@ -17,9 +17,10 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	wstring path = L"../Models/car_test/source/silvia_varietta.fbx";
+	//wstring path = L"../Models/car_test/source/silvia_varietta.fbx";
+	wstring path = L"../Models/temp/pool.fbx";
 	//wstring path = L"../Models/pool_table/pool_table.fbx";	-> Texture loading fail
-	//wstring path = L"../Models/balls/source/poolballs.fbx";	-> Too big + PoolStick missing...
+	//wstring path = L"../Models/balls/source/poolballs.fbx";	-> Too big(1800+ vertices per ball) + PoolStick missing...
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -287,7 +288,7 @@ shared_ptr<Model> Converter::MakeModel()
 		}
 		material->SetMaterialData(data);
 		
-		wstring path = L"../Models/car_test/textures/";
+		wstring path = L"../Models/temp/";
 		//wstring path = L"../Models/pool_table/pool_text/";
 		//wstring path = L"../Models/balls/textures/";
 
@@ -300,7 +301,7 @@ shared_ptr<Model> Converter::MakeModel()
 			if(!asMaterial->diffuseFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->diffuseFile);
-				fileName = GetTextureName(originName);
+				//fileName = GetTextureName(originName);
 				auto diff = make_shared<Texture>();
 				diff->Create(path + fileName);
 				material->SetDiffuseMap(diff);
@@ -316,7 +317,7 @@ shared_ptr<Model> Converter::MakeModel()
 			if (!asMaterial->normalFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->normalFile);
-				fileName = GetTextureName(originName);
+				//fileName = GetTextureName(originName);
 				auto normal = make_shared<Texture>();
 				normal->Create(path + fileName);
 				material->SetNormalMap(normal);
@@ -332,7 +333,7 @@ shared_ptr<Model> Converter::MakeModel()
 			if (!asMaterial->specularFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->specularFile);
-				fileName = GetTextureName(originName);
+				//fileName = GetTextureName(originName);
 				auto specular = make_shared<Texture>();
 				specular->Create(path + fileName);
 				material->SetSpecularMap(specular);
