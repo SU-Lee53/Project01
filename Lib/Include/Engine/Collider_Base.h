@@ -1,18 +1,16 @@
 #pragma once
-#include "Component_Base.h"
-
-// TODO : Make Base
-// TODO2 : Make BoundingSphere, Plane
+#include "Component.h"
 
 class Collider_Base : public Component<Collider_Base>
 {
 public:
-
-
+	Collider_Base();
+	virtual ~Collider_Base();
 
 private:
 
 };
+
 
 template <typename C>
 concept IsColliderType = requires(C c)

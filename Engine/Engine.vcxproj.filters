@@ -75,6 +75,9 @@
     <Filter Include="소스 파일\06. Resources\Model">
       <UniqueIdentifier>{0c0ca88b-5892-4d52-817a-6eb7356de94e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04. Component\Collider">
+      <UniqueIdentifier>{01accdc9-3ebb-4d4b-8109-72523528ecf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -223,6 +226,21 @@
     </ClCompile>
     <ClCompile Include="ModelTypes.cpp">
       <Filter>소스 파일\06. Resources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider_Base.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneCollider.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBCollider.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +399,21 @@
     </ClInclude>
     <ClInclude Include="ModelTypes.h">
       <Filter>소스 파일\06. Resources\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider_Base.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneCollider.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="AABBCollider.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,12 +6,12 @@ enum class COMPONENT_TYPE
 	Transform,
 	Camera,
 	MeshRenderer,
-	Collider,
 
 	/*
 		- TODO : Add Below
 		Light,
-		Gravity
+		Gravity,
+		Collider
 	*/
 
 	Script,
@@ -27,7 +27,7 @@ enum
 };
 
 template <typename T>
-class Component : public Component_Base, public enable_shared_from_this<Component>
+class Component : public Component_Base
 {
 public:
 	Component();

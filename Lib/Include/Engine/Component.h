@@ -6,12 +6,12 @@ enum class COMPONENT_TYPE
 	Transform,
 	Camera,
 	MeshRenderer,
-	Collider,
 
 	/*
 		- TODO : Add Below
 		Light,
-		Gravity
+		Gravity,
+		Collider
 	*/
 
 	Script,
