@@ -75,9 +75,6 @@
     <Filter Include="소스 파일\06. Resources\Model">
       <UniqueIdentifier>{0c0ca88b-5892-4d52-817a-6eb7356de94e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Component\Collider">
-      <UniqueIdentifier>{3ec4f1a0-45ac-4974-beb1-bc856ef0b4c8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -226,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="ModelTypes.cpp">
       <Filter>소스 파일\06. Resources\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider_Base.cpp">
-      <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,9 +381,6 @@
     </ClInclude>
     <ClInclude Include="ModelTypes.h">
       <Filter>소스 파일\06. Resources\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider_Base.h">
-      <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

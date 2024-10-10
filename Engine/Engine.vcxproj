@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="BlendState.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collider_Base.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
@@ -91,7 +90,6 @@
   <ItemGroup>
     <ClInclude Include="BlendState.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Collider_Base.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Component_Base.h" />
     <ClInclude Include="ConstantBuffer.h" />

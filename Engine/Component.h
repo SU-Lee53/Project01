@@ -27,7 +27,7 @@ enum
 };
 
 template <typename T>
-class Component : public Component_Base
+class Component : public Component_Base, public enable_shared_from_this<Component>
 {
 public:
 	Component();
