@@ -77,14 +77,9 @@ void MouseScript::Update()
 		ImGui::Begin("Non-mouse freelook");
 		ImGui::SliderFloat("Pitch", &rot.x, -180.f, 180.f, "%.3f Deg");
 		ImGui::SliderFloat("Yaw", &rot.y, -180.f, 180.f, "%.3f Deg");
-		ImGui::End(); 
 
 		GetOwner()->GetTransform()->SetRotation(rot);
-	}
 
-
-	{
-		ImGui::Begin("Speeds");
 		ImGui::SliderFloat("Cam Sensitivity", &_sensitivity, 0.f, 20.f);
 		ImGui::SliderInt("Movement Speed", &_speed, 0.f, 20.f);
 		ImGui::End();
