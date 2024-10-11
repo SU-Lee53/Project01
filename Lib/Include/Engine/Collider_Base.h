@@ -7,8 +7,12 @@ public:
 	Collider_Base();
 	virtual ~Collider_Base();
 
-private:
+public:
+	void Update_impl();
 
+private:
+	Vec3 _position;
+	Matrix _srt;
 };
 
 
