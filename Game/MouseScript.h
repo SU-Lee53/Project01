@@ -13,12 +13,12 @@ private:
 	bool _mouseOnOff = true;
 
 	int _speed = 10.f;
-	POINT _prevPoint;
+	POINT _point;
 
 	float _deltaX = 0.f;
 	float _deltaY = 0.f;
 
-	float _sensitivity = 10.f;
+	float _sensitivity = 0.1f;
 
 };
 

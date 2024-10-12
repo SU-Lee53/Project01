@@ -242,6 +242,9 @@
     <ClCompile Include="AABBCollider.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="imgui_stdlib.cpp">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -414,6 +417,9 @@
     </ClInclude>
     <ClInclude Include="AABBCollider.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_stdlib.h">
+      <Filter>소스 파일\99. Utils\ImGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

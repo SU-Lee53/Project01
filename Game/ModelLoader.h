@@ -20,5 +20,14 @@ private:
 	shared_ptr<Script<GameObject>> _mouseScript;
 	shared_ptr<Script<GameObject>> _modelScript;
 
-};
+	bool _entered = false;
+
+	uint64 _timeStamp; 
+	wstring _modelPath = L"";
+	wstring _texturePath = L"";
+
+	string modelTemp = "";
+	string textureTemp = "";
+
+};					  
 

@@ -11,6 +11,7 @@ public:
 
 public:
 	void LoadAssetFile();
+	void LoadAssetFile(const wstring& modelPath, const wstring& texturePath);
 
 private:
 	void ReadModel(const aiNode& node, int32 index, int32 parent);
@@ -20,10 +21,17 @@ private:
 public:
 	void ExportAssetFile();
 
+public:
+	void Reset();
+
 private:
 	void ExportModel();
 	void ExportMesh();
 	void ExportMaterial();
+
+public:
+	wstring GetCurrentModelPath() { return _modelPath; }
+	wstring GetCurrentMaterialPath() { return _materialPath; }
 
 public:
 	// Just for test : Make model
@@ -34,8 +42,13 @@ private:
 	const aiScene* _scene;
 
 private:
-	wstring _modelPath = L"../Resources/Models/";
-	wstring _texturePath = L"../Resources/Textures/";
+	// Import path
+	wstring _modelPath = L"";
+	wstring _materialPath = L"";
+
+	// Export path
+	wstring _modelExportPath = L"../Resources/Models/";
+	wstring _materialExportPath = L"../Resources/Materials/";
 
 private:
 	vector<shared_ptr<asBone>> _bones;

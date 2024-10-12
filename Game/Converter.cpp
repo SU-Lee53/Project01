@@ -17,10 +17,7 @@ Converter::~Converter()
 void Converter::LoadAssetFile()
 {
 	// Test
-	//wstring path = L"../Models/car_test/source/silvia_varietta.fbx";
 	wstring path = L"../Models/temp/pool.fbx";
-	//wstring path = L"../Models/pool_table/pool_table.fbx";	-> Texture loading fail
-	//wstring path = L"../Models/balls/source/poolballs.fbx";	-> Too big(1800+ vertices per ball) + PoolStick missing...
 
 	auto p = filesystem::path(path);
 	if (!filesystem::exists(p))
@@ -28,6 +25,35 @@ void Converter::LoadAssetFile()
 
 	_scene = _importer->ReadFile(
 		Utils::ToString(path),
+		aiProcess_ConvertToLeftHanded |
+		aiProcess_Triangulate |
+		aiProcess_GenUVCoords |
+		aiProcess_GenNormals |
+		aiProcess_CalcTangentSpace
+	);
+
+	if (_scene == nullptr)
+		assert(false);
+
+	ReadModel(*(_scene->mRootNode), -1, -1);
+	ReadMaterial();
+}
+
+void Converter::LoadAssetFile(const wstring& modelPath, const wstring& texturePath)
+{
+	_modelPath = modelPath;
+	_materialPath = texturePath;
+
+	auto p = filesystem::path(_modelPath);
+	if (!filesystem::exists(p))
+		assert(false);
+	
+	auto p2 = filesystem::path(_materialPath);
+	if (!filesystem::exists(p2))
+		assert(false);
+
+	_scene = _importer->ReadFile(
+		Utils::ToString(_modelPath),
 		aiProcess_ConvertToLeftHanded |
 		aiProcess_Triangulate |
 		aiProcess_GenUVCoords |
@@ -183,6 +209,13 @@ void Converter::ExportAssetFile()
 
 }
 
+void Converter::Reset()
+{
+	_bones.clear();
+	_meshes.clear();
+	_materials.clear();
+}
+
 void Converter::ExportModel()
 {
 
@@ -205,7 +238,8 @@ wstring GetTextureName(const wstring& origin)
 	auto it = find(origin.rbegin(), origin.rend(), L'\\');
 	if (it == origin.rend())
 	{
-		assert(false);
+		return wstring(origin.cbegin(), origin.cend());
+		//assert(false);
 	}
 	else
 	{
@@ -264,9 +298,6 @@ shared_ptr<Model> Converter::MakeModel()
 		if (it == _materials.end()) assert(false);
 
 		mesh->materialIndex = index;
-		
-
-
 
 		modelMeshes.push_back(mesh);
 	}
@@ -276,7 +307,7 @@ shared_ptr<Model> Converter::MakeModel()
 	for (const auto asMaterial : _materials)
 	{
 		shared_ptr<Material> material = make_shared<Material>();
-
+		
 		material->SetName(Utils::ToWString(asMaterial->name));
 
 		MaterialData data;
@@ -288,23 +319,25 @@ shared_ptr<Model> Converter::MakeModel()
 		}
 		material->SetMaterialData(data);
 		
-		wstring path = L"../Models/temp/";
 		//wstring path = L"../Models/pool_table/pool_text/";
 		//wstring path = L"../Models/balls/textures/";
 
-
 		wstring originName;
 		wstring fileName;
+		wstring finalPath;
 
 		{
 			// Diffuse
 			if(!asMaterial->diffuseFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->diffuseFile);
-				//fileName = GetTextureName(originName);
+				fileName = GetTextureName(originName);
 				auto diff = make_shared<Texture>();
-				diff->Create(path + fileName);
+				finalPath = _materialPath + fileName;
+				diff->Create(finalPath);
 				material->SetDiffuseMap(diff);
+				material->GetDiffuseMap()->SetName(fileName);
+				material->GetDiffuseMap()->SetPath(finalPath);
 			}
 			else
 			{
@@ -317,10 +350,13 @@ shared_ptr<Model> Converter::MakeModel()
 			if (!asMaterial->normalFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->normalFile);
-				//fileName = GetTextureName(originName);
+				fileName = GetTextureName(originName);
+				finalPath = _materialPath + fileName;
 				auto normal = make_shared<Texture>();
-				normal->Create(path + fileName);
+				normal->Create(finalPath);
 				material->SetNormalMap(normal);
+				material->GetNormalMap()->SetName(fileName);
+				material->GetNormalMap()->SetPath(finalPath);
 			}
 			else
 			{
@@ -333,10 +369,13 @@ shared_ptr<Model> Converter::MakeModel()
 			if (!asMaterial->specularFile.empty())
 			{
 				originName = Utils::ToWString(asMaterial->specularFile);
-				//fileName = GetTextureName(originName);
+				fileName = GetTextureName(originName);
+				finalPath = _materialPath + fileName;
 				auto specular = make_shared<Texture>();
-				specular->Create(path + fileName);
+				specular->Create(finalPath);
 				material->SetSpecularMap(specular);
+				material->GetSpecularMap()->SetName(fileName);
+				material->GetSpecularMap()->SetPath(finalPath);
 			}
 			else
 			{

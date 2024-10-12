@@ -8,18 +8,13 @@
 #include "Camera.h"
 #include "MouseScript.h"
 #include "ModelScript.h"
+#include <filesystem>
 
 void ModelLoader::Init()
 {
+	//strset(pathstr, '0');
+
 	_converter = make_shared<Converter>();
-
-	_converter->LoadAssetFile();
-
-	{
-		auto model = make_shared<Model>();
-		model = _converter->MakeModel();
-		RESOURCE->Add("Car", model);
-	}
 
 	_obj = make_shared<GameObject>();
 	{
@@ -27,7 +22,10 @@ void ModelLoader::Init()
 		_obj->AddComponent<MeshRenderer>();
 		_obj->Init();
 
-		_obj->GetComponent<MeshRenderer>()->SetModel(RESOURCE->Get<Model>("Car"));
+		_converter->LoadAssetFile(L"../Models/temp/pool.fbx", L"../Models/temp/");
+		auto model = make_shared<Model>();
+		model = _converter->MakeModel();
+		_obj->GetComponent<MeshRenderer>()->SetModel(model);
 
 		_mouseScript = make_shared<ModelScript>();
 		_obj->AddScript(_mouseScript);
@@ -59,6 +57,70 @@ void ModelLoader::Update()
 		ImGui::Text("CameraPos.x : %f", pos.x);
 		ImGui::Text("CameraPos.y : %f", pos.y);
 		ImGui::Text("CameraPos.z : %f", pos.z);
+
+		ImGui::End();
+	}
+
+	{
+		ImGui::Begin("ModelLoader");
+
+		ImGui::IsItemDeactivatedAfterEdit();
+
+		auto callBacks = [](ImGuiInputTextCallbackData* data) -> int
+			{
+				if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
+				{
+					data->InsertChars(data->CursorPos, "/");
+				}
+				else if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+				{
+					string* str = static_cast<string*>(data->UserData);
+					IM_ASSERT(str->data() == data->Buf);
+					str->resize(data->BufSize);
+					data->Buf = str->data();
+				}
+				return 0;
+			};
+
+		ImGuiInputTextFlags flags = ImGuiInputTextFlags_CallbackCompletion | ImGuiInputTextFlags_CallbackResize;
+
+		ImGui::InputText(".fbx path", modelTemp.data(), (size_t)modelTemp.size(), flags, callBacks, (void*)&modelTemp);
+		ImGui::InputText("texture path", textureTemp.data(), (size_t)textureTemp.size(), flags, callBacks, (void*)&textureTemp);
+
+		if (ImGui::Button("Load"))
+		{
+			ImGui::Text("Loading");
+
+			_entered = true;
+			QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&_timeStamp));
+
+			_modelPath = Utils::ToWString(modelTemp);
+			_texturePath = Utils::ToWString(textureTemp);
+
+			auto modelP = filesystem::path(_modelPath);
+			auto textureP = filesystem::path(_texturePath);
+
+			if (!filesystem::exists(modelP)) assert(false);
+			if (!filesystem::exists(textureP)) assert(false);
+
+			_converter->Reset();
+			_converter->LoadAssetFile(modelP, textureP);
+			auto model = _converter->MakeModel();
+			_obj->GetComponent<MeshRenderer>()->SetModel(model);
+
+			ImGui::Text("Load Complete");
+		}
+
+		if (_entered == true)
+		{
+			uint64 _currTime;
+			QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&_currTime));
+			if (_currTime - _timeStamp > 15000000)
+				_entered = false;
+		}
+
+		ImGui::Text("_modelPath : %s", Utils::ToString(_converter->GetCurrentModelPath()).c_str());
+		ImGui::Text("_texturePath : %s", Utils::ToString(_converter->GetCurrentMaterialPath()).c_str());
 
 		ImGui::End();
 	}

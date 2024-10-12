@@ -25,16 +25,17 @@ public:
 	void SetName(const wstring& name) { _name = name; }
 	void SetPath(const wstring& path) { _path = path; }
 	
-	wstring GetName() { return _name; }
-	wstring GetPath() { return _path; }
+	wstring GetName() const { return _name; }
+	wstring GetPath() const { return _path; }
+	uint32 GetID() const { return _id; }
 
 public:
 	virtual void Load(const wstring& path);
 	virtual void Save(const wstring& path);
 
 private:
-	wstring _name;
-	wstring _path;
+	wstring _name = L"";
+	wstring _path = L"";
 	uint32 _id;
 
 public:

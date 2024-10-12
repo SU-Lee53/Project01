@@ -47,7 +47,9 @@ void Texture::CreateErrorTexture()
 	DirectX::TexMetadata md;
 	DirectX::ScratchImage img;
 
-	wstring errPath = L"../Resources/Texture/error.jpg";
+	wstring errPath = L"../Resources/Materials/error.jpg";
+	SetPath(errPath);
+	SetName(L"!!! Error Texture !!!");
 
 	HRESULT hr = LoadFromWICFile(
 		errPath.c_str(),
@@ -70,4 +72,6 @@ void Texture::CreateErrorTexture()
 
 	_size.x = md.width;
 	_size.y = md.height;
+
+	_isErrorTexture = true;
 }

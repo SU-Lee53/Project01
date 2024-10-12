@@ -4,7 +4,6 @@
 
 void MouseScript::Init()
 {
-	_prevPoint = { GAME.GetDesc().width, GAME.GetDesc().height };
 }
 
 void MouseScript::Update()
@@ -49,42 +48,46 @@ void MouseScript::Update()
 			_mouseOnOff = true;
 	}
 
-
-	POINT point = INPUT->GetMousePos();
+	GetCursorPos(&_point);
 	Vec3 rot = GetOwner()->GetTransform()->GetRotation();
+
+	// Update Center
+	RECT rMyRect;
+	GetClientRect(GAME.GetDesc().hWnd, (LPRECT)&rMyRect);
+	ClientToScreen(GAME.GetDesc().hWnd, (LPPOINT)&rMyRect.left);
+	ClientToScreen(GAME.GetDesc().hWnd, (LPPOINT)&rMyRect.right);
+
+	int screenCenterX = 0, screenCenterY = 0;
+	screenCenterX = rMyRect.left + GAME.GetDesc().width / 2;
+	screenCenterY = rMyRect.top + GAME.GetDesc().height / 2;
 
 	if(_mouseOnOff)
 	{
-		if(INPUT->GetButton(KEY_TYPE::LBUTTON))
 		{
-			int32 diffx = _prevPoint.x - point.x;
+			_deltaX = (_point.x - screenCenterX);	// Yaw
+			_deltaY = (_point.y - screenCenterY);	// Pitch
 
-			{
-				_deltaX = (_prevPoint.x - point.x);	// Yaw
-				_deltaY = (_prevPoint.y - point.y);	// Pitch
-
-				rot.x -= _deltaY * _sensitivity * DELTA_TIME;
-				rot.y -= _deltaX * _sensitivity * DELTA_TIME;
-
-			}
-
-			GetOwner()->GetTransform()->SetRotation(rot);
+			rot.x += _deltaY * _sensitivity;
+			rot.y += _deltaX * _sensitivity;
 		}
+
+		GetOwner()->GetTransform()->SetRotation(rot);
+
+		SetCursorPos(screenCenterX, screenCenterY);
 
 	}
 	else
 	{
-		ImGui::Begin("Non-mouse freelook");
-		ImGui::SliderFloat("Pitch", &rot.x, -180.f, 180.f, "%.3f Deg");
-		ImGui::SliderFloat("Yaw", &rot.y, -180.f, 180.f, "%.3f Deg");
+		if (ImGui::Begin("Non-mouse freelook"))
+		{
+			ImGui::SliderFloat("Pitch", &rot.x, -180.f, 180.f, "%.3f Deg");
+			ImGui::SliderFloat("Yaw", &rot.y, -180.f, 180.f, "%.3f Deg");
 
-		GetOwner()->GetTransform()->SetRotation(rot);
+			GetOwner()->GetTransform()->SetRotation(rot);
 
-		ImGui::SliderFloat("Cam Sensitivity", &_sensitivity, 0.f, 20.f);
-		ImGui::SliderInt("Movement Speed", &_speed, 0.f, 20.f);
-		ImGui::End();
+			ImGui::SliderFloat("Cam Sensitivity", &_sensitivity, 0.f, 20.f);
+			ImGui::SliderInt("Movement Speed", &_speed, 0.f, 20.f);
+			ImGui::End();
+		}
 	}
-
-
-	_prevPoint = point;
 }

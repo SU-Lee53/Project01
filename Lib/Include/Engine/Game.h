@@ -30,6 +30,8 @@ public:
 
 	GameDesc& GetDesc() { return _desc; }
 
+	void ShowFps();
+
 private:
 
 private:

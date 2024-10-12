@@ -9,6 +9,9 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 
+public:
+	void ShowModelHierarchy();
+
 private:
 	bool HasParent(int index);
 	bool HasChild(int index);
@@ -21,5 +24,7 @@ private:
 	Matrix _transform;
 	float _dragSpeed = 0.1f;
 	bool _scaleType = true;
-};
 
+	ImGuiTableFlags flags = ImGuiTableFlags_BordersV | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_Resizable | ImGuiTableFlags_RowBg | ImGuiTableFlags_NoBordersInBody;
+	
+};

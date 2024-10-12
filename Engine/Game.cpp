@@ -108,6 +108,8 @@ void Game::Update()
 {
 	MANAGER.Update();
 
+	ShowFps();
+
 	_desc.program->Update();
 }
 
@@ -119,4 +121,14 @@ void Game::Render()
 		GUI->Render();
 	}
 	GRAPHICS.RenderEnd();
+}
+
+void Game::ShowFps()
+{
+	uint32 fps = TIME->GetFps();
+
+	WCHAR text[100] = L"";
+	wsprintf(text, L"FPS : %d", fps);
+
+	SetWindowText(_desc.hWnd, text);
 }

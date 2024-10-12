@@ -15,9 +15,12 @@ public:
 	ComPtr<ID3D11ShaderResourceView> GetComPtr() const { return _srv; }
 	Vec2 GetSize() const { return _size; }
 
+	bool IsErrorTexture() const { return _isErrorTexture; }
+
 private:
 	ComPtr<ID3D11ShaderResourceView> _srv;
 	Vec2 _size;
+	bool _isErrorTexture = false;
 
 public:
 	using Ty = Texture;

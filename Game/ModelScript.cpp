@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Model.h"
+#include "Material.h"
 
 void HelpMarker(const char* desc)
 {
@@ -89,6 +90,165 @@ void ModelScript::Update()
 		ImGui::Text("Z: %3f", scale.z);
 	}
 	ImGui::End();
+
+	ShowModelHierarchy();
+}
+
+// for ImGui Debug
+static void ShowBoneNode(shared_ptr<ModelBone> node, vector<shared_ptr<ModelBone>> all_nodes)
+{
+	ImGui::TableNextRow();
+	ImGui::TableNextColumn();
+	
+	bool hasChild = false;
+	int32 nodeSize = all_nodes.size();
+	auto idx = node->index;
+	auto pred = [idx, nodeSize](decltype(all_nodes[0]) bone) -> bool
+		{
+			if (idx >= nodeSize or bone->parentIndex >= nodeSize) return false;	// weird index overflow?
+			if (bone->parentIndex == idx) return true;
+			return false;
+		};
+
+	if (node->parentIndex != -1)
+	{
+		bool open = ImGui::TreeNodeEx(Utils::ToString(node->name).c_str(), ImGuiTreeNodeFlags_SpanAllColumns);
+		ImGui::TableNextColumn();
+		ImGui::Text("%d", node->index);
+		ImGui::TableNextColumn();
+		ImGui::Text("%d", node->parentIndex);
+		ImGui::TableNextColumn();
+		Utils::ShowMatrix(node->transform);
+		if (open)
+		{
+			ShowBoneNode(all_nodes[node->parentIndex], all_nodes);
+			ImGui::TreePop();
+		}
+	}
+	else if (node->parentIndex == -1 or node->parentIndex > all_nodes.size())
+	{
+		ImGui::TreeNodeEx(Utils::ToString(node->name).c_str(), ImGuiTreeNodeFlags_SpanAllColumns | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_NoTreePushOnOpen);
+		ImGui::TableNextColumn();
+		ImGui::Text("%d", node->index);
+		ImGui::TableNextColumn();
+		ImGui::Text("%d", node->parentIndex);
+		ImGui::TableNextColumn();
+		Utils::ShowMatrix(node->transform);
+		ImGui::TreePop();
+	}
+}
+
+void ModelScript::ShowModelHierarchy()
+{
+	auto bones = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetBones();
+	auto meshes = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMeshes();
+	auto materials = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMaterials();
+
+	if (ImGui::Begin("Model Structure"))
+	{
+		for (const auto& model : meshes)
+		{
+			if (ImGui::TreeNode(Utils::ToString(model->name).c_str()))
+			{
+				ImGui::BulletText(
+					"name : %s\n"
+					"materialName : %s\n"
+					"materialIndex : %d\n"
+					"boneIndex : %d",
+					Utils::ToString(model->name).c_str(),
+					Utils::ToString(model->materialName).c_str(),
+					model->materialIndex,
+					model->boneIndex
+				);
+
+				if (ImGui::TreeNode("Material"))
+				{
+					auto m = materials[model->materialIndex];
+					if (ImGui::TreeNode("_materialData"))
+					{
+						if (ImGui::TreeNode("ambient"))
+						{
+							ImGui::BulletText(
+								"ambient : R. %.3f G. %.3f B. %.3f A. %.3f\n",
+								m->GetMaterialData().ambient.x, m->GetMaterialData().ambient.y, m->GetMaterialData().ambient.z, m->GetMaterialData().ambient.w
+							);
+							ImGui::TreePop();
+						}
+						
+						if (ImGui::TreeNode("diffuse"))
+						{
+							ImGui::BulletText(
+								"diffuse : R. %.3f G. %.3f B. %.3f A. %.3f\n",
+								m->GetMaterialData().diffuse.x, m->GetMaterialData().diffuse.y, m->GetMaterialData().diffuse.z, m->GetMaterialData().diffuse.w
+							);
+							ImGui::TreePop();
+						}
+						
+						if (ImGui::TreeNode("specular"))
+						{
+							ImGui::BulletText(
+								"specular : R. %.3f G. %.3f B. %.3f A. %.3f\n",
+								m->GetMaterialData().specular.x, m->GetMaterialData().specular.y, m->GetMaterialData().specular.z, m->GetMaterialData().specular.w
+							);
+							ImGui::TreePop();
+						}
+						
+						if (ImGui::TreeNode("emissive"))
+						{
+							ImGui::BulletText(
+								"emissive : R. %.3f G. %.3f B. %.3f A. %.3f\n",
+								m->GetMaterialData().emissive.x, m->GetMaterialData().emissive.y, m->GetMaterialData().emissive.z, m->GetMaterialData().emissive.w
+							);
+							ImGui::TreePop();
+						}
+
+						ImGui::TreePop();
+					}
+
+					if (ImGui::TreeNode("_diffuseMap"))
+					{
+						ImGui::BulletText(
+							"(from Resource_Base) _name : %s\n"
+							"(from Resource_Base) _path : %s\n"
+							"(from Resource_Base) _id : %d\n"
+							"_size : (%.3f, %.3f)\n"
+							"_isErrorTexture : %s\n",
+							Utils::ToString(m->GetDiffuseMap()->GetName()).c_str(),
+							Utils::ToString(m->GetDiffuseMap()->GetPath()).c_str(),
+							m->GetDiffuseMap()->GetID(),
+							m->GetDiffuseMap()->GetSize().x, m->GetDiffuseMap()->GetSize().y,
+							m->GetDiffuseMap()->IsErrorTexture() ? "True" : "False"
+						);
+
+						ImGui::TreePop();
+					}
+
+					ImGui::TreePop();
+				}
+
+				if (ImGui::TreeNode("Bones"))
+				{
+					if (ImGui::BeginTable("Bones", 4, flags));
+					{
+						ImGui::TableSetupColumn("name");
+						ImGui::TableSetupColumn("index");
+						ImGui::TableSetupColumn("parentIndex");
+						ImGui::TableSetupColumn("transform");
+						ImGui::TableHeadersRow();
+					
+						ShowBoneNode(bones[model->boneIndex], bones);
+					
+						ImGui::EndTable();
+					}
+
+					ImGui::TreePop();
+				}
+
+				ImGui::TreePop();
+			} 
+		}
+		ImGui::End();
+	}
 
 }
 
