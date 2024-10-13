@@ -22,7 +22,7 @@ void ModelLoader::Init()
 		_obj->AddComponent<MeshRenderer>();
 		_obj->Init();
 
-		_converter->LoadAssetFile(L"../Models/temp/pool.fbx", L"../Models/temp/");
+		_converter->LoadAssetFile(L"../Models/temp2/pool_1.fbx", L"../Models/temp2/src/");
 		auto model = make_shared<Model>();
 		model = _converter->MakeModel();
 		_obj->GetComponent<MeshRenderer>()->SetModel(model);
@@ -48,8 +48,8 @@ void ModelLoader::Init()
 
 void ModelLoader::Update()
 {
+	if (ImGui::Begin("Test on TestExe"))
 	{
-		ImGui::Begin("Test on TestExe");
 		ImGui::Text("MousePos.x : %li", INPUT->GetMousePos().x);
 		ImGui::Text("MousePos.y : %li", INPUT->GetMousePos().y);
 
@@ -58,14 +58,11 @@ void ModelLoader::Update()
 		ImGui::Text("CameraPos.y : %f", pos.y);
 		ImGui::Text("CameraPos.z : %f", pos.z);
 
-		ImGui::End();
 	}
+	ImGui::End();
 
+	if (ImGui::Begin("ModelLoader"))
 	{
-		ImGui::Begin("ModelLoader");
-
-		ImGui::IsItemDeactivatedAfterEdit();
-
 		auto callBacks = [](ImGuiInputTextCallbackData* data) -> int
 			{
 				if (data->EventFlag == ImGuiInputTextFlags_CallbackCompletion)
@@ -121,9 +118,11 @@ void ModelLoader::Update()
 
 		ImGui::Text("_modelPath : %s", Utils::ToString(_converter->GetCurrentModelPath()).c_str());
 		ImGui::Text("_texturePath : %s", Utils::ToString(_converter->GetCurrentMaterialPath()).c_str());
-
-		ImGui::End();
 	}
+
+	_converter->ShowMaterials();
+
+	ImGui::End();
 
 	_obj->Update();
 	_cam->Update();

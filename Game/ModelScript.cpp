@@ -27,7 +27,7 @@ void ModelScript::Update()
 {
 	//auto model = _model.lock();
 	
-	ImGui::Begin("Model Transform");
+	if(ImGui::Begin("Model Transform"))
 	{
 		Vec3 pos = GetOwner()->GetTransform()->GetPosition();
 		Vec3 rot = GetOwner()->GetTransform()->GetRotation();
@@ -88,6 +88,7 @@ void ModelScript::Update()
 		ImGui::Text("X: %3f", scale.x);
 		ImGui::Text("Y: %3f", scale.y);
 		ImGui::Text("Z: %3f", scale.z);
+
 	}
 	ImGui::End();
 
@@ -100,16 +101,6 @@ static void ShowBoneNode(shared_ptr<ModelBone> node, vector<shared_ptr<ModelBone
 	ImGui::TableNextRow();
 	ImGui::TableNextColumn();
 	
-	bool hasChild = false;
-	int32 nodeSize = all_nodes.size();
-	auto idx = node->index;
-	auto pred = [idx, nodeSize](decltype(all_nodes[0]) bone) -> bool
-		{
-			if (idx >= nodeSize or bone->parentIndex >= nodeSize) return false;	// weird index overflow?
-			if (bone->parentIndex == idx) return true;
-			return false;
-		};
-
 	if (node->parentIndex != -1)
 	{
 		bool open = ImGui::TreeNodeEx(Utils::ToString(node->name).c_str(), ImGuiTreeNodeFlags_SpanAllColumns);
@@ -134,7 +125,6 @@ static void ShowBoneNode(shared_ptr<ModelBone> node, vector<shared_ptr<ModelBone
 		ImGui::Text("%d", node->parentIndex);
 		ImGui::TableNextColumn();
 		Utils::ShowMatrix(node->transform);
-		ImGui::TreePop();
 	}
 }
 
@@ -222,13 +212,49 @@ void ModelScript::ShowModelHierarchy()
 
 						ImGui::TreePop();
 					}
+					
+					if (ImGui::TreeNode("_normalMap"))
+					{
+						ImGui::BulletText(
+							"(from Resource_Base) _name : %s\n"
+							"(from Resource_Base) _path : %s\n"
+							"(from Resource_Base) _id : %d\n"
+							"_size : (%.3f, %.3f)\n"
+							"_isErrorTexture : %s\n",
+							Utils::ToString(m->GetNormalMap()->GetName()).c_str(),
+							Utils::ToString(m->GetNormalMap()->GetPath()).c_str(),
+							m->GetNormalMap()->GetID(),
+							m->GetNormalMap()->GetSize().x, m->GetNormalMap()->GetSize().y,
+							m->GetNormalMap()->IsErrorTexture() ? "True" : "False"
+						);
+
+						ImGui::TreePop();
+					}
+					
+					if (ImGui::TreeNode("_specularMap"))
+					{
+						ImGui::BulletText(
+							"(from Resource_Base) _name : %s\n"
+							"(from Resource_Base) _path : %s\n"
+							"(from Resource_Base) _id : %d\n"
+							"_size : (%.3f, %.3f)\n"
+							"_isErrorTexture : %s\n",
+							Utils::ToString(m->GetSpecularMap()->GetName()).c_str(),
+							Utils::ToString(m->GetSpecularMap()->GetPath()).c_str(),
+							m->GetSpecularMap()->GetID(),
+							m->GetSpecularMap()->GetSize().x, m->GetSpecularMap()->GetSize().y,
+							m->GetSpecularMap()->IsErrorTexture() ? "True" : "False"
+						);
+
+						ImGui::TreePop();
+					}
 
 					ImGui::TreePop();
 				}
 
 				if (ImGui::TreeNode("Bones"))
 				{
-					if (ImGui::BeginTable("Bones", 4, flags));
+					if (ImGui::BeginTable("Bones", 4, flags))
 					{
 						ImGui::TableSetupColumn("name");
 						ImGui::TableSetupColumn("index");
@@ -240,15 +266,14 @@ void ModelScript::ShowModelHierarchy()
 					
 						ImGui::EndTable();
 					}
-
 					ImGui::TreePop();
 				}
 
 				ImGui::TreePop();
 			} 
 		}
-		ImGui::End();
 	}
+	ImGui::End();
 
 }
 

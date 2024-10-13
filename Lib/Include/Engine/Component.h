@@ -3,10 +3,18 @@
 
 enum class COMPONENT_TYPE
 {
-	Transform,
-	Camera,
-	MeshRenderer,
+	Transform,							// 0
+	Camera,								// 1
+	MeshRenderer,						// 2
 
+	Light_Base,							// 3
+	DirectionalLight = Light_Base,
+	SpotLight = DirectionalLight,
+
+	AABBColider,						// 4
+	SphereColider = AABBColider,
+	PlaneColider = SphereColider,
+	
 	/*
 		- TODO : Add Below
 		Light,

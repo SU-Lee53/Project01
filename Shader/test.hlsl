@@ -1,30 +1,33 @@
 #include "global.hlsl"
+#include "light.hlsl"
 
 // VS
 VS_OUTPUT VS(VS_INPUT input)
 {
     VS_OUTPUT output;
     
-    float4 position = mul(input.position, matLocal);
-    position = mul(position, matWorld);
-    position = mul(position, matView);
-    position = mul(position, matProjection);
-    
-    output.position = position;
+    output.position = mul(input.position, matLocal);
+    output.position = mul(output.position, matWorld);
+    output.worldPosition = output.position.xyz;
+    output.position = mul(output.position, matView);
+    output.position = mul(output.position, matProjection);
     output.uv = input.uv;
+    
+    output.normal = mul(input.normal, (float3x3) matLocal);
+    output.normal = mul(output.normal, (float3x3) matWorld);
+    
+    output.tangent = mul(input.tangent, (float3x3) matLocal);
+    output.tangent = mul(output.tangent, (float3x3) matWorld);
     
     return output;
 }
 
-Texture2D diffuseMap : register(t0);
-Texture2D normalMap : register(t1);
-Texture2D specularMap : register(t2);
-
-SamplerState sampler0 : register(s0);
-
 // PS
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    float4 color = diffuseMap.Sample(sampler0, input.uv);
+    //ComputeNormalMapping(input.normal, input.tangent, input.uv);
+    float4 color = normalMap.Sample(sampler0, input.uv);
+    
+    //float4 color = diffuseMap.Sample(sampler0, input.uv);
     return color;
 }

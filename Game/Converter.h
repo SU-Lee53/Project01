@@ -34,6 +34,10 @@ public:
 	wstring GetCurrentMaterialPath() { return _materialPath; }
 
 public:
+	// Test
+	void ShowMaterials();
+
+public:
 	// Just for test : Make model
 	shared_ptr<Model> MakeModel();
 

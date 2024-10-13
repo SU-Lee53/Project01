@@ -87,7 +87,7 @@ void MouseScript::Update()
 
 			ImGui::SliderFloat("Cam Sensitivity", &_sensitivity, 0.f, 20.f);
 			ImGui::SliderInt("Movement Speed", &_speed, 0.f, 20.f);
-			ImGui::End();
 		}
+		ImGui::End();
 	}
 }

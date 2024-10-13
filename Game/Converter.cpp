@@ -130,12 +130,12 @@ void Converter::ReadMesh(const aiNode& node, int32 bone)
 				memcpy(&vertex.uv, &srcMesh->mTextureCoords[0][v], sizeof(Vec2));
 
 			// Normal
-			//	if (srcMesh->HasNormals())
-			//		memcpy(&vertex.normal, &srcMesh->mNormals[v], sizeof(Vec3));
+			if (srcMesh->HasNormals())
+				//memcpy(&vertex.normal, &srcMesh->mNormals[v], sizeof(Vec3));
 
 			// Tangent
-			//	if (srcMesh->HasTangentsAndBitangents())
-			//		memcpy(&vertex.tangent, &srcMesh->mTangents[v], sizeof(Vec3));
+			if (srcMesh->HasTangentsAndBitangents())
+				//memcpy(&vertex.tangent, &srcMesh->mTangents[v], sizeof(Vec3));
 
 			mesh->vertices.push_back(vertex);
 		}
@@ -250,6 +250,37 @@ wstring GetTextureName(const wstring& origin)
 	return ret;
 }
 
+void Converter::ShowMaterials()
+{
+	if (ImGui::Begin("_converter materials"))
+	{
+		for (const auto& m : _materials)
+		{
+			if (ImGui::TreeNode(m->name.c_str()))
+			{
+				ImGui::BulletText(
+					"ambient : R. %.3f G. %.3f B. %.3f A. %.3f\n"
+					"diffuse : R. %.3f G. %.3f B. %.3f A. %.3f\n"
+					"specular : R. %.3f G. %.3f B. %.3f A. %.3f\n"
+					"emissive : R. %.3f G. %.3f B. %.3f A. %.3f\n"
+					"diffuseFile : %s\n"
+					"specularFile : %s\n"
+					"normalFile : %s\n",
+					m->ambient.x, m->ambient.y, m->ambient.z, m->ambient.w,
+					m->diffuse.x, m->diffuse.y, m->diffuse.z, m->diffuse.w,
+					m->specular.x, m->specular.y, m->specular.z, m->specular.w,
+					m->emissive.x, m->emissive.y, m->emissive.z, m->emissive.w,
+					m->diffuseFile.c_str(),
+					m->specularFile.c_str(),
+					m->specularFile.c_str()
+				);
+				ImGui::TreePop();
+			}
+		}
+	}
+	ImGui::End();
+}
+
 shared_ptr<Model> Converter::MakeModel()
 {
 	// Recycle the code below to export bones/models/materials
@@ -344,6 +375,8 @@ shared_ptr<Model> Converter::MakeModel()
 				auto err = make_shared<Texture>();
 				err->CreateErrorTexture();
 				material->SetDiffuseMap(err);
+				material->GetDiffuseMap()->SetName(fileName);
+				material->GetDiffuseMap()->SetPath(finalPath);
 			}
 
 			// Normal
@@ -363,6 +396,8 @@ shared_ptr<Model> Converter::MakeModel()
 				auto err = make_shared<Texture>();
 				err->CreateErrorTexture();
 				material->SetNormalMap(err);
+				material->GetNormalMap()->SetName(fileName);
+				material->GetNormalMap()->SetPath(finalPath);
 			}
 
 			// Specular
@@ -382,6 +417,8 @@ shared_ptr<Model> Converter::MakeModel()
 				auto err = make_shared<Texture>();
 				err->CreateErrorTexture();
 				material->SetSpecularMap(err);
+				material->GetSpecularMap()->SetName(fileName);
+				material->GetSpecularMap()->SetPath(finalPath);
 			}
 		}
 

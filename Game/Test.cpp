@@ -52,8 +52,9 @@ void Test::Update()
 		temp += 50.f * DELTA_TIME;
 	}
 
+	if(ImGui::Begin("Test on TestExe"))
 	{
-		ImGui::Begin("Test on TestExe");
+		
 		ImGui::Text("MousePos.x : %li", INPUT->GetMousePos().x);
 		ImGui::Text("MousePos.y : %li", INPUT->GetMousePos().y);
 
@@ -62,8 +63,8 @@ void Test::Update()
 		ImGui::Text("CameraPos.y : %f", pos.y);
 		ImGui::Text("CameraPos.z : %f", pos.z);
 
-		ImGui::End();
 	}
+	ImGui::End();
 
 	_obj->Update();
 	_cam->Update();

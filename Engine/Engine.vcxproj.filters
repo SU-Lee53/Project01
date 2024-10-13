@@ -78,6 +78,9 @@
     <Filter Include="소스 파일\04. Component\Collider">
       <UniqueIdentifier>{01accdc9-3ebb-4d4b-8109-72523528ecf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04. Component\Light">
+      <UniqueIdentifier>{620b1ab7-44af-4789-877b-577d6301e25a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -245,6 +248,12 @@
     <ClCompile Include="imgui_stdlib.cpp">
       <Filter>소스 파일\99. Utils\ImGUI</Filter>
     </ClCompile>
+    <ClCompile Include="Light_Base.cpp">
+      <Filter>소스 파일\04. Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>소스 파일\04. Component\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -273,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>소스 파일\05. Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>소스 파일\99. Utils</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>소스 파일\04. Component</Filter>
@@ -420,6 +426,15 @@
     </ClInclude>
     <ClInclude Include="imgui_stdlib.h">
       <Filter>소스 파일\99. Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_Base.h">
+      <Filter>소스 파일\04. Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>소스 파일\99. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>소스 파일\04. Component\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
