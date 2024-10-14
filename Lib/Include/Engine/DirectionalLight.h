@@ -7,8 +7,19 @@ public:
 	DirectionalLight();
 	virtual ~DirectionalLight();
 
-private:
+public:
+	void Init_impl();
+	void Update_impl();
 
+public:
+	void SetData(const GlobalLightData& data);
+	GlobalLightData& GetData() { return _data; }
+
+	void PushData();
+
+private:
+	GlobalLightData _data;
+	shared_ptr<ConstantBuffer<GlobalLightData>> _buffer;
 
 
 public:

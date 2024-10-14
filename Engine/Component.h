@@ -8,8 +8,8 @@ enum class COMPONENT_TYPE
 	MeshRenderer,						// 2
 
 	Light_Base,							// 3
-	DirectionalLight = Light_Base,
-	SpotLight = DirectionalLight,
+	GlobalLight = Light_Base,
+	SpotLight = GlobalLight,
 
 	AABBColider,						// 4
 	SphereColider = AABBColider,

@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "MouseScript.h"
 #include "ModelScript.h"
+#include "GlobalLight.h"
 #include <filesystem>
 
 void ModelLoader::Init()
@@ -31,8 +32,8 @@ void ModelLoader::Init()
 		_obj->AddScript(_mouseScript);
 	}
 
+	_cam = make_shared<GameObject>();
 	{
-		_cam = make_shared<GameObject>();
 		_cam->AddComponent<Transform>();
 		_cam->AddComponent<Camera>();
 		_cam->Init();
@@ -43,6 +44,23 @@ void ModelLoader::Init()
 		_cam->AddScript(_mouseScript);
 	}
 
+	_light = make_shared<GameObject>();
+	{
+		_light->AddComponent<Transform>();
+		_light->AddComponent<GlobalLight>();
+		_light->Init();
+
+		GlobalLightData data;
+		{
+			data.ambient = Vec4(0.5f);
+			data.diffuse = Vec4(1.0f);
+			data.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			data.direction = Vec3(0.0f, -1.0f, 0.0f);
+		}
+
+		_light->GetComponent<GlobalLight>()->SetData(data);
+
+	}
 
 }
 
@@ -105,11 +123,11 @@ void ModelLoader::Update()
 			auto model = _converter->MakeModel();
 			_obj->GetComponent<MeshRenderer>()->SetModel(model);
 
-			ImGui::Text("Load Complete");
 		}
 
 		if (_entered == true)
 		{
+			ImGui::Text("Load Complete");
 			uint64 _currTime;
 			QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&_currTime));
 			if (_currTime - _timeStamp > 15000000)
@@ -126,6 +144,7 @@ void ModelLoader::Update()
 
 	_obj->Update();
 	_cam->Update();
+	_light->Update();
 }
 
 void ModelLoader::Render()

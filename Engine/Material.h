@@ -8,8 +8,10 @@ public:
 	virtual ~Material();
 
 public:
-	void SetMaterialData(const MaterialData& data) { _materialData = data; }
+	void SetMaterialData(const MaterialData& data);
 	MaterialData& GetMaterialData() { return _materialData; }
+
+	void PushMaterialData();
 
 	void SetDiffuseMap(shared_ptr<Texture> map) { _diffuseMap = map; }
 	void SetNormalMap(shared_ptr<Texture> map) { _normalMap = map; }

@@ -25,9 +25,9 @@ VS_OUTPUT VS(VS_INPUT input)
 // PS
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    //ComputeNormalMapping(input.normal, input.tangent, input.uv);
-    float4 color = normalMap.Sample(sampler0, input.uv);
+    ComputeNormalMapping(input.normal, input.tangent, input.uv);
+    float4 color = ComputeLight(input.normal, input.uv, input.worldPosition);
     
-    //float4 color = diffuseMap.Sample(sampler0, input.uv);
     return color;
+   // return color;
 }

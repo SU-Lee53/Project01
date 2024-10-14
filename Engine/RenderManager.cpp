@@ -22,6 +22,8 @@ void RenderManager::Init()
 
 	_cameraBuffer = make_shared<ConstantBuffer<CameraData>>();
 	_transformBuffer = make_shared<ConstantBuffer<TransformData>>();
+	_materialBuffer = make_shared<ConstantBuffer<MaterialData>>();
+	_globalBuffer = make_shared<ConstantBuffer<GlobalLightData>>();
 
 	_rasterizerState = make_shared<RasterizerState>();
 	_blendState = make_shared<BlendState>();
@@ -31,6 +33,8 @@ void RenderManager::Init()
 
 	_cameraBuffer->Create();
 	_transformBuffer->Create();
+	_materialBuffer->Create();
+	_globalBuffer->Create();
 
 	_rasterizerState->Create();
 	_blendState->Create();
@@ -48,7 +52,7 @@ void RenderManager::Update()
 void RenderManager::Render()
 {
 	PushCameraData();
-
+	PushGlobalLightData();
 	for (const auto obj : _renderObj)
 	{
 		auto meshRenderer = obj->GetComponent<MeshRenderer>();
@@ -122,6 +126,8 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 
 		//auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));
 		auto material = materials[mesh->materialIndex];
+		_materialData = material->GetMaterialData();
+		PushMaterialData();
 
 		_pipeline->SetTexture<PixelShader>(Material::_diffuseSlot, material->GetDiffuseMap());
 		_pipeline->SetTexture<PixelShader>(Material::_normalSlot, material->GetNormalMap());
@@ -142,11 +148,15 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 
 		_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
 		_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
+		
+		_pipeline->SetConstantBuffer<MaterialData, PixelShader>(_materialBuffer);
+		_pipeline->SetConstantBuffer<GlobalLightData, PixelShader>(_globalBuffer);
 
 		_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
 
 		_pipeline->DrawIndexed(mesh->indexBuffer->GetCount(), 0, 0);
 	}
+
 }
 
 void RenderManager::PushCameraData()
@@ -157,4 +167,14 @@ void RenderManager::PushCameraData()
 void RenderManager::PushTransformData()
 {
 	_transformBuffer->PushData(_transformData);
+}
+
+void RenderManager::PushMaterialData()
+{
+	_materialBuffer->PushData(_materialData);
+}
+
+void RenderManager::PushGlobalLightData()
+{
+	_globalBuffer->PushData(_globalLightData);
 }

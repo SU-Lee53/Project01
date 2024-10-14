@@ -131,11 +131,11 @@ void Converter::ReadMesh(const aiNode& node, int32 bone)
 
 			// Normal
 			if (srcMesh->HasNormals())
-				//memcpy(&vertex.normal, &srcMesh->mNormals[v], sizeof(Vec3));
+				memcpy(&vertex.normal, &srcMesh->mNormals[v], sizeof(Vec3));
 
 			// Tangent
 			if (srcMesh->HasTangentsAndBitangents())
-				//memcpy(&vertex.tangent, &srcMesh->mTangents[v], sizeof(Vec3));
+				memcpy(&vertex.tangent, &srcMesh->mTangents[v], sizeof(Vec3));
 
 			mesh->vertices.push_back(vertex);
 		}

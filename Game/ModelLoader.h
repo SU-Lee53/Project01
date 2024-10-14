@@ -17,6 +17,7 @@ private:
 	// Test
 	shared_ptr<GameObject> _obj;
 	shared_ptr<GameObject> _cam;
+	shared_ptr<GameObject> _light;
 	shared_ptr<Script<GameObject>> _mouseScript;
 	shared_ptr<Script<GameObject>> _modelScript;
 

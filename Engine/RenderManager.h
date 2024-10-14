@@ -32,6 +32,8 @@ public:
 private:
 	void PushCameraData();
 	void PushTransformData();
+	void PushMaterialData();
+	void PushGlobalLightData();
 
 public:
 	void SetRasterizerState(shared_ptr<RasterizerState> rs) { _rasterizerState = rs; }
@@ -39,7 +41,9 @@ public:
 	void SetRasterizerState(shared_ptr<SamplerState> ss) { _samplerState = ss; }
 
 public:
-	void SetCameraData(CameraData cam) { _cameraData = cam; }
+	void SetCameraData(const CameraData& cam) { _cameraData = cam; }
+	void SetMaterialData(const MaterialData& material) { _materialData = material; }
+	void SetGlobalLightData(const GlobalLightData& light) { _globalLightData = light; }
 
 private:
 	shared_ptr<Pipeline> _pipeline;
@@ -54,6 +58,9 @@ private:
 
 	MaterialData _materialData;
 	shared_ptr<ConstantBuffer<MaterialData>> _materialBuffer;
+	
+	GlobalLightData _globalLightData;
+	shared_ptr<ConstantBuffer<GlobalLightData>> _globalBuffer;
 
 private:
 	shared_ptr<Shader> _shader;

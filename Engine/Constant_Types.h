@@ -23,6 +23,8 @@ struct MaterialData
 	Color diffuse = Color{ 1.f, 1.f, 1.f, 1.f };
 	Color specular = Color{ 0.f, 0.f, 0.f, 1.f };
 	Color emissive = Color{ 0.f, 0.f, 0.f, 1.f };
+
+	const static uint32 slot = 2;
 };
 
 struct GlobalLightData
@@ -33,6 +35,8 @@ struct GlobalLightData
 	Color emissive = Color{ 0.f, 0.f, 0.f, 1.f };
 	Vec3 direction = Vec3{ 1.f,0.f,0.f };
 	float padding;
+
+	const static uint32 slot = 3;
 };
 
 struct SpotLightData
@@ -57,4 +61,6 @@ struct SpotLightData
     Color sSpecular;
     Color sEmissive;
     // 16 * 4
+
+	const static uint32 slot = 4;
 };

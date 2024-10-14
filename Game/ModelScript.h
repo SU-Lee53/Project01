@@ -11,6 +11,7 @@ public:
 
 public:
 	void ShowModelHierarchy();
+	void ShowModelMeshVertices();
 
 private:
 	bool HasParent(int index);

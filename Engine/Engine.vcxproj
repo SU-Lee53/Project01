@@ -28,7 +28,7 @@
     <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Constant_Types.cpp" />
-    <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="Execute.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="EnginePch.cpp">
@@ -108,7 +108,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Constant_Types.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="EnginePch.h" />

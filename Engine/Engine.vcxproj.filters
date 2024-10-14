@@ -251,7 +251,7 @@
     <ClCompile Include="Light_Base.cpp">
       <Filter>소스 파일\04. Component\Light</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
+    <ClCompile Include="GlobalLight.cpp">
       <Filter>소스 파일\04. Component\Light</Filter>
     </ClCompile>
   </ItemGroup>
@@ -433,7 +433,7 @@
     <ClInclude Include="Utils.h">
       <Filter>소스 파일\99. Utils</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
+    <ClInclude Include="GlobalLight.h">
       <Filter>소스 파일\04. Component\Light</Filter>
     </ClInclude>
   </ItemGroup>

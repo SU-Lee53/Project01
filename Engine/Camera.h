@@ -47,7 +47,6 @@ private:
 	Matrix _projection = Matrix::Identity;
 
 private:
-	shared_ptr<ConstantBuffer<CameraData>> _cbuffer;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Camera;

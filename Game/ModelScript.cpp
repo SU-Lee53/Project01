@@ -93,6 +93,7 @@ void ModelScript::Update()
 	ImGui::End();
 
 	ShowModelHierarchy();
+	ShowModelMeshVertices();
 }
 
 // for ImGui Debug
@@ -275,6 +276,10 @@ void ModelScript::ShowModelHierarchy()
 	}
 	ImGui::End();
 
+}
+
+void ModelScript::ShowModelMeshVertices()
+{
 }
 
 bool ModelScript::HasParent(int index)
