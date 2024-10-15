@@ -13,11 +13,11 @@ VS_OUTPUT VS(VS_INPUT input)
     output.position = mul(output.position, matProjection);
     output.uv = input.uv;
     
-    output.normal = mul(input.normal, (float3x3) matLocal);
-    output.normal = mul(output.normal, (float3x3) matWorld);
+    //output.normal = mul(input.normal, (float3x3) matLocal);
+    output.normal = mul(input.normal, (float3x3) matWorld);
     
-    output.tangent = mul(input.tangent, (float3x3) matLocal);
-    output.tangent = mul(output.tangent, (float3x3) matWorld);
+    //output.tangent = mul(input.tangent, (float3x3) matLocal);
+    output.tangent = mul(input.tangent, (float3x3) matWorld);
     
     return output;
 }
@@ -25,9 +25,9 @@ VS_OUTPUT VS(VS_INPUT input)
 // PS
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    ComputeNormalMapping(input.normal, input.tangent, input.uv);
+    //ComputeNormalMapping(input.normal, input.tangent, input.uv);
     float4 color = ComputeLight(input.normal, input.uv, input.worldPosition);
     
+    //return float4(input.normal, 1.f);
     return color;
-   // return color;
 }

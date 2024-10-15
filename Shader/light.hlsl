@@ -87,7 +87,7 @@ void ComputeNormalMapping(inout float3 normal, float3 tangent, float2 uv)
     float3 B = normalize(cross(N, T));
     float3x3 TBN = float3x3(T, B, N);
     
-    float3 tangentSpaceNormal = (map.rgb + 2.0f - 1.0f);
+    float3 tangentSpaceNormal = (map.rgb * 2.0f - 1.0f);
     float3 worldNormal = mul(tangentSpaceNormal, TBN);
     
     normal = worldNormal;

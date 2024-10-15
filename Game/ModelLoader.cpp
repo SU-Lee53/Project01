@@ -137,10 +137,10 @@ void ModelLoader::Update()
 		ImGui::Text("_modelPath : %s", Utils::ToString(_converter->GetCurrentModelPath()).c_str());
 		ImGui::Text("_texturePath : %s", Utils::ToString(_converter->GetCurrentMaterialPath()).c_str());
 	}
+	ImGui::End();
+
 
 	_converter->ShowMaterials();
-
-	ImGui::End();
 
 	_obj->Update();
 	_cam->Update();
