@@ -18,6 +18,7 @@ enum class MANAGER_TYPE
 	Gui,
 	Shader,
 	Resource,
+	Collision,
 
 	end
 };

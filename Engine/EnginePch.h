@@ -75,6 +75,7 @@ using namespace Microsoft::WRL;
 #include "RenderManager.h"
 #include "GuiManager.h"
 #include "ResourceManager.h"
+#include "CollisionManager.h"
 
 // Engine
 #include "VertexBuffer.h"
