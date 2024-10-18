@@ -25,7 +25,7 @@ VS_OUTPUT VS(VS_INPUT input)
 // PS
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    //ComputeNormalMapping(input.normal, input.tangent, input.uv);
+    ComputeNormalMapping(input.normal, input.tangent, input.uv);
     float4 color = ComputeLight(input.normal, input.uv, input.worldPosition);
     
     //return float4(input.normal, 1.f);

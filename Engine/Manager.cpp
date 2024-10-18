@@ -18,7 +18,6 @@ void Manager::Init()
 	_managers[(int)MANAGER_TYPE::Render] = make_shared<RenderManager>();
 	_managers[(int)MANAGER_TYPE::Gui] = make_shared<GuiManager>();
 	_managers[(int)MANAGER_TYPE::Resource] = make_shared<ResourceManager>();
-	_managers[(int)MANAGER_TYPE::Collision] = make_shared<CollisionManager>();
 
 	TIME->Init();
 	INPUT->Init();
@@ -27,7 +26,6 @@ void Manager::Init()
 	RENDER->Init();
 	GUI->Init();
 	RESOURCE->Init();
-	COLLISION->Init();
 }
 
 void Manager::Update()
@@ -39,7 +37,6 @@ void Manager::Update()
 	RENDER->Update();
 	GUI->Update();
 	RESOURCE->Update();
-	COLLISION->Update();
 }
 
 

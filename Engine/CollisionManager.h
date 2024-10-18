@@ -1,28 +1,23 @@
 #pragma once
-#include "Manager.h"
-#include "Collider_Base.h"
 
-/*
-	CollisionManager wasn't mean to work like manager
-	BUT, I guess this is more appropriate way
-*/
+class Collider;
 
-class CollisionManager : public Manager_Base
+class CollisionManager
 {
 public:
 	CollisionManager();
-	virtual ~CollisionManager();
+	~CollisionManager();
 
 public:
-	virtual void Init();
-	virtual void Update();
+	void Init();
+	void Update();
 
 public:
-	void Add(shared_ptr<Collider_Base> key, shared_ptr<Collider_Base> value);
-	void Remove(shared_ptr<Collider_Base> key, shared_ptr<Collider_Base> value);
+	void Add(shared_ptr<Collider> key, shared_ptr<Collider> value);
+	void Remove(shared_ptr<Collider> key, shared_ptr<Collider> value);
 
 private:
-	unordered_map<shared_ptr<Collider_Base>, shared_ptr<Collider_Base>> _collisionSet;
+	unordered_map<shared_ptr<Collider>, shared_ptr<Collider>> _collisionSet;
 
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 class GameObject;
+class CollisionManager;
 
 class Scene
 {
@@ -21,6 +22,10 @@ public:
 
 	void AddScript(shared_ptr<Script<Scene>> script);
 
+public:
+	void AddCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2);
+	void RemoveCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2);
+
 private:
 	unordered_set<shared_ptr<GameObject>> _objects;
 	unordered_map<string, shared_ptr<GameObject>> _cameras;
@@ -29,6 +34,6 @@ private:
 private:
 	//Script for Scene
 	vector<shared_ptr<Script<Scene>>> _scripts;
-
+	shared_ptr<CollisionManager> _collider;
 };
 

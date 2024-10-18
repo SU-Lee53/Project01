@@ -1,7 +1,7 @@
 #pragma once
-#include "Collider_Base.h"
+#include "Collider.h"
 
-class PlaneCollider : public Collider_Base, public enable_shared_from_this<PlaneCollider>
+class PlaneCollider : public Collider, public enable_shared_from_this<PlaneCollider>
 {
 public:
 	PlaneCollider();
@@ -16,6 +16,9 @@ public:
 private:
 	float _distanceFromOrigin;
 	Vec3 _normal;
+
+public:
+	using _colliderType = PlaneCollider;
 };
 
 template<ColliderType T>

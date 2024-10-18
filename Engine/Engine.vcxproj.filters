@@ -230,7 +230,7 @@
     <ClCompile Include="ModelTypes.cpp">
       <Filter>소스 파일\06. Resources\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Collider_Base.cpp">
+    <ClCompile Include="Collider.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
@@ -412,7 +412,7 @@
     <ClInclude Include="ModelTypes.h">
       <Filter>소스 파일\06. Resources\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Collider_Base.h">
+    <ClInclude Include="Collider.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="SphereCollider.h">

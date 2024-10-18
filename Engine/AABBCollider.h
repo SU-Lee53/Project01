@@ -1,7 +1,7 @@
 #pragma once
-#include "Collider_Base.h"
+#include "Collider.h"
 
-class AABBCollider : public Collider_Base, public enable_shared_from_this<AABBCollider>
+class AABBCollider : public Collider, public enable_shared_from_this<AABBCollider>
 {
 public:
 	AABBCollider();
@@ -16,6 +16,10 @@ public:
 private:
 	float _center;
 	Vec3 _size;
+
+
+public:
+	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::AABB;
 };
 
 template<ColliderType T>

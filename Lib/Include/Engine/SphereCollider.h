@@ -1,9 +1,9 @@
 #pragma once
-#include "Collider_Base.h"
+#include "Collider.h"
 #include "Collision.h"
 
 
-class SphereCollider : public Collider_Base, public enable_shared_from_this<SphereCollider>
+class SphereCollider : public Collider, public enable_shared_from_this<SphereCollider>
 {
 public:
 	SphereCollider();
@@ -18,6 +18,9 @@ public:
 private:
 	Vec3 _center;
 	float _radius;
+
+public:
+	using _colliderType = SphereCollider;
 };
 
 template<ColliderType T>

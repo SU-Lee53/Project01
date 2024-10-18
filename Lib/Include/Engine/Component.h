@@ -11,7 +11,8 @@ enum class COMPONENT_TYPE
 	GlobalLight = Light_Base,
 	SpotLight = GlobalLight,
 
-	AABBColider,						// 4
+	Collider,
+	AABBColider = Collider,						// 4
 	SphereColider = AABBColider,
 	PlaneColider = SphereColider,
 	

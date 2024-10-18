@@ -18,7 +18,6 @@ enum class MANAGER_TYPE
 	Gui,
 	Shader,
 	Resource,
-	Collision,
 
 	end
 };
@@ -69,13 +68,5 @@ public:
 
 private:
 	array<any, MANAGER_TYPE_COUNT> _managers;
-
-	shared_ptr<TimeManager> _time;
-	shared_ptr<InputManager> _input;
-	shared_ptr<SceneManager> _scene;
-	shared_ptr<RenderManager> _render;
-	shared_ptr<GuiManager> _gui;
-	shared_ptr<ShaderManager> _shader;
-	shared_ptr<ResourceManager> _resource;
 	
 };
