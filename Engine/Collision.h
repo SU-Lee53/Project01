@@ -9,19 +9,19 @@ class AABBCollider;
 class Collision
 {
 public:
-	static bool CheckCollision(const SphereCollider& sphere1, const SphereCollider& sphere2);
+	static bool CheckCollision(shared_ptr<SphereCollider> sphere1, shared_ptr<SphereCollider> sphere2);
 							    				   
-	static bool CheckCollision(const SphereCollider& sphere, const PlaneCollider& plane);
+	static bool CheckCollision(shared_ptr<SphereCollider> sphere, shared_ptr<PlaneCollider> plane);
 							    				   
-	static bool CheckCollision(const SphereCollider& sphere, const AABBCollider& aabb);
+	static bool CheckCollision(shared_ptr<SphereCollider> sphere, shared_ptr<AABBCollider> aabb);
 							    
-	static bool CheckCollision(const PlaneCollider& plane1, const PlaneCollider& aabb2);
+	static bool CheckCollision(shared_ptr<PlaneCollider> plane1, shared_ptr<PlaneCollider> aabb2);
 							    
-	static bool CheckCollision(const PlaneCollider& plane, const AABBCollider& aabb);
+	static bool CheckCollision(shared_ptr<PlaneCollider> plane, shared_ptr<AABBCollider> aabb);
 							    
-	static bool CheckCollision(const AABBCollider& aabb1, const AABBCollider& aabb2);
+	static bool CheckCollision(shared_ptr<AABBCollider> aabb1, shared_ptr<AABBCollider> aabb2);
 
 
-	static Vec3 ClosestPoint(const PlaneCollider& p, const SphereCollider s);
+	static Vec3 ClosestPoint(shared_ptr<PlaneCollider> p, shared_ptr<SphereCollider> s);
 };
 
