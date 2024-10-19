@@ -18,15 +18,13 @@ public:
 public:
 	void Update_impl();
 
-public:
-
 private:
 	Vec3 _position;
 	Matrix _srt;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
-	using _colliderType = Collider;
+	COLLIDER_TYPE _colliderType;
 };
 
 

@@ -3,6 +3,7 @@
 
 SphereCollider::SphereCollider()
 {
+	_colliderType = COLLIDER_TYPE::Sphere;
 }
 
 SphereCollider::~SphereCollider()

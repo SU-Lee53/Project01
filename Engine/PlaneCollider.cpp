@@ -3,6 +3,7 @@
 
 PlaneCollider::PlaneCollider()
 {
+	_colliderType = COLLIDER_TYPE::Plane;
 }
 
 PlaneCollider::~PlaneCollider()

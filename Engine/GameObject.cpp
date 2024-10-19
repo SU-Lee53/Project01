@@ -2,6 +2,9 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Script.h"
+#include "SphereCollider.h"
+#include "AABBCollider.h"
+#include "PlaneCollider.h"
 
 GameObject::GameObject()
 {

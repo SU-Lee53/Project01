@@ -18,9 +18,6 @@ public:
 private:
 	Vec3 _center;
 	float _radius;
-
-public:
-	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Sphere;
 };
 
 template<ColliderType T>

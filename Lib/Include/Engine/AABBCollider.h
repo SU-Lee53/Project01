@@ -16,10 +16,6 @@ public:
 private:
 	float _center;
 	Vec3 _size;
-
-
-public:
-	using _colliderType = AABBCollider;
 };
 
 template<ColliderType T>

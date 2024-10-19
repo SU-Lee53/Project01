@@ -24,7 +24,7 @@ private:
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
-	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Base;
+	COLLIDER_TYPE _colliderType;
 };
 
 

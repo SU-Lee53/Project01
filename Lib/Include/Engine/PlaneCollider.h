@@ -16,9 +16,6 @@ public:
 private:
 	float _distanceFromOrigin;
 	Vec3 _normal;
-
-public:
-	using _colliderType = PlaneCollider;
 };
 
 template<ColliderType T>

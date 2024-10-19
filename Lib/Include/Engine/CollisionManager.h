@@ -1,5 +1,6 @@
 #pragma once
 
+class GameObject;
 class Collider;
 
 class CollisionManager
@@ -13,11 +14,11 @@ public:
 	void Update();
 
 public:
-	void Add(shared_ptr<Collider> key, shared_ptr<Collider> value);
-	void Remove(shared_ptr<Collider> key, shared_ptr<Collider> value);
+	void Add(shared_ptr<GameObject> key, shared_ptr<GameObject> value);
+	void Remove(shared_ptr<GameObject> key, shared_ptr<GameObject> value);
 
 private:
-	unordered_map<shared_ptr<Collider>, shared_ptr<Collider>> _collisionSet;
+	unordered_map<shared_ptr<GameObject>, shared_ptr<GameObject>> _collisionSet;
 
 };
 

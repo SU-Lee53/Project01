@@ -110,11 +110,7 @@ void Scene::AddCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> o
 		assert(false);
 		return;
 	}
-
-	auto col1 = obj1->GetComponent<Collider>();
-	auto col2 = obj2->GetComponent<Collider>();
-
-	_collider->Add(col1, col2);
+	_collider->Add(obj1, obj2);
 }
 
 void Scene::RemoveCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2)
@@ -126,8 +122,5 @@ void Scene::RemoveCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject
 		return;
 	}
 
-	auto col1 = obj1->GetComponent<Collider>();
-	auto col2 = obj2->GetComponent<Collider>();
-
-	_collider->Remove(col1, col2);
+	_collider->Remove(obj1, obj2);
 }

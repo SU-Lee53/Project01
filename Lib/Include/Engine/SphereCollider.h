@@ -18,9 +18,6 @@ public:
 private:
 	Vec3 _center;
 	float _radius;
-
-public:
-	using _colliderType = SphereCollider;
 };
 
 template<ColliderType T>
