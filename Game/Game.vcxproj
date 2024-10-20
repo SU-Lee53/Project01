@@ -121,8 +121,7 @@
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
-      <EntryPointName>
-      </EntryPointName>
+      <EntryPointName>VS</EntryPointName>
       <ShaderType>
       </ShaderType>
     </FxCompile>
@@ -149,6 +148,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="ModelScript.cpp" />
+    <ClCompile Include="NewStructureTest.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -160,9 +160,19 @@
     <ClInclude Include="Converter.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="ModelScript.h" />
+    <ClInclude Include="NewStructureTest.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="MouseScript.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Shader\Pixel.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\Shader\Vertex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

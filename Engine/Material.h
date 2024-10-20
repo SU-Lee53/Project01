@@ -21,12 +21,19 @@ public:
 	shared_ptr<Texture> GetNormalMap() { return _normalMap; }
 	shared_ptr<Texture> GetSpecularMap() { return _specularMap; }
 
+	void SetVertexShader(shared_ptr<VertexShader> shader);
+	void SetPixelShader(shared_ptr<PixelShader> shader);
+	void SetShader(shared_ptr<Shader> shader);
+
 private:
 	MaterialData _materialData;
 
 	shared_ptr<Texture> _diffuseMap;
 	shared_ptr<Texture> _normalMap;
 	shared_ptr<Texture> _specularMap;
+
+private:
+	shared_ptr<Shader> _shader;
 
 public:
 	static const int32 _diffuseSlot = 0; 

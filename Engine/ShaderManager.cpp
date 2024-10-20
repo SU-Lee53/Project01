@@ -11,6 +11,21 @@ ShaderManager::~ShaderManager()
 
 void ShaderManager::Init()
 {
+    for (const auto& desc : descs)
+    {
+        if (desc.type == SHADER_TYPE::Vertex)
+        {
+            shared_ptr<VertexShader> vs = make_shared<VertexShader>();
+            vs->Create(desc.fileName, desc.entryName, "vs_5_0");
+            RESOURCE->AddVertexShader(vs);
+        }
+        else if (desc.type == SHADER_TYPE::Pixel)
+        {
+            shared_ptr<PixelShader> ps = make_shared<PixelShader>();
+            ps->Create(desc.fileName, desc.entryName, "ps_5_0");
+            RESOURCE->AddPixelShader(ps);
+        }
+    }
 }
 
 void ShaderManager::LoadFromFile(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob)
@@ -41,3 +56,11 @@ void ShaderManager::LoadFromFile(const wstring& path, const string& name, const 
         assert(false);
     }
 }
+
+vector<DESC_FOR_SHADER_LOAD> ShaderManager::descs =
+{
+    {SHADER_TYPE::Vertex, "Vertex.hlsl", "VS"},
+    {SHADER_TYPE::Pixel, "Pixel.hlsl", "PS"},
+    {SHADER_TYPE::Pixel, "TestPixel.hlsl", "TestPS"}
+    // Add when need more!!
+};

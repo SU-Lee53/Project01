@@ -14,7 +14,7 @@ MeshRenderer::~MeshRenderer()
 void MeshRenderer::Init_impl()
 {
 	_shader = make_shared<Shader>();
-	_shader->Create();
+	_shader->CreateDefault();
 
 	if(_mesh == nullptr) // If _mesh was not set
 		_mesh = make_shared<Mesh>();	// set default mesh

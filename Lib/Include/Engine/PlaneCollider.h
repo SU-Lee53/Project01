@@ -8,8 +8,7 @@ public:
 	virtual ~PlaneCollider();
 
 public:
-	template<ColliderType T>
-	bool CheckCollision(shared_ptr<T> other);
+	bool CheckCollision(shared_ptr<Collider> other);
 
 	friend class Collision;
 
@@ -17,9 +16,3 @@ private:
 	float _distanceFromOrigin;
 	Vec3 _normal;
 };
-
-template<ColliderType T>
-inline bool PlaneCollider::CheckCollision(shared_ptr<T> other)
-{
-	return Collision::CheckCollision(shared_from_this(), other);
-}

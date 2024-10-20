@@ -16,6 +16,8 @@ public:
 	ComPtr<T> GetComPtr() const { return _shader; }
 	ComPtr<ID3DBlob> GetBlob() const { return _blob; }
 
+	string GetName() const { return _name; }
+
 private:
 	wstring _filePath;
 	string _name;
@@ -24,6 +26,9 @@ private:
 private:
 	ComPtr<T> _shader;
 	ComPtr<ID3DBlob> _blob;
+
+public:
+	using ShaderTy = T;
 };
 
 template<ShaderType T>

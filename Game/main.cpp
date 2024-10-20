@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Test.h"
 #include "ModelLoader.h"
+#include "NewStructureTest.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {

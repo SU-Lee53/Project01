@@ -81,6 +81,9 @@
     <Filter Include="소스 파일\04. Component\Light">
       <UniqueIdentifier>{620b1ab7-44af-4789-877b-577d6301e25a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\06. Resources\Shader">
+      <UniqueIdentifier>{5064b84d-95a0-4206-a142-ecc2e5c730d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -163,12 +166,6 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\06. Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader_Base.cpp">
-      <Filter>소스 파일\01. Graphics\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>소스 파일\01. Graphics\Shader</Filter>
     </ClCompile>
     <ClCompile Include="InputData.cpp">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
@@ -257,6 +254,12 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일\06. Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader_Base.cpp">
+      <Filter>소스 파일\06. Resources\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -339,12 +342,6 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>소스 파일\06. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader_Base.h">
-      <Filter>소스 파일\01. Graphics\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>소스 파일\01. Graphics\Shader</Filter>
     </ClInclude>
     <ClInclude Include="InputData.h">
       <Filter>소스 파일\01. Graphics\Pipelines\01. IA</Filter>
@@ -441,6 +438,12 @@
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>소스 파일\06. Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader_Base.h">
+      <Filter>소스 파일\06. Resources\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

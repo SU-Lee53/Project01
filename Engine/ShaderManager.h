@@ -14,7 +14,26 @@ concept IsShaderType = requires(C c)
 
 template <typename C>
 concept ShaderType = IsShaderType<C>;
-	
+
+enum class SHADER_TYPE
+{
+	Vertex = 0,
+	Hull,
+	Domain,
+	Geometry,
+	Pixel,
+	Compute
+};
+
+class Shader;
+
+struct DESC_FOR_SHADER_LOAD
+{
+	SHADER_TYPE type;
+	string fileName;
+	string entryName;
+};
+
 class ShaderManager : public Manager_Base
 {
 public:
@@ -32,6 +51,9 @@ private:
 
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
+
+	static vector<DESC_FOR_SHADER_LOAD> descs;
+
 };
 
 template <ShaderType T>

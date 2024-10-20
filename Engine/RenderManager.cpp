@@ -40,7 +40,7 @@ void RenderManager::Init()
 	_blendState->Create();
 	_samplerState->Create();
 
-	_shader->Create();
+	_shader->CreateDefault();
 
 }
 
