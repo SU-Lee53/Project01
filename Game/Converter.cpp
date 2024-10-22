@@ -163,41 +163,58 @@ void Converter::ReadMaterial()
 
 		aiColor3D color;
 		aiString file;
+		aiReturn res;
 
+		
 		// Ambient
 		{
-			srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
-			material->ambient = Color(color.r, color.g, color.b, 1.0f);
+			res = srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
+			if(res == AI_SUCCESS)
+				material->ambient = Color(color.r, color.g, color.b, 1.0f);
+			else
+				material->ambient = Color(0.f, 0.f, 0.f, 1.0f);
 		}
 		
 		// Diffuse
 		{
-			srcMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-			material->diffuse = Color(color.r, color.g, color.b, 1.0f);
+			res = srcMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+			if (res == AI_SUCCESS)
+				material->diffuse = Color(color.r, color.g, color.b, 1.0f);
+			else
+				material->diffuse = Color(0.f, 0.f, 0.f, 1.0f);
 
-			srcMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &file);
-			material->diffuseFile = file.C_Str();
+			res = srcMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &file);
+			if(res == AI_SUCCESS)
+				material->diffuseFile = file.C_Str();
 		}
 		
 		// Specular
 		{
-			srcMaterial->Get(AI_MATKEY_COLOR_SPECULAR, color);
-			material->specular = Color(color.r, color.g, color.b, 1.0f);
+			res = srcMaterial->Get(AI_MATKEY_COLOR_SPECULAR, color);
+			if (res == AI_SUCCESS)
+				material->specular = Color(color.r, color.g, color.b, 1.0f);
+			else
+				material->specular = Color(0.f, 0.f, 0.f, 1.0f);
 
-			srcMaterial->GetTexture(aiTextureType_SPECULAR, 0, &file);
-			material->specularFile = file.C_Str();
+			res = srcMaterial->GetTexture(aiTextureType_SPECULAR, 0, &file);
+			if (res == AI_SUCCESS)
+				material->specularFile = file.C_Str();
 		}
 		
 		// Emmisive
 		{
-			srcMaterial->Get(AI_MATKEY_COLOR_EMISSIVE, color);
-			material->emissive = Color(color.r, color.g, color.b, 1.0f);
+			res = srcMaterial->Get(AI_MATKEY_COLOR_EMISSIVE, color);
+			if (res == AI_SUCCESS)
+				material->emissive = Color(color.r, color.g, color.b, 1.0f);
+			else
+				material->emissive = Color(0.f, 0.f, 0.f, 1.0f);
 		}
 
 		// Normal
 		{
-			srcMaterial->GetTexture(aiTextureType_NORMALS, 0, &file);
-			material->normalFile = file.C_Str();
+			res = srcMaterial->GetTexture(aiTextureType_NORMALS, 0, &file);
+			if (res == AI_SUCCESS)
+				material->normalFile = file.C_Str();
 		}
 
 		_materials.push_back(material);

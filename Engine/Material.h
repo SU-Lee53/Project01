@@ -21,9 +21,14 @@ public:
 	shared_ptr<Texture> GetNormalMap() { return _normalMap; }
 	shared_ptr<Texture> GetSpecularMap() { return _specularMap; }
 
+public:
 	void SetVertexShader(shared_ptr<VertexShader> shader);
 	void SetPixelShader(shared_ptr<PixelShader> shader);
 	void SetShader(shared_ptr<Shader> shader);
+	
+	shared_ptr<VertexShader> GetVertexShader();
+	shared_ptr<PixelShader> GetPixelShader();
+	shared_ptr<Shader> GetShader();
 
 private:
 	MaterialData _materialData;

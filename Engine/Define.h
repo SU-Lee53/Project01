@@ -12,6 +12,7 @@ public:										\
 
 
 #define HR_ASSERT(p)	assert(SUCCEEDED(p))
+#define AI_ASSERT(p)	assert(p != AI_SUCCESS)
 #define GET_SINGLE(classname)	classname::GetInstance()
 
 #define GRAPHICS		GET_SINGLE(Graphics)

@@ -136,8 +136,10 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 		PipelineDesc desc;
 		{
 			desc.inputLayout = _shader->GetInputLayout();
-			desc.vertexShader = _shader->GetVertexShader();
-			desc.pixelShader = _shader->GetPixelShader();
+			//desc.vertexShader = _shader->GetVertexShader();
+			//desc.pixelShader = _shader->GetPixelShader();
+			desc.vertexShader = material->GetVertexShader();
+			desc.pixelShader = material->GetPixelShader();
 			desc.rasterizerState = _rasterizerState;
 			desc.blendState = _blendState;
 		}

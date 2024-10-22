@@ -13,8 +13,6 @@
 
 void ModelLoader::Init()
 {
-	//strset(pathstr, '0');
-
 	_converter = make_shared<Converter>();
 
 	_obj = make_shared<GameObject>();

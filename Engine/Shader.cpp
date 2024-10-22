@@ -5,6 +5,8 @@
 
 Shader::Shader()
 {
+	// For Test
+	CreateDefault();
 }
 
 Shader::~Shader()
