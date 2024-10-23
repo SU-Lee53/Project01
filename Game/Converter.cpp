@@ -261,12 +261,35 @@ void Converter::ExportModel(wstring name)
 		// 3. bone index
 		// 4. material name
 
-		wstring savePath = _modelExportPath + Utils::ToWString(mesh->name);
-		filesystem::path(path);
+		wstring path = _modelExportPath + Utils::ToWString(mesh->name) + L".mesh";
+		auto savePath = filesystem::path(path);
+		filesystem::create_directory(savePath.parent_path());
 
+		ofstream os(savePath, ios::ate | ios::binary);
+		if (!os.is_open())
+			assert(false, "Failed to Open");
 
+		if (os.fail())
+			assert(false, "ostream failed");
+
+		os << ios::binary;
+		os << mesh->name << '\n';
+		os << mesh->materialName << '\n';
+		os << mesh->boneIndex << '\n';
+
+		for (const auto& v : mesh->vertices)
+		{
+			os << v.position.x << ' ' << v.position.y << ' ' << v.position.z << '\n';
+			os << v.uv.x << ' ' << v.uv.y << '\n';
+			os << v.normal.x << ' ' << v.normal.y << ' ' << v.normal.z << '\n';
+			os << v.tangent.x << ' ' << v.tangent.y << ' ' << v.tangent.z << '\n';
+		}
+
+		for (const auto& i : mesh->indices)
+		{
+			os << i << ' ';
+		}
 	}
-
 }
 
 void Converter::ExportMaterial(wstring name)
