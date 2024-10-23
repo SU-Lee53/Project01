@@ -164,8 +164,8 @@ void Converter::ReadMaterial()
 		aiColor3D color;
 		aiString file;
 		aiReturn res;
+		uint8 attributes = 0;
 
-		
 		// Ambient
 		{
 			res = srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
@@ -184,8 +184,13 @@ void Converter::ReadMaterial()
 				material->diffuse = Color(0.f, 0.f, 0.f, 1.0f);
 
 			res = srcMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &file);
-			if(res == AI_SUCCESS)
+			if (res == AI_SUCCESS)
+			{
 				material->diffuseFile = file.C_Str();
+				attributes |= HAS_DIFFUSE;
+			}
+			else
+				material->diffuseFile = "None";
 		}
 		
 		// Specular
@@ -198,7 +203,12 @@ void Converter::ReadMaterial()
 
 			res = srcMaterial->GetTexture(aiTextureType_SPECULAR, 0, &file);
 			if (res == AI_SUCCESS)
+			{
 				material->specularFile = file.C_Str();
+				attributes |= HAS_SPECULAR;
+			}
+			else
+				material->specularFile = "None";
 		}
 		
 		// Emmisive
@@ -214,16 +224,18 @@ void Converter::ReadMaterial()
 		{
 			res = srcMaterial->GetTexture(aiTextureType_NORMALS, 0, &file);
 			if (res == AI_SUCCESS)
+			{
 				material->normalFile = file.C_Str();
+				attributes |= HAS_NORAML;
+			}
+			else
+				material->normalFile = "None";
 		}
+
+		material->attributes = (MaterialMask)attributes;
 
 		_materials.push_back(material);
 	}
-}
-
-void Converter::ExportAssetFile()
-{
-
 }
 
 void Converter::Reset()
@@ -233,19 +245,32 @@ void Converter::Reset()
 	_materials.clear();
 }
 
-void Converter::ExportModel()
+void Converter::ExportAssetFile(wstring name)
 {
+	ExportModel(name);
+	ExportMaterial(name);
+}
+
+void Converter::ExportModel(wstring name)
+{
+	for (auto& mesh : _meshes)
+	{
+		// save?
+		// 1. name
+		// 2. vertices, indices
+		// 3. bone index
+		// 4. material name
+
+		wstring savePath = _modelExportPath + Utils::ToWString(mesh->name);
+		filesystem::path(path);
+
+
+	}
 
 }
 
-void Converter::ExportMesh()
+void Converter::ExportMaterial(wstring name)
 {
-
-}
-
-void Converter::ExportMaterial()
-{
-
 }
 
 wstring GetTextureName(const wstring& origin)
@@ -437,7 +462,15 @@ shared_ptr<Model> Converter::MakeModel()
 				material->GetSpecularMap()->SetName(fileName);
 				material->GetSpecularMap()->SetPath(finalPath);
 			}
+
+			material->SetMaterialAttributes(asMaterial->attributes);
 		}
+		
+		bool has_nothing = material->CheckAttributes(HAS_NOTHING);
+		bool has_diffuse = material->CheckAttributes(HAS_DIFFUSE);
+		bool has_specular = material->CheckAttributes(HAS_SPECULAR);
+		bool has_normal = material->CheckAttributes(HAS_NORAML);
+
 
 		materials.push_back(material);
 	}

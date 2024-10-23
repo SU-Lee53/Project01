@@ -22,6 +22,31 @@ void Material::PushMaterialData()
 	RENDER->SetMaterialData(_materialData);
 }
 
+bool Material::CheckAttributes(MaterialMask m)
+{
+	if (m == HAS_NOTHING)
+	{
+		uint8 check = _attributes & HAS_DIFFUSE;
+		if (check == HAS_DIFFUSE)
+		{
+			return false;
+		}
+		return true;
+	}
+	else
+	{
+		uint8 check = _attributes & m;
+
+		if (check == m)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	assert(false);
+}
+
 void Material::SetVertexShader(shared_ptr<VertexShader> shader)
 {
 	_shader->SetVertexShader(shader);

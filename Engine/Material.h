@@ -1,6 +1,14 @@
 #pragma once
 #include "Resource_Base.h"
 
+enum MaterialMask : uint8
+{
+	HAS_NOTHING = 0,
+	HAS_DIFFUSE = 1,
+	HAS_SPECULAR = HAS_DIFFUSE << 1,
+	HAS_NORAML = HAS_SPECULAR << 1,
+};
+
 class Material : public Resource_Base
 {
 public:
@@ -20,6 +28,11 @@ public:
 	shared_ptr<Texture> GetDiffuseMap() { return _diffuseMap; }
 	shared_ptr<Texture> GetNormalMap() { return _normalMap; }
 	shared_ptr<Texture> GetSpecularMap() { return _specularMap; }
+
+	MaterialMask GetMaterialAttributes() { return _attributes; }
+	void SetMaterialAttributes(MaterialMask m) { _attributes = m; }
+
+	bool CheckAttributes(MaterialMask m);
 
 public:
 	void SetVertexShader(shared_ptr<VertexShader> shader);
@@ -44,6 +57,9 @@ public:
 	static const int32 _diffuseSlot = 0; 
 	static const int32 _normalSlot = 1;
 	static const int32 _specularSlot = 2;
+
+public:
+	MaterialMask _attributes = HAS_NOTHING;
 
 	using Ty = Material;
 };

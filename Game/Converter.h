@@ -19,15 +19,14 @@ private:
 	void ReadMaterial();
 
 public:
-	void ExportAssetFile();
-
-public:
 	void Reset();
 
+public:
+	void ExportAssetFile(wstring name);
+
 private:
-	void ExportModel();
-	void ExportMesh();
-	void ExportMaterial();
+	void ExportModel(wstring name);
+	void ExportMaterial(wstring name);
 
 public:
 	wstring GetCurrentModelPath() { return _modelPath; }

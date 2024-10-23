@@ -1,4 +1,5 @@
 #pragma once
+#include "Material.h"
 
 struct asBone
 {
@@ -31,4 +32,6 @@ struct asMaterial
 	string diffuseFile;
 	string specularFile;
 	string normalFile;
+
+	MaterialMask attributes;
 };
