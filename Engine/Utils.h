@@ -16,6 +16,7 @@ public:
 
 	//static void MakeCubeGeometry(shared_ptr<Geometry<VertexType>> geometry);
 
+	static bool ExportMatrix(ofstream& os, Matrix m);
 
 
 public:

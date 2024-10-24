@@ -7,7 +7,6 @@ struct ModelBone
 	uint32 index = -1;
 	uint32 parentIndex = -1;
 	Matrix transform = Matrix::Identity;
-
 };
 
 struct ModelMesh

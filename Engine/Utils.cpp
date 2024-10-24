@@ -76,6 +76,25 @@ string Utils::FileToBuf(ifstream& is)
 	return buf;
 }
 
+bool Utils::ExportMatrix(ofstream& os, Matrix m)
+{
+	if (!os.is_open())
+		assert(false, "Failed to Open");
+
+	if (os.fail())
+		assert(false, "ostream failed");
+
+	os << m._11 << ' ' << m._12 << ' ' << m._13 << ' ' << m._14 << '\n';
+	os << m._21 << ' ' << m._22 << ' ' << m._23 << ' ' << m._24 << '\n';
+	os << m._31 << ' ' << m._32 << ' ' << m._33 << ' ' << m._34 << '\n';
+	os << m._41 << ' ' << m._42 << ' ' << m._43 << ' ' << m._44 << '\n';
+
+	if (os.fail())
+		return false;
+
+	return true;
+}
+
 //void Utils::MakeCubeGeometry(shared_ptr<Geometry<VertexType>> geometry)
 //{
 //	float w2 = 0.5f;

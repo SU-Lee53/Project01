@@ -28,6 +28,9 @@ private:
 	void ExportModel(wstring name);
 	void ExportMaterial(wstring name);
 
+private:
+	void ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh);
+
 public:
 	wstring GetCurrentModelPath() { return _modelPath; }
 	wstring GetCurrentMaterialPath() { return _materialPath; }

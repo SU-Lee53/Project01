@@ -275,7 +275,7 @@ void Converter::ExportModel(wstring name)
 		os << ios::binary;
 		os << mesh->name << '\n';
 		os << mesh->materialName << '\n';
-		os << mesh->boneIndex << '\n';
+		//os << mesh->boneIndex << '\n';
 
 		for (const auto& v : mesh->vertices)
 		{
@@ -289,11 +289,76 @@ void Converter::ExportModel(wstring name)
 		{
 			os << i << ' ';
 		}
+		os << '\n';
+
+		ParseBonesByMeshAndExport(os, mesh);
 	}
 }
 
 void Converter::ExportMaterial(wstring name)
 {
+}
+
+void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
+{
+	if (!os.is_open())
+		assert(false, "Failed to Open");
+
+	if (os.fail())
+		assert(false, "ostream failed");
+
+	int32 findKey = mesh->boneIndex;
+	auto finder =
+		[&findKey](shared_ptr<asBone> bone)->bool
+		{
+			if (bone->index == findKey)
+				return true;
+			else
+				return false;
+		};
+
+	vector<asBone> save;
+	auto it = find_if(_bones.begin(), _bones.end(), finder);
+	if (it == _bones.end())
+		assert(false, "Something wrong while exporting bones");
+
+	while (findKey != -1)
+	{
+		save.push_back(**it);
+		findKey = (*it)->parent;
+		it = find_if(_bones.begin(), _bones.end(), finder);
+	}
+	// add last root bone
+	save.push_back(**find_if(_bones.begin(), _bones.end(), finder));
+
+	// reverses (for convenient)
+	reverse(save.begin(), save.end());
+
+	// sync real index to bone index + match parent index
+	for (int32 i = 0; i < save.size(); i++)
+	{
+		asBone& b = save[i];
+		int32 originIndex = b.index;
+
+		for_each(save.begin(), save.end(),
+			[&i, &originIndex](asBone& bone)
+			{
+				if (bone.parent == originIndex)
+					bone.parent = i;
+			}
+		);
+
+		b.index = i;
+	}
+
+	// Now, time for export bones
+	for (const auto& b : save)
+	{
+		os << b.name << '\n';
+		os << b.index << '\n';
+		os << b.parent << '\n';
+		Utils::ExportMatrix(os, b.transform);
+	}
 }
 
 wstring GetTextureName(const wstring& origin)
