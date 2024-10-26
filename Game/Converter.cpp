@@ -226,7 +226,7 @@ void Converter::ReadMaterial()
 			if (res == AI_SUCCESS)
 			{
 				material->normalFile = file.C_Str();
-				attributes |= HAS_NORAML;
+				attributes |= HAS_NORMAL;
 			}
 			else
 				material->normalFile = "None";
@@ -273,10 +273,13 @@ void Converter::ExportModel(wstring name)
 			assert(false, "ostream failed");
 
 		os << ios::binary;
+
+		os << "names begin" << '\n';
 		os << mesh->name << '\n';
 		os << mesh->materialName << '\n';
-		//os << mesh->boneIndex << '\n';
+		os << "names end" << '\n';
 
+		os << "vertices begin" << '\n';
 		for (const auto& v : mesh->vertices)
 		{
 			os << v.position.x << ' ' << v.position.y << ' ' << v.position.z << '\n';
@@ -284,14 +287,17 @@ void Converter::ExportModel(wstring name)
 			os << v.normal.x << ' ' << v.normal.y << ' ' << v.normal.z << '\n';
 			os << v.tangent.x << ' ' << v.tangent.y << ' ' << v.tangent.z << '\n';
 		}
+		os << "vertices end" << '\n';
 
+		os << "indices begin" << '\n';
 		for (const auto& i : mesh->indices)
 		{
-			os << i << ' ';
+			os << i << '\n';
 		}
-		os << '\n';
+		os << "indices end" << '\n';
 
 		ParseBonesByMeshAndExport(os, mesh);
+		ExportMaterialsByMesh(os, mesh);
 	}
 }
 
@@ -352,6 +358,7 @@ void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
 	}
 
 	// Now, time for export bones
+	os << "bones begin" << '\n';
 	for (const auto& b : save)
 	{
 		os << b.name << '\n';
@@ -359,6 +366,68 @@ void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
 		os << b.parent << '\n';
 		Utils::ExportMatrix(os, b.transform);
 	}
+	os << "bones end" << '\n';
+}
+
+void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
+{
+	if (!os.is_open())
+		assert(false, "Failed to Open");
+
+	if (os.fail())
+		assert(false, "ostream failed");
+
+	string finder = mesh->materialName;
+	auto it = find_if(_materials.begin(), _materials.end(),
+		[&finder](shared_ptr<asMaterial> material)-> bool
+		{
+			if (material->name == finder)
+				return true;
+			return false;
+		}
+	);
+
+	auto save = *it;
+
+	// Save
+	os << "materials begin" << '\n';
+	{
+		// Colors
+		os << save->diffuse.x << ' ' << save->diffuse.y << ' ' << save->diffuse.z << ' ' << save->diffuse.w << '\n';
+		os << save->specular.x << ' ' << save->specular.y << ' ' << save->specular.z << ' ' << save->specular.w << '\n';
+		os << save->ambient.x << ' ' << save->ambient.y << ' ' << save->ambient.z << ' ' << save->ambient.w << '\n';
+		os << save->emissive.x << ' ' << save->emissive.y << ' ' << save->emissive.z << ' ' << save->emissive.w << '\n';
+		
+		// Textures
+		if (Material::CheckAttributes(save->attributes, HAS_DIFFUSE))
+		{
+			os << save->diffuseFile << '\n';
+		}
+		else
+		{
+			os << "None" << '\n';
+		}
+
+		if (Material::CheckAttributes(save->attributes, HAS_SPECULAR))
+		{
+			os << save->specularFile << '\n';
+		}
+		else
+		{
+			os << "None" << '\n';
+		}
+
+		if (Material::CheckAttributes(save->attributes, HAS_NORMAL))
+		{
+			os << save->normalFile << '\n';
+		}
+		else
+		{
+			os << "None" << '\n';
+		}
+	}
+	os << "materials end" << '\n';
+
 }
 
 wstring GetTextureName(const wstring& origin)
@@ -554,10 +623,10 @@ shared_ptr<Model> Converter::MakeModel()
 			material->SetMaterialAttributes(asMaterial->attributes);
 		}
 		
-		bool has_nothing = material->CheckAttributes(HAS_NOTHING);
-		bool has_diffuse = material->CheckAttributes(HAS_DIFFUSE);
-		bool has_specular = material->CheckAttributes(HAS_SPECULAR);
-		bool has_normal = material->CheckAttributes(HAS_NORAML);
+		bool has_nothing = Material::CheckAttributes(material->_attributes, HAS_NOTHING);
+		bool has_diffuse = Material::CheckAttributes(material->_attributes, HAS_DIFFUSE);
+		bool has_specular = Material::CheckAttributes(material->_attributes, HAS_SPECULAR);
+		bool has_normal = Material::CheckAttributes(material->_attributes, HAS_NORMAL);
 
 
 		materials.push_back(material);

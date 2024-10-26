@@ -30,6 +30,7 @@ private:
 
 private:
 	void ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh);
+	void ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh);
 
 public:
 	wstring GetCurrentModelPath() { return _modelPath; }

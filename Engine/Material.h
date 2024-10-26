@@ -6,7 +6,7 @@ enum MaterialMask : uint8
 	HAS_NOTHING = 0,
 	HAS_DIFFUSE = 1,
 	HAS_SPECULAR = HAS_DIFFUSE << 1,
-	HAS_NORAML = HAS_SPECULAR << 1,
+	HAS_NORMAL = HAS_SPECULAR << 1,
 };
 
 class Material : public Resource_Base
@@ -32,7 +32,8 @@ public:
 	MaterialMask GetMaterialAttributes() { return _attributes; }
 	void SetMaterialAttributes(MaterialMask m) { _attributes = m; }
 
-	bool CheckAttributes(MaterialMask m);
+public:
+	static bool CheckAttributes(MaterialMask target, MaterialMask checker);
 
 public:
 	void SetVertexShader(shared_ptr<VertexShader> shader);

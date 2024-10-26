@@ -22,11 +22,11 @@ void Material::PushMaterialData()
 	RENDER->SetMaterialData(_materialData);
 }
 
-bool Material::CheckAttributes(MaterialMask m)
+bool Material::CheckAttributes(MaterialMask target, MaterialMask checker)
 {
-	if (m == HAS_NOTHING)
+	if (checker == HAS_NOTHING)
 	{
-		uint8 check = _attributes & HAS_DIFFUSE;
+		uint8 check = target & HAS_DIFFUSE;
 		if (check == HAS_DIFFUSE)
 		{
 			return false;
@@ -35,9 +35,9 @@ bool Material::CheckAttributes(MaterialMask m)
 	}
 	else
 	{
-		uint8 check = _attributes & m;
+		uint8 check = target & checker;
 
-		if (check == m)
+		if (check == checker)
 		{
 			return true;
 		}
