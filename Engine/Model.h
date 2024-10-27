@@ -24,6 +24,9 @@ public:
 	auto GetMeshes() const { return _meshes; }
 	auto GetMaterials() const { return _material; }
 
+public:
+	void LoadFromFiles(const wstring& path);
+
 private:
 	shared_ptr<ModelBone> _root;
 	vector<shared_ptr<ModelBone>> _bones;

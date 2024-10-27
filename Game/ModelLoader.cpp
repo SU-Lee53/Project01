@@ -21,8 +21,8 @@ void ModelLoader::Init()
 		_obj->AddComponent<MeshRenderer>();
 		_obj->Init();
 
-		_converter->LoadAssetFile(L"../Models/pool/pool_1.fbx", L"../Models/pool/src/");
-		_converter->ExportAssetFile(L"pool");
+		_converter->LoadAssetFile(L"../Models/pool_last/pool_last.fbx", L"../Models/pool_last/src/");
+		//_converter->ExportAssetFile(L"pool");
 
 		auto model = make_shared<Model>();
 		model = _converter->MakeModel();
