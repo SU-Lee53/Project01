@@ -33,9 +33,6 @@
     <Filter Include="소스 파일\07. Scene">
       <UniqueIdentifier>{86e830f3-6771-4218-9fec-97c555dfec12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\99. Headers">
-      <UniqueIdentifier>{fe4e327b-8538-4869-b74a-777ffea51203}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\99. Utils">
       <UniqueIdentifier>{462a06c0-bc1a-4fdf-9be8-c71c9f5ea580}</UniqueIdentifier>
     </Filter>
@@ -83,6 +80,9 @@
     </Filter>
     <Filter Include="소스 파일\06. Resources\Shader">
       <UniqueIdentifier>{5064b84d-95a0-4206-a142-ecc2e5c730d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Headers">
+      <UniqueIdentifier>{fe4e327b-8538-4869-b74a-777ffea51203}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

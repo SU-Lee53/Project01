@@ -9,5 +9,10 @@ public:
 	virtual void Render() override;
 
 private:
+	shared_ptr<GameObject> _obj;
+	shared_ptr<GameObject> _cam;
+
+	shared_ptr<Script<GameObject>> _mouseScript;
+	shared_ptr<Script<GameObject>> _modelScript;
 };					  
 
