@@ -110,20 +110,21 @@ float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
     // diffuse
     {
         float4 color = diffuseMap.Sample(sampler0, uv);
-        float value = dot(-GlobalLight.direction, normalize(normal));
+        float value = max(dot(-GlobalLight.direction, normalize(normal)), 0);
         diffuseColor = color * value * GlobalLight.diffuse * Material.diffuse;
     }
     
     // specular
     {
-        float3 R = GlobalLight.direction - (2 * normal * dot(GlobalLight.direction, normal));
+        float3 R = reflect(GlobalLight.direction, normalize(normal));
+        //float3 R = GlobalLight.direction - (2 * normal * dot(GlobalLight.direction, normal));
         R = normalize(R);
     
         float3 cameraPosition = -matViewInv._41_42_43;
         float3 E = normalize(cameraPosition - worldPosition);
 	
-        float value = saturate(dot(R, E)); // same as clamp(0,1)
-        float specular = pow(value, 10);
+        float value = max(dot(R, E), 0); // same as clamp(0,1)
+        float specular = pow(value, 20);
     
         specularColor = GlobalLight.specular * Material.specular * specular;
     }

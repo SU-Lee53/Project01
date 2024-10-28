@@ -90,26 +90,112 @@ void Model::LoadVertices(ifstream& is)
 		// position
 		size_t pos = 0;
 		size_t prev = 0;
+
+		shared_ptr<ModelMesh> m = make_shared<ModelMesh>();
+		VertexType vtx;
 		for (int i = 0; i < 3; i++)
 		{
 			pos = read.find(' ', prev);
-			auto sub = read.substr(prev, pos);
+			auto sub = read.substr(prev, pos - prev);
+			{
+				// substr -> pos
+				switch (i)
+				{
+				case 0 :
+					vtx.position.x = stof(sub);
+					break;
+				case 1:
+					vtx.position.y = stof(sub);
+					break;
+				case 2:
+					vtx.position.z = stof(sub);
+					break;
+				default:
+					assert(false);
+				}
+
+			}
 			prev = pos + 1;
 		}
-
 
 		// uv
 		getline(is, read);
 		for (int i = 0; i < 2; i++)
 		{
-			read.find(' ');
+			pos = read.find(' ', prev);
+			auto sub = read.substr(prev, pos - prev);
+			{
+				// substr -> pos
+				switch (i)
+				{
+				case 0:
+					vtx.uv.x = stof(sub);
+					break;
+				case 1:
+					vtx.uv.y = stof(sub);
+					break;
+				default:
+					assert(false);
+				}
+			}
+			prev = pos + 1;
 		}
 
-
 		// normal
+		getline(is, read);
+		for (int i = 0; i < 3; i++)
+		{
+			pos = read.find(' ', prev);
+			auto sub = read.substr(prev, pos - prev);
+			{
+				// substr -> pos
+				switch (i)
+				{
+				case 0:
+					vtx.normal.x = stof(sub);
+					break;
+				case 1:
+					vtx.normal.y = stof(sub);
+					break;
+				case 2:
+					vtx.normal.z = stof(sub);
+					break;
+				default:
+					assert(false);
+				}
+			}
+			prev = pos + 1;
+		}
 
 		// tangent
+		getline(is, read);
+		for (int i = 0; i < 3; i++)
+		{
+			pos = read.find(' ', prev);
+			auto sub = read.substr(prev, pos - prev);
+			{
+				// substr -> pos
+				switch (i)
+				{
+				case 0:
+					vtx.tangent.x = stof(sub);
+					break;
+				case 1:
+					vtx.tangent.y = stof(sub);
+					break;
+				case 2:
+					vtx.tangent.z = stof(sub);
+					break;
+				default:
+					assert(false);
+				}
+			}
+			prev = pos + 1;
+		}
 		
+
+		// Add
+		m->geometry->AddVertex(vtx);
 	}
 
 }
