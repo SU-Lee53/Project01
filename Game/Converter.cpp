@@ -359,6 +359,7 @@ void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
 
 	// Now, time for export bones
 	os << "bones begin" << '\n';
+	os << save.back().index << '\n'; // mesh's boneIndex
 	for (const auto& b : save)
 	{
 		os << b.name << '\n';
