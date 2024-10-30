@@ -44,7 +44,7 @@ void Model::LoadFromFiles(const wstring& fileName)
 	LoadIndices(is, mesh);
 	mesh->MakeBuffers();
 
-	LoadBones(is, mesh, bone);
+	LoadBones(is, mesh);
 	LoadMaterials(is);
 
 }
@@ -100,6 +100,7 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 		if (read.contains("vertices end")) break;
 
 		VertexType vtx;
+		float vec[3];
 
 		// position
 		size_t pos = 0;
@@ -110,25 +111,11 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			pos = read.find(' ', prev);
 			auto sub = read.substr(prev, pos - prev);
 			{
-				// substr -> pos
-				switch (i)
-				{
-				case 0 :
-					vtx.position.x = stof(sub);
-					break;
-				case 1:
-					vtx.position.y = stof(sub);
-					break;
-				case 2:
-					vtx.position.z = stof(sub);
-					break;
-				default:
-					assert(false);
-				}
-
+				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
 		}
+		vtx.position = Vec3(vec);
 
 		// uv
 		getline(is, read);
@@ -137,21 +124,11 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			pos = read.find(' ', prev);
 			auto sub = read.substr(prev, pos - prev);
 			{
-				// substr -> pos
-				switch (i)
-				{
-				case 0:
-					vtx.uv.x = stof(sub);
-					break;
-				case 1:
-					vtx.uv.y = stof(sub);
-					break;
-				default:
-					assert(false);
-				}
+				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
 		}
+		vtx.uv = Vec2(vec);
 
 		// normal
 		getline(is, read);
@@ -161,23 +138,11 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			auto sub = read.substr(prev, pos - prev);
 			{
 				// substr -> pos
-				switch (i)
-				{
-				case 0:
-					vtx.normal.x = stof(sub);
-					break;
-				case 1:
-					vtx.normal.y = stof(sub);
-					break;
-				case 2:
-					vtx.normal.z = stof(sub);
-					break;
-				default:
-					assert(false);
-				}
+				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
 		}
+		vtx.normal = Vec3(vec);
 
 		// tangent
 		getline(is, read);
@@ -187,23 +152,11 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			auto sub = read.substr(prev, pos - prev);
 			{
 				// substr -> pos
-				switch (i)
-				{
-				case 0:
-					vtx.tangent.x = stof(sub);
-					break;
-				case 1:
-					vtx.tangent.y = stof(sub);
-					break;
-				case 2:
-					vtx.tangent.z = stof(sub);
-					break;
-				default:
-					assert(false);
-				}
+				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
 		}
+		vtx.tangent = Vec3(vec);
 		
 		// Add
 		vertices.push_back(vtx);
@@ -241,7 +194,7 @@ void Model::LoadIndices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 
 }
 
-void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh, OUT shared_ptr<ModelBone> bone)
+void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 {
 	assert(is.is_open(), "failed to open " + Utils::ToString(path));
 	assert(!is.fail(), "istream failed");
@@ -257,6 +210,49 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh, OUT shared_p
 	// boneIndex
 	getline(is, read);
 	mesh->boneIndex = stoi(read);
+
+	while(true)
+	{
+		getline(is, read);
+		if (read.contains("bones end")) break;
+		
+		shared_ptr<ModelBone> bone = make_shared<ModelBone>();
+
+		// name
+		bone->name = Utils::ToWString(read);
+
+		// index
+		getline(is, read);
+		bone->index = stoi(read);
+
+		// parent
+		getline(is, read);
+		bone->parentIndex = stoi(read);
+
+		// transform
+		size_t pos = 0;
+		size_t prev = 0;
+		float matrix[4][4]; 
+
+		for (uint32 i = 0; i < 4; i++)
+		{
+			getline(is, read);
+			for (uint32 j = 0; j < 4; j++)
+			{
+				pos = read.find(' ', prev);
+				auto sub = read.substr(prev, pos - prev);
+				{
+					// substr -> pos'
+					matrix[i][j] = stof(sub);
+				}
+				prev = pos + 1;
+			}
+		}
+		bone->transform = Matrix((float*)matrix);
+
+		_bones.push_back(bone);
+	}
+
 
 }
 

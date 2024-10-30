@@ -26,11 +26,11 @@ public:
 
 private:
 	void ExportModel(wstring name);
-	void ExportMaterial(wstring name);
 
 private:
 	void ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh);
-	void ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh);
+	void ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh, wstring textureSaveFolder);
+	void ExportTexture(wstring textureSavePath, wstring file);
 
 public:
 	wstring GetCurrentModelPath() { return _modelPath; }

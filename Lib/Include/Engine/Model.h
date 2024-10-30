@@ -31,7 +31,7 @@ private:
 	void LoadNames(ifstream& is);
 	void LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
 	void LoadIndices(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
-	void LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh, OUT shared_ptr<ModelBone> bone);
+	void LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
 	void LoadMaterials(ifstream& is);
 
 private:

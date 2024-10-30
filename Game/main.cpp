@@ -14,7 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		desc.windowName = L"Billards";
 		desc.hInstance = hInstance;
 		desc.hWnd = NULL;
-		desc.program = make_shared<NewStructureTest>();
+		desc.program = make_shared<ModelLoader>();
 	}
 
 	GAME.Run(desc);

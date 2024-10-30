@@ -248,7 +248,6 @@ void Converter::Reset()
 void Converter::ExportAssetFile(wstring name)
 {
 	ExportModel(name);
-	ExportMaterial(name);
 }
 
 void Converter::ExportModel(wstring name)
@@ -297,12 +296,8 @@ void Converter::ExportModel(wstring name)
 		os << "indices end" << '\n';
 
 		ParseBonesByMeshAndExport(os, mesh);
-		ExportMaterialsByMesh(os, mesh);
+		ExportMaterialsByMesh(os, mesh, _materialExportPath);
 	}
-}
-
-void Converter::ExportMaterial(wstring name)
-{
 }
 
 void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
@@ -370,7 +365,7 @@ void Converter::ParseBonesByMeshAndExport(ofstream& os, shared_ptr<asMesh> mesh)
 	os << "bones end" << '\n';
 }
 
-void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
+void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh, wstring textureSaveFolder)
 {
 	if (!os.is_open())
 		assert(false, "Failed to Open");
@@ -390,8 +385,14 @@ void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
 
 	auto save = *it;
 
+	// Texture save path
+	filesystem::path p = filesystem::path(textureSaveFolder + L"Texture/" + Utils::ToWString(mesh->name));
+	wstring pathstr = p.c_str();
+
 	// Save
 	os << "materials begin" << '\n';
+	os << mesh->materialName << '\n';
+	
 	{
 		// Colors
 		os << save->diffuse.x << ' ' << save->diffuse.y << ' ' << save->diffuse.z << ' ' << save->diffuse.w << '\n';
@@ -403,6 +404,7 @@ void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
 		if (Material::CheckAttributes(save->attributes, HAS_DIFFUSE))
 		{
 			os << save->diffuseFile << '\n';
+			ExportTexture(pathstr, Utils::ToWString(save->diffuseFile));
 		}
 		else
 		{
@@ -412,6 +414,7 @@ void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
 		if (Material::CheckAttributes(save->attributes, HAS_SPECULAR))
 		{
 			os << save->specularFile << '\n';
+			ExportTexture(pathstr, Utils::ToWString(save->specularFile));
 		}
 		else
 		{
@@ -421,6 +424,7 @@ void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
 		if (Material::CheckAttributes(save->attributes, HAS_NORMAL))
 		{
 			os << save->normalFile << '\n';
+			ExportTexture(pathstr, Utils::ToWString(save->normalFile));
 		}
 		else
 		{
@@ -428,6 +432,17 @@ void Converter::ExportMaterialsByMesh(ofstream& os, shared_ptr<asMesh> mesh)
 		}
 	}
 	os << "materials end" << '\n';
+
+}
+
+void Converter::ExportTexture(wstring textureSavePath, wstring file)
+{
+	// copy from origin path to my resource path
+	string fileName = filesystem::path(file).filename().string();
+	string saveFolder = filesystem::path(textureSavePath).filename().string();
+
+	auto findIn = filesystem::path(_materialPath);
+
 
 }
 
