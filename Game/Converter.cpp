@@ -439,11 +439,15 @@ void Converter::ExportTexture(wstring textureSavePath, wstring file)
 {
 	// copy from origin path to my resource path
 	string fileName = filesystem::path(file).filename().string();
-	string saveFolder = filesystem::path(textureSavePath).filename().string();
+	string saveName = Utils::ToString(textureSavePath) + '/' + fileName;
 
-	auto findIn = filesystem::path(_materialPath);
+	auto finder = filesystem::path(Utils::ToString(_materialPath) + fileName);
 
-
+	if (filesystem::exists(finder))
+	{
+		filesystem::create_directories(textureSavePath);
+		filesystem::copy_file(finder, saveName, filesystem::copy_options::overwrite_existing);
+	}
 }
 
 wstring GetTextureName(const wstring& origin)

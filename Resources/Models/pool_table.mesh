@@ -46428,3 +46428,62 @@ indices begin
 9268
 9267
 9272
+9271
+9270
+9275
+9274
+9273
+9278
+9277
+9276
+9281
+9280
+9279
+9284
+9283
+9282
+9287
+9286
+9285
+indices end
+bones begin
+3
+RootNode
+0
+0
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+pool_table_$AssimpFbx$_Translation
+1
+0
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 8.30311 9.20666e-07 1
+pool_table_$AssimpFbx$_PreRotation
+2
+1
+1 0 0 0
+0 -4.37114e-08 1 0
+-0 -1 -4.37114e-08 -0
+0 8.30311 9.20666e-07 1
+pool_table
+3
+2
+1 0 0 0
+0 -4.37114e-08 1 0
+-0 -1 -4.37114e-08 -0
+0 8.30311 9.20666e-07 1
+bones end
+materials begin
+pool_table
+0.588 0.588 0.588 1
+0.9 0.9 0.9 1
+0.588 0.588 0.588 1
+0 0 0 1
+src\pool_table_diffuse.png
+None
+src\pool_table_Normal.png
+materials end
