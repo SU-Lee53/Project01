@@ -27,7 +27,7 @@ enum class SHADER_TYPE
 
 class Shader;
 
-struct DESC_FOR_SHADER_LOAD
+struct SHADER_DESC
 {
 	SHADER_TYPE type;
 	string fileName;
@@ -52,7 +52,7 @@ private:
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
 
-	static vector<DESC_FOR_SHADER_LOAD> descs;
+	static vector<SHADER_DESC> descs;
 
 };
 

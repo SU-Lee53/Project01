@@ -6,6 +6,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	GameDesc desc;
 	{
 		desc.width = 1280;
@@ -14,10 +15,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		desc.windowName = L"Billards";
 		desc.hInstance = hInstance;
 		desc.hWnd = NULL;
-		desc.program = make_shared<ModelLoader>();
+		desc.program = make_shared<NewStructureTest>();
+
 	}
 
 	GAME.Run(desc);
-
 }
 

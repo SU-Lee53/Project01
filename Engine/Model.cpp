@@ -35,8 +35,7 @@ void Model::LoadFromFiles(const wstring& fileName)
 	shared_ptr<ModelMesh> mesh = make_shared<ModelMesh>();
 	mesh->geometry = make_shared<Geometry<VertexType>>();
 
-	shared_ptr<ModelBone> bone = make_shared<ModelBone>();
-	shared_ptr<Material> _material = make_shared<Material>();
+	shared_ptr<Material> material = make_shared<Material>();
 
 	LoadNames(is);
 
@@ -45,7 +44,7 @@ void Model::LoadFromFiles(const wstring& fileName)
 	mesh->MakeBuffers();
 
 	LoadBones(is, mesh);
-	LoadMaterials(is);
+	LoadMaterials(is, material);
 
 }
 
@@ -253,11 +252,157 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 		_bones.push_back(bone);
 	}
 
+	_root = _bones.front();
 
 }
 
-void Model::LoadMaterials(ifstream& is)
+void Model::LoadMaterials(ifstream& is, OUT shared_ptr<Material> material)
 {
+	assert(is.is_open(), "failed to open " + Utils::ToString(path));
+	assert(!is.fail(), "istream failed");
+
+	string read;
+
+	while (true)
+	{
+		getline(is, read);
+		if (read.contains("materials begin")) break;
+	}
+
+	while (true)
+	{
+		getline(is, read);
+		if (read.contains("materials end")) break;
+
+		// material name
+		wstring name = Utils::ToWString(read);
+		material->SetName(name);
+
+		float color[4];
+		MaterialData data;
+
+		size_t pos = 0;
+		size_t prev = 0;
+
+		// Material Data(colors)
+		{
+			// diffuse
+			getline(is, read);
+			for (int i = 0; i < 4; i++)
+			{
+				pos = read.find(' ', prev);
+				auto sub = read.substr(prev, pos - prev);
+				{
+					color[i] = stof(sub);
+				}
+				prev = pos + 1;
+			}
+			data.diffuse = Color(color);
+
+			// specular
+			getline(is, read);
+			for (int i = 0; i < 4; i++)
+			{
+				pos = read.find(' ', prev);
+				auto sub = read.substr(prev, pos - prev);
+				{
+					color[i] = stof(sub);
+				}
+				prev = pos + 1;
+			}
+			data.specular = Color(color);
+
+			// ambient
+			getline(is, read);
+			for (int i = 0; i < 4; i++)
+			{
+				pos = read.find(' ', prev);
+				auto sub = read.substr(prev, pos - prev);
+				{
+					color[i] = stof(sub);
+				}
+				prev = pos + 1;
+			}
+			data.ambient = Color(color);
+
+			// emissive
+			getline(is, read);
+			for (int i = 0; i < 4; i++)
+			{
+				pos = read.find(' ', prev);
+				auto sub = read.substr(prev, pos - prev);
+				{
+					color[i] = stof(sub);
+				}
+				prev = pos + 1;
+			}
+			data.ambient = Color(color);
+		}
+
+		material->SetMaterialData(data);
+
+		// textures
+		{
+			wstring path = L"../Resources/Materials/Texture/" + material->GetName() + L'/';
+			uint8 flag = 0;
+
+			for (uint32 i = 0; i < 3; i++)
+			{
+				shared_ptr<Texture> tex = make_shared<Texture>();
+
+				getline(is, read);
+				if (read != "None")
+				{
+					string fileName = filesystem::path(read).filename().string();
+					wstring filePath = path + Utils::ToWString(fileName);
+					tex->Create(filePath);
+				}
+				else
+				{
+					tex->CreateErrorTexture();
+				}
+
+				switch (i)
+				{
+				case 0:
+					material->SetDiffuseMap(tex);
+					if (tex->IsErrorTexture() == false)
+					{
+						flag |= HAS_DIFFUSE;
+					}
+					break;
+
+				case 1:
+					material->SetSpecularMap(tex);
+					if (tex->IsErrorTexture() == false)
+					{
+						flag |= HAS_SPECULAR;
+					}
+					break;
+
+				case 2:
+					material->SetNormalMap(tex);
+					if (tex->IsErrorTexture() == false)
+					{
+						flag |= HAS_NORMAL;
+					}
+					break;
+
+				default:
+					assert(false);
+				}
+
+			}
+
+			material->SetMaterialAttributes((MaterialFlag)flag);
+		}
+
+		// TODO : Set Shader by Attribute(flag)
+
+
+	}
+
+
 }
 
 #pragma endregion Loader

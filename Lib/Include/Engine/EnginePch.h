@@ -42,7 +42,6 @@ using namespace std;
 #include <FreeType/ft2build.h>
 #include FT_FREETYPE_H
 
-
 // DX
 #include <d3d11.h>
 #include <d3dcompiler.h>

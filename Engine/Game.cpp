@@ -23,6 +23,8 @@ WPARAM Game::Run(GameDesc& desc)
 		GRAPHICS.Init(_desc.hWnd);
 		MANAGER.Init();
 		desc.program->Init();
+
+
 	}
 
 	MSG msg = { 0 };

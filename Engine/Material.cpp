@@ -22,7 +22,7 @@ void Material::PushMaterialData()
 	RENDER->SetMaterialData(_materialData);
 }
 
-bool Material::CheckAttributes(MaterialMask target, MaterialMask checker)
+bool Material::CheckAttributes(MaterialFlag target, MaterialFlag checker)
 {
 	if (checker == HAS_NOTHING)
 	{

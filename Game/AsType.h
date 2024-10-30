@@ -33,5 +33,5 @@ struct asMaterial
 	string specularFile;
 	string normalFile;
 
-	MaterialMask attributes;
+	MaterialFlag attributes;
 };

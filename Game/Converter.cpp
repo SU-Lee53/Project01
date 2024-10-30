@@ -232,7 +232,7 @@ void Converter::ReadMaterial()
 				material->normalFile = "None";
 		}
 
-		material->attributes = (MaterialMask)attributes;
+		material->attributes = (MaterialFlag)attributes;
 
 		_materials.push_back(material);
 	}

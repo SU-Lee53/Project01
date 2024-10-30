@@ -27,27 +27,6 @@ void ModelLoader::Init()
 		auto model = make_shared<Model>();
 		model = _converter->MakeModel();
 
-		{
-			auto mesh = model->GetMeshes();
-			auto material = model->GetMaterials();
-			auto it = find_if(mesh.begin(), mesh.end(),
-				[](shared_ptr<ModelMesh> mesh)->bool
-				{
-					if (mesh->name == L"pool_table") return true;
-					return false;
-				}
-			);
-			 
-			auto table = *it;
-			auto table_mat = material[table->materialIndex];
-
-			auto texture = make_shared<Texture>();
-			texture->Create(L"../Models/pool_last/src/pool_table_diffuse.png");
-			table_mat->SetDiffuseMap(texture);
-			table_mat->GetDiffuseMap()->SetName(L"pool_table_diffuse.png");
-			table_mat->GetDiffuseMap()->SetPath(L"../Models/pool_last/src/pool_table_diffuse.png");
-		}
-
 		_obj->GetComponent<MeshRenderer>()->SetModel(model);
 
 		_mouseScript = make_shared<ModelScript>();

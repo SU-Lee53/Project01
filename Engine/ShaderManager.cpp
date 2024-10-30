@@ -57,7 +57,7 @@ void ShaderManager::LoadFromFile(const wstring& path, const string& name, const 
     }
 }
 
-vector<DESC_FOR_SHADER_LOAD> ShaderManager::descs =
+vector<SHADER_DESC> ShaderManager::descs =
 {
     {SHADER_TYPE::Vertex, "Vertex.hlsl", "VS"},
     {SHADER_TYPE::Pixel, "Pixel.hlsl", "PS"},
