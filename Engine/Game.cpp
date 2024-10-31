@@ -10,6 +10,9 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 WPARAM Game::Run(GameDesc& desc)
 {
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	_desc = desc;
 	// assert(_desc.app != nullptr);
 
@@ -42,6 +45,11 @@ WPARAM Game::Run(GameDesc& desc)
 			Render();
 		}
 	}
+
+#ifdef _DEBUG
+	_ASSERT(_CrtCheckMemory());
+#endif
+	return (int)msg.wParam;
 
 	return msg.wParam;
 }

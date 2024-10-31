@@ -37,8 +37,8 @@ void NewStructureTest::Init()
 		_cam->AddScript(_mouseScript);
 	}
 
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-	_CrtDumpMemoryLeaks();
+	//_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+	//_CrtDumpMemoryLeaks();
 
 
 }
