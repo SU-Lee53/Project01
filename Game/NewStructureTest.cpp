@@ -25,9 +25,6 @@ void NewStructureTest::Init()
 
 	}
 
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-	_CrtDumpMemoryLeaks();
-
 	_cam = make_shared<GameObject>();
 	{
 		_cam->AddComponent<Transform>();
@@ -39,6 +36,9 @@ void NewStructureTest::Init()
 		_mouseScript = make_shared<MouseScript>();
 		_cam->AddScript(_mouseScript);
 	}
+
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+	_CrtDumpMemoryLeaks();
 
 
 }

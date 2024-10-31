@@ -452,21 +452,7 @@ void Converter::ExportTexture(wstring textureSavePath, wstring file)
 
 wstring GetTextureName(const wstring& origin)
 {
-	wstring ret = L"";
-
-	auto it = find(origin.rbegin(), origin.rend(), L'\\');
-	if (it == origin.rend())
-	{
-		return wstring(origin.cbegin(), origin.cend());
-		//assert(false);
-	}
-	else
-	{
-		ret = wstring(origin.rbegin(), it);
-		reverse(ret.begin(), ret.end());
-	}
-
-	return ret;
+	return filesystem::path(origin).filename().wstring();
 }
 
 void Converter::ShowMaterials()
