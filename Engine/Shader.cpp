@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "InputLayout.h"
 #include "InputData.h"
+#include "Shader_Base.h"
 
 Shader::Shader()
 {

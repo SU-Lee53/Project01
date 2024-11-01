@@ -42,7 +42,7 @@ public:
 template <typename C>
 concept IsManagerType = requires(C c)
 {
-	derived_from<C, Manager_Base>;
+	std::derived_from<C, Manager_Base>;
 };
 
 template <typename C>

@@ -28,6 +28,11 @@ using namespace std;
 #include <assert.h>
 #include <optional>
 
+// DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 // ImGUI
 #include "imgui.h"
 #include "imgui_impl_dx11.h"

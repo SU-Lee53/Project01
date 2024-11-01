@@ -1,19 +1,6 @@
 #pragma once
 #include "Manager.h"
-
-template <typename C>
-concept IsShaderType = requires(C c)
-{
-	same_as<C, ID3D11VertexShader>			or
-		same_as<C, ID3D11HullShader>		or
-		same_as<C, ID3D11DomainShader>		or
-		same_as<C, ID3D11GeometryShader>	or
-		same_as<C, ID3D11PixelShader>		or
-		same_as<C, ID3D11ComputeShader>;
-};
-
-template <typename C>
-concept ShaderType = IsShaderType<C>;
+#include "Shader_Base.h"
 
 enum class SHADER_TYPE
 {
@@ -53,6 +40,9 @@ public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
 
 	static vector<SHADER_DESC> descs;
+
+	unordered_set<VertexShader> _vsSet;
+	unordered_set<PixelShader> _psSet;
 
 };
 

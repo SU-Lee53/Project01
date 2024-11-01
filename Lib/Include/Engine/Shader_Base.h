@@ -1,6 +1,19 @@
 #pragma once
-#include "ShaderManager.h"
 #include "Utils.h"
+
+template <typename C>
+concept IsShaderType = requires(C c)
+{
+	same_as<C, ID3D11VertexShader> or
+		same_as<C, ID3D11HullShader> or
+		same_as<C, ID3D11DomainShader> or
+		same_as<C, ID3D11GeometryShader> or
+		same_as<C, ID3D11PixelShader> or
+		same_as<C, ID3D11ComputeShader>;
+};
+
+template <typename C>
+concept ShaderType = IsShaderType<C>;
 
 template <ShaderType T>
 class Shader_Base
@@ -17,6 +30,9 @@ public:
 	ComPtr<ID3DBlob> GetBlob() const { return _blob; }
 
 	string GetName() const { return _name; }
+
+	friend class hash<Shader_Base<ID3D11VertexShader>>;
+	friend class hash<Shader_Base<ID3D11PixelShader>>;
 
 private:
 	wstring _filePath;
@@ -48,3 +64,26 @@ inline void Shader_Base<T>::Create(const string& file, const string& name, const
 
 using VertexShader = Shader_Base<ID3D11VertexShader>;
 using PixelShader = Shader_Base<ID3D11PixelShader>;
+
+namespace std
+{
+	template<>
+	struct hash<VertexShader>
+	{
+		size_t operator()(const VertexShader& vs) const
+		{
+			hash<string> hash_func;
+			return hash_func(vs._name);
+		}
+	};
+
+	template<>
+	struct hash<PixelShader>
+	{
+		size_t operator()(const PixelShader& ps) const
+		{
+			hash<string> hash_func;
+			return hash_func(ps._name);
+		}
+	};
+}

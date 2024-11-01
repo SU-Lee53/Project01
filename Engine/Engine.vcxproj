@@ -29,12 +29,12 @@
     <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Constant_Types.cpp" />
-    <ClCompile Include="GlobalLight.cpp" />
-    <ClCompile Include="Execute.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="EnginePch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GlobalLight.cpp" />
+    <ClCompile Include="Execute.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Graphics.cpp" />

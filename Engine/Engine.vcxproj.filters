@@ -86,9 +86,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnginePch.cpp">
-      <Filter>소스 파일\99. Headers</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\02. Game</Filter>
     </ClCompile>
@@ -259,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="Shader_Base.cpp">
       <Filter>소스 파일\06. Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePch.cpp">
+      <Filter>소스 파일\99. Headers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

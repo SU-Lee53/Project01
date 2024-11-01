@@ -9,6 +9,15 @@ enum COLLIDER_TYPE
 	AABB
 };
 
+template <typename C>
+concept IsColliderType = requires(C c)
+{
+	std::derived_from<C, Collider>;
+};
+
+template <typename C>
+concept ColliderType = IsColliderType<C>;
+
 class Collider : public Component<Collider>
 {
 public:
@@ -27,12 +36,3 @@ public:
 	COLLIDER_TYPE _colliderType;
 };
 
-
-template <typename C>
-concept IsColliderType = requires(C c)
-{
-	derived_from<C, Collider>;
-};
-
-template <typename C>
-concept ColliderType = IsColliderType<C>;

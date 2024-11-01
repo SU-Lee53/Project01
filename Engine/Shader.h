@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Shader_Base.h"
-
 class InputLayout;
 
 class Shader
@@ -13,12 +11,12 @@ public:
 public:
 	void CreateDefault();
 
+	// fileName : actual file name / shaderName : ENTRY NAME
 	void CreateVertexShader(const string& fileName, const string& shaderName);
 	void CreatePixelShader(const string& filename, const string& shaderName);
 	
 	// explicitly used when override inputlayout
 	void CreateInputLayout();
-
 
 public:
 	void SetVertexShader(shared_ptr<VertexShader> shader) { _vs = shader; CreateInputLayout(); }
