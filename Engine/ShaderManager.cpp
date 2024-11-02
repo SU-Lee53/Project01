@@ -17,13 +17,13 @@ void ShaderManager::Init()
         {
             shared_ptr<VertexShader> vs = make_shared<VertexShader>();
             vs->Create(desc.fileName, desc.entryName, "vs_5_0");
-            RESOURCE->AddVertexShader(vs);
+            AddVertexShader(vs);
         }
         else if (desc.type == SHADER_TYPE::Pixel)
         {
             shared_ptr<PixelShader> ps = make_shared<PixelShader>();
             ps->Create(desc.fileName, desc.entryName, "ps_5_0");
-            RESOURCE->AddPixelShader(ps);
+            AddPixelShader(ps);
         }
     }
 }
@@ -55,6 +55,54 @@ void ShaderManager::LoadFromFile(const wstring& path, const string& name, const 
 
         assert(false);
     }
+}
+
+void ShaderManager::AddVertexShader(shared_ptr<VertexShader> shader)
+{
+    _vsSet.insert(shader);
+}
+
+shared_ptr<VertexShader> ShaderManager::GetVertexShader(const string& name)
+{
+    auto it = find_if(_vsSet.begin(), _vsSet.end(),
+        [name](shared_ptr<VertexShader> vs)->bool
+        {
+            if (vs->GetName() == name) return true;
+            return false;
+        }
+    );
+
+    if (it == _vsSet.end())
+    {
+        assert(false, "Failed to find shader");
+        return nullptr;
+    }
+
+    return *it;
+}
+
+void ShaderManager::AddPixelShader(shared_ptr<PixelShader> shader)
+{
+    _psSet.insert(shader);
+}
+
+shared_ptr<PixelShader> ShaderManager::GetPixelShader(const string& name)
+{
+    auto it = find_if(_psSet.begin(), _psSet.end(),
+        [name](shared_ptr<PixelShader> ps)->bool
+        {
+            if (ps->GetName() == name) return true;
+            return false;
+        }
+    );
+
+    if (it == _psSet.end())
+    {
+        assert(false, "Failed to find shader");
+        return nullptr;
+    }
+
+    return *it;
 }
 
 vector<SHADER_DESC> ShaderManager::descs =
