@@ -17,12 +17,12 @@ public:
 	void SetMesh(vector<shared_ptr<ModelMesh>> mesh) { _meshes = mesh;}
 	void AddMesh(shared_ptr<ModelMesh> mesh) { _meshes.push_back(mesh); }
 
-	void SetMaterial(vector<shared_ptr<Material>> material) { _material = material; }
-	void AddMaterial(shared_ptr<Material> material) { _material.push_back(material); }
+	void SetMaterial(vector<shared_ptr<Material>> material) { _materials = material; }
+	void AddMaterial(shared_ptr<Material> material) { _materials.push_back(material); }
 
 	auto GetBones() const { return _bones; }
 	auto GetMeshes() const { return _meshes; }
-	auto GetMaterials() const { return _material; }
+	auto GetMaterials() const { return _materials; }
 
 public:
 	void LoadFromFiles(const wstring& path);
@@ -32,13 +32,13 @@ private:
 	void LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
 	void LoadIndices(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
 	void LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
-	void LoadMaterials(ifstream& is, OUT shared_ptr<Material> material);
+	void LoadMaterials(ifstream& is);
 
 private:
 	shared_ptr<ModelBone> _root;
 	vector<shared_ptr<ModelBone>> _bones;
 	vector<shared_ptr<ModelMesh>> _meshes;
-	vector<shared_ptr<Material>> _material;
+	vector<shared_ptr<Material>> _materials;
 
 
 };

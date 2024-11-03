@@ -114,9 +114,9 @@ float4 ComputeSpecular(float3 normal, float2 uv, float3 worldPos, int power)
     
     float value = max(dot(R, E), 0);
     float specular = pow(value, power);
-    float4 color = specularMap.Sample(sampler0, uv) * Material.specular;
+    //float4 color = specularMap.Sample(sampler0, uv) * Material.specular;
     
-    return GlobalLight.specular * specular * color;
+    return GlobalLight.specular * Material.specular * specular;
     
 }
 

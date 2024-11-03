@@ -9,6 +9,7 @@
 #include "MouseScript.h"
 #include "ModelScript.h"
 #include "GlobalLight.h"
+#include "Material.h"
 #include <filesystem>
 
 void ModelLoader::Init()
@@ -125,7 +126,6 @@ void ModelLoader::Update()
 			_converter->LoadAssetFile(modelP, textureP);
 			auto model = _converter->MakeModel();
 			_obj->GetComponent<MeshRenderer>()->SetModel(model);
-
 		}
 
 		if (_entered == true)

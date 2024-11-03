@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "MouseScript.h"
 #include "ModelScript.h"
+#include "LightScript.h"
 #include "GlobalLight.h"
 #include <filesystem>
 
@@ -21,7 +22,19 @@ void NewStructureTest::Init()
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"floor.mesh");
-		
+		_obj->GetComponent<MeshRenderer>()->SetModel(model);
+
+	}
+
+	_obj2 = make_shared<GameObject>();
+	{
+		_obj2->AddComponent<Transform>();
+		_obj2->AddComponent<MeshRenderer>();
+		_obj2->Init();
+
+		auto model = make_shared<Model>();
+		model->LoadFromFiles(L"pool_ball_1.mesh");
+		_obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
 	}
 
@@ -37,9 +50,26 @@ void NewStructureTest::Init()
 		_cam->AddScript(_mouseScript);
 	}
 
-	//_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-	//_CrtDumpMemoryLeaks();
 
+	_light = make_shared<GameObject>();
+	{
+		_light->AddComponent<Transform>();
+		_light->AddComponent<GlobalLight>();
+		_light->Init();
+
+		GlobalLightData data;
+		{
+			data.ambient = Vec4(0.5f);
+			data.diffuse = Vec4(1.0f);
+			data.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			data.direction = Vec3(0.0f, -1.0f, 0.0f);
+		}
+
+		_light->GetComponent<GlobalLight>()->SetData(data);
+
+		_lightScript = make_shared<LightScript>();
+		_light->AddScript(_lightScript);
+	}
 
 }
 
@@ -71,6 +101,14 @@ void NewStructureTest::Update()
 		}
 	}
 	ImGui::End();
+
+
+	_obj->Update();
+	_obj2->Update();
+	_light->Update();
+	_cam->Update();
+
+
 }
 
 void NewStructureTest::Render()

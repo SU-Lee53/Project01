@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="AsType.cpp" />
     <ClCompile Include="Converter.cpp" />
+    <ClCompile Include="LightScript.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="ModelScript.cpp" />
@@ -158,21 +159,13 @@
   <ItemGroup>
     <ClInclude Include="AsType.h" />
     <ClInclude Include="Converter.h" />
+    <ClInclude Include="LightScript.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="ModelScript.h" />
     <ClInclude Include="NewStructureTest.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="MouseScript.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\Shader\Pixel.hlsl">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="..\Shader\Vertex.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

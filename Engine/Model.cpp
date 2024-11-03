@@ -42,10 +42,13 @@ void Model::LoadFromFiles(const wstring& fileName)
 	LoadVertices(is, mesh);
 	LoadIndices(is, mesh);
 	mesh->MakeBuffers();
+	mesh->materialIndex = 0;
 
 	LoadBones(is, mesh);
-	LoadMaterials(is, material);
+	_meshes.push_back(mesh);
 
+	LoadMaterials(is);
+	_materials.push_back(material);
 }
 
 		//////////////////////////////////
@@ -256,7 +259,7 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 
 }
 
-void Model::LoadMaterials(ifstream& is, OUT shared_ptr<Material> material)
+void Model::LoadMaterials(ifstream& is)
 {
 	assert(is.is_open(), "failed to open " + Utils::ToString(path));
 	assert(!is.fail(), "istream failed");
@@ -271,6 +274,8 @@ void Model::LoadMaterials(ifstream& is, OUT shared_ptr<Material> material)
 
 	while (true)
 	{
+		shared_ptr<Material> material = make_shared<Material>();
+
 		getline(is, read);
 		if (read.contains("materials end")) break;
 
@@ -362,6 +367,7 @@ void Model::LoadMaterials(ifstream& is, OUT shared_ptr<Material> material)
 					tex->CreateErrorTexture();
 				}
 
+				// Set flag
 				switch (i)
 				{
 				case 0:
@@ -398,10 +404,18 @@ void Model::LoadMaterials(ifstream& is, OUT shared_ptr<Material> material)
 		}
 
 		// TODO : Set Shader by Attribute(flag)
+		material->SetVertexShader(SHADER->GetVertexShader("Vertex.hlsl"));
+		if (Material::CheckAttributes(material->_attributes, HAS_NORMAL))
+		{
+			material->SetPixelShader(SHADER->GetPixelShader("PixelWithNormal.hlsl"));
+		}
+		else
+		{
+			material->SetPixelShader(SHADER->GetPixelShader("PixelWithoutNormal.hlsl"));
+		}
 
-
+		_materials.push_back(material);
 	}
-
 
 }
 

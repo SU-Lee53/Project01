@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "ShaderManager.h"
+#include <filesystem>
 
 ShaderManager::ShaderManager()
 {
@@ -67,7 +68,8 @@ shared_ptr<VertexShader> ShaderManager::GetVertexShader(const string& name)
     auto it = find_if(_vsSet.begin(), _vsSet.end(),
         [name](shared_ptr<VertexShader> vs)->bool
         {
-            if (vs->GetName() == name) return true;
+            auto filename = filesystem::path(vs->GetPath()).filename().string();
+            if (filename == name) return true;
             return false;
         }
     );
@@ -91,7 +93,8 @@ shared_ptr<PixelShader> ShaderManager::GetPixelShader(const string& name)
     auto it = find_if(_psSet.begin(), _psSet.end(),
         [name](shared_ptr<PixelShader> ps)->bool
         {
-            if (ps->GetName() == name) return true;
+            auto filename = filesystem::path(ps->GetPath()).filename().string();
+            if (filename == name) return true;
             return false;
         }
     );
@@ -107,8 +110,8 @@ shared_ptr<PixelShader> ShaderManager::GetPixelShader(const string& name)
 
 vector<SHADER_DESC> ShaderManager::descs =
 {
-    {SHADER_TYPE::Vertex, "Vertex.hlsl", "VS"},
-    {SHADER_TYPE::Pixel, "Pixel.hlsl", "PS"},
-    {SHADER_TYPE::Pixel, "TestPixel.hlsl", "TestPS"}
+    {SHADER_TYPE::Vertex,   "Vertex.hlsl",              "VS"},
+    {SHADER_TYPE::Pixel,    "PixelWithNormal.hlsl",     "PS"},
+    {SHADER_TYPE::Pixel,    "PixelWithoutNormal.hlsl",  "PS"}
     // Add when need more!!
 };

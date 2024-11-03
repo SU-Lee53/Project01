@@ -30,11 +30,11 @@
     <Filter Include="소스 파일\Execute\ModelLoader">
       <UniqueIdentifier>{5a8323df-cd45-452a-bfa3-d489c01f8509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Entry">
+      <UniqueIdentifier>{47a186df-aa35-406e-92d9-b037fd0c5a49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
@@ -58,6 +58,12 @@
     </ClCompile>
     <ClCompile Include="NewStructureTest.cpp">
       <Filter>소스 파일\Execute</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="LightScript.cpp">
+      <Filter>소스 파일\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,13 +91,8 @@
     <ClInclude Include="NewStructureTest.h">
       <Filter>소스 파일\Execute</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\Shader\Pixel.hlsl">
-      <Filter>소스 파일\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shader\Vertex.hlsl">
-      <Filter>소스 파일\Shader</Filter>
-    </FxCompile>
+    <ClInclude Include="LightScript.h">
+      <Filter>소스 파일\Script</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

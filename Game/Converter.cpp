@@ -258,7 +258,7 @@ void Converter::ExportModel(wstring name)
 		// 1. name
 		// 2. vertices, indices
 		// 3. bone index
-		// 4. material name
+		// 4. material name + material index(mostly 0)
 
 		wstring path = _modelExportPath + Utils::ToWString(mesh->name) + L".mesh";
 		auto savePath = filesystem::path(path);
