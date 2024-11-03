@@ -47,8 +47,8 @@ void NewStructureTest::Update()
 {
 	if (ImGui::Begin("Shaders"))
 	{
-		auto vss = RESOURCE->GetVertexShaderSet();
-		auto pss = RESOURCE->GetPixelShaderSet();
+		auto vss = SHADER->GetVertexShaderSet();
+		auto pss = SHADER->GetPixelShaderSet();
 
 		if (ImGui::TreeNode("VertexShaders"))
 		{

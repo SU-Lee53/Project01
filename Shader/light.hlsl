@@ -93,6 +93,32 @@ void ComputeNormalMapping(inout float3 normal, float3 tangent, float2 uv)
     normal = worldNormal;
 }
 
+float4 ComputeAmbient(float2 uv)
+{
+    float4 color = GlobalLight.ambient * Material.ambient;
+    return diffuseMap.Sample(sampler0, uv) * color;
+}
+
+float4 ComputeDiffuse(float3 normal, float2 uv)
+{
+    float4 color = diffuseMap.Sample(sampler0, uv);
+    float value = max(dot(-GlobalLight.direction, normalize(normal)), 0);
+    return color * value * GlobalLight.diffuse * Material.diffuse;
+}
+
+float4 ComputeSpecular(float3 normal, float2 uv, float3 worldPos, int power)
+{
+    float3 R = normalize(reflect(GlobalLight.direction, normalize(normal)));
+    float3 cameraPos = -matViewInv._41_42_43;
+    float3 E = normalize(cameraPos - worldPos);
+    
+    float value = max(dot(R, E), 0);
+    float specular = pow(value, power);
+    float4 color = specularMap.Sample(sampler0, uv) * Material.specular;
+    
+    return GlobalLight.specular * specular * color;
+    
+}
 
 float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
 {
@@ -103,44 +129,21 @@ float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
     
     // ambient
     {
-        float4 color = GlobalLight.ambient * Material.ambient;
-        ambientColor = diffuseMap.Sample(sampler0, uv) * color;
+        ambientColor = ComputeAmbient(uv);
     }
     
     // diffuse
     {
-        float4 color = diffuseMap.Sample(sampler0, uv);
-        float value = max(dot(-GlobalLight.direction, normalize(normal)), 0);
-        diffuseColor = color * value * GlobalLight.diffuse * Material.diffuse;
+        diffuseColor = ComputeDiffuse(normal, uv);
     }
     
     // specular
     {
-        float3 R = reflect(GlobalLight.direction, normalize(normal));
-        //float3 R = GlobalLight.direction - (2 * normal * dot(GlobalLight.direction, normal));
-        R = normalize(R);
-    
-        float3 cameraPosition = -matViewInv._41_42_43;
-        float3 E = normalize(cameraPosition - worldPosition);
-	
-        float value = max(dot(R, E), 0); // same as clamp(0,1)
-        float specular = pow(value, 20);
-    
-        specularColor = GlobalLight.specular * Material.specular * specular;
+        specularColor = ComputeSpecular(normal, uv, worldPosition, 20);
     }
     
     // Emissive
     {
-        //float3 cameraPosition = -matViewInv._41_42_43;
-        //float3 E = normalize(cameraPosition - worldPosition);
-    
-        //float value = saturate(dot(E, normal));
-        //float emissive = 1.0f - value;
-    
-        //// min, max, x -> make smooth with hermite interpolation
-        //emissive = smoothstep(0.0f, 1.0f, emissive);
-        //emissive = pow(emissive, 2);
-        //emissiveColor = Material.emissive * emissive;
         emissiveColor = Material.emissive;
     }
     

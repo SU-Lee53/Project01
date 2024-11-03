@@ -36,13 +36,24 @@ public:
 private:
 	void LoadFromFile(const wstring& path, const string& name, const string& version, OUT ComPtr<ID3DBlob>& blob);
 
+
+public:
+	void AddVertexShader(shared_ptr<VertexShader> shader);
+	shared_ptr<VertexShader> GetVertexShader(const string& name);
+
+	void AddPixelShader(shared_ptr<PixelShader> shader);
+	shared_ptr<PixelShader> GetPixelShader(const string& name);
+
+	unordered_set<shared_ptr<VertexShader>> GetVertexShaderSet() const { return _vsSet; }
+	unordered_set<shared_ptr<PixelShader>> GetPixelShaderSet() const { return _psSet; }
+
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Shader;
 
 	static vector<SHADER_DESC> descs;
 
-	unordered_set<VertexShader> _vsSet;
-	unordered_set<PixelShader> _psSet;
+	unordered_set<shared_ptr<VertexShader>> _vsSet;
+	unordered_set<shared_ptr<PixelShader>> _psSet;
 
 };
 
