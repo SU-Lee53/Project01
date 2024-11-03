@@ -92,6 +92,7 @@ void RenderManager::RenderLagacy(shared_ptr<GameObject> obj)
 		desc.pixelShader = _shader->GetPixelShader();
 		desc.rasterizerState = _rasterizerState;
 		desc.blendState = _blendState;
+		desc.topology = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
 	}
 	_pipeline->Update(desc);
 

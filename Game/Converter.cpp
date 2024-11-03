@@ -634,6 +634,16 @@ shared_ptr<Model> Converter::MakeModel()
 		bool has_specular = Material::CheckAttributes(material->_attributes, HAS_SPECULAR);
 		bool has_normal = Material::CheckAttributes(material->_attributes, HAS_NORMAL);
 
+		material->SetVertexShader(SHADER->GetVertexShader("Vertex.hlsl"));
+		if (Material::CheckAttributes(material->_attributes, HAS_NORMAL))
+		{
+			material->SetPixelShader(SHADER->GetPixelShader("PixelWithNormal.hlsl"));
+		}
+		else
+		{
+			material->SetPixelShader(SHADER->GetPixelShader("PixelWithoutNormal.hlsl"));
+		}
+
 
 		materials.push_back(material);
 	}

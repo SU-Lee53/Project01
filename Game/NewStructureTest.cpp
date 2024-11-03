@@ -84,7 +84,8 @@ void NewStructureTest::Update()
 		{
 			for (const auto& vs : vss)
 			{
-				ImGui::BulletText("name : %s", vs->GetName().c_str());
+				auto name = filesystem::path(vs->GetPath()).filename().string();
+				ImGui::BulletText("name : %s", name.c_str());
 			}
 
 			ImGui::TreePop();
@@ -94,7 +95,8 @@ void NewStructureTest::Update()
 		{
 			for (const auto& ps : pss)
 			{
-				ImGui::BulletText("name : %s", ps->GetName().c_str());
+				auto name = filesystem::path(ps->GetPath()).filename().string();
+				ImGui::BulletText("name : %s", name.c_str());
 			}
 
 			ImGui::TreePop();
