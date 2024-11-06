@@ -48,6 +48,10 @@ WPARAM Game::Run(GameDesc& desc)
 		}
 	}
 
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
+
 #ifdef _DEBUG
 	_ASSERT(_CrtCheckMemory());
 #endif
