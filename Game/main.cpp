@@ -3,6 +3,7 @@
 #include "Test.h"
 #include "ModelLoader.h"
 #include "NewStructureTest.h"
+#include "SceneTest.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
@@ -14,7 +15,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		desc.windowName = L"Billards";
 		desc.hInstance = hInstance;
 		desc.hWnd = NULL;
-		desc.program = make_shared<NewStructureTest>();
+		desc.program = make_shared<SceneTest>();
 
 	}
 

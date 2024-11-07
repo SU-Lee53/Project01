@@ -65,6 +65,9 @@
     <ClCompile Include="LightScript.cpp">
       <Filter>소스 파일\Script</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTest.cpp">
+      <Filter>소스 파일\Execute</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="LightScript.h">
       <Filter>소스 파일\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTest.h">
+      <Filter>소스 파일\Execute</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,24 +19,24 @@ void Manager::Init()
 	_managers[(int)MANAGER_TYPE::Gui] = make_shared<GuiManager>();
 	_managers[(int)MANAGER_TYPE::Resource] = make_shared<ResourceManager>();
 
+	GUI->Init();
 	TIME->Init();
 	INPUT->Init();
-	SCENE->Init();
 	SHADER->Init();
 	RENDER->Init();
-	GUI->Init();
 	RESOURCE->Init();
+	SCENE->Init();
 }
 
 void Manager::Update()
 {
+	GUI->Update();
 	TIME->Update();
 	INPUT->Update();
-	SCENE->Update();
 	SHADER->Update();
 	RENDER->Update();
-	GUI->Update();
 	RESOURCE->Update();
+	SCENE->Update();
 }
 
 

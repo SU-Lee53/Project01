@@ -10,6 +10,11 @@ public:
 	virtual ~SceneManager();
 
 public:
+	virtual void Init() override;
+	virtual void Update() override;
+
+
+public:
 	void AddScene(const string& name, shared_ptr<Scene> scene);
 
 public:
@@ -17,7 +22,7 @@ public:
 	shared_ptr<Scene> GetCurrentScene();
 	
 private:
-	weak_ptr<Scene> _currentScene;
+	shared_ptr<Scene> _currentScene;
 	unordered_map<string, shared_ptr<Scene>> _scenes;
 
 

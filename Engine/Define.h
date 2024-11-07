@@ -30,5 +30,6 @@ public:										\
 #define SHADER			MANAGER.GetManager<ShaderManager>()
 #define RESOURCE		MANAGER.GetManager<ResourceManager>()
 
+#define CUR_SCENE		SCENE->GetCurrentScene()
 
 #define DELTA_TIME		TIME->GetDeltaTime();

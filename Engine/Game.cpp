@@ -48,6 +48,7 @@ WPARAM Game::Run(GameDesc& desc)
 		}
 	}
 
+	// IMGUI CLEAN UP!!!
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();

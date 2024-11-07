@@ -20,12 +20,17 @@ void Scene::Init()
 		obj->Init();
 	}
 
+	for (auto cam : _cameras)
+	{
+		cam.second->Init();
+	}
+
 	for (auto script : _scripts)
 	{
 		script->Init();
 	}
 
-	_collider->Init();
+	//_collider->Init();
 }
 
 void Scene::Update()
@@ -33,6 +38,11 @@ void Scene::Update()
 	for (auto obj : _objects)
 	{
 		obj->Update();
+	}
+
+	for (auto cam : _cameras)
+	{
+		cam.second->Update();
 	}
 
 	for (auto script : _scripts)
@@ -43,7 +53,7 @@ void Scene::Update()
 
 void Scene::Render()
 {
-
+	RENDER->Render();
 }
 
 void Scene::AddObject(shared_ptr<GameObject> obj)

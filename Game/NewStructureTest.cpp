@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "NewStructureTest.h"
-#include "Converter.h"
 #include "GameObject.h"
 #include "Model.h"
 #include "Transform.h"
@@ -46,8 +45,8 @@ void NewStructureTest::Init()
 
 		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
 
-		//_mouseScript = make_shared<MouseScript>();
-		//_cam->AddScript(_mouseScript);
+		_mouseScript = make_shared<MouseScript>();
+		_cam->AddScript(_mouseScript);
 	}
 
 
@@ -67,8 +66,8 @@ void NewStructureTest::Init()
 
 		_light->GetComponent<GlobalLight>()->SetData(data);
 
-		//_lightScript = make_shared<LightScript>();
-		//_light->AddScript(_lightScript);
+		_lightScript = make_shared<LightScript>();
+		_light->AddScript(_lightScript);
 	}
 
 }
