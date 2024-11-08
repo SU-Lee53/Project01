@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Script.h"
-#include "CollisionManager.h"
+#include "CollisionHandler.h"
 
 Scene::Scene()
 {
@@ -30,7 +30,7 @@ void Scene::Init()
 		script->Init();
 	}
 
-	//_collider->Init();
+	_collider->Init();
 }
 
 void Scene::Update()

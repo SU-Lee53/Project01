@@ -9,6 +9,9 @@ public:
 	virtual ~SphereCollider();
 
 public:
+	void ShrinkToFit();
+
+public:
 	bool CheckCollision(shared_ptr<Collider> other);
 
 	friend class Collision;

@@ -7,7 +7,6 @@
 #include "GuiManager.h"
 #include "ShaderManager.h"
 #include "ResourceManager.h"
-#include "CollisionManager.h"
 
 void Manager::Init()
 {

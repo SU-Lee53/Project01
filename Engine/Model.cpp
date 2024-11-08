@@ -49,6 +49,8 @@ void Model::LoadFromFiles(const wstring& fileName)
 
 	LoadMaterials(is);
 	_materials.push_back(material);
+
+	is.close();
 }
 
 		//////////////////////////////////

@@ -32,4 +32,6 @@ bool PlaneCollider::CheckCollision(shared_ptr<Collider> other)
 	default:
 		assert(false);
 	}
+
+	assert(false);
 }

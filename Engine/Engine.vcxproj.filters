@@ -248,7 +248,7 @@
     <ClCompile Include="GlobalLight.cpp">
       <Filter>소스 파일\04. Component\Light</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
+    <ClCompile Include="CollisionHandler.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
@@ -436,7 +436,7 @@
     <ClInclude Include="GlobalLight.h">
       <Filter>소스 파일\04. Component\Light</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionManager.h">
+    <ClInclude Include="CollisionHandler.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">

@@ -33,4 +33,6 @@ bool AABBCollider::CheckCollision(shared_ptr<Collider> other)
 	default:
 		assert(false);
 	}
+
+	assert(false);
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 class GameObject;
-class CollisionManager;
+class CollisionHandler;
 
 class Scene
 {
@@ -34,6 +34,6 @@ private:
 private:
 	//Script for Scene
 	vector<shared_ptr<Script<Scene>>> _scripts;
-	shared_ptr<CollisionManager> _collider;
+	shared_ptr<CollisionHandler> _collider;
 };
 
