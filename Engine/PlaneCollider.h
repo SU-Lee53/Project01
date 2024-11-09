@@ -15,4 +15,7 @@ public:
 private:
 	float _distanceFromOrigin;
 	Vec3 _normal;
+
+public:
+	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Plane;
 };

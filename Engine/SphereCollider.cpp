@@ -9,7 +9,6 @@
 
 SphereCollider::SphereCollider()
 {
-	_colliderType = COLLIDER_TYPE::Sphere;
 }
 
 SphereCollider::~SphereCollider()
@@ -48,15 +47,15 @@ void SphereCollider::ShrinkToFit()
 
 		const auto xMinMax = minmax_element(vtx.begin(), vtx.end(), xComp);
 		xMin = xMinMax.first->position.x;
-		xMin = xMinMax.second->position.x;
+		xMax = xMinMax.second->position.x;
 		
 		const auto yMinMax = minmax_element(vtx.begin(), vtx.end(), yComp);
 		yMin = yMinMax.first->position.y;
-		yMin = yMinMax.second->position.y;
+		yMax = yMinMax.second->position.y;
 		
 		const auto zMinMax = minmax_element(vtx.begin(), vtx.end(), zComp);
 		zMin = zMinMax.first->position.z;
-		zMin = zMinMax.second->position.z;
+		zMax = zMinMax.second->position.z;
 	}
 
 	_center = Vec3(

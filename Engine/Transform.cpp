@@ -1,5 +1,8 @@
 #include "EnginePch.h"
 #include "Transform.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
+#include "Model.h"
 
 Transform::Transform()
 {
@@ -33,6 +36,22 @@ void Transform::UpdateMatrix()
 	scale *= Matrix::CreateScale(_scale);
 	
 	_world = scale * rotate * translate;
+
+	// Assume that every models has 1 mesh/bone in meshes/bones
+	if (GetOwner()->GetComponent<MeshRenderer>()->GetModel() != nullptr)
+	{
+		auto model = GetOwner()->GetComponent<MeshRenderer>()->GetModel();
+		auto bone = model->GetBones()[model->GetMeshes()[0]->boneIndex];
+		Matrix transform = bone->transform;
+
+		Vec3 outPos;
+		Quaternion outRot;
+		Vec3 outScale;
+
+		transform.Decompose(outScale, outRot, outPos);
+	}
+
+
 }
 
 void Transform::SetPosition(const Vec3& pos)

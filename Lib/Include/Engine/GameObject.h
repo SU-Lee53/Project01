@@ -19,7 +19,7 @@ public:
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	void AddComponent()
 	{
-		int idx = (int)(T::ty);
+		int idx = (int32)(T::ty);
 		_components[idx] = make_shared<T>();
 		_components[idx]->SetOwner(shared_from_this());
 	}
@@ -28,11 +28,18 @@ public:
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	shared_ptr<T> GetComponent()
 	{
-		int idx = (int)(T::ty);
+		int32 idx = (int32)(T::ty);
 
 		// Every GameObject has Transform
 		if (T::ty == COMPONENT_TYPE::Transform and _components[idx] == nullptr) AddComponent<T>();
 		return static_pointer_cast<T>(_components[idx]);
+	}
+
+	template<ColliderType C>
+	shared_ptr<C> GetCollider()
+	{
+		//COLLIDER_TYPE type = C::_colliderType;
+		return static_pointer_cast<C>(_components[(int32)COMPONENT_TYPE::Collider]);
 	}
 
 	shared_ptr<Transform> GetTransform() const

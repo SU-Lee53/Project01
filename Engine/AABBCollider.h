@@ -15,4 +15,7 @@ public:
 private:
 	float _center;
 	Vec3 _size;
+
+public:
+	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::AABB;
 };

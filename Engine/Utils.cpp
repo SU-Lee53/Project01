@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include "Geometry.h"
 #include "InputData.h"
+#include <numbers>
 
 bool Utils::StartsWith(string str, string comp)
 {
@@ -93,6 +94,30 @@ bool Utils::ExportMatrix(ofstream& os, Matrix m)
 		return false;
 
 	return true;
+}
+
+Vec3 Utils::ToEulerAngles(const Quaternion& q)
+{
+	Vec3 angles;
+
+	// roll
+	double sinr_cosp = 2 * (q.w * q.x + q.y + q.z);
+	double cosr_cosp = 1 - 2 * (q.x * q.x + q.y * q.y);
+	angles.x = std::atan2(sinr_cosp, cosr_cosp);
+
+	// pitch
+	double sinp = std::sqrt(1 + 2 * (q.w * q.y - q.x * q.z));
+	double cosp = std::sqrt(1 - 2 * (q.w * q.y - q.x + q.z));
+
+	angles.y = 2 * std::atan2(sinp, cosp) - std::numbers::pi_v<float> / 2;
+
+	// yaw
+	double siny_cosp = 2 * (q.w * q.z + q.x * q.y);
+	double cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
+	angles.z = std::atan2(siny_cosp, cosy_cosp);
+
+	return angles;
+
 }
 
 //void Utils::MakeCubeGeometry(shared_ptr<Geometry<VertexType>> geometry)

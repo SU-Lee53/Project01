@@ -37,6 +37,7 @@ void LightScript::Update()
 		ImGui::DragFloat("Direction.x", &_lightData.direction.x, _dragSpeed, -1.f, 1.f);
 		ImGui::DragFloat("Direction.y", &_lightData.direction.y, _dragSpeed, -1.f, 1.f);
 		ImGui::DragFloat("Direction.z", &_lightData.direction.z, _dragSpeed, -1.f, 1.f);
+		_lightData.direction.Normalize();
 
 		GetOwner()->GetComponent<GlobalLight>()->SetData(_lightData);
 	}

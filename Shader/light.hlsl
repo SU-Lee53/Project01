@@ -96,7 +96,7 @@ void ComputeNormalMapping(inout float3 normal, float3 tangent, float2 uv)
 float4 ComputeAmbient(float2 uv)
 {
     float4 color = GlobalLight.ambient * Material.ambient;
-    return diffuseMap.Sample(sampler0, uv) * color;
+    return color;
 }
 
 float4 ComputeDiffuse(float3 normal, float2 uv)
@@ -108,7 +108,7 @@ float4 ComputeDiffuse(float3 normal, float2 uv)
 
 float4 ComputeSpecular(float3 normal, float2 uv, float3 worldPos, int power)
 {
-    float3 R = normalize(reflect(GlobalLight.direction, normalize(normal)));
+    float3 R = normalize(reflect(-GlobalLight.direction, normalize(normal)));
     float3 cameraPos = -matViewInv._41_42_43;
     float3 E = normalize(cameraPos - worldPos);
     
@@ -139,7 +139,7 @@ float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
     
     // specular
     {
-        specularColor = ComputeSpecular(normal, uv, worldPosition, 20);
+        specularColor = ComputeSpecular(normal, uv, worldPosition, 1024);
     }
     
     // Emissive

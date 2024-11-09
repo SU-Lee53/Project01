@@ -19,15 +19,12 @@ void SceneTest::Init()
 	{
 		_obj->AddComponent<Transform>();
 		_obj->AddComponent<MeshRenderer>();
-		_obj->AddComponent<SphereCollider>();
 		_obj->Init();
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"floor.mesh");
 		_obj->GetComponent<MeshRenderer>()->SetModel(model);
 
-		auto collider = make_shared<SphereCollider>();
-		_obj->GetComponent<Collider>()->
 	}
 	CUR_SCENE->AddObject(_obj);
 
@@ -35,12 +32,14 @@ void SceneTest::Init()
 	{
 		_obj2->AddComponent<Transform>();
 		_obj2->AddComponent<MeshRenderer>();
+		_obj2->AddComponent<SphereCollider>();
 		_obj2->Init();
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"pool_ball_1.mesh");
 		_obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
+		_obj2->GetCollider<SphereCollider>()->ShrinkToFit();
 	}
 	CUR_SCENE->AddObject(_obj2);
 
@@ -70,7 +69,7 @@ void SceneTest::Init()
 			data.ambient = Vec4(0.5f);
 			data.diffuse = Vec4(1.0f);
 			data.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
-			data.direction = Vec3(0.0f, -1.0f, 0.0f);
+			data.direction = Vec3(0.0f, -1.0f, 1.0f);
 		}
 
 		_light->GetComponent<GlobalLight>()->SetData(data);

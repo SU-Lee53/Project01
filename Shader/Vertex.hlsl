@@ -13,10 +13,10 @@ VS_OUTPUT VS(VS_INPUT input)
     output.position = mul(output.position, matProjection);
     output.uv = input.uv;
     
-    //output.normal = mul(input.normal, (float3x3) matLocal);
+    output.normal = mul(input.normal, (float3x3) matLocal);
     output.normal = mul(input.normal, (float3x3) matWorld);
     
-    //output.tangent = mul(input.tangent, (float3x3) matLocal);
+    output.tangent = mul(input.tangent, (float3x3) matLocal);
     output.tangent = mul(input.tangent, (float3x3) matWorld);
     
     return output;

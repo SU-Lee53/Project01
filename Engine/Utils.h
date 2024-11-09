@@ -18,6 +18,7 @@ public:
 
 	static bool ExportMatrix(ofstream& os, Matrix m);
 
+	static Vec3 ToEulerAngles(const Quaternion& q);
 
 public:
 	// DEBUG IMGUI UTILS

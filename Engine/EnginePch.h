@@ -45,8 +45,8 @@ using namespace std;
 #include <Assimp/postprocess.h>
 
 // FreeType
-#include <FreeType/ft2build.h>
-#include FT_FREETYPE_H
+// #include <FreeType/ft2build.h>
+// #include FT_FREETYPE_H
 
 // DX
 #include <d3d11.h>
