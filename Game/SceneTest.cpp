@@ -9,6 +9,8 @@
 #include "ModelScript.h"
 #include "LightScript.h"
 #include "GlobalLight.h"
+#include "Collider.h"
+#include "SphereCollider.h"
 #include "Scene.h"
 
 void SceneTest::Init()
@@ -17,11 +19,15 @@ void SceneTest::Init()
 	{
 		_obj->AddComponent<Transform>();
 		_obj->AddComponent<MeshRenderer>();
+		_obj->AddComponent<SphereCollider>();
 		_obj->Init();
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"floor.mesh");
 		_obj->GetComponent<MeshRenderer>()->SetModel(model);
+
+		auto collider = make_shared<SphereCollider>();
+		_obj->GetComponent<Collider>()->
 	}
 	CUR_SCENE->AddObject(_obj);
 
