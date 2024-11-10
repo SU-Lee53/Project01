@@ -38,7 +38,8 @@ void Transform::UpdateMatrix()
 	_world = scale * rotate * translate;
 
 	// Assume that every models has 1 mesh/bone in meshes/bones
-	if (GetOwner()->GetComponent<MeshRenderer>()->GetModel() != nullptr)
+	auto meshRenderer = GetOwner()->GetComponent<MeshRenderer>();
+	if (meshRenderer->GetModel())
 	{
 		auto model = GetOwner()->GetComponent<MeshRenderer>()->GetModel();
 		auto bone = model->GetBones()[model->GetMeshes()[0]->boneIndex];
@@ -49,6 +50,12 @@ void Transform::UpdateMatrix()
 		Vec3 outScale;
 
 		transform.Decompose(outScale, outRot, outPos);
+		Vec3 Rot = Utils::ToEulerAngles(outRot);
+
+		_localPosition = outPos;
+		_localRotation = Rot;
+		_localScale = outScale;
+
 	}
 
 

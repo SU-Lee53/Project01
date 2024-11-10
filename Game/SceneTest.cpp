@@ -40,6 +40,10 @@ void SceneTest::Init()
 		_obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
 		_obj2->GetCollider<SphereCollider>()->ShrinkToFit();
+
+		auto modelScript = make_shared<ModelScript>();
+		_obj2->AddScript(modelScript);
+
 	}
 	CUR_SCENE->AddObject(_obj2);
 

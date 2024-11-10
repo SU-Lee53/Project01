@@ -34,7 +34,7 @@ private:
 	shared_ptr<Texture> _texture;
 
 private:
-	shared_ptr<Model> _model;
+	shared_ptr<Model> _model = nullptr;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::MeshRenderer;
