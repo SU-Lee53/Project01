@@ -8,6 +8,7 @@ public:
 	virtual ~Transform();
 	
 public:
+	void Init_impl();
 	void Update_impl();
 	void UpdateMatrix();
 
@@ -18,11 +19,20 @@ public:
 	Vec3 GetPosition() { return _position; }
 	Vec3 GetRotation() { return _rotation; }
 	Vec3 GetScale() { return _scale; }
+	
+	void SetLocalPosition(const Vec3& pos);
+	void SetLocalRotation(const Vec3& rot);
+	void SetLocalScale(const Vec3& scale);
+	
+	Vec3 GetLocalPosition() { return _localPosition; }
+	Vec3 GetLocalRotation() { return _localRotation; }
+	Vec3 GetLocalScale() { return _localScale; }
 
 	Vec3 GetLook() { return _world.Backward(); }
 	Vec3 GetUp() { return _world.Up(); }
 	Vec3 GetRight() { return _world.Right(); }
 
+	Matrix GetLocal() { return _local; }
 	Matrix GetWorld() { return _world; }
 
 public:

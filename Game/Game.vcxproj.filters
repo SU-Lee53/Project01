@@ -15,9 +15,6 @@
     <Filter Include="소스 파일\Headers">
       <UniqueIdentifier>{c1529fc0-3575-4e1e-b80f-d789cc634b48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Shader">
-      <UniqueIdentifier>{c32c5ce6-32fe-4a81-9ae3-bd89d447ddb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Execute">
       <UniqueIdentifier>{8d1ca29e-c87c-4641-82c6-4a97afe364d6}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,12 @@
     <Filter Include="소스 파일\Entry">
       <UniqueIdentifier>{47a186df-aa35-406e-92d9-b037fd0c5a49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Script\GameObj">
+      <UniqueIdentifier>{5a039fd5-be82-44fa-a692-e896a3e605c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Script\Scene">
+      <UniqueIdentifier>{c88f1946-9c9b-470d-b8cb-e31206e93a29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -40,9 +43,6 @@
     </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>소스 파일\Execute</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseScript.cpp">
-      <Filter>소스 파일\Script</Filter>
     </ClCompile>
     <ClCompile Include="Converter.cpp">
       <Filter>소스 파일\Script\Assimp</Filter>
@@ -53,20 +53,26 @@
     <ClCompile Include="AsType.cpp">
       <Filter>소스 파일\Execute\ModelLoader</Filter>
     </ClCompile>
-    <ClCompile Include="ModelScript.cpp">
-      <Filter>소스 파일\Script</Filter>
-    </ClCompile>
     <ClCompile Include="NewStructureTest.cpp">
       <Filter>소스 파일\Execute</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일\Entry</Filter>
     </ClCompile>
-    <ClCompile Include="LightScript.cpp">
-      <Filter>소스 파일\Script</Filter>
-    </ClCompile>
     <ClCompile Include="SceneTest.cpp">
       <Filter>소스 파일\Execute</Filter>
+    </ClCompile>
+    <ClCompile Include="LightScript.cpp">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelScript.cpp">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseScript.cpp">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMaker.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +81,6 @@
     </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>소스 파일\Execute</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseScript.h">
-      <Filter>소스 파일\Script</Filter>
     </ClInclude>
     <ClInclude Include="Converter.h">
       <Filter>소스 파일\Script\Assimp</Filter>
@@ -88,17 +91,21 @@
     <ClInclude Include="AsType.h">
       <Filter>소스 파일\Execute\ModelLoader</Filter>
     </ClInclude>
-    <ClInclude Include="ModelScript.h">
-      <Filter>소스 파일\Script</Filter>
-    </ClInclude>
     <ClInclude Include="NewStructureTest.h">
       <Filter>소스 파일\Execute</Filter>
-    </ClInclude>
-    <ClInclude Include="LightScript.h">
-      <Filter>소스 파일\Script</Filter>
     </ClInclude>
     <ClInclude Include="SceneTest.h">
       <Filter>소스 파일\Execute</Filter>
     </ClInclude>
+    <ClInclude Include="LightScript.h">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelScript.h">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseScript.h">
+      <Filter>소스 파일\Script\GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMaker.h" />
   </ItemGroup>
 </Project>

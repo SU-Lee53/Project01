@@ -25,75 +25,149 @@ void ModelScript::Init()
 
 void ModelScript::Update()
 {
-	//auto model = _model.lock();
-	
 	if(ImGui::Begin("Model Transform"))
 	{
-		Vec3 pos = GetOwner()->GetTransform()->GetPosition();
-		Vec3 rot = GetOwner()->GetTransform()->GetRotation();
-		Vec3 scale = GetOwner()->GetTransform()->GetScale();
-
-		if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.05f; }
-		ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
-		if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { _dragSpeed += 0.05f; }
-		ImGui::SameLine();
-		ImGui::Text("Drag Speed : %f", _dragSpeed);
-
-		ImGui::InputFloat3("Pos", (float*)&pos);
-		ImGui::DragFloat("Pos.x", &pos.x, _dragSpeed, -10.f, 10.f);
-		ImGui::SameLine(); HelpMarker(
-			"Click and drag to edit value.\n"
-			"Hold SHIFT/ALT for faster/slower edit.\n"
-			"Double-click or CTRL+click to input value.");
-		ImGui::DragFloat("Pos.y", &pos.y, _dragSpeed, -10.f, 10.f);
-		ImGui::DragFloat("Pos.z", &pos.z, _dragSpeed, -10.f, 10.f);
-
-		ImGui::InputFloat3("Rot", (float*)&rot, "%.3f Deg");
-		ImGui::DragFloat("Rot.x", &rot.x, _dragSpeed, -180.f, 180.f);
-		ImGui::DragFloat("Rot.y", &rot.y, _dragSpeed, -180.f, 180.f);
-		ImGui::DragFloat("Rot.z", &rot.z, _dragSpeed, -180.f, 180.f);
-		
-		ImGui::Checkbox("Scale type", &_scaleType);
-
-		if(_scaleType)
+		if (ImGui::BeginTabBar("Transform", ImGuiTabBarFlags_None))
 		{
-			ImGui::InputFloat3("Scale", (float*)&scale, "%.3f");
-			ImGui::DragFloat("Scale.x", &scale.x, _dragSpeed, -180.f, 180.f);
-			ImGui::DragFloat("Scale.y", &scale.y, _dragSpeed, -180.f, 180.f);
-			ImGui::DragFloat("Scale.z", &scale.z, _dragSpeed, -180.f, 180.f);
+			if (ImGui::BeginTabItem("World Transform"))
+			{
+				Vec3 pos = GetOwner()->GetTransform()->GetPosition();
+				Vec3 rot = GetOwner()->GetTransform()->GetRotation();
+				Vec3 scale = GetOwner()->GetTransform()->GetScale();
+
+				if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.05f; }
+				ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
+				if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { _dragSpeed += 0.05f; }
+				ImGui::SameLine();
+				ImGui::Text("Drag Speed : %f", _dragSpeed);
+
+				ImGui::InputFloat3("Pos", (float*)&pos);
+				ImGui::DragFloat("Pos.x", &pos.x, _dragSpeed, -10.f, 10.f);
+				ImGui::SameLine(); HelpMarker(
+					"Click and drag to edit value.\n"
+					"Hold SHIFT/ALT for faster/slower edit.\n"
+					"Double-click or CTRL+click to input value.");
+				ImGui::DragFloat("Pos.y", &pos.y, _dragSpeed, -10.f, 10.f);
+				ImGui::DragFloat("Pos.z", &pos.z, _dragSpeed, -10.f, 10.f);
+
+				ImGui::InputFloat3("Rot", (float*)&rot, "%.3f Deg");
+				ImGui::DragFloat("Rot.x", &rot.x, _dragSpeed, -180.f, 180.f);
+				ImGui::DragFloat("Rot.y", &rot.y, _dragSpeed, -180.f, 180.f);
+				ImGui::DragFloat("Rot.z", &rot.z, _dragSpeed, -180.f, 180.f);
+
+				ImGui::Checkbox("Scale type", &_scaleType);
+
+				if (_scaleType)
+				{
+					ImGui::InputFloat3("Scale", (float*)&scale, "%.3f");
+					ImGui::DragFloat("Scale.x", &scale.x, _dragSpeed, -180.f, 180.f);
+					ImGui::DragFloat("Scale.y", &scale.y, _dragSpeed, -180.f, 180.f);
+					ImGui::DragFloat("Scale.z", &scale.z, _dragSpeed, -180.f, 180.f);
+				}
+				else
+				{
+					ImGui::DragFloat("Scale", &scale.x, _dragSpeed, 0.0f, 2.0f);
+
+					scale = Vec3{ scale.x, scale.x, scale.x };
+				}
+
+				GetOwner()->GetTransform()->SetPosition(pos);
+				GetOwner()->GetTransform()->SetRotation(rot);
+				GetOwner()->GetTransform()->SetScale(scale);
+
+				ImGui::Text("Position");
+				ImGui::Text("X: %3f", pos.x);
+				ImGui::Text("Y: %3f", pos.y);
+				ImGui::Text("Z: %3f", pos.z);
+				ImGui::Text("");
+
+				ImGui::Text("Rotation");
+				ImGui::Text("X: %3f", rot.x);
+				ImGui::Text("Y: %3f", rot.y);
+				ImGui::Text("Z: %3f", rot.z);
+				ImGui::Text("");
+
+				ImGui::Text("Scale");
+				ImGui::Text("X: %3f", scale.x);
+				ImGui::Text("Y: %3f", scale.y);
+				ImGui::Text("Z: %3f", scale.z);
+
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("Local Transform"))
+			{
+				Vec3 localPos = GetOwner()->GetTransform()->GetLocalPosition();
+				Vec3 localRot = GetOwner()->GetTransform()->GetLocalRotation();
+				Vec3 localScale = GetOwner()->GetTransform()->GetLocalScale();
+
+				if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.05f; }
+				ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
+				if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { _dragSpeed += 0.05f; }
+				ImGui::SameLine();
+				ImGui::Text("Drag Speed : %f", _dragSpeed);
+
+				ImGui::InputFloat3("Pos", (float*)&localPos);
+				ImGui::DragFloat("Pos.x", &localPos.x, _dragSpeed, -10.f, 10.f);
+				ImGui::SameLine(); HelpMarker(
+					"Click and drag to edit value.\n"
+					"Hold SHIFT/ALT for faster/slower edit.\n"
+					"Double-click or CTRL+click to input value.");
+				ImGui::DragFloat("Pos.y", &localPos.y, _dragSpeed, -10.f, 10.f);
+				ImGui::DragFloat("Pos.z", &localPos.z, _dragSpeed, -10.f, 10.f);
+
+				ImGui::InputFloat3("Rot", (float*)&localRot, "%.3f Deg");
+				ImGui::DragFloat("Rot.x", &localRot.x, _dragSpeed, -180.f, 180.f);
+				ImGui::DragFloat("Rot.y", &localRot.y, _dragSpeed, -180.f, 180.f);
+				ImGui::DragFloat("Rot.z", &localRot.z, _dragSpeed, -180.f, 180.f);
+
+				ImGui::Checkbox("Scale type", &_scaleType);
+
+				if (_scaleType)
+				{
+					ImGui::InputFloat3("Scale", (float*)&localScale, "%.3f");
+					ImGui::DragFloat("Scale.x", &localScale.x, _dragSpeed, -180.f, 180.f);
+					ImGui::DragFloat("Scale.y", &localScale.y, _dragSpeed, -180.f, 180.f);
+					ImGui::DragFloat("Scale.z", &localScale.z, _dragSpeed, -180.f, 180.f);
+				}
+				else
+				{
+					ImGui::DragFloat("Scale", &localScale.x, _dragSpeed, 0.0f, 2.0f);
+
+					localScale = Vec3{ localScale.x, localScale.x, localScale.x };
+				}
+
+				GetOwner()->GetTransform()->SetLocalPosition(localPos);
+				GetOwner()->GetTransform()->SetLocalRotation(localRot);
+				GetOwner()->GetTransform()->SetLocalScale(localScale);
+
+				ImGui::Text("Position");
+				ImGui::Text("X: %3f", localPos.x);
+				ImGui::Text("Y: %3f", localPos.y);
+				ImGui::Text("Z: %3f", localPos.z);
+				ImGui::Text("");
+
+				ImGui::Text("Rotation");
+				ImGui::Text("X: %3f", localRot.x);
+				ImGui::Text("Y: %3f", localRot.y);
+				ImGui::Text("Z: %3f", localRot.z);
+				ImGui::Text("");
+
+				ImGui::Text("Scale");
+				ImGui::Text("X: %3f", localScale.x);
+				ImGui::Text("Y: %3f", localScale.y);
+				ImGui::Text("Z: %3f", localScale.z);
+
+				ImGui::EndTabItem();
+			}
+
+			ImGui::EndTabBar();
 		}
-		else
-		{
-			ImGui::DragFloat("Scale", &scale.x, _dragSpeed, 0.0f, 2.0f);
-
-			scale = Vec3{ scale.x, scale.x, scale.x };
-		}
-
-		GetOwner()->GetTransform()->SetPosition(pos);
-		GetOwner()->GetTransform()->SetRotation(rot);
-		GetOwner()->GetTransform()->SetScale(scale);
-
-		ImGui::Text("Position");
-		ImGui::Text("X: %3f", pos.x);
-		ImGui::Text("Y: %3f", pos.y);
-		ImGui::Text("Z: %3f", pos.z);
-		ImGui::Text("");
-
-		ImGui::Text("Rotation");
-		ImGui::Text("X: %3f", rot.x);
-		ImGui::Text("Y: %3f", rot.y);
-		ImGui::Text("Z: %3f", rot.z);
-
-		ImGui::Text("Scale");
-		ImGui::Text("X: %3f", scale.x);
-		ImGui::Text("Y: %3f", scale.y);
-		ImGui::Text("Z: %3f", scale.z);
-
 	}
 	ImGui::End();
 
-	ShowModelHierarchy();
-	ShowModelMeshVertices();
+	//ShowModelHierarchy();
+	//ShowModelMeshVertices();
 }
 
 // for ImGui Debug

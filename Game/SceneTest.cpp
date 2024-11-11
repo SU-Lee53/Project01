@@ -19,7 +19,6 @@ void SceneTest::Init()
 	{
 		_obj->AddComponent<Transform>();
 		_obj->AddComponent<MeshRenderer>();
-		_obj->Init();
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"floor.mesh");
@@ -33,7 +32,6 @@ void SceneTest::Init()
 		_obj2->AddComponent<Transform>();
 		_obj2->AddComponent<MeshRenderer>();
 		_obj2->AddComponent<SphereCollider>();
-		_obj2->Init();
 
 		auto model = make_shared<Model>();
 		model->LoadFromFiles(L"pool_ball_1.mesh");
@@ -51,7 +49,6 @@ void SceneTest::Init()
 	{
 		_cam->AddComponent<Transform>();
 		_cam->AddComponent<Camera>();
-		_cam->Init();
 
 		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
 
@@ -66,7 +63,6 @@ void SceneTest::Init()
 	{
 		_light->AddComponent<Transform>();
 		_light->AddComponent<GlobalLight>();
-		_light->Init();
 
 		GlobalLightData data;
 		{
@@ -83,6 +79,7 @@ void SceneTest::Init()
 	}
 	CUR_SCENE->AddObject(_light);
 
+	CUR_SCENE->Init();
 }
 
 void SceneTest::Update()
