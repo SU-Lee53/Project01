@@ -122,7 +122,8 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 	for (const auto mesh : meshes)
 	{
 		int32 boneIndex = mesh->boneIndex;
-		_transformData.matLocal = transform->GetLocal();
+		//_transformData.matLocal = transform->GetLocal();
+		_transformData.matLocal = bones[boneIndex]->transform;
 		PushTransformData();
 
 		//auto material = RESOURCE->Get<Material>(Utils::ToString(mesh->materialName));

@@ -109,6 +109,7 @@ bool Scene::SetMainCamera(const string& name)
 
 void Scene::AddScript(shared_ptr<Script<Scene>> script)
 {
+	script->SetOwner(shared_from_this());
 	_scripts.push_back(script);
 }
 

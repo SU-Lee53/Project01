@@ -3,7 +3,7 @@
 class GameObject;
 class CollisionHandler;
 
-class Scene
+class Scene : public enable_shared_from_this<Scene>
 {
 public:
 	Scene();
@@ -15,10 +15,13 @@ public:
 
 	void AddObject(shared_ptr<GameObject> obj);
 	void RemoveObject(shared_ptr<GameObject> obj);
+	unordered_set<shared_ptr<GameObject>> GetObjects() { return _objects; }
+
 
 	void AddCamera(const string& name, shared_ptr<GameObject> cam);
 	void RemoveCamera(const string& name);
 	bool SetMainCamera(const string& name);
+	unordered_map<string, shared_ptr<GameObject>> GetCameras() { return _cameras; }
 
 	void AddScript(shared_ptr<Script<Scene>> script);
 

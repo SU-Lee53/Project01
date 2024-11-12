@@ -74,6 +74,9 @@
     <ClCompile Include="SceneMaker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="SceneModelController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -107,5 +110,6 @@
       <Filter>소스 파일\Script\GameObj</Filter>
     </ClInclude>
     <ClInclude Include="SceneMaker.h" />
+    <ClInclude Include="SceneModelController.h" />
   </ItemGroup>
 </Project>

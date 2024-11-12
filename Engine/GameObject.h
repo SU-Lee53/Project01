@@ -50,9 +50,14 @@ public:
 public:
 	void AddScript(shared_ptr<Script<GameObject>> script);
 
+public:
+	void SetName(const string& name) { _name = name; }
+	string GetName() { return _name; }
+
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
 
 	// Scripts
 	vector<shared_ptr<Script<GameObject>>> _scripts;
+	string _name;
 };

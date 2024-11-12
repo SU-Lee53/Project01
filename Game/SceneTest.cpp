@@ -12,9 +12,11 @@
 #include "Collider.h"
 #include "SphereCollider.h"
 #include "Scene.h"
+#include "SceneModelController.h"
 
 void SceneTest::Init()
 {
+	/*
 	auto _obj = make_shared<GameObject>();
 	{
 		_obj->AddComponent<Transform>();
@@ -24,6 +26,7 @@ void SceneTest::Init()
 		model->LoadFromFiles(L"floor.mesh");
 		_obj->GetComponent<MeshRenderer>()->SetModel(model);
 
+		_obj->SetName("floor");
 	}
 	CUR_SCENE->AddObject(_obj);
 
@@ -39,11 +42,31 @@ void SceneTest::Init()
 
 		_obj2->GetCollider<SphereCollider>()->ShrinkToFit();
 
-		auto modelScript = make_shared<ModelScript>();
-		_obj2->AddScript(modelScript);
+		//auto modelScript = make_shared<ModelScript>();
+		//_obj2->AddScript(modelScript);
 
+		_obj2->SetName("ball");
 	}
 	CUR_SCENE->AddObject(_obj2);
+	*/
+
+	for (const auto& targets : LoadTargets)
+	{
+		auto obj = make_shared<GameObject>();
+		{
+			obj->AddComponent<Transform>();
+			obj->AddComponent<MeshRenderer>();
+
+			auto model = make_shared<Model>();
+			model->LoadFromFiles(targets);
+			obj->GetComponent<MeshRenderer>()->SetModel(model);
+
+			string name = filesystem::path(targets).filename().string();
+			obj->SetName(name);
+		}
+		CUR_SCENE->AddObject(obj);
+	}
+
 
 	auto _cam = make_shared<GameObject>();
 	{
@@ -54,6 +77,8 @@ void SceneTest::Init()
 
 		auto _mouseScript = make_shared<MouseScript>();
 		_cam->AddScript(_mouseScript);
+
+		_cam->SetName("camera");
 	}
 	CUR_SCENE->AddCamera("main_cam", _cam);
 	CUR_SCENE->SetMainCamera("main_cam");
@@ -76,8 +101,14 @@ void SceneTest::Init()
 
 		auto _lightScript = make_shared<LightScript>();
 		_light->AddScript(_lightScript);
+
+		_light->SetName("globalLight");
 	}
 	CUR_SCENE->AddObject(_light);
+
+
+	auto sceneScript = make_shared<SceneModelController>();
+	CUR_SCENE->AddScript(sceneScript);
 
 	CUR_SCENE->Init();
 }

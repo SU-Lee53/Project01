@@ -14,6 +14,9 @@ Transform::~Transform()
 
 void Transform::Init_impl()
 {
+	// Something wrong (maybe in ToEulerAngles())
+	// DO NOT USE LOCAL VALUES UNTIL PROBLEM FIX!!!
+
 	// Sync local transform with models final bone
 	// Assume that every models has only one mesh/bone in meshes/bones
 	auto meshRenderer = GetOwner()->GetComponent<MeshRenderer>();
