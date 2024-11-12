@@ -98,25 +98,63 @@ bool Utils::ExportMatrix(ofstream& os, Matrix m)
 
 Vec3 Utils::ToEulerAngles(const Quaternion& q)
 {
-	Vec3 angles;
+	// Something Wrong
 
-	// roll
-	double sinr_cosp = 2 * (q.w * q.x + q.y + q.z);
-	double cosr_cosp = 1 - 2 * (q.x * q.x + q.y * q.y);
-	angles.x = std::atan2(sinr_cosp, cosr_cosp);
+	//Vec3 angles;
+	//
+	//// pitch (x-axis (LHS))
+	//double sinp = std::sqrt(1 + 2 * (q.w * q.y - q.x * q.z));
+	//double cosp = std::sqrt(1 - 2 * (q.w * q.y - q.x + q.z));
+	//
+	//angles.x = (2 * std::atan2(sinp, cosp)) - (numbers::pi_v<float> / 2);
+	//
+	//// yaw (y-axis (LHS))
+	//double siny_cosp = 2 * (q.w * q.z + q.x * q.y);
+	//double cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
+	//angles.y = std::atan2(siny_cosp, cosy_cosp);
+	//
+	//// roll (z-axis (LHS))
+	//double sinr_cosp = 2 * (q.w * q.x + q.y + q.z);
+	//double cosr_cosp = 1 - 2 * (q.x * q.x + q.y * q.y);
+	//angles.z = std::atan2(sinr_cosp, cosr_cosp);
+	//
+	//return angles;
 
-	// pitch
-	double sinp = std::sqrt(1 + 2 * (q.w * q.y - q.x * q.z));
-	double cosp = std::sqrt(1 - 2 * (q.w * q.y - q.x + q.z));
+	float yaw = 0.f;
+	float pitch = 0.f;
+	float roll = 0.f;
 
-	angles.y = 2 * std::atan2(sinp, cosp) - std::numbers::pi_v<float> / 2;
+	const double w2 = pow(q.w, 2);
+	const double x2 = pow(q.x, 2);
+	const double y2 = pow(q.y, 2);
+	const double z2 = pow(q.z, 2);
+	const double unitLength = w2 + x2 + y2 + z2;
+	const double abcd = q.w * q.x + q.y * q.z;
+	const double eps = 1e-7;
+	const double pi = numbers::pi_v<double>;
 
-	// yaw
-	double siny_cosp = 2 * (q.w * q.z + q.x * q.y);
-	double cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
-	angles.z = std::atan2(siny_cosp, cosy_cosp);
+	if (abcd > (0.5 - eps) * unitLength)
+	{
+		yaw = 2 * atan2(q.y, q.w);
+		pitch = pi;
+		roll = 0;
+	}
+	else if (abcd < (-0.5 + eps) * unitLength)
+	{
+		yaw = -2 * atan2(q.y, q.w);
+		pitch = -pi;
+		roll = 0;
+	}
+	else
+	{
+		const double adbc = q.w * q.z - q.x * q.y;
+		const double acbd = q.w * q.y - q.x * q.z;
+		yaw = atan2(2 * adbc, 1 - 2 * (z2 + x2));
+		pitch = asin(2 * abcd / unitLength);
+		roll = atan2(2 * acbd, 1 - 2 * (y2 + x2));
+	}
 
-	return angles;
+	return Vec3(roll, pitch, yaw);
 
 }
 

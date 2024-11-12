@@ -31,9 +31,13 @@ void Transform::Init_impl()
 		Vec3 Rot = Utils::ToEulerAngles(outRot);
 		
 		_localPosition = outPos;
-		_localRotation = Rot;
 		_localScale = outScale;
-		
+		_localRotation = Vec3{
+			XMConvertToDegrees(Rot.x),
+			XMConvertToDegrees(Rot.y),
+			XMConvertToDegrees(Rot.z)
+		};
+
 		//Matrix localTranslate = Matrix::CreateTranslation(_localPosition);
 		//Matrix localRotate = Matrix::CreateRotationX(_localRotation.x);
 		//localRotate *= Matrix::CreateRotationY(_localRotation.y);
