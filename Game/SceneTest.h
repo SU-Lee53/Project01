@@ -11,6 +11,7 @@ public:
 private:
 	vector<wstring> LoadTargets =
 	{
+		L"pool_cue.mesh",
 		L"floor.mesh",
 		L"pool_ball_1.mesh",
 		L"pool_ball_2.mesh",
@@ -27,7 +28,6 @@ private:
 		L"pool_ball_13.mesh",
 		L"pool_ball_14.mesh",
 		L"pool_ball_15.mesh",
-		L"pool_cue.mesh",
 		L"pool_objectball.mesh",
 		L"pool_table.mesh"
 	};

@@ -139,7 +139,7 @@ float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
     
     // specular
     {
-        specularColor = ComputeSpecular(normal, uv, worldPosition, 1024);
+        specularColor = ComputeSpecular(normal, uv, worldPosition, 20);
     }
     
     // Emissive
