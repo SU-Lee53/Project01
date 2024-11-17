@@ -8,8 +8,12 @@ class AABBCollider;
 
 class Collision
 {
+	// NEED TO FIX EVERYTHING
+	// COLLISION SHOULD NOT GET SHARED_PTR
+	// SHARED_FROM_THIS MAKES CRASH
 public:
 	static bool CheckCollision(shared_ptr<SphereCollider> sphere1, shared_ptr<SphereCollider> sphere2);
+	//static bool CheckCollision(const SphereCollider& sphere1, const SphereCollider& sphere2);
 							    				   
 	static bool CheckCollision(shared_ptr<SphereCollider> sphere, shared_ptr<PlaneCollider> plane);
 							    				   

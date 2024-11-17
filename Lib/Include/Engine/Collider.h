@@ -25,6 +25,9 @@ private:
 	Vec3 _position;
 	Matrix _srt;
 
+private:
+	unordered_set<shared_ptr<Collider>> _collisionMap;
+
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
 	COLLIDER_TYPE _colliderType;

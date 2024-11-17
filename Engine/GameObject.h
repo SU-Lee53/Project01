@@ -35,13 +35,37 @@ public:
 		return static_pointer_cast<T>(_components[idx]);
 	}
 
+public:
+	template <ColliderType C>
+	void AddCollider(shared_ptr<C> col)
+	{
+		if constexpr (is_same_v <C, SphereCollider>)
+		{
+			_colliderType = COLLIDER_TYPE::Sphere;
+		}
+		else if constexpr (is_same_v<C, AABBCollider>)
+		{
+			_colliderType = COLLIDER_TYPE::AABB;
+		}
+		else if constexpr (is_same_v<C, PlaneCollider>)
+		{
+			_colliderType = COLLIDER_TYPE::Plane;
+		}
+		else
+		{
+			_colliderType = COLLIDER_TYPE::None;
+		}
+
+	}
+
 	template<ColliderType C>
 	shared_ptr<C> GetCollider()
 	{
-		//COLLIDER_TYPE type = C::_colliderType;
-		return static_pointer_cast<C>(_components[(int32)COMPONENT_TYPE::Collider]);
+		if (!_collider) return nullptr;
+		return static_pointer_cast<C>(_collider);
 	}
 
+public:
 	shared_ptr<Transform> GetTransform() const
 	{
 		return static_pointer_cast<Transform>(_components[(int)COMPONENT_TYPE::Transform]);
@@ -56,6 +80,10 @@ public:
 
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
+
+	// Collider
+	shared_ptr<Collider> _collider;
+	COLLIDER_TYPE _colliderType = COLLIDER_TYPE::None;
 
 	// Scripts
 	vector<shared_ptr<Script<GameObject>>> _scripts;

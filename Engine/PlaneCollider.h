@@ -17,5 +17,5 @@ private:
 	Vec3 _normal;
 
 public:
-	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Plane;
+	//constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Plane;
 };

@@ -3,6 +3,7 @@
 
 enum COLLIDER_TYPE
 {
+	None = -2,
 	Base = -1,
 	Sphere,
 	Plane,

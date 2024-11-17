@@ -11,10 +11,10 @@ enum class COMPONENT_TYPE
 	GlobalLight = Light_Base,
 	SpotLight = GlobalLight,
 
-	Collider,
-	AABBColider = Collider,						// 4
-	SphereColider = AABBColider,
-	PlaneColider = SphereColider,
+	//Collider,
+	//AABBColider = Collider,						// 4
+	//SphereColider = AABBColider,
+	//PlaneColider = SphereColider,
 	
 	/*
 		- TODO : Add Below
@@ -26,8 +26,6 @@ enum class COMPONENT_TYPE
 	Script,
 
 	End,
-
-	ERROR_TYPE
 };
 
 enum

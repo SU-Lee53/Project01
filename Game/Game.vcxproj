@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsType.cpp" />
+    <ClCompile Include="CollisionTest.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="LightScript.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsType.h" />
+    <ClInclude Include="CollisionTest.h" />
     <ClInclude Include="Converter.h" />
     <ClInclude Include="LightScript.h" />
     <ClInclude Include="ModelLoader.h" />

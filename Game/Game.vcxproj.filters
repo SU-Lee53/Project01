@@ -72,9 +72,12 @@
       <Filter>소스 파일\Script\GameObj</Filter>
     </ClCompile>
     <ClCompile Include="SceneMaker.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Script\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneModelController.cpp">
+      <Filter>소스 파일\Script\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -109,7 +112,12 @@
     <ClInclude Include="MouseScript.h">
       <Filter>소스 파일\Script\GameObj</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMaker.h" />
-    <ClInclude Include="SceneModelController.h" />
+    <ClInclude Include="SceneMaker.h">
+      <Filter>소스 파일\Script\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneModelController.h">
+      <Filter>소스 파일\Script\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionTest.h" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,12 @@
 
 GameObject::GameObject()
 {
+	for (auto& c : _components)
+	{
+		c = nullptr;
+	}
+
+	_collider = nullptr;
 }
 
 GameObject::~GameObject()

@@ -17,5 +17,5 @@ private:
 	Vec3 _size;
 
 public:
-	constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::AABB;
+	//constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::AABB;
 };
