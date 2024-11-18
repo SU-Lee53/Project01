@@ -2,9 +2,7 @@
 
 #include "Component.h"
 #include "Transform.h"
-#include "SphereCollider.h"
-#include "AABBCollider.h"
-#include "PlaneCollider.h"
+#include "Collider.h"
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -21,7 +19,7 @@ public:
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	void AddComponent()
 	{
-		int idx = (int32)(T::ty);
+		int32 idx = (int32)(T::ty);
 		_components[idx] = make_shared<T>();
 		_components[idx]->SetOwner(shared_from_this());
 	}
@@ -38,17 +36,23 @@ public:
 	}
 
 public:
-	template<ColliderType C>
-	shared_ptr<C> GetCollider()
-	{
-		int32 idx = COMPONENT_TYPE::Collider;
-		return static_pointer_cast<C>(_components[idx]);
-	}
-
-public:
 	shared_ptr<Transform> GetTransform() const
 	{
 		return static_pointer_cast<Transform>(_components[(int)COMPONENT_TYPE::Transform]);
+	}
+
+public:
+	template <ColliderType C>
+	void AddCollider(shared_ptr<Collider> c)
+	{
+		_collider = c;
+	}
+
+	template <ColliderType C>
+	shared_ptr<C> GetCollider()
+	{
+		if (!_collider) assert(false);
+		return static_pointer_cast<C>(_collider);
 	}
 
 public:
@@ -60,6 +64,9 @@ public:
 
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
+
+	// Collider
+	shared_ptr<Collider> _collider;
 
 	// Scripts
 	vector<shared_ptr<Script<GameObject>>> _scripts;

@@ -2,9 +2,7 @@
 
 #include "Component.h"
 #include "Transform.h"
-#include "SphereCollider.h"
-#include "AABBCollider.h"
-#include "PlaneCollider.h"
+#include "Collider.h"
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -21,7 +19,7 @@ public:
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	void AddComponent()
 	{
-		int idx = (int32)(T::ty);
+		int32 idx = (int32)(T::ty);
 		_components[idx] = make_shared<T>();
 		_components[idx]->SetOwner(shared_from_this());
 	}
@@ -38,58 +36,16 @@ public:
 	}
 
 public:
-	template <ColliderType C>
-	void AddCollider(shared_ptr<C> col)
-	{
-		if constexpr (is_same_v <C, SphereCollider>)
-		{
-			_colliderType = COLLIDER_TYPE::Sphere;
-		}
-		else if constexpr (is_same_v<C, AABBCollider>)
-		{
-			_colliderType = COLLIDER_TYPE::AABB;
-		}
-		else if constexpr (is_same_v<C, PlaneCollider>)
-		{
-			_colliderType = COLLIDER_TYPE::Plane;
-		}
-		else
-		{
-			_colliderType = COLLIDER_TYPE::None;
-		}
-
-	}
-
-	template<ColliderType C>
-	shared_ptr<C> GetCollider()
-	{
-		if (!_collider) return nullptr;
-		return static_pointer_cast<C>(_collider);
-	}
-
-	constexpr auto GetCollider()
-	{
-		if (_colliderType == COLLIDER_TYPE::Sphere)
-		{
-			return static_pointer_cast<SphereCollider>(_collider);
-		}
-		else if (_colliderType == COLLIDER_TYPE::AABB)
-		{
-			return static_pointer_cast<AABBCollider>(_collider);
-		}
-		else if (_colliderType == COLLIDER_TYPE::Plane)
-		{
-			return static_pointer_cast<PlaneCollider>(_collider);
-		}
-
-		assert(false);
-		return nullptr;
-	}
-
-public:
 	shared_ptr<Transform> GetTransform() const
 	{
 		return static_pointer_cast<Transform>(_components[(int)COMPONENT_TYPE::Transform]);
+	}
+
+public:
+	template <ColliderType C>
+	void AddCollider()
+	{
+
 	}
 
 public:
@@ -104,7 +60,6 @@ private:
 
 	// Collider
 	shared_ptr<Collider> _collider;
-	COLLIDER_TYPE _colliderType = COLLIDER_TYPE::None;
 
 	// Scripts
 	vector<shared_ptr<Script<GameObject>>> _scripts;

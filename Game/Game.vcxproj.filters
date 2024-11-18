@@ -78,7 +78,7 @@
       <Filter>소스 파일\Script\Scene</Filter>
     </ClCompile>
     <ClCompile Include="CollisionTest.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Execute</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +118,8 @@
     <ClInclude Include="SceneModelController.h">
       <Filter>소스 파일\Script\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionTest.h" />
+    <ClInclude Include="CollisionTest.h">
+      <Filter>소스 파일\Execute</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

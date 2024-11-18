@@ -1,24 +1,18 @@
 #pragma once
-#include "Collider.h"
+#include "BaseCollider.h"
 
-class SphereCollider : public Collider
+class SphereCollider : public BaseCollider<SphereCollider>
 {
 public:
 	SphereCollider();
 	virtual ~SphereCollider();
 
 public:
-	void ShrinkToFit();
-
-public:
-	bool CheckCollision(shared_ptr<Collider> other);
-
-	friend class Collision;
+	void InitCollider() override;
+	void UpdateCollider() override;
 
 private:
 	Vec3 _center;
 	float _radius;
-
-public:
-	const COLLIDER_TYPE _type = COLLIDER_TYPE::Sphere;
 };
+

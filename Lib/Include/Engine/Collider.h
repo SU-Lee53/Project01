@@ -1,10 +1,14 @@
 #pragma once
 #include "Component.h"
+/*
+	- New method
+		- follow Component structure
+		- Is it good? idk
+*/
 
-enum COLLIDER_TYPE
+enum class COLLIDER_TYPE : uint8
 {
-	None = -2,
-	Base = -1,
+	Base = 0,
 	Sphere,
 	Plane,
 	AABB
@@ -17,24 +21,29 @@ public:
 	virtual ~Collider();
 
 public:
-	void Update_impl();
+	void Init_impl()
+	{
+		InitCollider();
+	}
 
-public:
-	function<void(shared_ptr<Collider>)> _handler;
+	void Update_impl()
+	{
+		UpdateCollider();
+	}
+
+protected:
+	virtual void InitCollider();
+	virtual void UpdateCollider();
 
 private:
-	Vec3 _position;
-	Matrix _srt;
-
-public:
-	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
-	COLLIDER_TYPE _colliderType;
+	function<void(Collider c)> _handler;
 };
 
+// Collider Concept
 template <typename C>
-concept IsColliderType = requires(C c)
+concept IsColliderType = requires (C c)
 {
-	std::derived_from<C, Collider>;
+	derived_from<C, Collider>;
 };
 
 template <typename C>

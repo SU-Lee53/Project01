@@ -11,6 +11,7 @@
 #include "GlobalLight.h"
 #include "Collider.h"
 #include "SphereCollider.h"
+#include "BaseCollider.h"
 #include "Scene.h"
 #include "SceneModelController.h"
 
@@ -28,7 +29,6 @@ void CollisionTest::Init()
 		obj1->GetComponent<MeshRenderer>()->SetModel(model);
 
 		obj1->AddComponent<SphereCollider>();
-		obj1->GetCollider<SphereCollider>()->ShrinkToFit();
 	}
 	CUR_SCENE->AddObject(obj1);
 
@@ -43,7 +43,6 @@ void CollisionTest::Init()
 		obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
 		obj2->AddComponent<SphereCollider>();
-		obj2->GetCollider<SphereCollider>()->ShrinkToFit();
 	}
 	CUR_SCENE->AddObject(obj2);
 

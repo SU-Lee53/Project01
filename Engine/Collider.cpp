@@ -1,6 +1,8 @@
 #include "EnginePch.h"
 #include "Collider.h"
-#include "GameObject.h"
+#include "SphereCollider.h"
+#include "PlaneCollider.h"
+#include "AABBCollider.h"
 
 Collider::Collider()
 {
@@ -10,7 +12,10 @@ Collider::~Collider()
 {
 }
 
-void Collider::Update_impl()
+void Collider::InitCollider()
 {
-	_position = Vec3::Transform(_position, GetOwner()->GetTransform()->GetWorld());
+}
+
+void Collider::UpdateCollider()
+{
 }

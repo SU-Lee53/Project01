@@ -1,21 +1,19 @@
 #pragma once
-#include "Collider.h"
+#include "BaseCollider.h"
 
-class AABBCollider : public Collider
+class AABBCollider : public BaseCollider<AABBCollider>
 {
 public:
 	AABBCollider();
 	virtual ~AABBCollider();
 
 public:
-	bool CheckCollision(shared_ptr<Collider> other);
-
-	friend class Collision;
+	void InitCollider() override;
+	void UpdateCollider() override;
 
 private:
 	float _center;
 	Vec3 _size;
 
-public:
-	const COLLIDER_TYPE _type = COLLIDER_TYPE::AABB;
 };
+

@@ -11,7 +11,7 @@ class MeshRenderer : public Component<MeshRenderer>
 {
 public:
 	MeshRenderer();
-	~MeshRenderer();
+	virtual ~MeshRenderer();
 
 public:
 	void Init_impl();
