@@ -28,7 +28,7 @@ void CollisionTest::Init()
 		model->LoadFromFiles(L"pool_ball_1.mesh");
 		obj1->GetComponent<MeshRenderer>()->SetModel(model);
 
-		obj1->AddComponent<SphereCollider>();
+		obj1->AddCollider<SphereCollider>();
 	}
 	CUR_SCENE->AddObject(obj1);
 
@@ -42,7 +42,7 @@ void CollisionTest::Init()
 		model->LoadFromFiles(L"pool_ball_2.mesh");
 		obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
-		obj2->AddComponent<SphereCollider>();
+		obj2->AddCollider<SphereCollider>();
 	}
 	CUR_SCENE->AddObject(obj2);
 

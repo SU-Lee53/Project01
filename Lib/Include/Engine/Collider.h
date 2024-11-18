@@ -35,8 +35,9 @@ protected:
 	virtual void InitCollider();
 	virtual void UpdateCollider();
 
-private:
+protected:
 	function<void(Collider c)> _handler;
+	Matrix transform;
 };
 
 // Collider Concept

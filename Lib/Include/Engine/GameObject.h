@@ -45,7 +45,14 @@ public:
 	template <ColliderType C>
 	void AddCollider()
 	{
+		_collider = make_shared<C>();
+	}
 
+	template <ColliderType C>
+	shared_ptr<C> GetCollider()
+	{
+		if (!_collider) assert(false);
+		return static_pointer_cast<C>(_collider);
 	}
 
 public:

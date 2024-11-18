@@ -14,8 +14,10 @@ Collider::~Collider()
 
 void Collider::InitCollider()
 {
+	assert(false);
 }
 
 void Collider::UpdateCollider()
 {
+	assert(false);
 }

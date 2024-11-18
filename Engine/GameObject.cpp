@@ -33,6 +33,9 @@ void GameObject::Init()
 	{
 		script->Init();
 	}
+
+	if(_collider)
+		_collider->Init();
 }
 
 void GameObject::Update()
@@ -47,6 +50,9 @@ void GameObject::Update()
 	{
 		script->Update();
 	}
+
+	if (_collider)
+		_collider->Update();
 }
 
 void GameObject::AddScript(shared_ptr<Script<GameObject>> script)

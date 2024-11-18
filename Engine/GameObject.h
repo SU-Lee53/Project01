@@ -43,9 +43,9 @@ public:
 
 public:
 	template <ColliderType C>
-	void AddCollider(shared_ptr<Collider> c)
+	void AddCollider()
 	{
-		_collider = c;
+		_collider = make_shared<C>();
 	}
 
 	template <ColliderType C>
