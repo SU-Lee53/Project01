@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
 
-class PlaneCollider : public Collider, public enable_shared_from_this<PlaneCollider>
+class PlaneCollider : public Collider
 {
 public:
 	PlaneCollider();
@@ -17,5 +17,5 @@ private:
 	Vec3 _normal;
 
 public:
-	//constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::Plane;
+	const COLLIDER_TYPE _type = COLLIDER_TYPE::Plane;
 };

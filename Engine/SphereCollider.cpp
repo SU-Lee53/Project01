@@ -72,6 +72,8 @@ void SphereCollider::ShrinkToFit()
 bool SphereCollider::CheckCollision(shared_ptr<Collider> other)
 {
 	auto type = other->_colliderType;
+	using _otherType = remove_reference_t<decltype(*other)>;
+
 
 	switch (type)
 	{

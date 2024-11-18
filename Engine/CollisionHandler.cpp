@@ -17,7 +17,7 @@ void CollisionHandler::Init()
 
 void CollisionHandler::Update()
 {
-	for (const auto s : _collisionMap)
+	for (const auto s : _possibleCollisionMap)
 	{
 		 
 

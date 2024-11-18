@@ -18,16 +18,12 @@ enum class COMPONENT_TYPE
 	
 	/*
 		- TODO : Add Below
-		Light,
 		Gravity,
-		Collider
 	*/
 
 	Script,
 
-	End,
-
-	ERROR_TYPE
+	End
 };
 
 enum

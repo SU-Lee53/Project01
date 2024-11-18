@@ -1,8 +1,7 @@
 #pragma once
 #include "Collider.h"
 
-
-class SphereCollider : public Collider, public enable_shared_from_this<SphereCollider>
+class SphereCollider : public Collider
 {
 public:
 	SphereCollider();
@@ -20,4 +19,6 @@ private:
 	Vec3 _center;
 	float _radius;
 
+public:
+	const COLLIDER_TYPE _type = COLLIDER_TYPE::Sphere;
 };

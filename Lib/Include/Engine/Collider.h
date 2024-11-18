@@ -3,6 +3,7 @@
 
 enum COLLIDER_TYPE
 {
+	None = -2,
 	Base = -1,
 	Sphere,
 	Plane,
@@ -24,9 +25,6 @@ public:
 private:
 	Vec3 _position;
 	Matrix _srt;
-
-private:
-	unordered_set<shared_ptr<Collider>> _collisionMap;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;

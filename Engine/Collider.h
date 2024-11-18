@@ -28,7 +28,6 @@ private:
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
-	COLLIDER_TYPE _colliderType;
 };
 
 template <typename C>

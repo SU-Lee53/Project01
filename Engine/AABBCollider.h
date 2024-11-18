@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
 
-class AABBCollider : public Collider, public enable_shared_from_this<AABBCollider>
+class AABBCollider : public Collider
 {
 public:
 	AABBCollider();
@@ -17,5 +17,5 @@ private:
 	Vec3 _size;
 
 public:
-	//constexpr static COLLIDER_TYPE _colliderType = COLLIDER_TYPE::AABB;
+	const COLLIDER_TYPE _type = COLLIDER_TYPE::AABB;
 };

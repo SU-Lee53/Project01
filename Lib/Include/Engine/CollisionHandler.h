@@ -19,7 +19,6 @@ public:
 
 private:
 	unordered_map<shared_ptr<GameObject>, shared_ptr<GameObject>> _possibleCollisionMap;
-	unordered_map<shared_ptr<GameObject>, shared_ptr<GameObject>> _collisionMap;
 
 };
 
