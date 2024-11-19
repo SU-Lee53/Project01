@@ -5,12 +5,6 @@
 // IN_OUT structs //
 ////////////////////
 
-//struct VS_INPUT
-//{
-//    float4 position : POSITION;
-//    float2 uv : TEXCOORD;
-//};
-
 struct VS_INPUT
 {
     float4 position : POSITION;
@@ -19,12 +13,6 @@ struct VS_INPUT
     float3 tangent : TANGENT;
 };
 
-//struct VS_OUTPUT
-//{
-//    float4 position : SV_POSITION;
-//    float2 uv : TEXCOORD;
-//};
-
 struct VS_OUTPUT
 {
     float4 position : SV_POSITION;
@@ -32,6 +20,19 @@ struct VS_OUTPUT
     float2 uv : TEXCOORD;
     float3 normal : NORMAL;
     float3 tangent : TANGENT;
+};
+
+struct DEBUG_INPUT
+{
+    float4 position : POSITION;
+    float2 color : COLOR;
+};
+
+struct DEBUG_OUTPUT
+{
+    float4 position : SV_POSITION;
+    float3 worldPosition : POSITION1;
+    float3 color : COLOR;
 };
 
 /////////////////////

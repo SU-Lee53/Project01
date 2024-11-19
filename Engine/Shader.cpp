@@ -45,10 +45,10 @@ void Shader::CreatePixelShader(const string& fileName, const string& shaderName)
 	_ps->Create(fileName, shaderName, "ps_5_0");
 }
 
-void Shader::CreateInputLayout()
+void Shader::CreateInputLayout(vector<D3D11_INPUT_ELEMENT_DESC> desc)
 {
 	if(_inputLayout == nullptr)
 		_inputLayout = make_shared<InputLayout>();
 
-	_inputLayout->Create(VertexType::descs, _vs->GetBlob());
+	_inputLayout->Create(desc, _vs->GetBlob());
 }

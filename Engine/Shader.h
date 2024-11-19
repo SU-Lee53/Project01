@@ -16,10 +16,14 @@ public:
 	void CreatePixelShader(const string& filename, const string& shaderName);
 	
 	// explicitly used when override inputlayout
-	void CreateInputLayout();
+	void CreateInputLayout(vector<D3D11_INPUT_ELEMENT_DESC> desc);
 
 public:
-	void SetVertexShader(shared_ptr<VertexShader> shader) { _vs = shader; CreateInputLayout(); }
+	void SetVertexShader(shared_ptr<VertexShader> shader,
+		vector<D3D11_INPUT_ELEMENT_DESC> desc = VertexType::descs) 
+	{
+		_vs = shader; CreateInputLayout(desc);
+	}
 	void SetPixelShader(shared_ptr<PixelShader> shader) { _ps = shader; }
 
 	shared_ptr<InputLayout> GetInputLayout() const { return _inputLayout; }

@@ -27,3 +27,4 @@ struct VertexTextureNormalTangentData
 };
 
 using VertexType = VertexTextureNormalTangentData;
+using DebugType = VertexColorData;
