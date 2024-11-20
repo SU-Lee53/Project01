@@ -31,7 +31,7 @@ struct GlobalLightDesc
     float4 specular;
     float4 emissive;
     float3 direction;
-    float padding;
+    int specularPowValue;
 };
 
 cbuffer GlobalLightData : register(b3)
@@ -106,14 +106,14 @@ float4 ComputeDiffuse(float3 normal, float2 uv)
     return color * value * GlobalLight.diffuse * Material.diffuse;
 }
 
-float4 ComputeSpecular(float3 normal, float2 uv, float3 worldPos, int power)
+float4 ComputeSpecular(float3 normal, float2 uv, float3 worldPos)
 {
     float3 R = normalize(reflect(-GlobalLight.direction, normalize(normal)));
     float3 cameraPos = -matViewInv._41_42_43;
     float3 E = normalize(cameraPos - worldPos);
     
     float value = max(dot(R, E), 0);
-    float specular = pow(value, power);
+    float specular = pow(value, GlobalLight.specularPowValue);
     //float4 color = specularMap.Sample(sampler0, uv) * Material.specular;
     
     return GlobalLight.specular * Material.specular * specular;
@@ -139,7 +139,7 @@ float4 ComputeLight(float3 normal, float2 uv, float3 worldPosition)
     
     // specular
     {
-        specularColor = ComputeSpecular(normal, uv, worldPosition, 20);
+        specularColor = ComputeSpecular(normal, uv, worldPosition);
     }
     
     // Emissive

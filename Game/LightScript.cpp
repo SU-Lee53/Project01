@@ -18,26 +18,31 @@ void LightScript::Update()
 		ImGui::SameLine();
 		ImGui::Text("Drag Speed : %f", _dragSpeed);
 
+		ImGui::NewLine();
 		ImGui::InputFloat3("Ambient", (float*)&_lightData.ambient);
 		ImGui::DragFloat("Ambient.R", &_lightData.ambient.x, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Ambient.G", &_lightData.ambient.y, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Ambient.B", &_lightData.ambient.z, _dragSpeed, 0.f, 1.f);
-		
+
+		ImGui::NewLine();
 		ImGui::InputFloat3("Diffuse", (float*)&_lightData.diffuse);
 		ImGui::DragFloat("Diffuse.R", &_lightData.diffuse.x, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Diffuse.G", &_lightData.diffuse.y, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Diffuse.B", &_lightData.diffuse.z, _dragSpeed, 0.f, 1.f);
-		
+
+		ImGui::NewLine();
 		ImGui::InputFloat3("Specular", (float*)&_lightData.specular);
 		ImGui::DragFloat("Specular.R", &_lightData.specular.x, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Specular.G", &_lightData.specular.y, _dragSpeed, 0.f, 1.f);
 		ImGui::DragFloat("Specular.B", &_lightData.specular.z, _dragSpeed, 0.f, 1.f);
-		
+		ImGui::DragInt("Pow", &_lightData.specularPowValue, 1.f, 0, 100);
+
+		ImGui::NewLine();
 		ImGui::InputFloat3("Direction", (float*)&_lightData.direction);
 		ImGui::DragFloat("Direction.x", &_lightData.direction.x, _dragSpeed, -1.f, 1.f);
 		ImGui::DragFloat("Direction.y", &_lightData.direction.y, _dragSpeed, -1.f, 1.f);
 		ImGui::DragFloat("Direction.z", &_lightData.direction.z, _dragSpeed, -1.f, 1.f);
-		_lightData.direction.Normalize();
+		//_lightData.direction.Normalize();
 
 		GetOwner()->GetComponent<GlobalLight>()->SetData(_lightData);
 	}

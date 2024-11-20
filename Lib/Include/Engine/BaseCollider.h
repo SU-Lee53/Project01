@@ -1,5 +1,41 @@
 #pragma once
 #include "Collider.h"
+#include "Shader.h"
+
+struct ColliderDebugMesh
+{
+public:
+	void Create()
+	{
+		SetShader();
+		CreateBuffers();
+	}
+
+private:
+	void SetShader()
+	{
+		_shader = make_shared<Shader>();
+		_shader->SetVertexShader(SHADER->GetVertexShader("ColliderDebug.hlsl"), DebugType::descs);
+		_shader->SetPixelShader(SHADER->GetPixelShader("ColliderDebug.hlsl"));
+	}
+
+	void CreateBuffers()
+	{
+		_vertexBuffer = make_shared<VertexBuffer>();
+		_vertexBuffer->Create(_geometry->GetVertices());
+
+		_indexBuffer = make_shared<IndexBuffer>();
+		_indexBuffer->Create(_geometry->GetIndices());
+	}
+
+private:
+	shared_ptr<Geometry<VertexType>> _geometry;
+	shared_ptr<VertexBuffer> _vertexBuffer;
+	shared_ptr<IndexBuffer> _indexBuffer;
+
+	shared_ptr<Shader> _shader;
+
+};
 
 template <typename C>
 class BaseCollider : public Collider

@@ -34,7 +34,7 @@ struct GlobalLightData
 	Color specular = Color{ 0.f, 0.f, 0.f, 1.f };
 	Color emissive = Color{ 0.f, 0.f, 0.f, 1.f };
 	Vec3 direction = Vec3{ 1.f,0.f,0.f };
-	float padding;
+	int specularPowValue = 10;
 
 	const static uint32 slot = 3;
 };

@@ -27,14 +27,14 @@ void Shader::CreateDefault()
 
 }
 
-void Shader::CreateVertexShader(const string& fileName, const string& shaderName)
+void Shader::CreateVertexShader(const string& fileName, const string& shaderName, vector<D3D11_INPUT_ELEMENT_DESC> desc)
 {
 	if (_vs == nullptr)
 		_vs = make_shared<VertexShader>();
 		
 	_vs->Create(fileName, shaderName, "vs_5_0");
 
-	CreateInputLayout();
+	CreateInputLayout(desc);
 }
 
 void Shader::CreatePixelShader(const string& fileName, const string& shaderName)

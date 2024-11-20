@@ -12,7 +12,7 @@ public:
 	void CreateDefault();
 
 	// fileName : actual file name / shaderName : ENTRY NAME
-	void CreateVertexShader(const string& fileName, const string& shaderName);
+	void CreateVertexShader(const string& fileName, const string& shaderName, vector<D3D11_INPUT_ELEMENT_DESC> desc = VertexType::descs);
 	void CreatePixelShader(const string& filename, const string& shaderName);
 	
 	// explicitly used when override inputlayout

@@ -112,6 +112,8 @@ vector<SHADER_DESC> ShaderManager::descs =
 {
     {SHADER_TYPE::Vertex,   "Vertex.hlsl",              "VS"},
     {SHADER_TYPE::Pixel,    "PixelWithNormal.hlsl",     "PS"},
-    {SHADER_TYPE::Pixel,    "PixelWithoutNormal.hlsl",  "PS"}
+    {SHADER_TYPE::Pixel,    "PixelWithoutNormal.hlsl",  "PS"},
+    {SHADER_TYPE::Vertex,   "ColliderDebug.hlsl",       "DEBUG_VS"},
+    {SHADER_TYPE::Pixel,    "ColliderDebug.hlsl",       "DEBUG_PS"}
     // Add when need more!!
 };

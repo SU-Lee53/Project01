@@ -1,7 +1,26 @@
 #include "global.hlsl"
 #include "light.hlsl"
 
-// PS
+VS_OUTPUT DEBUG_VS(VS_INPUT input)
+{
+    VS_OUTPUT output;
+    
+    output.position = mul(input.position, matLocal);
+    output.position = mul(output.position, matWorld);
+    output.worldPosition = output.position.xyz;
+    output.position = mul(output.position, matView);
+    output.position = mul(output.position, matProjection);
+    output.uv = input.uv;
+    
+    output.normal = mul(input.normal, (float3x3) matLocal);
+    output.normal = mul(input.normal, (float3x3) matWorld);
+    
+    output.tangent = mul(input.tangent, (float3x3) matLocal);
+    output.tangent = mul(input.tangent, (float3x3) matWorld);
+    
+    return output;
+}
+
 float4 PS(VS_OUTPUT input) : SV_Target
 {
     //ComputeNormalMapping(input.normal, input.tangent, input.uv);
