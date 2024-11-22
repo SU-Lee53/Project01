@@ -80,6 +80,10 @@ public:
 	COLLIDER_TYPE GetColliderType() { return _colliderType; }
 
 protected:
+	function<void(Collider c)> _handler;
+	Matrix transform;
+
+protected:
 	const COLLIDER_TYPE _colliderType;
 	shared_ptr<ColliderDebugMesh> _debugMesh;
 };

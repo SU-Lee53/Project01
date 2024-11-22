@@ -75,7 +75,7 @@ void RenderManager::Render()
 #ifdef _DEBUG
 		if (obj->HasCollider())
 		{
-			RenderColliderDebugMesh(obj);
+			//RenderColliderDebugMesh(obj);
 		}
 
 
