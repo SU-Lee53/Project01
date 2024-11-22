@@ -71,6 +71,15 @@ void RenderManager::Render()
 		{
 			RenderModel(obj);
 		}
+
+#ifdef _DEBUG
+		if (obj->HasCollider())
+		{
+			RenderColliderDebugMesh(obj);
+		}
+
+
+#endif
 	}
 }
 
@@ -161,6 +170,28 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 		_pipeline->DrawIndexed(mesh->indexBuffer->GetCount(), 0, 0);
 	}
 
+}
+
+void RenderManager::RenderColliderDebugMesh(shared_ptr<GameObject> obj)
+{
+	// Wireframe Rasterizer
+	D3D11_RASTERIZER_DESC _debugRasterizerDesc;
+	memset(&_debugRasterizerDesc, 0, sizeof(_debugRasterizerDesc));
+	{
+		_debugRasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
+		_debugRasterizerDesc.CullMode = D3D11_CULL_BACK;
+		_debugRasterizerDesc.FrontCounterClockwise = false;
+	}
+
+	ComPtr<ID3D11RasterizerState> _debugRasterizer;
+	HR_ASSERT(DEVICE->CreateRasterizerState(&_debugRasterizerDesc, _debugRasterizer.GetAddressOf()));
+
+	// TODO: Render Below
+
+
+
+
+	_debugRasterizer->Release();
 }
 
 void RenderManager::PushCameraData()

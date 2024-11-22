@@ -25,7 +25,7 @@ public:
 private:
 	void RenderLagacy(shared_ptr<GameObject> obj);
 	void RenderModel(shared_ptr<GameObject> obj);
-
+	void RenderColliderDebugMesh(shared_ptr<GameObject> obj);
 public:
 	void PushToRenderObject(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
 

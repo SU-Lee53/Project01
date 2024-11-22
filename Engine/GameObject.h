@@ -35,6 +35,14 @@ public:
 		return static_pointer_cast<T>(_components[idx]);
 	}
 
+
+	template <typename T,
+		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
+	bool HasComponent()
+	{
+		return _components[(int32)(T::ty)] ? true : false;
+	}
+
 public:
 	shared_ptr<Transform> GetTransform() const
 	{
@@ -53,6 +61,11 @@ public:
 	{
 		if (!_collider) assert(false);
 		return static_pointer_cast<C>(_collider);
+	}
+
+	bool HasCollider() 
+	{
+		return _collider ? true : false;
 	}
 
 public:

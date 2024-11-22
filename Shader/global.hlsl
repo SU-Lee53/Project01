@@ -25,14 +25,14 @@ struct VS_OUTPUT
 struct DEBUG_INPUT
 {
     float4 position : POSITION;
-    float2 color : COLOR;
+    float4 color : COLOR;
 };
 
 struct DEBUG_OUTPUT
 {
     float4 position : SV_POSITION;
     float3 worldPosition : POSITION1;
-    float3 color : COLOR;
+    float4 color : COLOR;
 };
 
 /////////////////////
