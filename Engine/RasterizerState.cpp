@@ -17,7 +17,7 @@ void RasterizerState::Create()
         desc.FillMode = D3D11_FILL_SOLID;
         desc.CullMode = D3D11_CULL_BACK;
         desc.FrontCounterClockwise = false;
-        //desc.ScissorEnable = true;
+        desc.ScissorEnable = true;
         desc.MultisampleEnable = true;
     }
 

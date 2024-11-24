@@ -22,5 +22,7 @@ public:
 private:
 	float _distanceFromOrigin;
 	Vec3 _normal;
+
+
 };
 

@@ -29,6 +29,8 @@ void CollisionTest::Init()
 		obj1->GetComponent<MeshRenderer>()->SetModel(model);
 
 		obj1->AddCollider<SphereCollider>();
+
+		obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
 	}
 	CUR_SCENE->AddObject(obj1);
 

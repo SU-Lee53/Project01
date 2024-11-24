@@ -6,6 +6,15 @@
 struct ColliderDebugMesh
 {
 public:
+	ColliderDebugMesh()
+	{
+		_geometry = make_shared<Geometry<DebugType>>();
+		_vertexBuffer = make_shared<VertexBuffer>();
+		_indexBuffer = make_shared<IndexBuffer>();
+		_shader = make_shared<Shader>();
+	}
+
+public:
 	void Create()
 	{
 		SetShader();
@@ -28,15 +37,6 @@ private:
 		_indexBuffer = make_shared<IndexBuffer>();
 		_indexBuffer->Create(_geometry->GetIndices());
 	}
-
-private:
-	// make primitive mesh for debug
-	// move seperately in near future!!!
-	template <ColliderType C>
-	void MakeDebugMesh()
-	{
-	}
-
 public:
 	void SetColor(const Color& color) { _color = color; }
 	Color GetColor() { return _color; }
@@ -44,6 +44,7 @@ public:
 	shared_ptr<Geometry<DebugType>> GetGeometry() { return _geometry; }
 	shared_ptr<VertexBuffer> GetVertexBuffer() { return _vertexBuffer; }
 	shared_ptr<IndexBuffer> GetIndexBuffer() { return _indexBuffer; }
+	shared_ptr<Shader> GetShader() { return _shader; }
 
 private:
 	shared_ptr<Geometry<DebugType>> _geometry;
@@ -75,17 +76,17 @@ public:
 		(static_cast<C*>(this))->UpdateCollider();
 	}
 
-	virtual void CreateDebugMesh() { assert(false); }
-
 	COLLIDER_TYPE GetColliderType() { return _colliderType; }
+
+	shared_ptr<ColliderDebugMesh> GetDebugMesh() { return _debugMesh; }
 
 protected:
 	function<void(Collider c)> _handler;
-	Matrix transform;
+	Matrix _transform;
 
 protected:
 	const COLLIDER_TYPE _colliderType;
-	shared_ptr<ColliderDebugMesh> _debugMesh;
+	shared_ptr<ColliderDebugMesh> _debugMesh = nullptr;
 };
 
 template<typename C>

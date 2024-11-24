@@ -12,11 +12,19 @@ public:
 	void UpdateCollider() override;
 
 public:
-	virtual void CreateDebugMesh() override;
+	void ShrinkToFit();
+	void SetData(Vec3 center, float radius)
+	{
+		_center = center;
+		_radius = radius;
+	}
+
+public:
+	void CreateDebugMesh();
 
 private:
-	Vec3 _center;
-	float _radius;
+	Vec3 _center = Vec3{ 0.f,0.f,0.f };
+	float _radius = 1.f;
 
 };
 

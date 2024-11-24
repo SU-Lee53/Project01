@@ -1,12 +1,5 @@
 #include "global.hlsl"
 
-// PS
-
-RasterizerState Wireframe
-{
-    FillMode = Wireframe;
-};
-
 DEBUG_OUTPUT DEBUG_VS(DEBUG_INPUT input)
 {
     DEBUG_OUTPUT output;

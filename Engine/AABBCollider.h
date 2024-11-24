@@ -12,6 +12,7 @@ public:
 	void UpdateCollider() override;
 
 public:
+
 	void SetData(float center, Vec3 size)
 	{
 		_center = center;
@@ -21,6 +22,7 @@ public:
 private:
 	float _center;
 	Vec3 _size;
+
 
 };
 

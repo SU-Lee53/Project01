@@ -37,8 +37,8 @@ private:
 
 public:
 	void SetRasterizerState(shared_ptr<RasterizerState> rs) { _rasterizerState = rs; }
-	void SetRasterizerState(shared_ptr<BlendState> bs) { _blendState = bs; }
-	void SetRasterizerState(shared_ptr<SamplerState> ss) { _samplerState = ss; }
+	void SetBlendState(shared_ptr<BlendState> bs) { _blendState = bs; }
+	void SetSamplerState(shared_ptr<SamplerState> ss) { _samplerState = ss; }
 
 public:
 	void SetCameraData(const CameraData& cam) { _cameraData = cam; }

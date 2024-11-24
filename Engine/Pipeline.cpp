@@ -43,6 +43,11 @@ void Pipeline::SetIndexBuffer(shared_ptr<IndexBuffer> buffer)
     DC->IASetIndexBuffer(buffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
+void Pipeline::SetRasterizerState(shared_ptr<RasterizerState> rs)
+{
+    DC->RSSetState(rs->GetComPtr().Get());
+}
+
 void Pipeline::DrawIndexed(uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation)
 {
     DC->DrawIndexed(indexCount, startIndexLocation, baseVertexLocation);

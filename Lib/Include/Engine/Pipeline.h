@@ -29,6 +29,8 @@ public:
 	template <ShaderType shaderTy>
 	void SetSamplerState(uint32 slot, shared_ptr<SamplerState> samplerState);
 
+	void SetRasterizerState(shared_ptr<RasterizerState> rs);
+
 	template <typename T, ShaderType shaderTy>
 	void SetConstantBuffer(shared_ptr<ConstantBuffer<T>> buffer);
 	
