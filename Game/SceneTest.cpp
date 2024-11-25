@@ -9,7 +9,6 @@
 #include "ModelScript.h"
 #include "LightScript.h"
 #include "GlobalLight.h"
-#include "Collider.h"
 #include "SphereCollider.h"
 #include "Scene.h"
 #include "SceneModelController.h"

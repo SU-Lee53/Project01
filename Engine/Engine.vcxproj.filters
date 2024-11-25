@@ -242,7 +242,10 @@
     <ClCompile Include="EnginePch.cpp">
       <Filter>소스 파일\99. Headers</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
+    <ClCompile Include="BaseCollider.cpp">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="AABBCollider.cpp">
@@ -251,10 +254,7 @@
     <ClCompile Include="PlaneCollider.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>소스 파일\04. Component\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseCollider.cpp">
+    <ClCompile Include="BoundingPlane.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
@@ -424,7 +424,10 @@
     <ClInclude Include="Shader_Base.h">
       <Filter>소스 파일\06. Resources\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
+    <ClInclude Include="BaseCollider.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="AABBCollider.h">
@@ -433,10 +436,7 @@
     <ClInclude Include="PlaneCollider.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="SphereCollider.h">
-      <Filter>소스 파일\04. Component\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseCollider.h">
+    <ClInclude Include="BoundingPlane.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>

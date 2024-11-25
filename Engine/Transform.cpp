@@ -14,40 +14,31 @@ Transform::~Transform()
 
 void Transform::Init_impl()
 {
-	// Something wrong (maybe in ToEulerAngles())
-	// DO NOT USE LOCAL VALUES UNTIL PROBLEM FIX!!!
-
-	// Sync local transform with models final bone
-	// Assume that every models has only one mesh/bone in meshes/bones
-	auto meshRenderer = GetOwner()->GetComponent<MeshRenderer>();
-	if (meshRenderer and meshRenderer->GetModel())
+	// 11.25
+	// TODO : Get Bone transform to world!!
+	if(GetOwner()->HasComponent<MeshRenderer>())
 	{
-		auto model = GetOwner()->GetComponent<MeshRenderer>()->GetModel();
-		auto bone = model->GetBones()[model->GetMeshes()[0]->boneIndex];
-		Matrix transform = bone->transform;
+		auto root = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetBones();
+		Matrix local = root[GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMeshes().front()->boneIndex]->transform;
 
 		Vec3 outPos;
-		Quaternion outRot;
 		Vec3 outScale;
-		
-		transform.Decompose(outScale, outRot, outPos);
-		Vec3 Rot = Utils::ToEulerAngles(outRot);
-		
-		_localPosition = outPos;
-		_localScale = outScale;
-		_localRotation = Vec3{
-			XMConvertToDegrees(Rot.x),
-			XMConvertToDegrees(Rot.y),
-			XMConvertToDegrees(Rot.z)
+		Quaternion outRot;
+
+		local.Decompose(outScale, outRot, outPos);
+
+		_position = outPos;
+		_scale = outScale;
+
+		// 11.26
+		// something wrong i guess
+		Vec3 temp = Utils::ToEulerAngles(outRot);
+
+		_rotation = Vec3{
+			XMConvertToDegrees(temp.x),
+			XMConvertToDegrees(temp.y),
+			XMConvertToDegrees(temp.z)
 		};
-
-		//Matrix localTranslate = Matrix::CreateTranslation(_localPosition);
-		//Matrix localRotate = Matrix::CreateRotationX(_localRotation.x);
-		//localRotate *= Matrix::CreateRotationY(_localRotation.y);
-		//localRotate *= Matrix::CreateRotationZ(_localRotation.z);
-		//Matrix localScale = Matrix::CreateScale(outScale);
-
-		_local = transform;
 	}
 }
 
@@ -75,7 +66,9 @@ void Transform::UpdateMatrix()
 	rotate *= Matrix::CreateRotationZ(rotDegree.z);
 	scale *= Matrix::CreateScale(_scale);
 	
-	_world = rotate * translate * scale;
+	_world = scale;
+	_world *= rotate;
+	_world *= translate;
 
 	// Local
 	translate = Matrix::Identity;
@@ -94,7 +87,9 @@ void Transform::UpdateMatrix()
 	rotate *= Matrix::CreateRotationZ(rotDegree.z);
 	scale *= Matrix::CreateScale(_localScale);
 
-	_local = scale * rotate * translate;
+	_local = scale;
+	_local *= rotate;
+	_local *= translate;
 
 }
 

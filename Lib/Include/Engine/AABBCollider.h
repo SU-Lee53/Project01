@@ -1,28 +1,23 @@
 #pragma once
 #include "BaseCollider.h"
 
-class AABBCollider : public BaseCollider<AABBCollider>
+class AABBCollider : public BaseCollider
 {
 public:
 	AABBCollider();
 	virtual ~AABBCollider();
 
 public:
-	void InitCollider() override;
-	void UpdateCollider() override;
+	virtual void UpdateCollider() override;
 
 public:
+	virtual bool CheckCollision(shared_ptr<BaseCollider> other) override;
 
-	void SetData(float center, Vec3 size)
-	{
-		_center = center;
-		_size = size;
-	}
+public:
+	BoundingBox& GetBoundingBox() { return _boundingBox; }
 
 private:
-	float _center;
-	Vec3 _size;
-
+	BoundingBox _boundingBox;
 
 };
 

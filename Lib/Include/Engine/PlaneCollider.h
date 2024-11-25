@@ -1,28 +1,22 @@
 #pragma once
 #include "BaseCollider.h"
+#include "BoundingPlane.h"
 
-class PlaneCollider : public BaseCollider<PlaneCollider>
+class PlaneCollider : public BaseCollider
 {
 public:
 	PlaneCollider();
 	virtual ~PlaneCollider();
 
+public:
+	virtual void UpdateCollider() override;
 
 public:
-	void InitCollider() override;
-	void UpdateCollider() override;
+	virtual bool CheckCollision(shared_ptr<BaseCollider> other) override;
 
-public:
-	void SetData(float distanceFromOrigin, Vec3 normal)
-	{
-		_distanceFromOrigin = distanceFromOrigin;
-		_normal = normal;
-	}
+	BoundingPlane& GetBoundingPlane() { return _boundingPlane; }
 
 private:
-	float _distanceFromOrigin;
-	Vec3 _normal;
-
-
+	BoundingPlane _boundingPlane;
 };
 

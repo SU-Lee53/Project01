@@ -1,30 +1,25 @@
 #pragma once
 #include "BaseCollider.h"
 
-class SphereCollider : public BaseCollider<SphereCollider>
+class SphereCollider : public BaseCollider
 {
 public:
 	SphereCollider();
 	virtual ~SphereCollider();
 
 public:
-	void InitCollider() override;
-	void UpdateCollider() override;
+	virtual void UpdateCollider() override;
 
 public:
-	void ShrinkToFit();
-	void SetData(Vec3 center, float radius)
-	{
-		_center = center;
-		_radius = radius;
-	}
+	virtual bool CheckCollision(shared_ptr<BaseCollider> other) override;
 
 public:
-	void CreateDebugMesh();
+	void SetRadius(float radius) { _radius = radius; }
+	BoundingSphere& GetBoundingSphere() { return _boundingSphere; }
 
 private:
-	Vec3 _center = Vec3{ 0.f,0.f,0.f };
 	float _radius = 1.f;
+	BoundingSphere _boundingSphere;
 
 };
 

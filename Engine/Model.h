@@ -20,6 +20,7 @@ public:
 	void SetMaterial(vector<shared_ptr<Material>> material) { _materials = material; }
 	void AddMaterial(shared_ptr<Material> material) { _materials.push_back(material); }
 
+	auto GetRootBone() const { return _root; }
 	auto GetBones() const { return _bones; }
 	auto GetMeshes() const { return _meshes; }
 	auto GetMaterials() const { return _materials; }

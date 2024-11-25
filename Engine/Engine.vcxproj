@@ -22,8 +22,8 @@
     <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="BaseCollider.cpp" />
     <ClCompile Include="BlendState.cpp" />
+    <ClCompile Include="BoundingPlane.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Component_Base.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
@@ -101,8 +101,8 @@
     <ClInclude Include="AABBCollider.h" />
     <ClInclude Include="BaseCollider.h" />
     <ClInclude Include="BlendState.h" />
+    <ClInclude Include="BoundingPlane.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Component_Base.h" />
     <ClInclude Include="ConstantBuffer.h" />

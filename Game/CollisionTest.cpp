@@ -9,8 +9,6 @@
 #include "ModelScript.h"
 #include "LightScript.h"
 #include "GlobalLight.h"
-#include "Collider.h"
-#include "SphereCollider.h"
 #include "BaseCollider.h"
 #include "Scene.h"
 #include "SceneModelController.h"
@@ -28,9 +26,9 @@ void CollisionTest::Init()
 		model->LoadFromFiles(L"pool_ball_1.mesh");
 		obj1->GetComponent<MeshRenderer>()->SetModel(model);
 
-		obj1->AddCollider<SphereCollider>();
-
-		obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
+		//obj1->AddCollider<SphereCollider>();
+		//
+		//obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
 	}
 	CUR_SCENE->AddObject(obj1);
 
@@ -44,7 +42,7 @@ void CollisionTest::Init()
 		model->LoadFromFiles(L"pool_ball_2.mesh");
 		obj2->GetComponent<MeshRenderer>()->SetModel(model);
 
-		obj2->AddCollider<SphereCollider>();
+		//obj2->AddCollider<SphereCollider>();
 	}
 	CUR_SCENE->AddObject(obj2);
 
@@ -54,7 +52,7 @@ void CollisionTest::Init()
 		_cam->AddComponent<Transform>();
 		_cam->AddComponent<Camera>();
 
-		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -5.0f });
+		_cam->GetComponent<Transform>()->SetPosition(Vec3{ 0.0f, 0.0f, -15.0f });
 
 		auto _mouseScript = make_shared<MouseScript>();
 		_cam->AddScript(_mouseScript);

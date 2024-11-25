@@ -61,9 +61,9 @@ void SceneModelController::Update()
 					ImGui::Text("Drag Speed : %f", _dragSpeed);
 
 					ImGui::InputFloat3("Pos", (float*)&pos);
-					ImGui::DragFloat("Pos.x", &pos.x, _dragSpeed, -10.f, 10.f);
-					ImGui::DragFloat("Pos.y", &pos.y, _dragSpeed, -10.f, 10.f);
-					ImGui::DragFloat("Pos.z", &pos.z, _dragSpeed, -10.f, 10.f);
+					ImGui::DragFloat("Pos.x", &pos.x, _dragSpeed, -100.f, 100.f);
+					ImGui::DragFloat("Pos.y", &pos.y, _dragSpeed, -100.f, 100.f);
+					ImGui::DragFloat("Pos.z", &pos.z, _dragSpeed, -100.f, 100.f);
 
 					ImGui::InputFloat3("Rot", (float*)&rot, "%.3f Deg");
 					ImGui::DragFloat("Rot.x", &rot.x, _dragSpeed, -180.f, 180.f);

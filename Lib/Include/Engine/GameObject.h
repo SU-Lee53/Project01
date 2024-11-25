@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include "Transform.h"
-#include "Collider.h"
+//#include "Collider.h"
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -50,24 +50,6 @@ public:
 	}
 
 public:
-	template <ColliderType C>
-	void AddCollider()
-	{
-		_collider = make_shared<C>();
-	}
-
-	template <ColliderType C>
-	shared_ptr<C> GetCollider()
-	{
-		if (!_collider) assert(false);
-		return static_pointer_cast<C>(_collider);
-	}
-
-	bool HasCollider() 
-	{
-		return _collider ? true : false;
-	}
-
 public:
 	void AddScript(shared_ptr<Script<GameObject>> script);
 
@@ -77,9 +59,6 @@ public:
 
 private:
 	array<shared_ptr<Component_Base>, COMPONENT_COUNT> _components;
-
-	// Collider
-	shared_ptr<Collider> _collider;
 
 	// Scripts
 	vector<shared_ptr<Script<GameObject>>> _scripts;
