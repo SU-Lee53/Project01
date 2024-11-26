@@ -13,38 +13,60 @@
 #include "Scene.h"
 #include "SceneModelController.h"
 
+#include "Material.h"
 
 void CollisionTest::Init()
 {
-	auto obj1 = make_shared<GameObject>();
+	//auto obj1 = make_shared<GameObject>();
+	//{
+	//	obj1->SetName("ball_1");
+	//	obj1->AddComponent<Transform>();
+	//	obj1->AddComponent<MeshRenderer>();
+
+	//	auto model = make_shared<Model>();
+	//	model->LoadFromFiles(L"pool_ball_1.mesh");
+	//	obj1->GetComponent<MeshRenderer>()->SetModel(model);
+
+	//	//auto tex = make_shared<Texture>();
+	//	//tex->CreateErrorTexture();
+	//	//obj1->GetComponent<MeshRenderer>()->GetModel()->GetMaterials().front()->SetDiffuseMap(tex);
+
+	//	//obj1->AddCollider<SphereCollider>();
+	//	//
+	//	//obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
+	//}
+	//CUR_SCENE->AddObject(obj1);
+
+	//auto obj2 = make_shared<GameObject>();
+	//{
+	//	obj2->SetName("ball_2");
+	//	obj2->AddComponent<Transform>();
+	//	obj2->AddComponent<MeshRenderer>();
+
+	//	auto model = make_shared<Model>();
+	//	model->LoadFromFiles(L"pool_ball_2.mesh");
+	//	obj2->GetComponent<MeshRenderer>()->SetModel(model);
+
+	//	//obj2->AddCollider<SphereCollider>();
+	//}
+	//CUR_SCENE->AddObject(obj2);
+
+	for (const auto& targets : LoadTargets)
 	{
-		obj1->SetName("ball_1");
-		obj1->AddComponent<Transform>();
-		obj1->AddComponent<MeshRenderer>();
+		auto obj = make_shared<GameObject>();
+		{
+			obj->AddComponent<Transform>();
+			obj->AddComponent<MeshRenderer>();
 
-		auto model = make_shared<Model>();
-		model->LoadFromFiles(L"pool_ball_1.mesh");
-		obj1->GetComponent<MeshRenderer>()->SetModel(model);
+			auto model = make_shared<Model>();
+			model->LoadFromFiles(targets);
+			obj->GetComponent<MeshRenderer>()->SetModel(model);
 
-		//obj1->AddCollider<SphereCollider>();
-		//
-		//obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
+			string name = filesystem::path(targets).filename().string();
+			obj->SetName(name);
+		}
+		CUR_SCENE->AddObject(obj);
 	}
-	CUR_SCENE->AddObject(obj1);
-
-	auto obj2 = make_shared<GameObject>();
-	{
-		obj2->SetName("ball_2");
-		obj2->AddComponent<Transform>();
-		obj2->AddComponent<MeshRenderer>();
-
-		auto model = make_shared<Model>();
-		model->LoadFromFiles(L"pool_ball_2.mesh");
-		obj2->GetComponent<MeshRenderer>()->SetModel(model);
-
-		//obj2->AddCollider<SphereCollider>();
-	}
-	CUR_SCENE->AddObject(obj2);
 
 
 	auto _cam = make_shared<GameObject>();

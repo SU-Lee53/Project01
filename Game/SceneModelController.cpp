@@ -53,6 +53,7 @@ void SceneModelController::Update()
 					Vec3 pos = target->GetTransform()->GetPosition();
 					Vec3 rot = target->GetTransform()->GetRotation();
 					Vec3 scale = target->GetTransform()->GetScale();
+					Quaternion q = target->GetTransform()->GetQuaternion();
 
 					if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { _dragSpeed -= 0.05f; }
 					ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
@@ -102,10 +103,25 @@ void SceneModelController::Update()
 					ImGui::Text("Z: %3f", rot.z);
 					ImGui::Text("");
 
+					ImGui::Text("Quaternion");
+					ImGui::Text("X: %3f", q.x);
+					ImGui::Text("Y: %3f", q.y);
+					ImGui::Text("Z: %3f", q.z);
+					ImGui::Text("W: %3f", q.w);
+					ImGui::Text("");
+
+					ImGui::Text("Quaternion to Rotation");
+					ImGui::Text("X: %3f", XMConvertToDegrees(Utils::ToEulerAngles(q).x));
+					ImGui::Text("Y: %3f", XMConvertToDegrees(Utils::ToEulerAngles(q).y));
+					ImGui::Text("Z: %3f", XMConvertToDegrees(Utils::ToEulerAngles(q).z));
+					ImGui::Text("");
+					
 					ImGui::Text("Scale");
 					ImGui::Text("X: %3f", scale.x);
 					ImGui::Text("Y: %3f", scale.y);
 					ImGui::Text("Z: %3f", scale.z);
+
+					Utils::ShowMatrix(_items[itemSelected].second->GetTransform()->GetWorld());
 
 					ImGui::EndTabItem();
 				}
@@ -168,6 +184,8 @@ void SceneModelController::Update()
 					ImGui::Text("X: %3f", localScale.x);
 					ImGui::Text("Y: %3f", localScale.y);
 					ImGui::Text("Z: %3f", localScale.z);
+
+					Utils::ShowMatrix(_items[itemSelected].second->GetTransform()->GetLocal());
 
 					ImGui::EndTabItem();
 				}

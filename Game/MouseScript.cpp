@@ -42,10 +42,10 @@ void MouseScript::Update()
 
 	if (INPUT->GetButtonDown(KEY_TYPE::E))
 	{
-		if (_mouseOnOff)
-			_mouseOnOff = false;
+		if (_mouseOn)
+			_mouseOn = false;
 		else
-			_mouseOnOff = true;
+			_mouseOn = true;
 	}
 
 	GetCursorPos(&_point);
@@ -61,7 +61,7 @@ void MouseScript::Update()
 	screenCenterX = rMyRect.left + GAME.GetDesc().width / 2;
 	screenCenterY = rMyRect.top + GAME.GetDesc().height / 2;
 
-	if(_mouseOnOff)
+	if(_mouseOn)
 	{
 		{
 			_deltaX = (_point.x - screenCenterX);	// Yaw

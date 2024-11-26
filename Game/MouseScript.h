@@ -10,7 +10,7 @@ public:
 private:
 	friend class Test;
 
-	bool _mouseOnOff = true;
+	bool _mouseOn = false;
 
 	int _speed = 10.f;
 	POINT _point;

@@ -18,6 +18,7 @@ public:
 	
 	Vec3 GetPosition() { return _position; }
 	Vec3 GetRotation() { return _rotation; }
+	Quaternion GetQuaternion() { return _quaternion; }
 	Vec3 GetScale() { return _scale; }
 	
 	void SetLocalPosition(const Vec3& pos);
@@ -26,6 +27,7 @@ public:
 	
 	Vec3 GetLocalPosition() { return _localPosition; }
 	Vec3 GetLocalRotation() { return _localRotation; }
+	Quaternion GetLocalQuaternion() { return _localQuaternion; }
 	Vec3 GetLocalScale() { return _localScale; }
 
 	Vec3 GetLook() { return _world.Backward(); }
@@ -41,10 +43,12 @@ public:
 private:
 	Vec3 _localPosition = { 0.f, 0.f, 0.f };
 	Vec3 _localRotation = { 0.f, 0.f, 0.f };
+	Quaternion _localQuaternion = { 0.f,0.f,0.f,0.f };
 	Vec3 _localScale = { 1.f, 1.f, 1.f };
 	
 	Vec3 _position = { 0.f, 0.f, 0.f };
 	Vec3 _rotation = { 0.f, 0.f, 0.f };
+	Quaternion _quaternion = { 0.f,0.f,0.f,0.f };
 	Vec3 _scale = { 1.f, 1.f, 1.f };
 
 

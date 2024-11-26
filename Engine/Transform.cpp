@@ -60,33 +60,38 @@ void Transform::UpdateMatrix()
 		XMConvertToRadians(_rotation.z)
 	};
 
+	_quaternion = Quaternion::CreateFromYawPitchRoll(rotDegree.y, rotDegree.x, rotDegree.z);
+
 	translate *= Matrix::CreateTranslation(_position);
-	rotate *= Matrix::CreateRotationX(rotDegree.x);
-	rotate *= Matrix::CreateRotationY(rotDegree.y);
-	rotate *= Matrix::CreateRotationZ(rotDegree.z);
+	//rotate *= Matrix::CreateRotationX(rotDegree.x);
+	//rotate *= Matrix::CreateRotationY(rotDegree.y);
+	//rotate *= Matrix::CreateRotationZ(rotDegree.z);
+	rotate *= Matrix::CreateFromQuaternion(_quaternion);
 	scale *= Matrix::CreateScale(_scale);
 	
 	_world = scale;
 	_world *= rotate;
 	_world *= translate;
 
-	// Local
 	translate = Matrix::Identity;
 	rotate = Matrix::Identity;
 	scale = Matrix::Identity;
-
+	
 	rotDegree = {
 		XMConvertToRadians(_localRotation.x),
 		XMConvertToRadians(_localRotation.y),
 		XMConvertToRadians(_localRotation.z)
 	};
 
-	translate *= Matrix::CreateTranslation(_localPosition);
-	rotate *= Matrix::CreateRotationX(rotDegree.x);
-	rotate *= Matrix::CreateRotationY(rotDegree.y);
-	rotate *= Matrix::CreateRotationZ(rotDegree.z);
-	scale *= Matrix::CreateScale(_localScale);
+	_localQuaternion = Quaternion::CreateFromYawPitchRoll(rotDegree.y, rotDegree.x, rotDegree.y);
 
+	translate *= Matrix::CreateTranslation(_localPosition);
+	//rotate *= Matrix::CreateRotationX(rotDegree.x);
+	//rotate *= Matrix::CreateRotationY(rotDegree.y);
+	//rotate *= Matrix::CreateRotationZ(rotDegree.z);
+	rotate *= Matrix::CreateFromQuaternion(_quaternion);
+	scale *= Matrix::CreateScale(_localScale);
+	
 	_local = scale;
 	_local *= rotate;
 	_local *= translate;
