@@ -155,6 +155,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SceneMaker.cpp" />
+    <ClCompile Include="SceneMakerScript.cpp" />
     <ClCompile Include="SceneModelController.cpp" />
     <ClCompile Include="SceneTest.cpp" />
     <ClCompile Include="Test.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="NewStructureTest.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SceneMaker.h" />
+    <ClInclude Include="SceneMakerScript.h" />
     <ClInclude Include="SceneModelController.h" />
     <ClInclude Include="SceneTest.h" />
     <ClInclude Include="Test.h" />
