@@ -10,6 +10,8 @@ public:
 	GameObject();
 	~GameObject();
 
+	GameObject(const GameObject& obj) = default;
+
 public:
 	void Init();
 	void Update();

@@ -54,19 +54,19 @@ void Transform::UpdateMatrix()
 	Matrix rotate		= Matrix::Identity;
 	Matrix scale		= Matrix::Identity;
 
-	Vec3 rotDegree = {
+	Vec3 rotRadians = {
 		XMConvertToRadians(_rotation.x),
 		XMConvertToRadians(_rotation.y),
 		XMConvertToRadians(_rotation.z)
 	};
 
-	_quaternion = Quaternion::CreateFromYawPitchRoll(rotDegree.y, rotDegree.x, rotDegree.z);
+	_quaternion = Quaternion::CreateFromYawPitchRoll(rotRadians.y, rotRadians.x, rotRadians.z);
 
 	translate *= Matrix::CreateTranslation(_position);
-	//rotate *= Matrix::CreateRotationX(rotDegree.x);
-	//rotate *= Matrix::CreateRotationY(rotDegree.y);
-	//rotate *= Matrix::CreateRotationZ(rotDegree.z);
-	rotate *= Matrix::CreateFromQuaternion(_quaternion);
+	rotate *= Matrix::CreateRotationX(rotRadians.x);
+	rotate *= Matrix::CreateRotationY(rotRadians.y);
+	rotate *= Matrix::CreateRotationZ(rotRadians.z);
+	//rotate *= Matrix::CreateFromQuaternion(_quaternion);
 	scale *= Matrix::CreateScale(_scale);
 	
 	_world = scale;
@@ -77,19 +77,19 @@ void Transform::UpdateMatrix()
 	rotate = Matrix::Identity;
 	scale = Matrix::Identity;
 	
-	rotDegree = {
+	rotRadians = {
 		XMConvertToRadians(_localRotation.x),
 		XMConvertToRadians(_localRotation.y),
 		XMConvertToRadians(_localRotation.z)
 	};
 
-	_localQuaternion = Quaternion::CreateFromYawPitchRoll(rotDegree.y, rotDegree.x, rotDegree.y);
+	_localQuaternion = Quaternion::CreateFromYawPitchRoll(rotRadians.y, rotRadians.x, rotRadians.y);
 
 	translate *= Matrix::CreateTranslation(_localPosition);
-	//rotate *= Matrix::CreateRotationX(rotDegree.x);
-	//rotate *= Matrix::CreateRotationY(rotDegree.y);
-	//rotate *= Matrix::CreateRotationZ(rotDegree.z);
-	rotate *= Matrix::CreateFromQuaternion(_localQuaternion);
+	rotate *= Matrix::CreateRotationX(rotRadians.x);
+	rotate *= Matrix::CreateRotationY(rotRadians.y);
+	rotate *= Matrix::CreateRotationZ(rotRadians.z);
+	//rotate *= Matrix::CreateFromQuaternion(_localQuaternion);
 	scale *= Matrix::CreateScale(_localScale);
 	
 	_local = scale;

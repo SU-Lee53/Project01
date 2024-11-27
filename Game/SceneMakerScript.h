@@ -1,20 +1,59 @@
 #pragma once
 #include <Script.h>
 
+
+/*
+	- What we need
+		1. Make Object and add to scene
+		2. Modify Object in scene
+			- AddComponent
+			- AddCollider
+			- Modify Component(Transform)
+		3. Save / Load Scene
+			- Save What?
+				- Scene name
+				- Objs
+				- Cams
+				- Scripts?
+*/
+
 class SceneMakerScript : public Script<Scene>
 {
 public:
 	virtual void Init() override;
 	virtual void Update() override;
 
-
+public:
 	void SaveScene();
 	void LoadScene();
 
 private:
-	vector<GameObject> LoadedObjs;
+	// Obj Loader() and variables
+	void ObjLoader();
+
+	char name[128];
+
 
 private:
+	void UpdateComboList();
+
+private:
+	void ControlComponent();
+
+
+
+
+private:
+
+private:
+	// LoadedObj Combo Variables
+	int32 itemSelected = 0;
+	const char* previewName;
+	int32 prevComboListSize = 0;
+
+private:
+	vector<pair<string, shared_ptr<GameObject>>> LoadedObjs;
+
 	vector<wstring> LoadTargets =
 	{
 		L"pool_cue.mesh",

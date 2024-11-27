@@ -63,6 +63,12 @@ void MouseScript::Update()
 
 	if(_mouseOn)
 	{
+		if (!_mouseHidden)
+		{
+			_mouseHidden = true;
+			ShowCursor(false);
+		}
+
 		{
 			_deltaX = (_point.x - screenCenterX);	// Yaw
 			_deltaY = (_point.y - screenCenterY);	// Pitch
@@ -78,6 +84,12 @@ void MouseScript::Update()
 	}
 	else
 	{
+		if (_mouseHidden)
+		{
+			_mouseHidden = false;
+			ShowCursor(true);
+		}
+
 		if (ImGui::Begin("Non-mouse freelook"))
 		{
 			ImGui::SliderFloat("Pitch", &rot.x, -180.f, 180.f, "%.3f Deg");

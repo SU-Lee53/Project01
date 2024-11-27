@@ -17,39 +17,6 @@
 
 void CollisionTest::Init()
 {
-	//auto obj1 = make_shared<GameObject>();
-	//{
-	//	obj1->SetName("ball_1");
-	//	obj1->AddComponent<Transform>();
-	//	obj1->AddComponent<MeshRenderer>();
-
-	//	auto model = make_shared<Model>();
-	//	model->LoadFromFiles(L"pool_ball_1.mesh");
-	//	obj1->GetComponent<MeshRenderer>()->SetModel(model);
-
-	//	//auto tex = make_shared<Texture>();
-	//	//tex->CreateErrorTexture();
-	//	//obj1->GetComponent<MeshRenderer>()->GetModel()->GetMaterials().front()->SetDiffuseMap(tex);
-
-	//	//obj1->AddCollider<SphereCollider>();
-	//	//
-	//	//obj1->GetCollider<SphereCollider>()->CreateDebugMesh();
-	//}
-	//CUR_SCENE->AddObject(obj1);
-
-	//auto obj2 = make_shared<GameObject>();
-	//{
-	//	obj2->SetName("ball_2");
-	//	obj2->AddComponent<Transform>();
-	//	obj2->AddComponent<MeshRenderer>();
-
-	//	auto model = make_shared<Model>();
-	//	model->LoadFromFiles(L"pool_ball_2.mesh");
-	//	obj2->GetComponent<MeshRenderer>()->SetModel(model);
-
-	//	//obj2->AddCollider<SphereCollider>();
-	//}
-	//CUR_SCENE->AddObject(obj2);
 
 	for (const auto& targets : LoadTargets)
 	{
@@ -110,8 +77,6 @@ void CollisionTest::Init()
 
 	auto sceneScript = make_shared<SceneModelController>();
 	CUR_SCENE->AddScript(sceneScript);
-
-	CUR_SCENE->Init();
 }
 
 void CollisionTest::Update()

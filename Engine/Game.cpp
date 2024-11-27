@@ -5,6 +5,7 @@
 #include "MeshRenderer.h"
 #include "Camera.h"
 #include "Execute.h"
+#include "Scene.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -28,7 +29,7 @@ WPARAM Game::Run(GameDesc& desc)
 		GRAPHICS.Init(_desc.hWnd);
 		MANAGER.Init();
 		desc.program->Init();
-
+		CUR_SCENE->Init();
 
 	}
 

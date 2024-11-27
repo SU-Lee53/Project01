@@ -8,7 +8,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	vector<wstring> LoadTargets =
+	vector<wstring> LoadTargets = 
 	{
 		//L"pool_cue.mesh",
 		//L"floor.mesh",
