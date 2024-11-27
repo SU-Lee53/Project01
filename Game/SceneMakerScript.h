@@ -55,6 +55,8 @@ private:
 private:
 	// LoadedObj Combo Variables
 	int32 lo_itemSelected = 0;
+	bool lo_itemHighlighted = 0;
+	int32 lo_itemHighlightedIdx = 0;
 	const char* lo_previewName;
 	int32 lo_prevComboListSize = 0;
 

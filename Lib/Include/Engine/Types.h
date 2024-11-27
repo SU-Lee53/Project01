@@ -24,5 +24,19 @@ using Matrix = DirectX::SimpleMath::Matrix;
 using Quaternion = DirectX::SimpleMath::Quaternion;
 using Ray = DirectX::SimpleMath::Ray;
 
+struct EulerAngle
+{
+	union
+	{
+		Vec3 v;
+		struct
+		{
+			float pitch;
+			float yaw;
+			float roll;
+		};
+	};
+};
+
 // MeshID / MaterialID
 using InstanceID = std::pair<uint64, uint64>;

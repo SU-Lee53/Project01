@@ -75,6 +75,10 @@ void MouseScript::Update()
 
 			rot.x += _deltaY * _sensitivity;
 			rot.y += _deltaX * _sensitivity;
+
+			if (rot.x >= 90.f) rot.x = 90.f;
+			if (rot.x <= -90.f) rot.x = -90.f;
+
 		}
 
 		GetOwner()->GetTransform()->SetRotation(rot);

@@ -138,20 +138,21 @@ void SceneMakerScript::LoadScene()
 
 void SceneMakerScript::ObjLoader()
 {
-	if (ImGui::BeginCombo("Objs", lo_previewName, ImGuiComboFlags_PopupAlignLeft))
+	if (ImGui::BeginListBox("LoadedObjs"))
 	{
-		for (int32 n = 0; n < LoadedObjs.size(); n++)
+		for (int n = 0; n < LoadedObjs.size(); n++)
 		{
 			const bool is_selected = (lo_itemSelected == n);
 			if (ImGui::Selectable(LoadedObjs[n].first.c_str(), is_selected))
 				lo_itemSelected = n;
 
+			if (lo_itemHighlighted && ImGui::IsItemHovered())
+				lo_itemHighlightedIdx = n;
+
 			if (is_selected)
-			{
 				ImGui::SetItemDefaultFocus();
-			}
 		}
-		ImGui::EndCombo();
+		ImGui::EndListBox();
 	}
 
 	ImGui::InputText("Name", name, IM_ARRAYSIZE(name));
