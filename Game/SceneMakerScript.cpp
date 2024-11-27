@@ -4,6 +4,10 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Model.h"
+#include "Transform.h"
+#include "Camera.h"
+#include "GlobalLight.h"
+#include "BaseCollider.h"
 #include <filesystem>
 
 
@@ -38,17 +42,17 @@ void SceneMakerScript::Init()
 		LoadedObjs.push_back(make_pair(filesystem::path(targets).filename().string(), obj));
 	}
 
-	prevComboListSize = LoadedObjs.size();
+	lo_prevComboListSize = LoadedObjs.size();
 }
 
 void SceneMakerScript::Update()
 {
-	if (prevComboListSize != LoadedObjs.size())
+	if (lo_prevComboListSize != LoadedObjs.size())
 	{
 		UpdateComboList();
 	}
 
-	previewName = LoadedObjs[itemSelected].first.c_str();
+	lo_previewName = LoadedObjs[lo_itemSelected].first.c_str();
 
 	if (ImGui::Begin("SceneMaker"))
 	{
@@ -63,6 +67,7 @@ void SceneMakerScript::Update()
 			if (ImGui::BeginTabItem("Scene Controller"))
 			{
 				ImGui::Text("Controller");
+				SceneController();
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Component Modifier"))
@@ -133,13 +138,13 @@ void SceneMakerScript::LoadScene()
 
 void SceneMakerScript::ObjLoader()
 {
-	if (ImGui::BeginCombo("Objs", previewName, ImGuiComboFlags_PopupAlignLeft))
+	if (ImGui::BeginCombo("Objs", lo_previewName, ImGuiComboFlags_PopupAlignLeft))
 	{
 		for (int32 n = 0; n < LoadedObjs.size(); n++)
 		{
-			const bool is_selected = (itemSelected == n);
+			const bool is_selected = (lo_itemSelected == n);
 			if (ImGui::Selectable(LoadedObjs[n].first.c_str(), is_selected))
-				itemSelected = n;
+				lo_itemSelected = n;
 
 			if (is_selected)
 			{
@@ -153,11 +158,130 @@ void SceneMakerScript::ObjLoader()
 	if (ImGui::Button("Add to Scene"))
 	{
 		// make new copy of orginal shared_ptr and add to scene
-		shared_ptr<GameObject> add = make_shared<GameObject>(*(LoadedObjs[itemSelected].second));
+		shared_ptr<GameObject> add = make_shared<GameObject>(*(LoadedObjs[lo_itemSelected].second));
 		add->SetName(name);
 		CUR_SCENE->AddObject(add);
 	}
 
+}
+
+void SceneMakerScript::SceneController()
+{
+	auto objs = CUR_SCENE->GetObjects();
+	vector<shared_ptr<GameObject>> objVector(objs.begin(), objs.end());
+
+	if (ImGui::BeginListBox("object in scene"))
+	{
+		for (int n = 0; n < objVector.size(); n++)
+		{
+			const bool is_selected = (sc_itemSelected == n);
+			if (ImGui::Selectable(objVector[n]->GetName().c_str(), is_selected))
+				sc_itemSelected = n;
+
+			if (sc_itemHighlighted && ImGui::IsItemHovered())
+				sc_itemHighlightedIdx = n;
+
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+		ImGui::EndListBox();
+	}
+
+	shared_ptr<GameObject> selected;
+	if(sc_itemSelected < objVector.size())
+		selected = objVector[sc_itemSelected];
+
+	if (ImGui::Button("Remove from Scene"))
+	{
+		// make new copy of orginal shared_ptr and add to scene
+		if (selected)
+		{
+			CUR_SCENE->RemoveObject(selected);
+			sc_itemSelected--;
+			sc_itemHighlightedIdx--;
+		}
+		else
+			ImGui::Text("No Item Selected");
+	}
+
+	ImGui::NewLine();
+
+	// Show Basic Status
+	if (selected)
+	{
+		if (ImGui::BeginTabBar("Components", ImGuiTabBarFlags_None))
+		{
+			if (ImGui::BeginTabItem("Transform"))
+			{
+				ImGui::Text("Transform");
+				if (selected->GetComponent<Transform>())
+				{
+
+				}
+				else
+				{
+					ImGui::Text("No Transform");
+				}
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("Camera"))
+			{
+				ImGui::Text("Camera");
+				if (selected->GetComponent<Camera>())
+				{
+
+				}
+				else
+				{
+					ImGui::Text("No Camera");
+				}
+
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("MeshRenderer"))
+			{
+				ImGui::Text("MeshRenderer");
+				if (selected->GetComponent<MeshRenderer>())
+				{
+
+				}
+				else
+				{
+					ImGui::Text("No MeshRenderer");
+				}
+
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("GlobalLight"))
+			{
+				ImGui::Text("GlobalLight");
+				if (selected->GetComponent<GlobalLight>())
+				{
+
+				}
+				else
+				{
+					ImGui::Text("No GlobalLight");
+				}
+
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("Collider"))
+			{
+				ImGui::Text("Collider");
+				ImGui::Text("TODO : Complete collider first!!!!!!!");
+
+				ImGui::EndTabItem();
+			}
+
+
+			ImGui::EndTabBar();
+		}
+	}
 
 }
 
@@ -171,5 +295,5 @@ void SceneMakerScript::UpdateComboList()
 		LoadedObjs.push_back(make_pair(obj->GetName(), obj));
 	}
 
-	prevComboListSize = LoadedObjs.size();
+	lo_prevComboListSize = LoadedObjs.size();
 }

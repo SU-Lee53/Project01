@@ -30,8 +30,15 @@ public:
 private:
 	// Obj Loader() and variables
 	void ObjLoader();
-
 	char name[128];
+
+private:
+	void SceneController();
+	int32 sc_itemSelected = 0;
+	bool sc_itemHighlighted = 0;
+	int32 sc_itemHighlightedIdx = 0;
+	const char* sc_previewName;
+	int32 sc_prevComboListSize = 0;
 
 
 private:
@@ -47,9 +54,9 @@ private:
 
 private:
 	// LoadedObj Combo Variables
-	int32 itemSelected = 0;
-	const char* previewName;
-	int32 prevComboListSize = 0;
+	int32 lo_itemSelected = 0;
+	const char* lo_previewName;
+	int32 lo_prevComboListSize = 0;
 
 private:
 	vector<pair<string, shared_ptr<GameObject>>> LoadedObjs;
