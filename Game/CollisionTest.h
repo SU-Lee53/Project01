@@ -10,8 +10,8 @@ public:
 
 	vector<wstring> LoadTargets =
 	{
-		L"pool_cue.mesh",
-		L"floor.mesh",
+		//L"pool_cue.mesh",
+		//L"floor.mesh",
 		L"pool_ball_1.mesh",
 		L"pool_ball_2.mesh",
 		L"pool_ball_3.mesh",

@@ -89,7 +89,7 @@ void Transform::UpdateMatrix()
 	//rotate *= Matrix::CreateRotationX(rotDegree.x);
 	//rotate *= Matrix::CreateRotationY(rotDegree.y);
 	//rotate *= Matrix::CreateRotationZ(rotDegree.z);
-	rotate *= Matrix::CreateFromQuaternion(_quaternion);
+	rotate *= Matrix::CreateFromQuaternion(_localQuaternion);
 	scale *= Matrix::CreateScale(_localScale);
 	
 	_local = scale;
