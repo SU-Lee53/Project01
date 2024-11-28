@@ -29,9 +29,13 @@ public:
 	shared_ptr<Model> GetModel() const { return _model; }
 
 private:
-	shared_ptr<Shader> _shader;
-	shared_ptr<Mesh> _mesh;
-	shared_ptr<Texture> _texture;
+	shared_ptr<Shader> _shader = nullptr;
+	shared_ptr<Mesh> _mesh = nullptr;
+	shared_ptr<Texture> _texture = nullptr;
+
+public:
+	void ShowStatusToImGui();
+
 
 private:
 	shared_ptr<Model> _model = nullptr;

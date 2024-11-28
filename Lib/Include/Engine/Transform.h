@@ -40,6 +40,9 @@ public:
 public:
 	void PushTransform();
 
+public:
+	void ShowStatusToImGui();
+
 private:
 	Vec3 _localPosition = { 0.f, 0.f, 0.f };
 	Vec3 _localRotation = { 0.f, 0.f, 0.f };

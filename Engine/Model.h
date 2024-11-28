@@ -35,6 +35,12 @@ private:
 	void LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh);
 	void LoadMaterials(ifstream& is);
 
+public:
+	void ShowModelHierarchy();
+
+private:
+	void ShowBoneNode(shared_ptr<ModelBone> node, vector<shared_ptr<ModelBone>> all_nodes);
+
 private:
 	shared_ptr<ModelBone> _root;
 	vector<shared_ptr<ModelBone>> _bones;

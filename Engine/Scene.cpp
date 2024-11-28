@@ -22,7 +22,7 @@ void Scene::Init()
 
 	for (auto cam : _cameras)
 	{
-		cam.second->Init();
+		cam->Init();
 	}
 
 	for (auto script : _scripts)
@@ -42,7 +42,7 @@ void Scene::Update()
 
 	for (auto cam : _cameras)
 	{
-		cam.second->Update();
+		cam->Update();
 	}
 
 	for (auto script : _scripts)
@@ -66,26 +66,27 @@ void Scene::RemoveObject(shared_ptr<GameObject> obj)
 	_objects.erase(obj);
 }
 
-void Scene::AddCamera(const string& name, shared_ptr<GameObject> cam)
+void Scene::AddCamera(shared_ptr<GameObject> cam)
 {
-	_cameras.insert(make_pair(name, cam));
+	_cameras.insert(cam);
 }
 
-void Scene::RemoveCamera(const string& name)
+bool Scene::RemoveCamera(const string& name)
 {
 	auto it = find_if(_cameras.begin(), _cameras.end(),
 		[&name](decltype(*_cameras.begin()) p)->bool
 		{
-			return p.first == name;
+			return p->GetName() == name;
 		}
 	);
 
-	if (it != _cameras.end())
+	if (it == _cameras.end())
 	{
-		assert(false);
+		return false;
 	}
 
 	_cameras.erase(it);
+	return true;
 
 }
 
@@ -94,13 +95,13 @@ bool Scene::SetMainCamera(const string& name)
 	auto it = find_if(_cameras.begin(), _cameras.end(), 
 		[&name](decltype(*_cameras.begin()) p)->bool
 		{
-			return p.first == name;
+			return p->GetName() == name;
 		}
 	);
 
 	if (it != _cameras.end())
 	{
-		_currentCamera = it->second;
+		_currentCamera = *it;
 		return true;
 	}
 

@@ -25,6 +25,9 @@ void SceneMakerScript::Init()
 	//
 	//json data = json::parse(is);
 
+	//auto p = filesystem::path("../Resources/Models");
+
+
 	for (const auto& targets : LoadTargets)
 	{
 		auto obj = make_shared<GameObject>();
@@ -33,7 +36,7 @@ void SceneMakerScript::Init()
 			obj->GetComponent<Transform>()->SetPosition(Vec3{ 0.f,0.f,0.f });
 			obj->GetComponent<Transform>()->SetRotation(Vec3{ 0.f,0.f,0.f });
 			obj->GetComponent<Transform>()->SetScale(Vec3{ 1.f,1.f,1.f });
-
+	
 			obj->AddComponent<MeshRenderer>();
 			auto model = make_shared<Model>();
 			model->LoadFromFiles(targets);
@@ -155,134 +158,184 @@ void SceneMakerScript::ObjLoader()
 		ImGui::EndListBox();
 	}
 
-	ImGui::InputText("Name", name, IM_ARRAYSIZE(name));
-	if (ImGui::Button("Add to Scene"))
-	{
-		// make new copy of orginal shared_ptr and add to scene
-		shared_ptr<GameObject> add = make_shared<GameObject>(*(LoadedObjs[lo_itemSelected].second));
-		add->SetName(name);
-		CUR_SCENE->AddObject(add);
-	}
-
 }
 
 void SceneMakerScript::SceneController()
 {
-	auto objs = CUR_SCENE->GetObjects();
-	vector<shared_ptr<GameObject>> objVector(objs.begin(), objs.end());
-
-	if (ImGui::BeginListBox("object in scene"))
+	if (ImGui::BeginTabBar("Scene"))
 	{
-		for (int n = 0; n < objVector.size(); n++)
+		if (ImGui::BeginTabItem("Objects"))
 		{
-			const bool is_selected = (sc_itemSelected == n);
-			if (ImGui::Selectable(objVector[n]->GetName().c_str(), is_selected))
-				sc_itemSelected = n;
+			auto objs = CUR_SCENE->GetObjects();
+			vector<shared_ptr<GameObject>> objVector(objs.begin(), objs.end());
 
-			if (sc_itemHighlighted && ImGui::IsItemHovered())
-				sc_itemHighlightedIdx = n;
+			if (ImGui::BeginListBox("object in scene"))
+			{
+				for (int n = 0; n < objVector.size(); n++)
+				{
+					const bool is_selected = (sc_itemSelected == n);
+					if (ImGui::Selectable(objVector[n]->GetName().c_str(), is_selected))
+						sc_itemSelected = n;
 
-			if (is_selected)
-				ImGui::SetItemDefaultFocus();
+					if (sc_itemHighlighted && ImGui::IsItemHovered())
+						sc_itemHighlightedIdx = n;
+
+					if (is_selected)
+						ImGui::SetItemDefaultFocus();
+				}
+				ImGui::EndListBox();
+			}
+
+			shared_ptr<GameObject> selected;
+			if (sc_itemSelected < objVector.size())
+				selected = objVector[sc_itemSelected];
+
+			ImGui::InputText("Name", name, IM_ARRAYSIZE(name));
+			ImGui::SameLine();
+			if (ImGui::Button("Add to Scene"))
+			{
+				shared_ptr<GameObject> add = make_shared<GameObject>();
+				add->SetName(name);
+				CUR_SCENE->AddObject(add);
+			}
+
+			if (ImGui::Button("Remove from Scene"))
+			{
+				if (selected)
+				{
+					CUR_SCENE->RemoveObject(selected);
+					sc_itemSelected--;
+					sc_itemHighlightedIdx--;
+				}
+				else
+					ImGui::Text("No Item Selected");
+			}
+
+			ImGui::NewLine();
+
+			// Show Basic Status
+			if (selected)
+			{
+				if (ImGui::BeginTabBar("Components", ImGuiTabBarFlags_None))
+				{
+					if (ImGui::BeginTabItem("Transform"))
+					{
+						ImGui::Text("Transform");
+						if (selected->GetComponent<Transform>())
+						{
+							selected->GetComponent<Transform>()->ShowStatusToImGui();
+						}
+						else
+						{
+							ImGui::Text("No Transform");
+						}
+						ImGui::EndTabItem();
+					}
+
+					if (ImGui::BeginTabItem("MeshRenderer"))
+					{
+						ImGui::Text("MeshRenderer");
+						if (selected->GetComponent<MeshRenderer>())
+						{
+							// TODO : Add inspector
+							selected->GetComponent<MeshRenderer>()->ShowStatusToImGui();
+						}
+						else
+						{
+							ImGui::Text("No MeshRenderer");
+						}
+
+						ImGui::EndTabItem();
+					}
+
+					if (ImGui::BeginTabItem("GlobalLight"))
+					{
+						ImGui::Text("GlobalLight");
+						if (selected->GetComponent<GlobalLight>())
+						{
+							// TODO : Add inspector
+						}
+						else
+						{
+							ImGui::Text("No GlobalLight");
+						}
+
+						ImGui::EndTabItem();
+					}
+
+					if (ImGui::BeginTabItem("Collider"))
+					{
+						ImGui::Text("Collider");
+						ImGui::Text("TODO : Complete collider first!!!!!!!");
+
+						ImGui::EndTabItem();
+					}
+
+
+					ImGui::EndTabBar();
+				}
+			}
+
+			ImGui::EndTabItem();
 		}
-		ImGui::EndListBox();
+
+		if (ImGui::BeginTabItem("Cameras"))
+		{
+			auto cams = CUR_SCENE->GetCameras();
+			vector<shared_ptr<GameObject>> camVector(cams.begin(), cams.end());
+
+			if (ImGui::BeginListBox("Camera in scene"))
+			{
+				for (int n = 0; n < camVector.size(); n++)
+				{
+					const bool is_selected = (sc_cam_itemSelected == n);
+					if (ImGui::Selectable(camVector[n]->GetName().c_str(), is_selected))
+						sc_cam_itemSelected = n;
+
+					if (sc_itemHighlighted && ImGui::IsItemHovered())
+						sc_cam_itemHighlightedIdx = n;
+
+					if (is_selected)
+						ImGui::SetItemDefaultFocus();
+				}
+				ImGui::EndListBox();
+			}
+
+			shared_ptr<GameObject> selected;
+			if (sc_itemSelected < camVector.size())
+				selected = camVector[sc_cam_itemSelected];
+
+			if (selected)
+			{
+				if (ImGui::BeginTabBar("Components", ImGuiTabBarFlags_None))
+				{
+					if (ImGui::BeginTabItem("Transform"))
+					{
+						ImGui::Text("Transform");
+						if (selected->GetComponent<Transform>())
+						{
+							// TODO : Add inspector
+							selected->GetComponent<Transform>()->ShowStatusToImGui();
+						}
+						else
+						{
+							ImGui::Text("No Transform");
+						}
+						ImGui::EndTabItem();
+					}
+
+					ImGui::EndTabBar();
+				}
+			}
+
+			ImGui::EndTabItem();
+		}
+
+
+
+		ImGui::EndTabBar();
 	}
 
-	shared_ptr<GameObject> selected;
-	if(sc_itemSelected < objVector.size())
-		selected = objVector[sc_itemSelected];
-
-	if (ImGui::Button("Remove from Scene"))
-	{
-		// make new copy of orginal shared_ptr and add to scene
-		if (selected)
-		{
-			CUR_SCENE->RemoveObject(selected);
-			sc_itemSelected--;
-			sc_itemHighlightedIdx--;
-		}
-		else
-			ImGui::Text("No Item Selected");
-	}
-
-	ImGui::NewLine();
-
-	// Show Basic Status
-	if (selected)
-	{
-		if (ImGui::BeginTabBar("Components", ImGuiTabBarFlags_None))
-		{
-			if (ImGui::BeginTabItem("Transform"))
-			{
-				ImGui::Text("Transform");
-				if (selected->GetComponent<Transform>())
-				{
-
-				}
-				else
-				{
-					ImGui::Text("No Transform");
-				}
-				ImGui::EndTabItem();
-			}
-
-			if (ImGui::BeginTabItem("Camera"))
-			{
-				ImGui::Text("Camera");
-				if (selected->GetComponent<Camera>())
-				{
-
-				}
-				else
-				{
-					ImGui::Text("No Camera");
-				}
-
-				ImGui::EndTabItem();
-			}
-
-			if (ImGui::BeginTabItem("MeshRenderer"))
-			{
-				ImGui::Text("MeshRenderer");
-				if (selected->GetComponent<MeshRenderer>())
-				{
-
-				}
-				else
-				{
-					ImGui::Text("No MeshRenderer");
-				}
-
-				ImGui::EndTabItem();
-			}
-
-			if (ImGui::BeginTabItem("GlobalLight"))
-			{
-				ImGui::Text("GlobalLight");
-				if (selected->GetComponent<GlobalLight>())
-				{
-
-				}
-				else
-				{
-					ImGui::Text("No GlobalLight");
-				}
-
-				ImGui::EndTabItem();
-			}
-
-			if (ImGui::BeginTabItem("Collider"))
-			{
-				ImGui::Text("Collider");
-				ImGui::Text("TODO : Complete collider first!!!!!!!");
-
-				ImGui::EndTabItem();
-			}
-
-
-			ImGui::EndTabBar();
-		}
-	}
 
 }
 

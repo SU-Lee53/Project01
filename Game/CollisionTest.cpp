@@ -48,8 +48,8 @@ void CollisionTest::Init()
 
 		_cam->SetName("camera");
 	}
-	CUR_SCENE->AddCamera("main_cam", _cam);
-	CUR_SCENE->SetMainCamera("main_cam");
+	CUR_SCENE->AddCamera(_cam);
+	CUR_SCENE->SetMainCamera("camera");
 
 
 	auto _light = make_shared<GameObject>();

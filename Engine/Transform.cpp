@@ -131,3 +131,57 @@ void Transform::SetLocalScale(const Vec3& scale)
 void Transform::PushTransform()
 {
 }
+
+void Transform::ShowStatusToImGui()
+{
+	if (ImGui::BeginTabBar("Transform"))
+	{
+		if (ImGui::BeginTabItem("World"))
+		{
+			ImGui::Text("World Position");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _position.x, _position.y, _position.z);
+			ImGui::Text("");
+
+			ImGui::Text("World Rotation");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _rotation.x, _rotation.y, _rotation.z);
+			ImGui::Text("");
+
+			ImGui::Text("World Quaternion");
+			ImGui::Text("(x, y, z, w) : (%3f, %3f, %3f, %3f)", _quaternion.x, _quaternion.y, _quaternion.z, _quaternion.w);
+			ImGui::Text("");
+
+			ImGui::Text("World Scale");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _scale.x, _scale.y, _scale.z);
+			ImGui::Text("");
+
+			Utils::ShowMatrix(_world);
+
+			ImGui::EndTabItem();
+		}
+		
+		if (ImGui::BeginTabItem("Local"))
+		{
+			ImGui::Text("Local Position");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _localPosition.x, _localPosition.y, _localPosition.z);
+			ImGui::Text("");
+
+			ImGui::Text("Local Rotation");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _localRotation.x, _localRotation.y, _localRotation.z);
+			ImGui::Text("");
+
+			ImGui::Text("Local Quaternion");
+			ImGui::Text("(x, y, z, w) : (%3f, %3f, %3f, %3f)", _localQuaternion.x, _localQuaternion.y, _localQuaternion.z, _localQuaternion.w);
+			ImGui::Text("");
+
+			ImGui::Text("Local Scale");
+			ImGui::Text("(x, y, z) : (%3f, %3f, %3f)", _localScale.x, _localScale.y, _localScale.z);
+			ImGui::Text("");
+
+			Utils::ShowMatrix(_local);
+
+			ImGui::EndTabItem();
+		}
+
+		ImGui::EndTabBar();
+	}
+}

@@ -2,6 +2,7 @@
 #include "MeshRenderer.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "Model.h"
 #include "Texture.h"
 
 MeshRenderer::MeshRenderer()
@@ -15,19 +16,78 @@ void MeshRenderer::Init_impl()
 {
 	_shader = make_shared<Shader>();
 	_shader->CreateDefault();
-
-	if(_mesh == nullptr) // If _mesh was not set
-		_mesh = make_shared<Mesh>();	// set default mesh
-
-	if(_texture == nullptr) // If _mesh was not set
-		_texture = make_shared<Texture>();	// set default mesh
 }
 
 void MeshRenderer::Update_impl()
 {
-	RENDER->PushToRenderObject(GetOwner());
+	if(_model)
+		RENDER->PushToRenderObject(GetOwner());
 }
 
 void MeshRenderer::Render()
 {
+}
+
+void MeshRenderer::ShowStatusToImGui()
+{
+	// Show what?
+	//	- _shader
+	//	- if _mesh
+	//	- if _texture
+	//	- if _model
+
+	if (ImGui::BeginTabBar("MeshRenderer"))
+	{
+		if (ImGui::BeginTabItem("Shader"))
+		{
+			ImGui::Text("Vertex Shader");
+			ImGui::Text("Name : %s", _shader->GetVertexShader()->GetName().c_str());
+			ImGui::Text("Path : %s", Utils::ToString(_shader->GetVertexShader()->GetPath()).c_str());
+			
+
+			ImGui::NewLine();  ImGui::Text("Pixel Shader");
+			ImGui::Text("Name : %s", _shader->GetPixelShader()->GetName().c_str());
+			ImGui::Text("Path : %s", Utils::ToString(_shader->GetPixelShader()->GetPath()).c_str());
+			
+			ImGui::EndTabItem();
+		}
+
+		// useless parts tbh
+		{
+			if (_mesh)
+			{
+				if (ImGui::BeginTabItem("Mesh"))
+				{
+					ImGui::Text("This is useless");
+					ImGui::Text("If you watch this, go fix it");
+					ImGui::EndTabItem();
+				}
+			}
+
+			if (_texture)
+			{
+				if (ImGui::BeginTabItem("Texture"))
+				{
+					ImGui::Text("This is useless");
+					ImGui::Text("If you watch this, go fix it");
+					ImGui::EndTabItem();
+				}
+			}
+		}
+
+		if (_model)
+		{
+			if (ImGui::BeginTabItem("Model"))
+			{
+				_model->ShowModelHierarchy();
+				ImGui::EndTabItem();
+			}
+		}
+
+
+		ImGui::EndTabBar();
+	}
+	// show shader
+
+
 }

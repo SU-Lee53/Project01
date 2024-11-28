@@ -47,7 +47,7 @@ public:
 	{
 		(static_cast<T*>(this))->Update_impl();
 	}
-
+	
 protected:
 	void Init_impl() {};
 	void Update_impl() {};

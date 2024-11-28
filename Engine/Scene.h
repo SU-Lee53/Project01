@@ -18,10 +18,10 @@ public:
 	unordered_set<shared_ptr<GameObject>>& GetObjects() { return _objects; }
 
 
-	void AddCamera(const string& name, shared_ptr<GameObject> cam);
-	void RemoveCamera(const string& name);
+	void AddCamera(shared_ptr<GameObject> cam);
+	bool RemoveCamera(const string& name);
 	bool SetMainCamera(const string& name);
-	unordered_map<string, shared_ptr<GameObject>>& GetCameras() { return _cameras; }
+	unordered_set<shared_ptr<GameObject>>& GetCameras() { return _cameras; }
 
 	void AddScript(shared_ptr<Script<Scene>> script);
 
@@ -31,7 +31,7 @@ public:
 
 private:
 	unordered_set<shared_ptr<GameObject>> _objects;
-	unordered_map<string, shared_ptr<GameObject>> _cameras;
+	unordered_set<shared_ptr<GameObject>> _cameras;
 	weak_ptr<GameObject> _currentCamera;
 
 private:

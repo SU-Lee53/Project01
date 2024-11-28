@@ -39,6 +39,12 @@ private:
 	int32 sc_itemHighlightedIdx = 0;
 	const char* sc_previewName;
 	int32 sc_prevComboListSize = 0;
+	
+	int32 sc_cam_itemSelected = 0;
+	bool sc_cam_itemHighlighted = 0;
+	int32 sc_cam_itemHighlightedIdx = 0;
+	const char* sc_cam_previewName;
+	int32 sc_cam_prevComboListSize = 0;
 
 
 private:
@@ -65,24 +71,24 @@ private:
 
 	vector<wstring> LoadTargets =
 	{
-		L"pool_cue.mesh",
-		L"floor.mesh",
-		L"pool_ball_1.mesh",
-		L"pool_ball_2.mesh",
-		L"pool_ball_3.mesh",
-		L"pool_ball_4.mesh",
-		L"pool_ball_5.mesh",
-		L"pool_ball_6.mesh",
-		L"pool_ball_7.mesh",
-		L"pool_ball_8.mesh",
-		L"pool_ball_9.mesh",
-		L"pool_ball_10.mesh",
-		L"pool_ball_11.mesh",
-		L"pool_ball_12.mesh",
-		L"pool_ball_13.mesh",
-		L"pool_ball_14.mesh",
-		L"pool_ball_15.mesh",
-		L"pool_objectball.mesh",
+		//L"pool_cue.mesh",
+		//L"floor.mesh",
+		//L"pool_ball_1.mesh",
+		//L"pool_ball_2.mesh",
+		//L"pool_ball_3.mesh",
+		//L"pool_ball_4.mesh",
+		//L"pool_ball_5.mesh",
+		//L"pool_ball_6.mesh",
+		//L"pool_ball_7.mesh",
+		//L"pool_ball_8.mesh",
+		//L"pool_ball_9.mesh",
+		//L"pool_ball_10.mesh",
+		//L"pool_ball_11.mesh",
+		//L"pool_ball_12.mesh",
+		//L"pool_ball_13.mesh",
+		//L"pool_ball_14.mesh",
+		//L"pool_ball_15.mesh",
+		//L"pool_objectball.mesh",
 		L"pool_table.mesh"
 	};
 };

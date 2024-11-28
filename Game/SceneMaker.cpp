@@ -29,8 +29,8 @@ void SceneMaker::Init()
 
 		_cam->SetName("camera");
 	}
-	CUR_SCENE->AddCamera("main_cam", _cam);
-	CUR_SCENE->SetMainCamera("main_cam");
+	CUR_SCENE->AddCamera(_cam);
+	CUR_SCENE->SetMainCamera("camera");
 
 	auto _light = make_shared<GameObject>();
 	{
@@ -49,6 +49,13 @@ void SceneMaker::Init()
 
 		auto _lightScript = make_shared<LightScript>();
 		_light->AddScript(_lightScript);
+
+		// test
+		auto m = make_shared<Model>();
+		m->LoadFromFiles(L"pool_objectball.mesh");
+		_light->AddComponent<MeshRenderer>();
+		_light->GetComponent<MeshRenderer>()->SetModel(m);
+
 
 		_light->SetName("globalLight");
 	}
