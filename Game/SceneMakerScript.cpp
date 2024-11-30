@@ -237,7 +237,6 @@ void SceneMakerScript::SceneController()
 						ImGui::Text("MeshRenderer");
 						if (selected->GetComponent<MeshRenderer>())
 						{
-							// TODO : Add inspector
 							selected->GetComponent<MeshRenderer>()->ShowStatusToImGui();
 						}
 						else
