@@ -1025,8 +1025,8 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 
 STBTT_DEF int stbtt_FindMatchingFont(const unsigned char *fontdata, const char *name, int flags);
 // returns the offset (not index) of the font that matches, or -1 if none
-//   if you use STBTT_MACSTYLE_DONTCARE, use a font name like "Arial Bold".
-//   if you use any other flag, use a font name like "Arial"; this checks
+//   if you use STBTT_MACSTYLE_DONTCARE, use a font cam_name like "Arial Bold".
+//   if you use any other flag, use a font cam_name like "Arial"; this checks
 //     the 'macStyle' header field; i don't know if fonts set this consistently
 #define STBTT_MACSTYLE_DONTCARE     0
 #define STBTT_MACSTYLE_BOLD         1
@@ -1044,7 +1044,7 @@ STBTT_DEF const char *stbtt_GetFontNameString(const stbtt_fontinfo *font, int *l
 //
 // some of the values for the IDs are below; for more see the truetype spec:
 //     http://developer.apple.com/textfonts/TTRefMan/RM06/Chap6name.html
-//     http://www.microsoft.com/typography/otspec/name.htm
+//     http://www.microsoft.com/typography/otspec/cam_name.htm
 
 enum { // platformID
    STBTT_PLATFORM_ID_UNICODE   =0,
@@ -1428,9 +1428,9 @@ static int stbtt_InitFont_internal(stbtt_fontinfo *info, unsigned char *data, in
       stbtt__buf_skip(&b, 2);
       stbtt__buf_seek(&b, stbtt__buf_get8(&b)); // hdrsize
 
-      // @TODO the name INDEX could list multiple fonts,
+      // @TODO the cam_name INDEX could list multiple fonts,
       // but we just use the first one.
-      stbtt__cff_get_index(&b);  // name INDEX
+      stbtt__cff_get_index(&b);  // cam_name INDEX
       topdictidx = stbtt__cff_get_index(&b);
       topdict = stbtt__cff_index_get(topdictidx, 0);
       stbtt__cff_get_index(&b);  // string INDEX
@@ -4777,7 +4777,7 @@ STBTT_DEF void stbtt_FreeSDF(unsigned char *bitmap, void *userdata)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// font name matching -- recommended not to use this
+// font cam_name matching -- recommended not to use this
 //
 
 // check if a utf8 string contains a prefix which is the utf16 string; if so return length of matching utf8 string

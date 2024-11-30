@@ -33,6 +33,8 @@ public:
 	float GetWidth() { return _width; }
 	float GetHeight() { return _height; }
 
+	CameraData GetCameraData();
+
 private:
 	PROJECTION_TYPE _type = PROJECTION_TYPE::Perspective;
 	

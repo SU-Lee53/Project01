@@ -14,7 +14,6 @@ Camera::~Camera()
 void Camera::Update_impl()
 {
 	SetCamera();
-	PushCamera();
 }
 
 void Camera::SetCamera()
@@ -50,4 +49,9 @@ void Camera::SetCamera()
 void Camera::PushCamera()
 {
 	RENDER->SetCameraData(CameraData{_view, _projection, _view.Invert()});
+}
+
+CameraData Camera::GetCameraData()
+{
+	return CameraData{ _view, _projection, _view.Invert() };
 }

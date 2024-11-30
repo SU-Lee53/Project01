@@ -131,14 +131,14 @@ Index of this file:
 #endif
 #pragma clang diagnostic ignored "-Wunknown-pragmas"                // warning: unknown warning group 'xxx'
 #pragma clang diagnostic ignored "-Wold-style-cast"                 // warning: use of old-style cast                           // yes, they are more terse.
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"        // warning: 'xx' is deprecated: The POSIX name for this..   // for strdup used in demo code (so user can copy & paste the code)
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"        // warning: 'xx' is deprecated: The POSIX cam_name for this..   // for strdup used in demo code (so user can copy & paste the code)
 #pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"       // warning: cast to 'void *' from smaller integer type
 #pragma clang diagnostic ignored "-Wformat-security"                // warning: format string is not a string literal
 #pragma clang diagnostic ignored "-Wexit-time-destructors"          // warning: declaration requires an exit-time destructor    // exit-time destruction order is undefined. if MemFree() leads to users code that has been disabled before exit it might cause problems. ImGui coding style welcomes static/globals.
 #pragma clang diagnostic ignored "-Wunused-macros"                  // warning: macro is not used                               // we define snprintf/vsnprintf on Windows so they are available, but not always used.
 #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"  // warning: zero as null pointer constant                   // some standard header variations use #define NULL 0
 #pragma clang diagnostic ignored "-Wdouble-promotion"               // warning: implicit conversion from 'float' to 'double' when passing argument to function  // using printf() is a misery with this as C++ va_arg ellipsis changes float to double.
-#pragma clang diagnostic ignored "-Wreserved-id-macro"              // warning: macro name is a reserved identifier
+#pragma clang diagnostic ignored "-Wreserved-id-macro"              // warning: macro cam_name is a reserved identifier
 #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"  // warning: implicit conversion from 'xxx' to 'float' may lose precision
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"            // warning: 'xxx' is an unsafe pointer used for buffer access
 #elif defined(__GNUC__)
@@ -279,7 +279,7 @@ struct ExampleTreeNode
 // (this is a minimal version of what a typical advanced application may provide)
 struct ExampleMemberInfo
 {
-    const char*     Name;       // Member name
+    const char*     Name;       // Member cam_name
     ImGuiDataType   DataType;   // Member type
     int             DataCount;  // Member count (1 when scalar)
     int             Offset;     // Offset inside parent structure
@@ -861,8 +861,8 @@ static void ShowDemoWindowWidgets(ImGuiDemoWindowData* demo_data)
             static float angle = 0.0f;
             ImGui::SliderAngle("slider angle", &angle);
 
-            // Using the format string to display a name instead of an integer.
-            // Here we completely omit '%d' from the format string, so it'll only display a name.
+            // Using the format string to display a cam_name instead of an integer.
+            // Here we completely omit '%d' from the format string, so it'll only display a cam_name.
             // This technique can also be used with DragInt().
             IMGUI_DEMO_MARKER("Widgets/Basic/Slider (enum)");
             enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUNT };
@@ -5481,7 +5481,7 @@ static void ShowDemoWindowTables()
 
         if (ImGui::BeginTable("table1", 3, flags))
         {
-            // Submit columns name with TableSetupColumn() and call TableHeadersRow() to create a row with a header in each column.
+            // Submit columns cam_name with TableSetupColumn() and call TableHeadersRow() to create a row with a header in each column.
             // (Later we will show how TableSetupColumn() has other uses, optional flags, sizing weight etc.)
             ImGui::TableSetupColumn("One");
             ImGui::TableSetupColumn("Two");
@@ -6401,7 +6401,7 @@ static void ShowDemoWindowTables()
             for (int column = 0; column < COLUMNS_COUNT; column++)
             {
                 ImGui::TableSetColumnIndex(column);
-                const char* column_name = ImGui::TableGetColumnName(column); // Retrieve name passed to TableSetupColumn()
+                const char* column_name = ImGui::TableGetColumnName(column); // Retrieve cam_name passed to TableSetupColumn()
                 ImGui::PushID(column);
                 ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
                 ImGui::Checkbox("##checkall", &column_selected[column]);
@@ -9633,7 +9633,7 @@ struct ExampleAppDocuments
         Documents.push_back(MyDocument(5, "Some Document",       false, ImVec4(0.8f, 0.8f, 1.0f, 1.0f)));
     }
 
-    // As we allow to change document name, we append a never-changing document ID so tabs are stable
+    // As we allow to change document cam_name, we append a never-changing document ID so tabs are stable
     void GetTabName(MyDocument* doc, char* out_buf, size_t out_buf_size)
     {
         snprintf(out_buf, out_buf_size, "%s###doc%d", doc->Name, doc->UID);
@@ -9794,7 +9794,7 @@ void ShowExampleAppDocuments(bool* p_open)
                 if (!doc.Open)
                     continue;
 
-                // As we allow to change document name, we append a never-changing document id so tabs are stable
+                // As we allow to change document cam_name, we append a never-changing document id so tabs are stable
                 char doc_name_buf[64];
                 app.GetTabName(&doc, doc_name_buf, sizeof(doc_name_buf));
                 ImGuiTabItemFlags tab_flags = (doc.Dirty ? ImGuiTabItemFlags_UnsavedDocument : 0);

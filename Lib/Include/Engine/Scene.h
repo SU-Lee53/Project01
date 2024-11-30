@@ -21,7 +21,9 @@ public:
 	void AddCamera(shared_ptr<GameObject> cam);
 	bool RemoveCamera(const string& name);
 	bool SetMainCamera(const string& name);
+
 	unordered_set<shared_ptr<GameObject>>& GetCameras() { return _cameras; }
+	shared_ptr<GameObject> GetMainCamera() { return _currentCamera.lock(); }
 
 	void AddScript(shared_ptr<Script<Scene>> script);
 

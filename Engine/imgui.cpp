@@ -246,8 +246,8 @@ CODE
  - Or maintain your own branch where you have imconfig.h modified as a top-most commit which you can regularly rebase over "master".
  - You can also use '#define IMGUI_USER_CONFIG "my_config_file.h" to redirect configuration to your own file.
  - Read the "API BREAKING CHANGES" section (below). This is where we list occasional API breaking changes.
-   If a function/type has been renamed / or marked obsolete, try to fix the name in your code before it is permanently removed
-   from the public API. If you have a problem with a missing function/symbols, search for its name in the code, there will
+   If a function/type has been renamed / or marked obsolete, try to fix the cam_name in your code before it is permanently removed
+   from the public API. If you have a problem with a missing function/symbols, search for its cam_name in the code, there will
    likely be a comment about it. Please report any issue to the GitHub page!
  - To find out usage of old API, you can add '#define IMGUI_DISABLE_OBSOLETE_FUNCTIONS' in your configuration file.
  - Try to keep your copy of Dear ImGui reasonably up to date!
@@ -376,7 +376,7 @@ CODE
        // TODO: Setup texture sampling state: sample with bilinear filtering (NOT point/nearest filtering). Use 'io.Fonts->Flags |= ImFontAtlasFlags_NoBakedLines;' to allow point/nearest filtering.
        // TODO: Setup viewport covering draw_data->DisplayPos to draw_data->DisplayPos + draw_data->DisplaySize
        // TODO: Setup orthographic projection matrix cover draw_data->DisplayPos to draw_data->DisplayPos + draw_data->DisplaySize
-       // TODO: Setup shader: vertex { float2 pos, float2 uv, u32 color }, fragment shader sample color from 1 texture, multiply by vertex color.
+       // TODO: Setup shader: vertex { float2 cam_pos, float2 uv, u32 color }, fragment shader sample color from 1 texture, multiply by vertex color.
        ImVec2 clip_off = draw_data->DisplayPos;
        for (int n = 0; n < draw_data->CmdListsCount; n++)
        {
@@ -427,7 +427,7 @@ CODE
 
  Occasionally introducing changes that are breaking the API. We try to make the breakage minor and easy to fix.
  Below is a change-log of API breaking changes only. If you are using one of the functions listed, expect to have to fix some code.
- When you are not sure about an old symbol or function name, try using the Search/Find function of your IDE to look for comments or references in all imgui files.
+ When you are not sure about an old symbol or function cam_name, try using the Search/Find function of your IDE to look for comments or references in all imgui files.
  You can read releases logs https://github.com/ocornut/imgui/releases for more details.
 
  - 2024/07/25 (1.91.0) - obsoleted GetContentRegionMax(), GetWindowContentRegionMin() and GetWindowContentRegionMax(). (see #7838 on GitHub for more info)
@@ -505,8 +505,8 @@ CODE
                            - old: BeginChild("Name", size, 0, ImGuiWindowFlags_AlwaysUseWindowPadding);
                            - new: BeginChild("Name", size, ImGuiChildFlags_AlwaysUseWindowPadding, 0);
  - 2023/09/27 (1.90.0) - io: removed io.MetricsActiveAllocations introduced in 1.63. Same as 'g.DebugMemAllocCount - g.DebugMemFreeCount' (still displayed in Metrics, unlikely to be accessed by end-user).
- - 2023/09/26 (1.90.0) - debug tools: Renamed ShowStackToolWindow() ("Stack Tool") to ShowIDStackToolWindow() ("ID Stack Tool"), as earlier name was misleading. Kept inline redirection function. (#4631)
- - 2023/09/15 (1.90.0) - ListBox, Combo: changed signature of "name getter" callback in old one-liner ListBox()/Combo() apis. kept inline redirection function (will obsolete).
+ - 2023/09/26 (1.90.0) - debug tools: Renamed ShowStackToolWindow() ("Stack Tool") to ShowIDStackToolWindow() ("ID Stack Tool"), as earlier cam_name was misleading. Kept inline redirection function. (#4631)
+ - 2023/09/15 (1.90.0) - ListBox, Combo: changed signature of "cam_name getter" callback in old one-liner ListBox()/Combo() apis. kept inline redirection function (will obsolete).
                            - old: bool Combo(const char* label, int* current_item, bool (*getter)(void* user_data, int idx, const char** out_text), ...)
                            - new: bool Combo(const char* label, int* current_item, const char* (*getter)(void* user_data, int idx), ...);
                            - old: bool ListBox(const char* label, int* current_item, bool (*getting)(void* user_data, int idx, const char** out_text), ...);
@@ -542,7 +542,7 @@ CODE
                            - OK:     #define IMGUI_DEFINE_MATH_OPERATORS / #include "imgui.h" / #include "imgui_internal.h"
                            - Error:  #include "imgui.h" / #define IMGUI_DEFINE_MATH_OPERATORS / #include "imgui_internal.h"
  - 2023/02/07 (1.89.3) - backends: renamed "imgui_impl_sdl.cpp" to "imgui_impl_sdl2.cpp" and "imgui_impl_sdl.h" to "imgui_impl_sdl2.h". (#6146) This is in prevision for the future release of SDL3.
- - 2022/10/26 (1.89)   - commented out redirecting OpenPopupContextItem() which was briefly the name of OpenPopupOnItemClick() from 1.77 to 1.79.
+ - 2022/10/26 (1.89)   - commented out redirecting OpenPopupContextItem() which was briefly the cam_name of OpenPopupOnItemClick() from 1.77 to 1.79.
  - 2022/10/12 (1.89)   - removed runtime patching of invalid "%f"/"%0.f" format strings for DragInt()/SliderInt(). This was obsoleted in 1.61 (May 2018). See 1.61 changelog for details.
  - 2022/09/26 (1.89)   - renamed and merged keyboard modifiers key enums and flags into a same set. Kept inline redirection enums (will obsolete).
                            - ImGuiKey_ModCtrl  and ImGuiModFlags_Ctrl  -> ImGuiMod_Ctrl
@@ -669,7 +669,7 @@ CODE
                         - InputFloat (... int decimal_precision ...) -> use InputFloat (... const char* format ...) with format = "%.Xf" where X is your value for decimal_precision.
                         - same for InputFloat2()/InputFloat3()/InputFloat4() variants taking a `int decimal_precision` parameter.
  - 2020/10/05 (1.79) - removed ImGuiListClipper: Renamed constructor parameters which created an ambiguous alternative to using the ImGuiListClipper::Begin() function, with misleading edge cases (note: imgui_memory_editor <0.40 from imgui_club/ used this old clipper API. Update your copy if needed).
- - 2020/09/25 (1.79) - renamed ImGuiSliderFlags_ClampOnInput to ImGuiSliderFlags_AlwaysClamp. Kept redirection enum (will obsolete sooner because previous name was added recently).
+ - 2020/09/25 (1.79) - renamed ImGuiSliderFlags_ClampOnInput to ImGuiSliderFlags_AlwaysClamp. Kept redirection enum (will obsolete sooner because previous cam_name was added recently).
  - 2020/09/25 (1.79) - renamed style.TabMinWidthForUnselectedCloseButton to style.TabMinWidthForCloseButton.
  - 2020/09/21 (1.79) - renamed OpenPopupContextItem() back to OpenPopupOnItemClick(), reverting the change from 1.77. For varieties of reason this is more self-explanatory.
  - 2020/09/21 (1.79) - removed return value from OpenPopupOnItemClick() - returned true on mouse release on an item - because it is inconsistent with other popup APIs and makes others misleading. It's also and unnecessary: you can use IsWindowAppearing() after BeginPopup() for a similar result.
@@ -897,7 +897,7 @@ CODE
  - 2015/01/11 (1.30) - added texture identifier in ImDrawCmd passed to your render function (we can now render images). make sure to call io.Fonts->SetTexID()
  - 2015/01/11 (1.30) - removed IO.PixelCenterOffset (unnecessary, can be handled in user projection matrix)
  - 2015/01/11 (1.30) - removed ImGui::IsItemFocused() in favor of ImGui::IsItemActive() which handles all widgets
- - 2014/12/10 (1.18) - removed SetNewWindowDefaultPos() in favor of new generic API SetNextWindowPos(pos, ImGuiSetCondition_FirstUseEver)
+ - 2014/12/10 (1.18) - removed SetNewWindowDefaultPos() in favor of new generic API SetNextWindowPos(cam_pos, ImGuiSetCondition_FirstUseEver)
  - 2014/11/28 (1.17) - moved IO.Font*** options to inside the IO.Font-> structure (FontYOffset, FontTexUvForWhite, FontBaseScale, FontFallbackGlyph)
  - 2014/11/26 (1.17) - reworked syntax of IMGUI_ONCE_UPON_A_FRAME helper macro to increase compiler compatibility
  - 2014/11/07 (1.15) - renamed IsHovered() to IsItemHovered()
@@ -3497,7 +3497,7 @@ void ImGui::RenderTextClippedEx(ImDrawList* draw_list, const ImVec2& pos_min, co
     const ImVec2* clip_min = clip_rect ? &clip_rect->Min : &pos_min;
     const ImVec2* clip_max = clip_rect ? &clip_rect->Max : &pos_max;
     bool need_clipping = (pos.x + text_size.x >= clip_max->x) || (pos.y + text_size.y >= clip_max->y);
-    if (clip_rect) // If we had no explicit clipping rectangle then pos==clip_min
+    if (clip_rect) // If we had no explicit clipping rectangle then cam_pos==clip_min
         need_clipping |= (pos.x < clip_min->x) || (pos.y < clip_min->y);
 
     // Align whole block. We should defer that to the better rendering function when we'll have support for individual line alignment.
@@ -4347,7 +4347,7 @@ float ImGui::CalcWrapWidthForPos(const ImVec2& pos, float wrap_pos_x)
     if (wrap_pos_x == 0.0f)
     {
         // We could decide to setup a default wrapping max point for auto-resizing windows,
-        // or have auto-wrap (with unspecified wrapping pos) behave as a ContentSize extending function?
+        // or have auto-wrap (with unspecified wrapping cam_pos) behave as a ContentSize extending function?
         //if (window->Hidden && (window->Flags & ImGuiWindowFlags_AlwaysAutoResize))
         //    wrap_pos_x = ImMax(window->WorkRect.Min.x + g.FontSize * 10.0f, window->WorkRect.Max.x);
         //else
@@ -5640,12 +5640,12 @@ bool ImGui::BeginChildEx(const char* name, ImGuiID id, const ImVec2& size_arg, I
     const ImVec2 size = CalcItemSize(size_arg, size_default.x, size_default.y);
     SetNextWindowSize(size);
 
-    // Build up name. If you need to append to a same child from multiple location in the ID stack, use BeginChild(ImGuiID id) with a stable value.
+    // Build up cam_name. If you need to append to a same child from multiple location in the ID stack, use BeginChild(ImGuiID id) with a stable value.
     // FIXME: 2023/11/14: commented out shorted version. We had an issue with multiple ### in child window path names, which the trailing hash helped workaround.
     // e.g. "ParentName###ParentIdentifier/ChildName###ChildIdentifier" would get hashed incorrectly by ImHashStr(), trailing _%08X somehow fixes it.
     const char* temp_window_name;
-    /*if (name && parent_window->IDStack.back() == parent_window->ID)
-        ImFormatStringToTempBuffer(&temp_window_name, NULL, "%s/%s", parent_window->Name, name); // May omit ID if in root of ID stack
+    /*if (cam_name && parent_window->IDStack.back() == parent_window->ID)
+        ImFormatStringToTempBuffer(&temp_window_name, NULL, "%s/%s", parent_window->Name, cam_name); // May omit ID if in root of ID stack
     else*/
     if (name)
         ImFormatStringToTempBuffer(&temp_window_name, NULL, "%s/%s_%08X", parent_window->Name, name, id);
@@ -5819,7 +5819,7 @@ static void InitOrLoadWindowSettings(ImGuiWindow* window, ImGuiWindowSettings* s
 static ImGuiWindow* CreateNewWindow(const char* name, ImGuiWindowFlags flags)
 {
     // Create window the first time
-    //IMGUI_DEBUG_LOG("CreateNewWindow '%s', flags = 0x%08X\n", name, flags);
+    //IMGUI_DEBUG_LOG("CreateNewWindow '%s', flags = 0x%08X\n", cam_name, flags);
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = IM_NEW(ImGuiWindow)(&g, name);
     window->Flags = flags;
@@ -6582,8 +6582,8 @@ ImGuiWindow* ImGui::FindBlockingModal(ImGuiWindow* window)
 
 // Push a new Dear ImGui window to add widgets to.
 // - A default window called "Debug" is automatically stacked at the beginning of every frame so you can use widgets without explicitly calling a Begin/End pair.
-// - Begin/End can be called multiple times during the frame with the same window name to append content.
-// - The window name is used as a unique identifier to preserve window information across frames (and save rudimentary information to the .ini file).
+// - Begin/End can be called multiple times during the frame with the same window cam_name to append content.
+// - The window cam_name is used as a unique identifier to preserve window information across frames (and save rudimentary information to the .ini file).
 //   You can use the "##" or "###" markers to use the same label with different id, or same id with different label. See documentation at the top of this file.
 // - Return false when window is collapsed, so you can early out in your code. You always need to call ImGui::End() even if false is returned.
 // - Passing 'bool* p_open' displays a Close button on the upper-right corner of the window, the pointed value will be set to false when the button is pressed.
@@ -6591,7 +6591,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
 {
     ImGuiContext& g = *GImGui;
     const ImGuiStyle& style = g.Style;
-    IM_ASSERT(name != NULL && name[0] != '\0');     // Window name required
+    IM_ASSERT(name != NULL && name[0] != '\0');     // Window cam_name required
     IM_ASSERT(g.WithinFrameScope);                  // Forgot to call ImGui::NewFrame()
     IM_ASSERT(g.FrameCountEnded != g.FrameCount);   // Called ImGui::Render() or ImGui::EndFrame() and haven't called ImGui::NewFrame() again yet
 
@@ -6767,8 +6767,8 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         if (window->MemoryCompacted)
             GcAwakeTransientWindowBuffers(window);
 
-        // Update stored window name when it changes (which can _only_ happen with the "###" operator, so the ID would stay unchanged).
-        // The title bar always display the 'name' parameter, so we only update the string storage if it needs to be visible to the end-user elsewhere.
+        // Update stored window cam_name when it changes (which can _only_ happen with the "###" operator, so the ID would stay unchanged).
+        // The title bar always display the 'cam_name' parameter, so we only update the string storage if it needs to be visible to the end-user elsewhere.
         bool window_title_visible_elsewhere = false;
         if (g.NavWindowingListWindow != NULL && (window->Flags & ImGuiWindowFlags_NoNavFocus) == 0)   // Window titles visible when using CTRL+TAB
             window_title_visible_elsewhere = true;
@@ -7647,7 +7647,7 @@ void ImGui::EndDisabled()
         g.Style.Alpha = g.DisabledAlphaBackup; //PopStyleVar();
 }
 
-// Could have been called BeginDisabledDisable() but it didn't want to be award nominated for most awkward function name.
+// Could have been called BeginDisabledDisable() but it didn't want to be award nominated for most awkward function cam_name.
 // Ideally we would use a shared e.g. BeginDisabled()->BeginDisabledEx() but earlier needs to be optimal.
 // The whole code for this is awkward, will reevaluate if we find a way to implement SetNextItemDisabled().
 void ImGui::BeginDisabledOverrideReenable()
@@ -8887,7 +8887,7 @@ bool ImGui::SetShortcutRouting(ImGuiKeyChord key_chord, ImGuiInputFlags flags, I
 }
 
 // Currently unused by core (but used by tests)
-// Note: this cannot be turned into GetShortcutRouting() because we do the owner_id->routing_id translation, name would be more misleading.
+// Note: this cannot be turned into GetShortcutRouting() because we do the owner_id->routing_id translation, cam_name would be more misleading.
 bool ImGui::TestShortcutRouting(ImGuiKeyChord key_chord, ImGuiID owner_id)
 {
     const ImGuiID routing_id = GetRoutingIdFromOwnerId(owner_id);
@@ -10962,7 +10962,7 @@ void ImGui::SetScrollHereX(float center_x_ratio)
     ImGuiWindow* window = g.CurrentWindow;
     float spacing_x = ImMax(window->WindowPadding.x, g.Style.ItemSpacing.x);
     float target_pos_x = ImLerp(g.LastItemData.Rect.Min.x - spacing_x, g.LastItemData.Rect.Max.x + spacing_x, center_x_ratio);
-    SetScrollFromPosX(window, target_pos_x - window->Pos.x, center_x_ratio); // Convert from absolute to local pos
+    SetScrollFromPosX(window, target_pos_x - window->Pos.x, center_x_ratio); // Convert from absolute to local cam_pos
 
     // Tweak: snap on edges when aiming at an item very close to the edge
     window->ScrollTargetEdgeSnapDist.x = ImMax(0.0f, window->WindowPadding.x - spacing_x);
@@ -10975,7 +10975,7 @@ void ImGui::SetScrollHereY(float center_y_ratio)
     ImGuiWindow* window = g.CurrentWindow;
     float spacing_y = ImMax(window->WindowPadding.y, g.Style.ItemSpacing.y);
     float target_pos_y = ImLerp(window->DC.CursorPosPrevLine.y - spacing_y, window->DC.CursorPosPrevLine.y + window->DC.PrevLineSize.y + spacing_y, center_y_ratio);
-    SetScrollFromPosY(window, target_pos_y - window->Pos.y, center_y_ratio); // Convert from absolute to local pos
+    SetScrollFromPosY(window, target_pos_y - window->Pos.y, center_y_ratio); // Convert from absolute to local cam_pos
 
     // Tweak: snap on edges when aiming at an item very close to the edge
     window->ScrollTargetEdgeSnapDist.y = ImMax(0.0f, window->WindowPadding.y - spacing_y);
@@ -12236,7 +12236,7 @@ static ImVec2 ImGui::NavCalcPreferredRefPos()
         else
             ref_rect = WindowRectRelToAbs(window, window->NavRectRel[g.NavLayer]);
 
-        // Take account of upcoming scrolling (maybe set mouse pos should be done in EndFrame?)
+        // Take account of upcoming scrolling (maybe set mouse cam_pos should be done in EndFrame?)
         if (window->LastFrameActive != g.FrameCount && (window->ScrollTarget.x != FLT_MAX || window->ScrollTarget.y != FLT_MAX))
         {
             ImVec2 next_scroll = CalcNextScrollFromScrollTargetAndClamp(window);
@@ -12468,7 +12468,7 @@ void ImGui::NavInitRequestApplyResult()
         NavRestoreHighlightAfterMove();
 }
 
-// Bias scoring rect ahead of scoring + update preferred pos (if missing) using source position
+// Bias scoring rect ahead of scoring + update preferred cam_pos (if missing) using source position
 static void NavBiasScoringRect(ImRect& r, ImVec2& preferred_pos_rel, ImGuiDir move_dir, ImGuiNavMoveFlags move_flags)
 {
     // Bias initial rect
@@ -12661,7 +12661,7 @@ void ImGui::NavMoveRequestApplyResult()
             g.NavMoveFlags |= ImGuiNavMoveFlags_NoSetNavHighlight;
         if (g.NavId != 0 && (g.NavMoveFlags & ImGuiNavMoveFlags_NoSetNavHighlight) == 0)
             NavRestoreHighlightAfterMove();
-        NavClearPreferredPosForAxis(axis); // On a failed move, clear preferred pos for this axis.
+        NavClearPreferredPosForAxis(axis); // On a failed move, clear preferred cam_pos for this axis.
         IMGUI_DEBUG_LOG_NAV("[nav] NavMoveSubmitted but not led to a result!\n");
         return;
     }
@@ -13096,7 +13096,7 @@ static void ImGui::NavUpdateWindowing()
             g.NavWindowingToggleLayer = false;
 
         // Apply layer toggle on Alt release
-        // Important: as before version <18314 we lacked an explicit IO event for focus gain/loss, we also compare mouse validity to detect old backends clearing mouse pos on focus loss.
+        // Important: as before version <18314 we lacked an explicit IO event for focus gain/loss, we also compare mouse validity to detect old backends clearing mouse cam_pos on focus loss.
         if (IsKeyReleased(g.NavWindowingToggleKey) && g.NavWindowingToggleLayer)
             if (g.ActiveId == 0 || g.ActiveIdAllowOverlap)
                 if (IsMousePosValid(&io.MousePos) == IsMousePosValid(&io.MousePosPrev))
@@ -14091,7 +14091,7 @@ ImGuiWindowSettings* ImGui::FindWindowSettingsByWindow(ImGuiWindow* window)
 // This will revert window to its initial state, including enabling the ImGuiCond_FirstUseEver/ImGuiCond_Once conditions once more.
 void ImGui::ClearWindowSettings(const char* name)
 {
-    //IMGUI_DEBUG_LOG("ClearWindowSettings('%s')\n", name);
+    //IMGUI_DEBUG_LOG("ClearWindowSettings('%s')\n", cam_name);
     ImGuiWindow* window = FindWindowByName(name);
     if (window != NULL)
     {
@@ -16151,7 +16151,7 @@ static int StackToolFormatLevelInfo(ImGuiIDStackTool* tool, int n, bool format_f
 {
     ImGuiStackLevelInfo* info = &tool->Results[n];
     ImGuiWindow* window = (info->Desc[0] == 0 && n == 0) ? ImGui::FindWindowByID(info->ID) : NULL;
-    if (window)                                                                 // Source: window name (because the root ID don't call GetID() and so doesn't get hooked)
+    if (window)                                                                 // Source: window cam_name (because the root ID don't call GetID() and so doesn't get hooked)
         return ImFormatString(buf, buf_size, format_for_ui ? "\"%s\" [window]" : "%s", window->Name);
     if (info->QuerySuccess)                                                     // Source: GetID() hooks (prioritize over ItemInfo() because we frequently use patterns like: PushID(str), Button("") where they both have same id)
         return ImFormatString(buf, buf_size, (format_for_ui && info->DataType == ImGuiDataType_String) ? "\"%s\"" : "%s", info->Desc);

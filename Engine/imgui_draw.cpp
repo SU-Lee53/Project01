@@ -61,7 +61,7 @@ Index of this file:
 #pragma clang diagnostic ignored "-Wsign-conversion"                // warning: implicit conversion changes signedness
 #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"  // warning: zero as null pointer constant                    // some standard header variations use #define NULL 0
 #pragma clang diagnostic ignored "-Wcomma"                          // warning: possible misuse of comma operator here
-#pragma clang diagnostic ignored "-Wreserved-id-macro"              // warning: macro name is a reserved identifier
+#pragma clang diagnostic ignored "-Wreserved-id-macro"              // warning: macro cam_name is a reserved identifier
 #pragma clang diagnostic ignored "-Wdouble-promotion"               // warning: implicit conversion from 'float' to 'double' when passing argument to function  // using printf() is a misery with this as C++ va_arg ellipsis changes float to double.
 #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"  // warning: implicit conversion from 'xxx' to 'float' may lose precision
 #pragma clang diagnostic ignored "-Wreserved-identifier"            // warning: identifier '_Xxx' is reserved because it starts with '_' followed by a capital letter
@@ -2412,7 +2412,7 @@ void    ImFontAtlas::ClearInputData()
             font_cfg.FontData = NULL;
         }
 
-    // When clearing this we lose access to the font name and other information used to build the font.
+    // When clearing this we lose access to the font cam_name and other information used to build the font.
     for (ImFont* font : Fonts)
         if (font->ConfigData >= ConfigData.Data && font->ConfigData < ConfigData.Data + ConfigData.Size)
         {
@@ -2573,7 +2573,7 @@ ImFont* ImFontAtlas::AddFontFromFileTTF(const char* filename, float size_pixels,
     ImFontConfig font_cfg = font_cfg_template ? *font_cfg_template : ImFontConfig();
     if (font_cfg.Name[0] == '\0')
     {
-        // Store a short copy of filename into into the font name for convenience
+        // Store a short copy of filename into into the font cam_name for convenience
         const char* p;
         for (p = filename + strlen(filename); p > filename && p[-1] != '/' && p[-1] != '\\'; p--) {}
         ImFormatString(font_cfg.Name, IM_ARRAYSIZE(font_cfg.Name), "%s, %.0fpx", p, size_pixels);
@@ -3398,7 +3398,7 @@ const ImWchar*  ImFontAtlas::GetGlyphRangesJapanese()
 {
     // 2999 ideograms code points for Japanese
     // - 2136 Joyo (meaning "for regular use" or "for common use") Kanji code points
-    // - 863 Jinmeiyo (meaning "for personal name") Kanji code points
+    // - 863 Jinmeiyo (meaning "for personal cam_name") Kanji code points
     // - Sourced from official information provided by the government agencies of Japan:
     //   - List of Joyo Kanji by the Agency for Cultural Affairs
     //     - https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/
@@ -4267,7 +4267,7 @@ void ImGui::RenderCheckMark(ImDrawList* draw_list, ImVec2 pos, ImU32 col, float 
     draw_list->PathStroke(col, 0, thickness);
 }
 
-// Render an arrow. 'pos' is position of the arrow tip. half_sz.x is length from base to tip. half_sz.y is length on each side.
+// Render an arrow. 'cam_pos' is position of the arrow tip. half_sz.x is length from base to tip. half_sz.y is length on each side.
 void ImGui::RenderArrowPointingAt(ImDrawList* draw_list, ImVec2 pos, ImVec2 half_sz, ImGuiDir direction, ImU32 col)
 {
     switch (direction)

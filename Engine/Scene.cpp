@@ -40,10 +40,12 @@ void Scene::Update()
 		obj->Update();
 	}
 
-	for (auto cam : _cameras)
-	{
-		cam->Update();
-	}
+	//for (auto cam : _cameras)
+	//{
+	//	cam->Update();
+	//}
+
+	_currentCamera.lock()->Update();
 
 	for (auto script : _scripts)
 	{

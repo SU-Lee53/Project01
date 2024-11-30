@@ -141,7 +141,7 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			pos = read.find(' ', prev);
 			auto sub = read.substr(prev, pos - prev);
 			{
-				// substr -> pos
+				// substr -> cam_pos
 				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
@@ -155,7 +155,7 @@ void Model::LoadVertices(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 			pos = read.find(' ', prev);
 			auto sub = read.substr(prev, pos - prev);
 			{
-				// substr -> pos
+				// substr -> cam_pos
 				vec[i] = stof(sub);
 			}
 			prev = pos + 1;
@@ -222,7 +222,7 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 		
 		shared_ptr<ModelBone> bone = make_shared<ModelBone>();
 
-		// name
+		// cam_name
 		bone->name = Utils::ToWString(read);
 
 		// index
@@ -246,7 +246,7 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 				pos = read.find(' ', prev);
 				auto sub = read.substr(prev, pos - prev);
 				{
-					// substr -> pos'
+					// substr -> cam_pos'
 					matrix[i][j] = stof(sub);
 				}
 				prev = pos + 1;
@@ -281,7 +281,7 @@ void Model::LoadMaterials(ifstream& is)
 		getline(is, read);
 		if (read.contains("materials end")) break;
 
-		// material name
+		// material cam_name
 		wstring name = Utils::ToWString(read);
 		material->SetName(name);
 

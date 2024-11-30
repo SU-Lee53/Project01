@@ -11,7 +11,7 @@
 			- Modify Component(Transform)
 		3. Save / Load Scene
 			- Save What?
-				- Scene name
+				- Scene cam_name
 				- Objs
 				- Cams
 				- Scripts?
@@ -30,10 +30,13 @@ public:
 private:
 	// Obj Loader() and variables
 	void ObjLoader();
-	char name[128];
 
 private:
 	void SceneController();
+	char cam_name[128];
+	Vec3 cam_pos;
+	Vec3 cam_dir;
+
 	int32 sc_itemSelected = 0;
 	bool sc_itemHighlighted = 0;
 	int32 sc_itemHighlightedIdx = 0;
@@ -46,17 +49,14 @@ private:
 	const char* sc_cam_previewName;
 	int32 sc_cam_prevComboListSize = 0;
 
-
 private:
-	void UpdateComboList();
-
-private:
-	void ControlComponent();
+	void ComponentModifier();
 
 
 
 
 private:
+	void UpdateComboList();
 
 private:
 	// LoadedObj Combo Variables
@@ -89,7 +89,7 @@ private:
 		//L"pool_ball_14.mesh",
 		//L"pool_ball_15.mesh",
 		//L"pool_objectball.mesh",
-		L"pool_table.mesh"
+		//L"pool_table.mesh"
 	};
 };
 

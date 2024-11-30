@@ -8,6 +8,8 @@
 #include "Material.h"
 #include "Model.h"
 #include "SphereCollider.h"
+#include "Scene.h"
+#include "Camera.h"
 
 RenderManager::RenderManager()
 {
@@ -52,6 +54,7 @@ void RenderManager::Update()
 
 void RenderManager::Render()
 {
+	CUR_SCENE->GetMainCamera()->GetComponent<Camera>()->PushCamera();
 	PushCameraData();
 	PushGlobalLightData();
 	for (const auto obj : _renderObj)

@@ -17,6 +17,9 @@ public:
 
 	void PushData();
 
+public:
+	void ShowStatusToImGui();
+
 private:
 	GlobalLightData _data;
 
