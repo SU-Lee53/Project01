@@ -51,7 +51,15 @@ private:
 
 private:
 	void ComponentModifier();
+	void TransformModifier(shared_ptr<GameObject> target);
+	void MeshRendererModifier(shared_ptr<GameObject> target);
+	
+	float _dragSpeed = 1.f; 
+	bool _scaleType = false;
 
+	int32 mm_itemSelected = 0;
+	bool mm_itemHighlighted = 0;
+	int32 mm_itemHighlightedIdx = 0;
 
 
 

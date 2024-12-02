@@ -40,6 +40,15 @@ public:
 
 	template <typename T,
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
+	void RemoveComponent()
+	{
+		int32 idx = (int32)(T::ty);
+		_components[idx].reset();
+	}
+
+
+	template <typename T,
+		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	bool HasComponent()
 	{
 		return _components[(int32)(T::ty)] ? true : false;

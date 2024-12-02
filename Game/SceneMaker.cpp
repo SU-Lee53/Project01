@@ -17,6 +17,20 @@
 
 void SceneMaker::Init()
 {
+	auto testObj = make_shared<GameObject>();
+	{
+		testObj->AddComponent<Transform>();
+		testObj->AddComponent<MeshRenderer>();
+
+		auto m = make_shared<Model>();
+		m->LoadFromFiles(L"floor.mesh");
+		testObj->AddComponent<MeshRenderer>();
+		testObj->GetComponent<MeshRenderer>()->SetModel(m);
+
+		testObj->SetName("testObj");
+	}
+	CUR_SCENE->AddObject(testObj);
+
 	auto _cam = make_shared<GameObject>();
 	{
 		_cam->AddComponent<Transform>();
@@ -52,14 +66,14 @@ void SceneMaker::Init()
 
 		// test
 		auto m = make_shared<Model>();
-		m->LoadFromFiles(L"pool_objectball.mesh");
+		m->LoadFromFiles(L"floor.mesh");
 		_light->AddComponent<MeshRenderer>();
 		_light->GetComponent<MeshRenderer>()->SetModel(m);
 
 
 		_light->SetName("globalLight");
 	}
-	CUR_SCENE->AddObject(_light);
+	CUR_SCENE->SetGlobalLight(_light);
 
 	auto s = make_shared <SceneMakerScript>();
 	CUR_SCENE->AddScript(s);

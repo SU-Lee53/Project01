@@ -30,6 +30,9 @@ void Scene::Init()
 		script->Init();
 	}
 
+	if (_globalLight)
+		_globalLight->Init();
+
 	//_collider->Init();
 }
 
@@ -40,17 +43,16 @@ void Scene::Update()
 		obj->Update();
 	}
 
-	//for (auto cam : _cameras)
-	//{
-	//	cam->Update();
-	//}
-
 	_currentCamera.lock()->Update();
 
 	for (auto script : _scripts)
 	{
 		script->Update();
 	}
+
+	if (_globalLight)
+		_globalLight->Update();
+
 }
 
 void Scene::Render()

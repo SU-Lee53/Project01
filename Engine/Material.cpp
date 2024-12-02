@@ -26,8 +26,7 @@ bool Material::CheckAttributes(MaterialFlag target, MaterialFlag checker)
 {
 	if (checker == HAS_NOTHING)
 	{
-		uint8 check = target & HAS_DIFFUSE;
-		if (check == HAS_DIFFUSE)
+		if (target & HAS_DIFFUSE)
 		{
 			return false;
 		}
@@ -35,9 +34,7 @@ bool Material::CheckAttributes(MaterialFlag target, MaterialFlag checker)
 	}
 	else
 	{
-		uint8 check = target & checker;
-
-		if (check == checker)
+		if (target & checker)
 		{
 			return true;
 		}
