@@ -1,14 +1,7 @@
 #include "EnginePch.h"
 #include "BoundingPlane.h"
 
-Vec3 ClosestPoint(const BoundingPlane& plane, const Vec3& point)
-{
-    float dot = point.Dot(plane.Normal);
-    float distance = dot - plane.Distance;
-    return point - Vec3(plane.Normal) * distance;
-}
-
-bool BoundingPlane::Intersects(const BoundingSphere& sh) const noexcept
+bool BoundingPlane::Intersects(_In_ const BoundingSphere& sh) const noexcept
 {
     Vec3 closestPoint = ClosestPoint(*this, sh.Center);
     float distSq = (sh.Center - closestPoint).LengthSquared();
@@ -16,7 +9,7 @@ bool BoundingPlane::Intersects(const BoundingSphere& sh) const noexcept
     return distSq <= radiusSq;
 }
 
-bool BoundingPlane::Intersects(const BoundingBox& box) const noexcept
+bool BoundingPlane::Intersects(_In_ const BoundingBox& box) const noexcept
 {
     float pLen = box.Extents.x * fabsf(Normal.x) +
         box.Extents.y * fabsf(Normal.y) +
@@ -26,4 +19,17 @@ bool BoundingPlane::Intersects(const BoundingBox& box) const noexcept
     float dist = dot - Distance;
 
     return fabsf(dist) <= pLen;
+}
+
+bool BoundingPlane::Intersects(_In_ const BoundingPlane& p) const noexcept
+{
+    Vec3 d = Normal.Cross(p.Normal);
+    return d.Dot(d) != 0;
+}
+
+Vec3 BoundingPlane::ClosestPoint(const BoundingPlane& plane, const Vec3& point)
+{
+    float dot = point.Dot(plane.Normal);
+    float distance = dot - plane.Distance;
+    return point - Vec3(plane.Normal) * distance;
 }

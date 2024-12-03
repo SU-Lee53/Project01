@@ -16,30 +16,33 @@ void Transform::Init_impl()
 {
 	// 11.25
 	// TODO : Get Bone transform to world!!
-	if(GetOwner()->HasComponent<MeshRenderer>())
-	{
-		auto root = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetBones();
-		Matrix local = root[GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMeshes().front()->boneIndex]->transform;
+	// 
+	// 12.04 : NVM this is useless
+	// 
+	//if(GetOwner()->HasComponent<MeshRenderer>())
+	//{
+	//	auto root = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetBones();
+	//	Matrix local = root[GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMeshes().front()->boneIndex]->transform;
 
-		Vec3 outPos;
-		Vec3 outScale;
-		Quaternion outRot;
+	//	Vec3 outPos;
+	//	Vec3 outScale;
+	//	Quaternion outRot;
 
-		local.Decompose(outScale, outRot, outPos);
+	//	local.Decompose(outScale, outRot, outPos);
 
-		_position = outPos;
-		_scale = outScale;
+	//	_position = outPos;
+	//	_scale = outScale;
 
-		// 11.26
-		// something wrong i guess
-		Vec3 temp = Utils::ToEulerAngles(outRot);
+	//	// 11.26
+	//	// something wrong i guess
+	//	Vec3 temp = Utils::ToEulerAngles(outRot);
 
-		_rotation = Vec3{
-			XMConvertToDegrees(temp.x),
-			XMConvertToDegrees(temp.y),
-			XMConvertToDegrees(temp.z)
-		};
-	}
+	//	_rotation = Vec3{
+	//		XMConvertToDegrees(temp.x),
+	//		XMConvertToDegrees(temp.y),
+	//		XMConvertToDegrees(temp.z)
+	//	};
+	//}
 }
 
 void Transform::Update_impl()
