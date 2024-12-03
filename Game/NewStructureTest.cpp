@@ -83,8 +83,8 @@ void NewStructureTest::Update()
 		{
 			for (const auto& vs : vss)
 			{
-				auto cam_name = filesystem::path(vs->GetPath()).filename().string();
-				ImGui::BulletText("cam_name : %s", cam_name.c_str());
+				auto _name = filesystem::path(vs->GetPath()).filename().string();
+				ImGui::BulletText("_name : %s", _name.c_str());
 			}
 
 			ImGui::TreePop();
@@ -94,8 +94,8 @@ void NewStructureTest::Update()
 		{
 			for (const auto& ps : pss)
 			{
-				auto cam_name = filesystem::path(ps->GetPath()).filename().string();
-				ImGui::BulletText("cam_name : %s", cam_name.c_str());
+				auto _name = filesystem::path(ps->GetPath()).filename().string();
+				ImGui::BulletText("_name : %s", _name.c_str());
 			}
 
 			ImGui::TreePop();

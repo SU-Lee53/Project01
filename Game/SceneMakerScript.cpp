@@ -106,124 +106,6 @@ void SceneMakerScript::SceneController()
 {
 	if (ImGui::BeginTabBar("Scene"))
 	{
-		if (ImGui::BeginTabItem("Objects"))
-		{
-			auto objs = CUR_SCENE->GetObjects();
-			vector<shared_ptr<GameObject>> objVector(objs.begin(), objs.end());
-
-			if (ImGui::BeginListBox("object in scene"))
-			{
-				for (int n = 0; n < objVector.size(); n++)
-				{
-					const bool is_selected = (sc_itemSelected == n);
-					if (ImGui::Selectable(objVector[n]->GetName().c_str(), is_selected))
-						sc_itemSelected = n;
-
-					if (sc_itemHighlighted && ImGui::IsItemHovered())
-						sc_itemHighlightedIdx = n;
-
-					if (is_selected)
-						ImGui::SetItemDefaultFocus();
-				}
-				ImGui::EndListBox();
-			}
-
-			shared_ptr<GameObject> selected;
-			if (sc_itemSelected < objVector.size())
-				selected = objVector[sc_itemSelected];
-
-			// Component Selector flags
-			const uint8 CP_TRANSFORM = 1;
-			const uint8 CP_MESHRENDERER = CP_TRANSFORM << 1;
-
-			ImGui::InputText("Name", cam_name, IM_ARRAYSIZE(cam_name));
-			if (ImGui::Button("Add to Scene"))
-			{
-				shared_ptr<GameObject> add = make_shared<GameObject>();
-				add->SetName(cam_name);
-				CUR_SCENE->AddObject(add);
-			}
-
-			if (ImGui::Button("Remove from Scene"))
-			{
-				if (selected)
-				{
-					CUR_SCENE->RemoveObject(selected);
-					sc_itemSelected--;
-					sc_itemHighlightedIdx--;
-				}
-				else
-					ImGui::Text("No Item Selected");
-			}
-
-			ImGui::NewLine();
-
-			// Show Basic Status
-			if (selected)
-			{
-				if (ImGui::BeginTabBar("Components", ImGuiTabBarFlags_None))
-				{
-					if (ImGui::BeginTabItem("Transform"))
-					{
-						ImGui::Text("Transform");
-						if (selected->GetComponent<Transform>())
-						{
-							selected->GetComponent<Transform>()->ShowStatusToImGui();
-						}
-						else
-						{
-							ImGui::Text("No Transform");
-						}
-						ImGui::EndTabItem();
-					}
-
-					if (ImGui::BeginTabItem("MeshRenderer"))
-					{
-						ImGui::Text("MeshRenderer");
-						if (selected->GetComponent<MeshRenderer>())
-						{
-							selected->GetComponent<MeshRenderer>()->ShowStatusToImGui();
-						}
-						else
-						{
-							ImGui::Text("No MeshRenderer");
-						}
-
-						ImGui::EndTabItem();
-					}
-
-					if (ImGui::BeginTabItem("GlobalLight"))
-					{
-						ImGui::Text("GlobalLight");
-						if (selected->GetComponent<GlobalLight>())
-						{
-							// TODO : Add inspector
-							selected->GetComponent<GlobalLight>()->ShowStatusToImGui();
-						}
-						else
-						{
-							ImGui::Text("No GlobalLight");
-						}
-
-						ImGui::EndTabItem();
-					}
-
-					if (ImGui::BeginTabItem("Collider"))
-					{
-						ImGui::Text("Collider");
-						ImGui::Text("TODO : Complete collider first!!!!!!!");
-
-						ImGui::EndTabItem();
-					}
-
-
-					ImGui::EndTabBar();
-				}
-			}
-
-			ImGui::EndTabItem();
-		}
-
 		if (ImGui::BeginTabItem("Cameras"))
 		{
 			auto cams = CUR_SCENE->GetCameras();
@@ -257,7 +139,7 @@ void SceneMakerScript::SceneController()
 
 			ImGui::NewLine();
 			ImGui::Text("Add new");
-			ImGui::InputText("Name", cam_name, IM_ARRAYSIZE(cam_name));
+			ImGui::InputText("Name", _name, IM_ARRAYSIZE(_name));
 			ImGui::InputFloat3("Pos", (float*)& cam_pos);
 
 			if (ImGui::Button("Add new camera"))
@@ -270,7 +152,7 @@ void SceneMakerScript::SceneController()
 				auto _mouseScript = make_shared<MouseScript>();
 				add->AddScript(_mouseScript);
 
-				add->SetName(cam_name);
+				add->SetName(_name);
 				CUR_SCENE->AddCamera(add);
 			}
 
@@ -314,12 +196,51 @@ void SceneMakerScript::SceneController()
 			ImGui::EndTabItem();
 		}
 
+		if (ImGui::BeginTabItem("GlobalLight"))
+		{
+			auto light = CUR_SCENE->GetGlobalLight();
+			ControlGlobalLight(light);
 
+			ImGui::EndTabItem();
+		}
 
 		ImGui::EndTabBar();
 	}
 
 
+}
+
+void SceneMakerScript::ControlGlobalLight(shared_ptr<GameObject> light)
+{
+	ImGui::DragFloat("Drag Speed : %f", &_dragSpeed, 0.005f, 0.f, 5.f);
+
+	ImGui::NewLine();
+	ImGui::InputFloat3("Ambient", (float*)&sc_lightData.ambient);
+	ImGui::DragFloat("Ambient.R", &sc_lightData.ambient.x, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Ambient.G", &sc_lightData.ambient.y, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Ambient.B", &sc_lightData.ambient.z, _dragSpeed, 0.f, 1.f);
+
+	ImGui::NewLine();
+	ImGui::InputFloat3("Diffuse", (float*)&sc_lightData.diffuse);
+	ImGui::DragFloat("Diffuse.R", &sc_lightData.diffuse.x, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Diffuse.G", &sc_lightData.diffuse.y, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Diffuse.B", &sc_lightData.diffuse.z, _dragSpeed, 0.f, 1.f);
+
+	ImGui::NewLine();
+	ImGui::InputFloat3("Specular", (float*)&sc_lightData.specular);
+	ImGui::DragFloat("Specular.R", &sc_lightData.specular.x, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Specular.G", &sc_lightData.specular.y, _dragSpeed, 0.f, 1.f);
+	ImGui::DragFloat("Specular.B", &sc_lightData.specular.z, _dragSpeed, 0.f, 1.f);
+	ImGui::DragInt("Pow", &sc_lightData.specularPowValue, 1.f, 0, 100);
+
+	ImGui::NewLine();
+	ImGui::InputFloat3("Direction", (float*)&sc_lightData.direction);
+	ImGui::DragFloat("Direction.x", &sc_lightData.direction.x, _dragSpeed, -1.f, 1.f);
+	ImGui::DragFloat("Direction.y", &sc_lightData.direction.y, _dragSpeed, -1.f, 1.f);
+	ImGui::DragFloat("Direction.z", &sc_lightData.direction.z, _dragSpeed, -1.f, 1.f);
+	//sc_lightData.direction.Normalize();
+
+	light->GetComponent<GlobalLight>()->SetData(sc_lightData);
 }
 
 void SceneMakerScript::ComponentModifier()
@@ -352,15 +273,24 @@ void SceneMakerScript::ComponentModifier()
 			if (sc_itemSelected < objVector.size())
 				selected = objVector[sc_itemSelected];
 
-			ImGui::InputText("Name", cam_name, IM_ARRAYSIZE(cam_name));
-			ImGui::SameLine();
+			// Component Selector flags
+			static bool transformFlag = false;
+			static bool meshredererFlag = false;
+			static bool colliderFlag = false;
+			ImGui::Checkbox("Transform", &transformFlag);
+			ImGui::Checkbox("MeshRenderer", &meshredererFlag);
+			ImGui::Checkbox("Collider(Not Completed)", &colliderFlag);
+
+			ImGui::InputText("Name", _name, IM_ARRAYSIZE(_name));
 			if (ImGui::Button("Add to Scene"))
 			{
 				shared_ptr<GameObject> add = make_shared<GameObject>();
-				add->SetName(cam_name);
+				if (transformFlag) add->AddComponent<Transform>();
+				if (meshredererFlag) add->AddComponent<MeshRenderer>();
+				//if (colliderFlag) add->AddComponent<Collider>();
+				add->SetName(_name);
 				CUR_SCENE->AddObject(add);
 			}
-
 			if (ImGui::Button("Remove from Scene"))
 			{
 				if (selected)
@@ -391,21 +321,6 @@ void SceneMakerScript::ComponentModifier()
 					{
 						ImGui::Text("MeshRenderer");
 						MeshRendererModifier(selected);
-						ImGui::EndTabItem();
-					}
-
-					if (ImGui::BeginTabItem("GlobalLight"))
-					{
-						ImGui::Text("GlobalLight");
-						if (selected->GetComponent<GlobalLight>())
-						{
-							// TODO : Add Modifier
-						}
-						else
-						{
-							ImGui::Text("No GlobalLight");
-						}
-
 						ImGui::EndTabItem();
 					}
 

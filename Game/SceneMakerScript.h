@@ -11,7 +11,7 @@
 			- Modify Component(Transform)
 		3. Save / Load Scene
 			- Save What?
-				- Scene cam_name
+				- Scene _name
 				- Objs
 				- Cams
 				- Scripts?
@@ -33,7 +33,8 @@ private:
 
 private:
 	void SceneController();
-	char cam_name[128];
+	void ControlGlobalLight(shared_ptr<GameObject> light);
+	char _name[128];
 	Vec3 cam_pos;
 	Vec3 cam_dir;
 
@@ -48,6 +49,8 @@ private:
 	int32 sc_cam_itemHighlightedIdx = 0;
 	const char* sc_cam_previewName;
 	int32 sc_cam_prevComboListSize = 0;
+
+	GlobalLightData sc_lightData;
 
 private:
 	void ComponentModifier();

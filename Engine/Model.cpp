@@ -222,7 +222,7 @@ void Model::LoadBones(ifstream& is, OUT shared_ptr<ModelMesh> mesh)
 		
 		shared_ptr<ModelBone> bone = make_shared<ModelBone>();
 
-		// cam_name
+		// _name
 		bone->name = Utils::ToWString(read);
 
 		// index
@@ -281,7 +281,7 @@ void Model::LoadMaterials(ifstream& is)
 		getline(is, read);
 		if (read.contains("materials end")) break;
 
-		// material cam_name
+		// material _name
 		wstring name = Utils::ToWString(read);
 		material->SetName(name);
 
@@ -535,6 +535,23 @@ void Model::ShowModelHierarchy()
 						m->GetSpecularMap()->GetSize().x, m->GetSpecularMap()->GetSize().y,
 						m->GetSpecularMap()->IsErrorTexture() ? "True" : "False"
 					);
+
+					ImGui::TreePop();
+				}
+				
+				if (ImGui::TreeNode("Shader"))
+				{
+					ImGui::Text("Vertex Shader");
+					auto vsName = m->GetVertexShader()->GetName();
+					auto vsPath = Utils::ToString(m->GetVertexShader()->GetPath());
+					ImGui::Text("Name : %s", vsName.c_str());
+					ImGui::Text("Path : %s", vsPath.c_str());
+					
+					ImGui::Text("Pixel Shader");
+					auto psName = m->GetPixelShader()->GetName();
+					auto psPath = Utils::ToString(m->GetPixelShader()->GetPath());
+					ImGui::Text("Name : %s", psName.c_str());
+					ImGui::Text("Path : %s", psPath.c_str());
 
 					ImGui::TreePop();
 				}

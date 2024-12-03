@@ -255,10 +255,10 @@ void Converter::ExportModel(wstring name)
 	for (auto& mesh : _meshes)
 	{
 		// save?
-		// 1. cam_name
+		// 1. _name
 		// 2. vertices, indices
 		// 3. bone index
-		// 4. material cam_name + material index(mostly 0)
+		// 4. material _name + material index(mostly 0)
 
 		wstring path = _modelExportPath + Utils::ToWString(mesh->name) + L".mesh";
 		auto savePath = filesystem::path(path);

@@ -29,6 +29,7 @@ public:
 	shared_ptr<Model> GetModel() const { return _model; }
 
 private:
+	// No more use
 	shared_ptr<Shader> _shader = nullptr;
 	shared_ptr<Mesh> _mesh = nullptr;
 	shared_ptr<Texture> _texture = nullptr;
