@@ -257,6 +257,9 @@
     <ClCompile Include="BoundingPlane.cpp">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryHelper.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -439,6 +442,7 @@
     <ClInclude Include="BoundingPlane.h">
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

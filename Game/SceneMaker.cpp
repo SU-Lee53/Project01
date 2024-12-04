@@ -23,7 +23,7 @@ void SceneMaker::Init()
 		testObj->AddComponent<MeshRenderer>();
 
 		auto m = make_shared<Model>();
-		m->LoadFromFiles(L"pool_ball_8.mesh");
+		m->LoadFromFiles(L"pool_ball_7.mesh");
 		testObj->AddComponent<MeshRenderer>();
 		testObj->GetComponent<MeshRenderer>()->SetModel(m);
 

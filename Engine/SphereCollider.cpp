@@ -3,6 +3,8 @@
 #include "AABBCollider.h"
 #include "PlaneCollider.h"
 #include "GameObject.h"
+#include "MeshRenderer.h"
+#include "Model.h"
 
 SphereCollider::SphereCollider()
 	:BaseCollider(COLLIDER_TYPE::Sphere)
@@ -13,11 +15,23 @@ SphereCollider::~SphereCollider()
 {
 }
 
+void SphereCollider::InitCollider()
+{
+	_boundingSphere.Center = Vec3(0.f, 0.f, 0.f);
+	_boundingSphere.Radius = 1.f;
+	ShrinkToFit();
+}
+
 void SphereCollider::UpdateCollider()
 {
-	_boundingSphere.Center = GetOwner()->GetTransform()->GetPosition();
-	Vec3 scale = GetOwner()->GetTransform()->GetScale();
-	_boundingSphere.Radius = _radius * max(max(scale.x, scale.y), scale.z);
+	auto transform = GetOwner()->GetTransform();
+
+	// TODO : COMPLETE
+	
+
+	//_boundingSphere.Center = GetOwner()->GetTransform()->GetPosition();
+	//Vec3 scale = GetOwner()->GetTransform()->GetScale();
+	//_boundingSphere.Radius = _radius * max(max(scale.x, scale.y), scale.z);
 }
 
 bool SphereCollider::CheckCollision(shared_ptr<BaseCollider> other)
@@ -35,6 +49,62 @@ bool SphereCollider::CheckCollision(shared_ptr<BaseCollider> other)
 	}
 
 	return false;
+}
+
+void SphereCollider::ShrinkToFit()
+{
+	auto meshes = GetOwner()->GetComponent<MeshRenderer>()->GetModel()->GetMeshes();
+
+	Vec3 xMin, xMax;
+	Vec3 yMin, yMax;
+	Vec3 zMin, zMax;
+
+	auto compX = [](VertexType v1, VertexType v2) -> bool
+		{
+			return v1.position.x < v2.position.x;
+		};
+	
+	auto compY = [](VertexType v1, VertexType v2) -> bool
+		{
+			return v1.position.x < v2.position.x;
+		};
+	
+	auto compZ = [](VertexType v1, VertexType v2) -> bool
+		{
+			return v1.position.x < v2.position.x;
+		};
+
+	for (const auto& mesh : meshes)
+	{
+		auto vtxs = mesh->geometry->GetVertices();
+		xMin = std::min_element(vtxs.begin(), vtxs.end(), compX)->position;
+		xMax = std::max_element(vtxs.begin(), vtxs.end(), compX)->position;
+
+		yMin = std::min_element(vtxs.begin(), vtxs.end(), compY)->position;
+		yMax = std::max_element(vtxs.begin(), vtxs.end(), compY)->position;
+
+		zMin = std::min_element(vtxs.begin(), vtxs.end(), compZ)->position;
+		zMax = std::max_element(vtxs.begin(), vtxs.end(), compZ)->position;
+	}
+	
+	Vec3 center = Vec3((xMin.x + xMax.x) / 2, (yMin.y + yMax.y) / 2, (zMin.z+ zMax.z) / 2);
+	_boundingSphere.Center = center;
+
+	// Radius?
+	float xMinDistSq = (xMin - center).LengthSquared();
+	float xMaxDistSq = (xMax - center).LengthSquared();
+	float xDistBig = std::sqrtf(std::max(xMinDistSq, xMaxDistSq));
+	
+	float yMinDistSq = (yMin - center).LengthSquared();
+	float yMaxDistSq = (yMax - center).LengthSquared();
+	float yDistBig = std::sqrtf(std::max(yMinDistSq, yMaxDistSq));
+	
+	float zMinDistSq = (zMin - center).LengthSquared();
+	float zMaxDistSq = (zMax - center).LengthSquared();
+	float zDistBig = std::sqrtf(std::max(zMinDistSq, zMaxDistSq));
+
+	_boundingSphere.Radius = std::max(std::max(xDistBig, yDistBig), zDistBig);
+
 }
 
 bool SphereCollider::CheckIntersectWithPlane(const BoundingPlane& p)

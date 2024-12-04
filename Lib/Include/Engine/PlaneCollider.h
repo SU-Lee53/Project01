@@ -9,6 +9,7 @@ public:
 	virtual ~PlaneCollider();
 
 public:
+	virtual void InitCollider() override;
 	virtual void UpdateCollider() override;
 
 public:
@@ -18,5 +19,8 @@ public:
 
 private:
 	BoundingPlane _boundingPlane;
+
+public:
+	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::PlaneCollider;
 };
 

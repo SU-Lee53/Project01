@@ -178,46 +178,22 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 void RenderManager::RenderColliderDebugMesh(shared_ptr<GameObject> obj)
 {
 	// Wireframe Rasterizer
-	//shared_ptr<RasterizerState> wireframe = make_shared<RasterizerState>();
+	shared_ptr<RasterizerState> wireframe = make_shared<RasterizerState>();
 
-	//D3D11_RASTERIZER_DESC _debugRasterizerDesc;
-	//memset(&_debugRasterizerDesc, 0, sizeof(_debugRasterizerDesc));
-	//{
-	//	_debugRasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
-	//	_debugRasterizerDesc.CullMode = D3D11_CULL_BACK;
-	//	_debugRasterizerDesc.FrontCounterClockwise = false;
-	//}
+	D3D11_RASTERIZER_DESC _debugRasterizerDesc;
+	memset(&_debugRasterizerDesc, 0, sizeof(_debugRasterizerDesc));
+	{
+		_debugRasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
+		_debugRasterizerDesc.CullMode = D3D11_CULL_BACK;
+		_debugRasterizerDesc.FrontCounterClockwise = false;
+	}
 
-	//ComPtr<ID3D11RasterizerState> _debugRasterizer;
-	//HR_ASSERT(DEVICE->CreateRasterizerState(&_debugRasterizerDesc, _debugRasterizer.GetAddressOf()));
-	//wireframe->SetState(_debugRasterizer);
+	ComPtr<ID3D11RasterizerState> _debugRasterizer;
+	HR_ASSERT(DEVICE->CreateRasterizerState(&_debugRasterizerDesc, _debugRasterizer.GetAddressOf()));
+	wireframe->SetState(_debugRasterizer);
 
-	//// TODO: Render Below
-	//auto transform = obj->GetComponent<Transform>();
-	//auto m = obj->GetCollider<SphereCollider>()->GetDebugMesh();
-	//auto shader = m->GetShader();
+	
 
-	//_transformData.matWorld = transform->GetWorld();
-	//PushTransformData();
-	//PipelineDesc desc;
-	//{
-	//	desc.inputLayout = shader->GetInputLayout();
-	//	desc.vertexShader = shader->GetVertexShader();
-	//	desc.pixelShader = shader->GetPixelShader();
-	//	desc.rasterizerState = wireframe;
-	//	desc.blendState = _blendState;
-	//}
-	//_pipeline->Update(desc);
-
-	//_pipeline->SetVertexBuffer(m->GetVertexBuffer());
-	//_pipeline->SetIndexBuffer(m->GetIndexBuffer());
-
-	//_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
-	//_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
-
-	//_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
-
-	//_pipeline->DrawIndexed(m->GetIndexBuffer()->GetCount(), 0, 0);
 }
 
 void RenderManager::PushCameraData()

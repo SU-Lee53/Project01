@@ -13,6 +13,10 @@ PlaneCollider::~PlaneCollider()
 {
 }
 
+void PlaneCollider::InitCollider()
+{
+}
+
 void PlaneCollider::UpdateCollider()
 {
 	Vec3 origin = Vec3{ 0,0,0 };

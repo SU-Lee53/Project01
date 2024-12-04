@@ -13,6 +13,10 @@ AABBCollider::~AABBCollider()
 {
 }
 
+void AABBCollider::InitCollider()
+{
+}
+
 void AABBCollider::UpdateCollider()
 {
 	_boundingBox.Center = GetOwner()->GetTransform()->GetPosition();

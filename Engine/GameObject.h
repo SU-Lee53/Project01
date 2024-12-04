@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include "Transform.h"
-//#include "Collider.h"
+#include "BaseCollider.h"
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -60,7 +60,6 @@ public:
 		return static_pointer_cast<Transform>(_components[(int)COMPONENT_TYPE::Transform]);
 	}
 
-public:
 public:
 	void AddScript(shared_ptr<Script<GameObject>> script);
 

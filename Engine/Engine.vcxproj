@@ -31,6 +31,7 @@
     <ClCompile Include="EnginePch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GeometryHelper.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="Execute.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -108,6 +109,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Constant_Types.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="GeometryHelper.h" />
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="Game.h" />

@@ -32,8 +32,8 @@ public:
 	string GetName() const { return _name; }
 	wstring GetPath() const { return _filePath; }
 
-	friend class hash<Shader_Base<ID3D11VertexShader>>;
-	friend class hash<Shader_Base<ID3D11PixelShader>>;
+	friend struct hash<Shader_Base<ID3D11VertexShader>>;
+	friend struct hash<Shader_Base<ID3D11PixelShader>>;
 
 private:
 	wstring _filePath;

@@ -8,6 +8,7 @@ public:
 	virtual ~AABBCollider();
 
 public:
+	virtual void InitCollider() override;
 	virtual void UpdateCollider() override;
 
 public:
@@ -24,5 +25,7 @@ private:
 private:
 	BoundingBox _boundingBox;
 
+public:
+	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::AABBCollider;
 };
 

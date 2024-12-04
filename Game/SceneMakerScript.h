@@ -56,6 +56,7 @@ private:
 	void ComponentModifier();
 	void TransformModifier(shared_ptr<GameObject> target);
 	void MeshRendererModifier(shared_ptr<GameObject> target);
+	void ColliderModifier(shared_ptr<GameObject> target);
 	
 	float _dragSpeed = 1.f; 
 	bool _scaleType = false;
@@ -64,10 +65,10 @@ private:
 	bool mm_itemHighlighted = 0;
 	int32 mm_itemHighlightedIdx = 0;
 
-
-
-private:
-	void UpdateComboList();
+	const char* cm_items[3] = { "Sphere", "AABB", "Plane" };
+	int32 cm_itemSelected = 0;
+	bool cm_itemHighlighted = 0;
+	int32 cm_itemHighlightedIdx = 0;
 
 private:
 	// LoadedObj Combo Variables

@@ -8,6 +8,9 @@
 #include "Camera.h"
 #include "GlobalLight.h"
 #include "BaseCollider.h"
+#include "SphereCollider.h"
+#include "AABBCollider.h"
+#include "PlaneCollider.h"
 #include "MouseScript.h"
 #include <filesystem>
 
@@ -212,6 +215,8 @@ void SceneMakerScript::SceneController()
 
 void SceneMakerScript::ControlGlobalLight(shared_ptr<GameObject> light)
 {
+	sc_lightData = light->GetComponent<GlobalLight>()->GetData();
+
 	ImGui::DragFloat("Drag Speed : %f", &_dragSpeed, 0.005f, 0.f, 5.f);
 
 	ImGui::NewLine();
@@ -328,6 +333,7 @@ void SceneMakerScript::ComponentModifier()
 					{
 						ImGui::Text("Collider");
 						ImGui::Text("TODO : Complete collider first!!!!!!!");
+						ColliderModifier(selected);
 
 						ImGui::EndTabItem();
 					}
@@ -560,15 +566,51 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 
 }
 
-void SceneMakerScript::UpdateComboList()
+void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 {
-	LoadedObjs.clear();
-
-	unordered_set<shared_ptr<GameObject>> objSet = GetOwner()->GetObjects();
-	for (const auto& obj : objSet)
+	if (target->GetComponent<BaseCollider>() == nullptr)
 	{
-		LoadedObjs.push_back(make_pair(obj->GetName(), obj));
-	}
+		if (ImGui::BeginListBox("ColliderType"))
+		{
+			for (int n = 0; n < IM_ARRAYSIZE(cm_items); n++)
+			{
+				const bool is_selected = (cm_itemSelected == n);
+				if (ImGui::Selectable(cm_items[n], is_selected))
+					cm_itemSelected = n;
 
-	lo_prevComboListSize = LoadedObjs.size();
+				if (cm_itemHighlighted && ImGui::IsItemHovered())
+					cm_itemHighlightedIdx = n;
+
+				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+			ImGui::EndListBox();
+		}
+
+		if (ImGui::Button("Add"))
+		{
+			switch (cm_itemSelected)
+			{
+			case 0:
+				target->AddComponent<SphereCollider>();
+				break;
+
+			case 1:
+				target->AddComponent<AABBCollider>();
+				break;
+
+			case 2:
+				target->AddComponent<PlaneCollider>();
+				break;
+
+			default:
+				assert(false);
+			}
+
+		}
+	}
+	else
+	{
+	}
 }
