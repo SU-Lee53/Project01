@@ -15,7 +15,7 @@ public:
 	virtual bool CheckCollision(shared_ptr<BaseCollider> other) override;
 
 public:
-	void SetRadius(float radius) { _radius = radius; }
+	void SetRadius(float radius) { _radiusOrigin = radius; }
 	BoundingSphere& GetBoundingSphere() { return _boundingSphere; }
 
 private:
@@ -27,7 +27,8 @@ private:
 	bool CheckIntersectWithPlane(const class BoundingPlane& p);
 
 private:
-	float _radius = 1.f;
+	Vec3 _centerOrigin = Vec3(0.f);
+	float _radiusOrigin = 1.f;
 	BoundingSphere _boundingSphere;
 
 public:

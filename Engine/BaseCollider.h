@@ -8,6 +8,14 @@ enum class COLLIDER_TYPE
 	Plane
 };
 
+struct DebugMesh
+{
+	shared_ptr<Geometry<DebugType>> geometry;
+	shared_ptr<VertexBuffer> vertexBuffer;
+	shared_ptr<IndexBuffer> indexBuffer;
+	Color color = Color(1.f, 0.f, 0.f, 0.f);
+};
+
 class BaseCollider : public Component<BaseCollider>
 {
 public:
@@ -38,10 +46,10 @@ public:
 public:
 	shared_ptr<Geometry<DebugType>> GetDebugMesh() { return _debugMesh; }
 
-private:
-	Matrix _transform;
+protected:
+	Matrix _transform = Matrix::Identity;
 
-private:
+protected:
 	shared_ptr<Geometry<DebugType>> _debugMesh;
 
 public:

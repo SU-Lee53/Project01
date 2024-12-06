@@ -20,18 +20,38 @@ void SphereCollider::InitCollider()
 	_boundingSphere.Center = Vec3(0.f, 0.f, 0.f);
 	_boundingSphere.Radius = 1.f;
 	ShrinkToFit();
+
+#ifdef _DEBUG
+	//_debugMesh = Geo
+
+#endif
 }
 
 void SphereCollider::UpdateCollider()
 {
 	auto transform = GetOwner()->GetTransform();
+	Vec3 translate = transform->GetPosition();
+	Vec3 scale = transform->GetScale();
 
-	// TODO : COMPLETE
-	
+	/*
+		TODO : COMPLETE
+		current situation
+			- after ShrinkToFit(),
+				- BoundingSphere.Radius set to max(max(x,y),z)
+				- BoundingSphere.Center Set to median of minmax of xyz
+			- what to do
+				- 2 options
+					1. set radius to 1, center to 0,0,0 -> update all size data in _transform
+					2. leave BoundingSphere alone -> update only object's transform value in _transfrom
+	*/
+
+	_boundingSphere.Center = Vec3::Transform(_centerOrigin, Matrix::CreateTranslation(translate));
+	_boundingSphere.Radius = _radiusOrigin * std::max(std::max(scale.x, scale.y), scale.z);
+	_transform = Matrix::CreateScale(scale) * Matrix::CreateTranslation(translate);
 
 	//_boundingSphere.Center = GetOwner()->GetTransform()->GetPosition();
 	//Vec3 scale = GetOwner()->GetTransform()->GetScale();
-	//_boundingSphere.Radius = _radius * max(max(scale.x, scale.y), scale.z);
+	//_boundingSphere.Radius = _radiusOrigin * max(max(scale.x, scale.y), scale.z);
 }
 
 bool SphereCollider::CheckCollision(shared_ptr<BaseCollider> other)
@@ -88,7 +108,7 @@ void SphereCollider::ShrinkToFit()
 	}
 	
 	Vec3 center = Vec3((xMin.x + xMax.x) / 2, (yMin.y + yMax.y) / 2, (zMin.z+ zMax.z) / 2);
-	_boundingSphere.Center = center;
+	_centerOrigin = center;
 
 	// Radius?
 	float xMinDistSq = (xMin - center).LengthSquared();
@@ -103,7 +123,7 @@ void SphereCollider::ShrinkToFit()
 	float zMaxDistSq = (zMax - center).LengthSquared();
 	float zDistBig = std::sqrtf(std::max(zMinDistSq, zMaxDistSq));
 
-	_boundingSphere.Radius = std::max(std::max(xDistBig, yDistBig), zDistBig);
+	_radiusOrigin = std::max(std::max(xDistBig, yDistBig), zDistBig);
 
 }
 
