@@ -10,6 +10,19 @@ enum class COLLIDER_TYPE
 
 struct DebugMesh
 {
+	DebugMesh() = default;
+
+	void Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFunc)
+	{
+		geometry = make_shared<Geometry<DebugType>>();
+		vertexBuffer = make_shared<VertexBuffer>();
+		indexBuffer = make_shared<IndexBuffer>();
+
+		_createFunc(geometry);
+		vertexBuffer->Create(geometry->GetVertices());
+		indexBuffer->Create(geometry->GetIndices());
+	}
+
 	shared_ptr<Geometry<DebugType>> geometry;
 	shared_ptr<VertexBuffer> vertexBuffer;
 	shared_ptr<IndexBuffer> indexBuffer;
@@ -44,13 +57,13 @@ public:
 	COLLIDER_TYPE GetColliderType() { return _colliderType; }
 
 public:
-	shared_ptr<Geometry<DebugType>> GetDebugMesh() { return _debugMesh; }
+	shared_ptr<DebugMesh> GetDebugMesh() { return _debugMesh; }
 
 protected:
 	Matrix _transform = Matrix::Identity;
 
 protected:
-	shared_ptr<Geometry<DebugType>> _debugMesh;
+	shared_ptr<DebugMesh> _debugMesh = nullptr;
 
 public:
 	COLLIDER_TYPE _colliderType;

@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Model.h"
+#include "GeometryHelper.h"
 
 SphereCollider::SphereCollider()
 	:BaseCollider(COLLIDER_TYPE::Sphere)
@@ -22,7 +23,7 @@ void SphereCollider::InitCollider()
 	ShrinkToFit();
 
 #ifdef _DEBUG
-	//_debugMesh = Geo
+	_debugMesh->Create(GeometryHelper::CreateSphere);
 
 #endif
 }

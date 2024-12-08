@@ -1,8 +1,9 @@
 #include "EnginePch.h"
 #include "GeometryHelper.h"
 
-void GeometryHelper::CreateSphere(Vec3 center, float radius, OUT shared_ptr<Geometry<DebugType>> geometry)
+void GeometryHelper::CreateSphere(OUT shared_ptr<Geometry<DebugType>> geometry)
 {
+	float radius = 1.0f; // Radius of Sphere
 	uint32 stackCount = 20; // Column Divide
 	uint32 sliceCount = 20; // Row Divide
 
@@ -102,7 +103,7 @@ void GeometryHelper::CreateSphere(Vec3 center, float radius, OUT shared_ptr<Geom
 
 }
 
-void GeometryHelper::CreateCube(Vec3 center, float extents, OUT shared_ptr<Geometry<DebugType>> geometry)
+void GeometryHelper::CreateCube(OUT shared_ptr<Geometry<DebugType>> geometry)
 {
 	float w2 = 0.5f;
 	float h2 = 0.5f;
@@ -166,8 +167,11 @@ void GeometryHelper::CreateCube(Vec3 center, float extents, OUT shared_ptr<Geome
 	geometry->SetIndices(idx);
 }
 
-void GeometryHelper::CreateGrid(int32 sizeX, int32 sizeY, OUT shared_ptr<Geometry<DebugType>> geometry)
+void GeometryHelper::CreateGrid(OUT shared_ptr<Geometry<DebugType>> geometry)
 {
+	int32 sizeX = 20;
+	int32 sizeY = 20;
+
 	vector<DebugType> vtx;
 
 	for (int32 z = 0; z < sizeY + 1; z++)
