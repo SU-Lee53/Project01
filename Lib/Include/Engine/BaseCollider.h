@@ -27,6 +27,8 @@ struct DebugMesh
 	shared_ptr<VertexBuffer> vertexBuffer;
 	shared_ptr<IndexBuffer> indexBuffer;
 	Color color = Color(1.f, 0.f, 0.f, 0.f);
+
+	Matrix transfom = Matrix::Identity;
 };
 
 class BaseCollider : public Component<BaseCollider>
@@ -67,6 +69,6 @@ protected:
 
 public:
 	COLLIDER_TYPE _colliderType;
-	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
+	//constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
 };
 

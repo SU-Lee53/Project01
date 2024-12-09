@@ -56,7 +56,7 @@ private:
 	void ComponentModifier();
 	void TransformModifier(shared_ptr<GameObject> target);
 	void MeshRendererModifier(shared_ptr<GameObject> target);
-	void ColliderModifier(shared_ptr<GameObject> target);
+	//void ColliderModifier(shared_ptr<GameObject> target);
 	
 	float _dragSpeed = 1.f; 
 	bool _scaleType = false;

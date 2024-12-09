@@ -10,6 +10,8 @@ class BlendState;
 class Pipeline;
 class Shader;
 
+//struct DebugMesh;
+
 class RenderManager : public Manager_Base
 {
 	// TODO : Add Texture for future
@@ -25,9 +27,11 @@ public:
 private:
 	void RenderLagacy(shared_ptr<GameObject> obj);
 	void RenderModel(shared_ptr<GameObject> obj);
-	void RenderColliderDebugMesh(shared_ptr<GameObject> obj);
+	//void RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh);
+
 public:
 	void PushToRenderObject(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
+	//void PushToDebugMesh(shared_ptr<DebugMesh> obj) { _debugMeshes.push_back(obj); }
 
 private:
 	void PushCameraData();
@@ -48,6 +52,9 @@ public:
 private:
 	shared_ptr<Pipeline> _pipeline;
 	vector<shared_ptr<GameObject>> _renderObj;
+
+	// for collider debug
+	//vector<shared_ptr<DebugMesh>> _debugMeshes;
 
 private:
 	CameraData _cameraData;

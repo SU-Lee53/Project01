@@ -333,7 +333,7 @@ void SceneMakerScript::ComponentModifier()
 					{
 						ImGui::Text("Collider");
 						ImGui::Text("TODO : Complete collider first!!!!!!!");
-						ColliderModifier(selected);
+						//ColliderModifier(selected);
 
 						ImGui::EndTabItem();
 					}
@@ -565,52 +565,52 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 	}
 
 }
-
-void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
-{
-	if (target->GetComponent<BaseCollider>() == nullptr)
-	{
-		if (ImGui::BeginListBox("ColliderType"))
-		{
-			for (int n = 0; n < IM_ARRAYSIZE(cm_items); n++)
-			{
-				const bool is_selected = (cm_itemSelected == n);
-				if (ImGui::Selectable(cm_items[n], is_selected))
-					cm_itemSelected = n;
-
-				if (cm_itemHighlighted && ImGui::IsItemHovered())
-					cm_itemHighlightedIdx = n;
-
-				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-				if (is_selected)
-					ImGui::SetItemDefaultFocus();
-			}
-			ImGui::EndListBox();
-		}
-
-		if (ImGui::Button("Add"))
-		{
-			switch (cm_itemSelected)
-			{
-			case 0:
-				target->AddComponent<SphereCollider>();
-				break;
-
-			case 1:
-				target->AddComponent<AABBCollider>();
-				break;
-
-			case 2:
-				target->AddComponent<PlaneCollider>();
-				break;
-
-			default:
-				assert(false);
-			}
-
-		}
-	}
-	else
-	{
-	}
-}
+//
+//void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
+//{
+//	if (target->GetComponent<BaseCollider>() == nullptr)
+//	{
+//		if (ImGui::BeginListBox("ColliderType"))
+//		{
+//			for (int n = 0; n < IM_ARRAYSIZE(cm_items); n++)
+//			{
+//				const bool is_selected = (cm_itemSelected == n);
+//				if (ImGui::Selectable(cm_items[n], is_selected))
+//					cm_itemSelected = n;
+//
+//				if (cm_itemHighlighted && ImGui::IsItemHovered())
+//					cm_itemHighlightedIdx = n;
+//
+//				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+//				if (is_selected)
+//					ImGui::SetItemDefaultFocus();
+//			}
+//			ImGui::EndListBox();
+//		}
+//
+//		if (ImGui::Button("Add"))
+//		{
+//			switch (cm_itemSelected)
+//			{
+//			case 0:
+//				target->AddComponent<SphereCollider>();
+//				break;
+//
+//			case 1:
+//				target->AddComponent<AABBCollider>();
+//				break;
+//
+//			case 2:
+//				target->AddComponent<PlaneCollider>();
+//				break;
+//
+//			default:
+//				assert(false);
+//			}
+//
+//		}
+//	}
+//	else
+//	{
+//	}
+//}

@@ -56,22 +56,6 @@ public:
 	}
 
 
-	template <typename T,
-		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
-	constexpr shared_ptr<T> GetCollider()
-	{
-		int32 idx = COMPONENT_TYPE::Collider;
-
-		if constexpr (is_same_v<T, SphereCollider>)
-		{
-
-		}
-		else if constexpr(is_same_v<T, AABBCollider>)
-
-	}
-
-
-
 public:
 	shared_ptr<Transform> GetTransform() const
 	{

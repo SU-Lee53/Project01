@@ -7,7 +7,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Model.h"
-#include "SphereCollider.h"
+#include "BaseCollider.h"
 #include "Scene.h"
 #include "Camera.h"
 
@@ -76,15 +76,15 @@ void RenderManager::Render()
 			RenderModel(obj);
 		}
 
-#ifdef _DEBUG
-		if (obj->HasComponent<BaseCollider>())
-		{
-			RenderColliderDebugMesh(obj);
-		}
+	}
 
+#ifdef _DEBUG
+	//for (const auto mesh : _debugMeshes)
+	//{
+	//	RenderColliderDebugMesh(mesh);
+	//}
 
 #endif
-	}
 }
 
 void RenderManager::RenderLagacy(shared_ptr<GameObject> obj)
@@ -175,7 +175,7 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 
 }
 
-void RenderManager::RenderColliderDebugMesh(shared_ptr<GameObject> obj)
+void RenderManager::RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh)
 {
 	// Wireframe Rasterizer
 	shared_ptr<RasterizerState> wireframe = make_shared<RasterizerState>();
@@ -193,7 +193,7 @@ void RenderManager::RenderColliderDebugMesh(shared_ptr<GameObject> obj)
 		wireframe->SetState(_debugRasterizer);
 	}
 
-	auto mesh = obj->GetComponent<BaseCollider>()->GetDebugMesh();
+	// ???
 	auto transform = obj->GetComponent<Transform>();
 
 	_transformData.matWorld = transform->GetWorld();

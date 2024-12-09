@@ -26,6 +26,6 @@ private:
 	BoundingBox _boundingBox;
 
 public:
-	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::AABBCollider;
+	//constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::AABBCollider;
 };
 

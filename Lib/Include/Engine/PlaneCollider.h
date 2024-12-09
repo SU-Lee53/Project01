@@ -21,6 +21,6 @@ private:
 	BoundingPlane _boundingPlane;
 
 public:
-	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::PlaneCollider;
+	//constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::PlaneCollider;
 };
 
