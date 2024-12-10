@@ -11,6 +11,7 @@
 #include "SceneMaker.h"
 #include "GlobalLight.h"
 #include "BaseCollider.h"
+#include "SphereCollider.h"
 #include "Scene.h"
 #include "SceneModelController.h"
 #include "SceneMakerScript.h"
@@ -21,6 +22,7 @@ void SceneMaker::Init()
 	{
 		testObj->AddComponent<Transform>();
 		testObj->AddComponent<MeshRenderer>();
+		testObj->AddComponent<SphereCollider>();
 
 		auto m = make_shared<Model>();
 		m->LoadFromFiles(L"pool_ball_7.mesh");

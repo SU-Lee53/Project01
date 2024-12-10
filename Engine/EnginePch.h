@@ -98,5 +98,10 @@ using namespace Microsoft::WRL;
 #include "Pipeline.h"
 
 #include "Transform.h"
+#include "Camera.h"
+#include "BaseCollider.h"
+#include "SphereCollider.h"
+#include "AABBCollider.h"
+#include "PlaneCollider.h"
 #include "Script.h"
 #include "Utils.h"

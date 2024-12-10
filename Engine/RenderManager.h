@@ -75,6 +75,8 @@ private:
 	shared_ptr<BlendState> _blendState;
 	shared_ptr<SamplerState> _samplerState;
 
+	shared_ptr<RasterizerState> _wireframeRasterizer;
+
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Render;
 };

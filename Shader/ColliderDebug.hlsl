@@ -6,7 +6,6 @@ DEBUG_OUTPUT DEBUG_VS(DEBUG_INPUT input)
     
     output.position = mul(input.position, matLocal);
     output.position = mul(output.position, matWorld);
-    output.worldPosition = output.position.xyz;
     output.position = mul(output.position, matView);
     output.position = mul(output.position, matProjection);
     

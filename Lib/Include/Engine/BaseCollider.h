@@ -12,20 +12,12 @@ struct DebugMesh
 {
 	DebugMesh() = default;
 
-	void Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFunc)
-	{
-		geometry = make_shared<Geometry<DebugType>>();
-		vertexBuffer = make_shared<VertexBuffer>();
-		indexBuffer = make_shared<IndexBuffer>();
-
-		_createFunc(geometry);
-		vertexBuffer->Create(geometry->GetVertices());
-		indexBuffer->Create(geometry->GetIndices());
-	}
+	void Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFunc);
 
 	shared_ptr<Geometry<DebugType>> geometry;
 	shared_ptr<VertexBuffer> vertexBuffer;
 	shared_ptr<IndexBuffer> indexBuffer;
+	shared_ptr<Shader> shader;
 	Color color = Color(1.f, 0.f, 0.f, 0.f);
 
 	Matrix transfom = Matrix::Identity;
@@ -49,11 +41,11 @@ public:
 	}
 
 protected:
-	virtual void InitCollider() = 0;
-	virtual void UpdateCollider() = 0;
+	virtual void InitCollider() { assert(false); }
+	virtual void UpdateCollider() { assert(false); }
 
 public:
-	virtual bool CheckCollision(shared_ptr<BaseCollider> other) = 0;
+	virtual bool CheckCollision(shared_ptr<BaseCollider> other) { assert(false); return false; }
 
 public:
 	COLLIDER_TYPE GetColliderType() { return _colliderType; }
@@ -69,6 +61,15 @@ protected:
 
 public:
 	COLLIDER_TYPE _colliderType;
-	//constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
+	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::Collider;
 };
 
+
+template <typename C>
+concept IsColliderType = requires (C c)
+{
+	derived_from<BaseCollider, C>;
+};
+
+template <typename C>
+concept ColliderType = IsColliderType<C>;

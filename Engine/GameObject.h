@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include "Transform.h"
-#include "BaseCollider.h"
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -30,7 +28,7 @@ public:
 		typename = typename enable_if<is_base_of_v<Component_Base, T>>::type>
 	shared_ptr<T> GetComponent()
 	{
-		static_assert(!std::derived_from<T, BaseCollider>, "To get Collider, Use GetCollider");
+		//static_assert(!std::derived_from<T, BaseCollider>, "To get Collider, Use GetCollider");
 		int32 idx = (int32)(T::ty);
 
 		// Every GameObject has Transform
@@ -53,6 +51,32 @@ public:
 	bool HasComponent()
 	{
 		return _components[(int32)(T::ty)] ? true : false;
+	}
+
+	template <ColliderType C>
+	shared_ptr<C> GetCollider()
+	{
+		auto p = static_pointer_cast<BaseCollider>(_components[(int32)(COMPONENT_TYPE::Collider)]);
+		COLLIDER_TYPE ty = p->GetColliderType();
+
+		if constexpr (is_same_v<C, SphereCollider>)
+		{
+			if (ty == COLLIDER_TYPE::Sphere) return static_pointer_cast<SphereCollider>(p);
+			else return nullptr;
+		}
+		else if constexpr (is_same_v<C, AABBCollider>)
+		{
+			if (ty == COLLIDER_TYPE::AABB) return static_pointer_cast<AABBCollider>(p);
+			else return nullptr;
+		}
+		else if constexpr (is_same_v<C, PlaneCollider>)
+		{
+			if (ty == COLLIDER_TYPE::Plane) return static_pointer_cast<PlaneCollider>(p);
+			else return nullptr;
+		}
+
+		assert(false);
+		return nullptr;
 	}
 
 

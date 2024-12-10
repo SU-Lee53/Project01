@@ -32,5 +32,5 @@ private:
 	BoundingSphere _boundingSphere;
 
 public:
-	//constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::SphereCollider;
+	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::SphereCollider;
 };

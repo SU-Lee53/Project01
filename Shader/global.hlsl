@@ -31,7 +31,6 @@ struct DEBUG_INPUT
 struct DEBUG_OUTPUT
 {
     float4 position : SV_POSITION;
-    float3 worldPosition : POSITION1;
     float4 color : COLOR;
 };
 

@@ -22,10 +22,9 @@ void SphereCollider::InitCollider()
 	_boundingSphere.Radius = 1.f;
 	ShrinkToFit();
 
-#ifdef _DEBUG
+	_debugMesh = make_shared<DebugMesh>();
 	_debugMesh->Create(GeometryHelper::CreateSphere);
 
-#endif
 }
 
 void SphereCollider::UpdateCollider()
@@ -37,7 +36,7 @@ void SphereCollider::UpdateCollider()
 	/*
 		TODO : COMPLETE
 		current situation
-			- after ShrinkToFit(),
+			- after ShrinkToFit()
 				- BoundingSphere.Radius set to max(max(x,y),z)
 				- BoundingSphere.Center Set to median of minmax of xyz
 			- what to do
@@ -48,7 +47,11 @@ void SphereCollider::UpdateCollider()
 
 	_boundingSphere.Center = Vec3::Transform(_centerOrigin, Matrix::CreateTranslation(translate));
 	_boundingSphere.Radius = _radiusOrigin * std::max(std::max(scale.x, scale.y), scale.z);
-	_transform = Matrix::CreateScale(scale) * Matrix::CreateTranslation(translate);
+	_transform = Matrix::CreateScale(_boundingSphere.Radius) * Matrix::CreateTranslation(_boundingSphere.Center);
+	
+	_debugMesh->transfom = _transform;
+
+	RENDER->PushToDebugMesh(_debugMesh);
 
 	//_boundingSphere.Center = GetOwner()->GetTransform()->GetPosition();
 	//Vec3 scale = GetOwner()->GetTransform()->GetScale();
@@ -87,12 +90,12 @@ void SphereCollider::ShrinkToFit()
 	
 	auto compY = [](VertexType v1, VertexType v2) -> bool
 		{
-			return v1.position.x < v2.position.x;
+			return v1.position.y < v2.position.y;
 		};
 	
 	auto compZ = [](VertexType v1, VertexType v2) -> bool
 		{
-			return v1.position.x < v2.position.x;
+			return v1.position.z < v2.position.z;
 		};
 
 	for (const auto& mesh : meshes)

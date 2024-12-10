@@ -45,11 +45,28 @@ void RenderManager::Init()
 
 	_shader->CreateDefault();
 
+
+	_wireframeRasterizer = make_shared<RasterizerState>();
+	{
+		D3D11_RASTERIZER_DESC _debugRasterizerDesc;
+		memset(&_debugRasterizerDesc, 0, sizeof(_debugRasterizerDesc));
+		{
+			_debugRasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
+			_debugRasterizerDesc.CullMode = D3D11_CULL_BACK;
+			_debugRasterizerDesc.FrontCounterClockwise = false;
+		}
+
+		ComPtr<ID3D11RasterizerState> _debugRasterizer;
+		HR_ASSERT(DEVICE->CreateRasterizerState(&_debugRasterizerDesc, _debugRasterizer.GetAddressOf()));
+		_wireframeRasterizer->SetState(_debugRasterizer);
+	}
+
 }
 
 void RenderManager::Update()
 {
 	_renderObj.clear();
+	_debugMeshes.clear();
 }
 
 void RenderManager::Render()
@@ -79,10 +96,10 @@ void RenderManager::Render()
 	}
 
 #ifdef _DEBUG
-	//for (const auto mesh : _debugMeshes)
-	//{
-	//	RenderColliderDebugMesh(mesh);
-	//}
+	for (const auto mesh : _debugMeshes)
+	{
+		RenderColliderDebugMesh(mesh);
+	}
 
 #endif
 }
@@ -178,33 +195,15 @@ void RenderManager::RenderModel(shared_ptr<GameObject> obj)
 void RenderManager::RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh)
 {
 	// Wireframe Rasterizer
-	shared_ptr<RasterizerState> wireframe = make_shared<RasterizerState>();
-	{
-		D3D11_RASTERIZER_DESC _debugRasterizerDesc;
-		memset(&_debugRasterizerDesc, 0, sizeof(_debugRasterizerDesc));
-		{
-			_debugRasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
-			_debugRasterizerDesc.CullMode = D3D11_CULL_BACK;
-			_debugRasterizerDesc.FrontCounterClockwise = false;
-		}
-
-		ComPtr<ID3D11RasterizerState> _debugRasterizer;
-		HR_ASSERT(DEVICE->CreateRasterizerState(&_debugRasterizerDesc, _debugRasterizer.GetAddressOf()));
-		wireframe->SetState(_debugRasterizer);
-	}
-
-	// ???
-	auto transform = obj->GetComponent<Transform>();
-
-	_transformData.matWorld = transform->GetWorld();
+	_transformData.matWorld = mesh->transfom;
 	PushTransformData();
 
 	PipelineDesc desc;
 	{
-		desc.inputLayout = _shader->GetInputLayout();
-		desc.vertexShader = _shader->GetVertexShader();
-		desc.pixelShader = _shader->GetPixelShader();
-		desc.rasterizerState = wireframe;
+		desc.inputLayout = mesh->shader->GetInputLayout();
+		desc.vertexShader = mesh->shader->GetVertexShader();
+		desc.pixelShader = mesh->shader->GetPixelShader();
+		desc.rasterizerState = _wireframeRasterizer;
 		desc.blendState = _blendState;
 	}
 	_pipeline->Update(desc);

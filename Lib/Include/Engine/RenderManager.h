@@ -10,7 +10,7 @@ class BlendState;
 class Pipeline;
 class Shader;
 
-//struct DebugMesh;
+struct DebugMesh;
 
 class RenderManager : public Manager_Base
 {
@@ -27,11 +27,11 @@ public:
 private:
 	void RenderLagacy(shared_ptr<GameObject> obj);
 	void RenderModel(shared_ptr<GameObject> obj);
-	//void RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh);
+	void RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh);
 
 public:
 	void PushToRenderObject(shared_ptr<GameObject> obj) { _renderObj.push_back(obj); }
-	//void PushToDebugMesh(shared_ptr<DebugMesh> obj) { _debugMeshes.push_back(obj); }
+	void PushToDebugMesh(shared_ptr<DebugMesh> obj) { _debugMeshes.push_back(obj); }
 
 private:
 	void PushCameraData();
@@ -54,7 +54,7 @@ private:
 	vector<shared_ptr<GameObject>> _renderObj;
 
 	// for collider debug
-	//vector<shared_ptr<DebugMesh>> _debugMeshes;
+	vector<shared_ptr<DebugMesh>> _debugMeshes;
 
 private:
 	CameraData _cameraData;
@@ -74,6 +74,8 @@ private:
 	shared_ptr<RasterizerState> _rasterizerState;
 	shared_ptr<BlendState> _blendState;
 	shared_ptr<SamplerState> _samplerState;
+
+	shared_ptr<RasterizerState> _wireframeRasterizer;
 
 public:
 	constexpr static  MANAGER_TYPE ty = MANAGER_TYPE::Render;

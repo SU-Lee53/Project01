@@ -21,7 +21,7 @@ WPARAM Game::Run(GameDesc& desc)
 
 	MyRegisterClass();
 
-	if (!InitInstance(SW_SHOWNORMAL))
+	if (!InitInstance(SW_SHOW))
 		return FALSE;
 
 	{

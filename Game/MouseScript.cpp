@@ -38,16 +38,6 @@ void MouseScript::Update()
 
 	GetOwner()->GetTransform()->SetPosition(pos);
 
-
-
-	if (INPUT->GetButtonDown(KEY_TYPE::E))
-	{
-		if (_mouseOn)
-			_mouseOn = false;
-		else
-			_mouseOn = true;
-	}
-
 	GetCursorPos(&_point);
 	Vec3 rot = GetOwner()->GetTransform()->GetRotation();
 
@@ -61,13 +51,13 @@ void MouseScript::Update()
 	screenCenterX = rMyRect.left + GAME.GetDesc().width / 2;
 	screenCenterY = rMyRect.top + GAME.GetDesc().height / 2;
 
-	if(_mouseOn)
+	if(INPUT->GetButton(KEY_TYPE::RBUTTON))
 	{
-		if (!_mouseHidden)
-		{
-			_mouseHidden = true;
-			ShowCursor(false);
-		}
+		//if (!_mouseHidden)
+		//{
+		//	_mouseHidden = true;
+		//	ShowCursor(false);
+		//}
 
 		{
 			_deltaX = (_point.x - screenCenterX);	// Yaw
