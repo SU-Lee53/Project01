@@ -18,7 +18,8 @@ struct DebugMesh
 	shared_ptr<VertexBuffer> vertexBuffer;
 	shared_ptr<IndexBuffer> indexBuffer;
 	shared_ptr<Shader> shader;
-	Color color = Color(1.f, 0.f, 0.f, 0.f);
+	Color color = Color(1.f, 0.f, 0.f, 1.f);
+	shared_ptr<ConstantBuffer<Vec4>> colorData;
 
 	Matrix transfom = Matrix::Identity;
 };

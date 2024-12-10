@@ -214,6 +214,7 @@ void RenderManager::RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh)
 
 	_pipeline->SetConstantBuffer<CameraData, VertexShader>(_cameraBuffer);
 	_pipeline->SetConstantBuffer<TransformData, VertexShader>(_transformBuffer);
+	DC->PSSetConstantBuffers(5, 1, mesh->colorData->GetComPtr().GetAddressOf());
 
 	_pipeline->SetSamplerState<PixelShader>(0, _samplerState);
 

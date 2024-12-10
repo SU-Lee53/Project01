@@ -536,6 +536,8 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 	}
 	else
 	{
+		ImGui::Checkbox("Render", &mm_renderOnOff);
+		target->GetComponent<MeshRenderer>()->SetRenderOnOff(mm_renderOnOff);
 		if (ImGui::Button("Change"))
 		{
 			target->RemoveComponent<MeshRenderer>();

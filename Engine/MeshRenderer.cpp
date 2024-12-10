@@ -20,7 +20,7 @@ void MeshRenderer::Init_impl()
 
 void MeshRenderer::Update_impl()
 {
-	if(_model)
+	if(_model and _renderOnOff)
 		RENDER->PushToRenderObject(GetOwner());
 }
 

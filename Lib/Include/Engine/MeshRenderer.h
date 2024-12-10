@@ -28,6 +28,8 @@ public:
 	void SetModel(shared_ptr<Model> model) { _model = model; }
 	shared_ptr<Model> GetModel() const { return _model; }
 
+	void SetRenderOnOff(bool onOff) { _renderOnOff = onOff; }
+
 private:
 	// No more use
 	shared_ptr<Shader> _shader = nullptr;
@@ -40,6 +42,8 @@ public:
 
 private:
 	shared_ptr<Model> _model = nullptr;
+
+	bool _renderOnOff = true;
 
 public:
 	constexpr static COMPONENT_TYPE ty = COMPONENT_TYPE::MeshRenderer;

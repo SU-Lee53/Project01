@@ -64,6 +64,7 @@ private:
 	int32 mm_itemSelected = 0;
 	bool mm_itemHighlighted = 0;
 	int32 mm_itemHighlightedIdx = 0;
+	bool mm_renderOnOff = true;
 
 	const char* cm_items[3] = { "Sphere", "AABB", "Plane" };
 	int32 cm_itemSelected = 0;

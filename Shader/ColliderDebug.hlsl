@@ -1,5 +1,10 @@
 #include "global.hlsl"
 
+cbuffer DebugColor : register(b5)
+{
+    float4 color;
+}
+
 DEBUG_OUTPUT DEBUG_VS(DEBUG_INPUT input)
 {
     DEBUG_OUTPUT output;
@@ -8,7 +13,7 @@ DEBUG_OUTPUT DEBUG_VS(DEBUG_INPUT input)
     output.position = mul(output.position, matWorld);
     output.position = mul(output.position, matView);
     output.position = mul(output.position, matProjection);
-    
+    output.color = input.color;
     return output;
 }
 

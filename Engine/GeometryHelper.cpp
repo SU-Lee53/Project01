@@ -14,7 +14,7 @@ void GeometryHelper::CreateSphere(OUT shared_ptr<Geometry<DebugType>> geometry)
 
 	// North(Top)
 	v.position = Vec3(0.0f, radius, 0.0f);
-	v.color = Color(1.f, 0.f, 0.f, 0.f);
+	v.color = Color(1.f, 0.f, 0.f, 1.f);
 
 	vtx.push_back(v);
 
@@ -37,7 +37,7 @@ void GeometryHelper::CreateSphere(OUT shared_ptr<Geometry<DebugType>> geometry)
 			v.position.y = radius * cosf(phi);
 			v.position.z = radius * sinf(phi) * sinf(theta);
 
-			v.color = Color(1.f, 0.f, 0.f, 0.f);
+			v.color = Color(1.f, 0.f, 0.f, 1.f);
 
 			vtx.push_back(v);
 		}
@@ -45,7 +45,7 @@ void GeometryHelper::CreateSphere(OUT shared_ptr<Geometry<DebugType>> geometry)
 
 	// South(Bottom)
 	v.position = Vec3(0.0f, -radius, 0.0f);
-	v.color = Color(1.f, 0.f, 0.f, 0.f);
+	v.color = Color(1.f, 0.f, 0.f, 1.f);
 
 	vtx.push_back(v);
 
@@ -111,35 +111,35 @@ void GeometryHelper::CreateCube(OUT shared_ptr<Geometry<DebugType>> geometry)
 	vector<DebugType> vtx(24);
 
 	// Front
-	vtx[0] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[1] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[2] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[3] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[0] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[1] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[2] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[3] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
 	// Back
-	vtx[4] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[5] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[6] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[7] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[4] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[5] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[6] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[7] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
 	// Upper
-	vtx[8] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[9] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[10] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[11] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[8] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[9] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[10] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[11] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
 	// Lower
-	vtx[12] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[13] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[14] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[15] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[12] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[13] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[14] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[15] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
 	// Left
-	vtx[16] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[17] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[18] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[19] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[16] = DebugType{ Vec3(-w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[17] = DebugType{ Vec3(-w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[18] = DebugType{ Vec3(-w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[19] = DebugType{ Vec3(-w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
 	// Right
-	vtx[20] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[21] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[22] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
-	vtx[23] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 0.f) };
+	vtx[20] = DebugType{ Vec3(+w2, -h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[21] = DebugType{ Vec3(+w2, +h2, -d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[22] = DebugType{ Vec3(+w2, +h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
+	vtx[23] = DebugType{ Vec3(+w2, -h2, +d2), Color(1.f, 0.f, 0.f, 1.f) };
 
 	geometry->SetVertices(vtx);
 
@@ -180,7 +180,7 @@ void GeometryHelper::CreateGrid(OUT shared_ptr<Geometry<DebugType>> geometry)
 		{
 			DebugType v;
 			v.position = Vec3(static_cast<float>(x), 0, static_cast<float>(z));
-			v.color = Color(1.f, 0.f, 0.f, 0.f);
+			v.color = Color(1.f, 0.f, 0.f, 1.f);
 
 			vtx.push_back(v);
 		}

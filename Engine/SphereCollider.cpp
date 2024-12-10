@@ -20,7 +20,6 @@ void SphereCollider::InitCollider()
 {
 	_boundingSphere.Center = Vec3(0.f, 0.f, 0.f);
 	_boundingSphere.Radius = 1.f;
-	ShrinkToFit();
 
 	_debugMesh = make_shared<DebugMesh>();
 	_debugMesh->Create(GeometryHelper::CreateSphere);
@@ -29,6 +28,10 @@ void SphereCollider::InitCollider()
 
 void SphereCollider::UpdateCollider()
 {
+	// NO WAY
+	// Only when debug
+	ShrinkToFit();
+
 	auto transform = GetOwner()->GetTransform();
 	Vec3 translate = transform->GetPosition();
 	Vec3 scale = transform->GetScale();
