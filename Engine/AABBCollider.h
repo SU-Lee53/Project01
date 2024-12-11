@@ -18,11 +18,16 @@ public:
 	BoundingBox& GetBoundingBox() { return _boundingBox; }
 
 private:
+	void ShrinkToFit();
+
+private:
 	// DirectX::Intersects is not work with my BoundingPlane
 	// So, Make My Intersects
 	bool CheckIntersectWithPlane(const class BoundingPlane& p);
 
 private:
+	Vec3 _centerOrigin = Vec3(0.f);
+	Vec3 _extentsOrigin = Vec3(1.f, 1.f, 1.f);
 	BoundingBox _boundingBox;
 
 public:

@@ -207,7 +207,6 @@ void RenderManager::RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh)
 		desc.blendState = _blendState;
 	}
 	_pipeline->Update(desc);
-	
 
 	_pipeline->SetVertexBuffer(mesh->vertexBuffer);
 	_pipeline->SetIndexBuffer(mesh->indexBuffer);

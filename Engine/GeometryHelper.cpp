@@ -105,9 +105,9 @@ void GeometryHelper::CreateSphere(OUT shared_ptr<Geometry<DebugType>> geometry)
 
 void GeometryHelper::CreateCube(OUT shared_ptr<Geometry<DebugType>> geometry)
 {
-	float w2 = 0.5f;
-	float h2 = 0.5f;
-	float d2 = 0.5f;
+	float w2 = 1.0f;
+	float h2 = 1.0f;
+	float d2 = 1.0f;
 	vector<DebugType> vtx(24);
 
 	// Front

@@ -402,6 +402,7 @@ void SceneMakerScript::TransformModifier(shared_ptr<GameObject> target)
 		if (ImGui::Button("Add"))
 		{
 			target->AddComponent<Transform>();
+			target->GetComponent<Transform>()->Init();
 		}
 	}
 	else
@@ -531,6 +532,8 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 			m->LoadFromFiles(selected);
 			target->AddComponent<MeshRenderer>();
 			target->GetComponent<MeshRenderer>()->SetModel(m);
+
+			target->GetComponent<MeshRenderer>()->Init();
 		}
 
 	}
@@ -559,19 +562,18 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 
 void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 {
-	shared_ptr<BaseCollider> col;
-	if (target->GetCollider<SphereCollider>())
-	{
-		col = target->GetCollider<SphereCollider>();
-	}
-	else if (target->GetCollider<AABBCollider>())
-	{
-		col = target->GetCollider<AABBCollider>();
-	}
-	else if (target->GetCollider<PlaneCollider>())
-	{
-		col = target->GetCollider<PlaneCollider>();
-	}
+	shared_ptr<BaseCollider> col = target->GetCollider();
+
+	//switch (col->GetColliderType())
+	//{
+	//case COLLIDER_TYPE::Sphere:
+	//	
+	//case COLLIDER_TYPE::AABB:
+	//case COLLIDER_TYPE::Plane:
+	//
+	//default:
+	//	assert(false);
+	//}
 
 	if (col == nullptr)
 	{

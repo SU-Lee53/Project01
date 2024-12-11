@@ -22,16 +22,36 @@ void SceneMaker::Init()
 	{
 		testObj->AddComponent<Transform>();
 		testObj->AddComponent<MeshRenderer>();
-		testObj->AddComponent<SphereCollider>();
+		testObj->AddComponent<AABBCollider>();
 
 		auto m = make_shared<Model>();
 		m->LoadFromFiles(L"pool_ball_7.mesh");
 		testObj->AddComponent<MeshRenderer>();
 		testObj->GetComponent<MeshRenderer>()->SetModel(m);
 
+		testObj->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
+
 		testObj->SetName("testObj");
 	}
 	CUR_SCENE->AddObject(testObj);
+
+	auto testObj2 = make_shared<GameObject>();
+	{
+		testObj2->AddComponent<Transform>();
+		testObj2->AddComponent<MeshRenderer>();
+		testObj2->AddComponent<SphereCollider>();
+
+		auto m = make_shared<Model>();
+		m->LoadFromFiles(L"pool_ball_7.mesh");
+		testObj2->AddComponent<MeshRenderer>();
+		testObj2->GetComponent<MeshRenderer>()->SetModel(m);
+
+		testObj2->GetComponent<Transform>()->SetPosition(Vec3(15.f, 0.f, 0.f));
+		testObj2->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
+
+		testObj2->SetName("testObj2");
+	}
+	CUR_SCENE->AddObject(testObj2);
 
 	auto _cam = make_shared<GameObject>();
 	{

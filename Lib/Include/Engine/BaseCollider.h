@@ -14,6 +14,12 @@ struct DebugMesh
 
 	void Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFunc);
 
+	void SetColor(Color c)
+	{
+		color = c;
+		colorData->PushData(color);
+	}
+
 	shared_ptr<Geometry<DebugType>> geometry;
 	shared_ptr<VertexBuffer> vertexBuffer;
 	shared_ptr<IndexBuffer> indexBuffer;
@@ -53,9 +59,6 @@ public:
 
 public:
 	shared_ptr<DebugMesh> GetDebugMesh() { return _debugMesh; }
-
-protected:
-	Matrix _transform = Matrix::Identity;
 
 protected:
 	shared_ptr<DebugMesh> _debugMesh = nullptr;
