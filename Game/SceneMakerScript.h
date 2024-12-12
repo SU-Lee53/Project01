@@ -58,6 +58,11 @@ private:
 	void MeshRendererModifier(shared_ptr<GameObject> target);
 	void ColliderModifier(shared_ptr<GameObject> target);
 	
+	void SphereColliderModifier(shared_ptr<BaseCollider> col);
+	void AABBColliderModifier(shared_ptr<BaseCollider> col);
+	void PlaneColliderModifier(shared_ptr<BaseCollider> col);
+
+	
 	float _dragSpeed = 1.f; 
 	bool _scaleType = false;
 

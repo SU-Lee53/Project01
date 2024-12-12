@@ -3,6 +3,9 @@
 #include "AABBCollider.h"
 #include "SphereCollider.h"
 #include "GameObject.h"
+#include "MeshRenderer.h"
+#include "Model.h"
+#include "GeometryHelper.h"
 
 PlaneCollider::PlaneCollider()
 	:BaseCollider(COLLIDER_TYPE::Plane)
@@ -15,6 +18,11 @@ PlaneCollider::~PlaneCollider()
 
 void PlaneCollider::InitCollider()
 {
+	_boundingPlane.Distance = 0.f;
+	_boundingPlane.Normal = Vec3(0.f, 1.f, 0.f);
+
+	_debugMesh = make_shared<DebugMesh>();
+	_debugMesh->Create(GeometryHelper::CreateGrid);
 }
 
 void PlaneCollider::UpdateCollider()

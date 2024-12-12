@@ -550,6 +550,7 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 
 			target->AddComponent<MeshRenderer>();
 			target->GetComponent<MeshRenderer>()->SetModel(m);
+			target->GetComponent<MeshRenderer>()->Init();
 		}
 
 		if (ImGui::Button("Remove"))
@@ -563,17 +564,6 @@ void SceneMakerScript::MeshRendererModifier(shared_ptr<GameObject> target)
 void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 {
 	shared_ptr<BaseCollider> col = target->GetCollider();
-
-	//switch (col->GetColliderType())
-	//{
-	//case COLLIDER_TYPE::Sphere:
-	//	
-	//case COLLIDER_TYPE::AABB:
-	//case COLLIDER_TYPE::Plane:
-	//
-	//default:
-	//	assert(false);
-	//}
 
 	if (col == nullptr)
 	{
@@ -601,14 +591,17 @@ void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 			{
 			case 0:
 				target->AddComponent<SphereCollider>();
+				target->GetCollider()->Init();
 				break;
 
 			case 1:
 				target->AddComponent<AABBCollider>();
+				target->GetCollider()->Init();
 				break;
 
 			case 2:
 				target->AddComponent<PlaneCollider>();
+				target->GetCollider()->Init();
 				break;
 
 			default:
@@ -619,5 +612,40 @@ void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 	}
 	else
 	{
+		switch (col->GetColliderType())
+		{
+		case COLLIDER_TYPE::Sphere:
+			SphereColliderModifier(col);
+			break;
+
+		case COLLIDER_TYPE::AABB:
+			AABBColliderModifier(col);
+			break;
+
+		case COLLIDER_TYPE::Plane:
+			PlaneColliderModifier(col);
+			break;
+
+
+		default:
+			assert(false);
+			break;
+		}
+
 	}
+}
+
+void SceneMakerScript::SphereColliderModifier(shared_ptr<BaseCollider> target)
+{
+	ImGui::Text("Sphere");
+}
+
+void SceneMakerScript::AABBColliderModifier(shared_ptr<BaseCollider> target)
+{
+	ImGui::Text("AABB");
+}
+
+void SceneMakerScript::PlaneColliderModifier(shared_ptr<BaseCollider> target)
+{
+	ImGui::Text("Plane");
 }

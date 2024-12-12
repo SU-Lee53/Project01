@@ -13,8 +13,6 @@ public:
 
 public:
 	virtual bool CheckCollision(shared_ptr<BaseCollider> other) override;
-
-public:
 	BoundingBox& GetBoundingBox() { return _boundingBox; }
 
 private:
