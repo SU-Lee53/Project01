@@ -34,10 +34,10 @@ void AABBCollider::UpdateCollider()
 	Vec3 scale = transform->GetScale();
 
 
-	_boundingBox.Center = Vec3::Transform(_centerOrigin, Matrix::CreateTranslation(translate));
 	_boundingBox.Extents.x = _extentsOrigin.x * scale.x;
 	_boundingBox.Extents.y = _extentsOrigin.y * scale.y;
 	_boundingBox.Extents.z = _extentsOrigin.z * scale.z;
+	_boundingBox.Center = Vec3::Transform(_centerOrigin, Matrix::CreateScale(Vec3(scale.x, scale.y, scale.z)) * Matrix::CreateTranslation(translate));
 	_debugMesh->transfom = Matrix::CreateScale(_boundingBox.Extents) * Matrix::CreateTranslation(_boundingBox.Center);
 
 	RENDER->PushToDebugMesh(_debugMesh);
@@ -99,7 +99,7 @@ void AABBCollider::ShrinkToFit()
 	Vec3 center = Vec3((xMin.x + xMax.x) / 2, (yMin.y + yMax.y) / 2, (zMin.z + zMax.z) / 2);
 	_centerOrigin = center;
 
-	// Radius?
+	// Something wrong
 	float xMinDistSq = (xMin - center).LengthSquared();
 	float xMaxDistSq = (xMax - center).LengthSquared();
 	float xDistBig = std::sqrtf(std::max(xMinDistSq, xMaxDistSq));

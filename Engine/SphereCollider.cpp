@@ -45,8 +45,8 @@ void SphereCollider::UpdateCollider()
 					2. leave BoundingSphere alone -> update only object's transform value in _transfrom
 	*/
 
-	_boundingSphere.Center = Vec3::Transform(_centerOrigin, Matrix::CreateTranslation(translate));
 	_boundingSphere.Radius = _radiusOrigin * std::max(std::max(scale.x, scale.y), scale.z);
+	_boundingSphere.Center = Vec3::Transform(_centerOrigin, Matrix::CreateScale(Vec3(std::max(std::max(scale.x, scale.y), scale.z))) * Matrix::CreateTranslation(translate));
 	_debugMesh->transfom = Matrix::CreateScale(_boundingSphere.Radius) * Matrix::CreateTranslation(_boundingSphere.Center);
 	
 

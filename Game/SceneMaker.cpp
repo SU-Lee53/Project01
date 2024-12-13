@@ -39,7 +39,7 @@ void SceneMaker::Init()
 	{
 		testObj2->AddComponent<Transform>();
 		testObj2->AddComponent<MeshRenderer>();
-		testObj2->AddComponent<SphereCollider>();
+		testObj2->AddComponent<AABBCollider>();
 
 		auto m = make_shared<Model>();
 		m->LoadFromFiles(L"pool_cue.mesh");
