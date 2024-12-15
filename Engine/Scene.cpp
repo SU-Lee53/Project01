@@ -151,8 +151,6 @@ void Scene::CheckCollision()
 			else 
 			{
 				// in collision
-				p.first->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
-				p.second->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
 			}
 		}
 		else
@@ -161,6 +159,8 @@ void Scene::CheckCollision()
 			{
 				// end collision
 				_collidedPairs.erase(p);
+				p.first->GetDebugMesh()->SetColor(Color(1.f, 0.f, 0.f, 1.f));
+				p.second->GetDebugMesh()->SetColor(Color(1.f, 0.f, 0.f, 1.f));
 			}
 			else
 			{

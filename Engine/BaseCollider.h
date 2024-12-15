@@ -22,7 +22,7 @@ struct DebugMesh
 	shared_ptr<IndexBuffer> indexBuffer;
 	shared_ptr<Shader> shader;
 	Color color = Color(1.f, 0.f, 0.f, 1.f);
-	shared_ptr<ConstantBuffer<Vec4>> colorData;
+	shared_ptr<ConstantBuffer<Color>> colorData;
 
 	Matrix transfom = Matrix::Identity;
 };

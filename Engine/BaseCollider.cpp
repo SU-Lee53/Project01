@@ -22,7 +22,7 @@ void DebugMesh::Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFu
 	vertexBuffer = make_shared<VertexBuffer>();
 	indexBuffer = make_shared<IndexBuffer>();
 	shader = make_shared<Shader>();
-	colorData = make_shared<ConstantBuffer<Vec4>>();
+	colorData = make_shared<ConstantBuffer<Color>>();
 
 	_createFunc(geometry);
 	vertexBuffer->Create(geometry->GetVertices());

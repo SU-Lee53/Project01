@@ -13,7 +13,7 @@ DEBUG_OUTPUT DEBUG_VS(DEBUG_INPUT input)
     output.position = mul(output.position, matWorld);
     output.position = mul(output.position, matView);
     output.position = mul(output.position, matProjection);
-    output.color = input.color;
+    output.color = color;
     return output;
 }
 
