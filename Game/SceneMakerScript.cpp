@@ -78,7 +78,17 @@ void SceneMakerScript::Update()
 	// test
 	ImGui::Begin("Collision");
 	{
+		auto pcs = CUR_SCENE->GetPossibleCollisionPairs();
 		auto cps = CUR_SCENE->GetCollidedPairs();
+
+		ImGui::Text("Possible Collision Set");
+		for (const auto& p : pcs)
+		{
+			ImGui::Text("(%s : %s)", p.first->GetOwner()->GetName().c_str(), p.second->GetOwner()->GetName().c_str());
+		}
+
+		ImGui::NewLine();
+		ImGui::Text("Collided Set");
 		for (const auto& p : cps)
 		{
 			ImGui::Text("(%s : %s)", p.first->GetOwner()->GetName().c_str(), p.second->GetOwner()->GetName().c_str());

@@ -34,6 +34,7 @@ public:
 	void RemoveCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair);
 	void CheckCollision();
 
+	set<pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>>> GetPossibleCollisionPairs() { return _possibleCollisionPairs; }
 	set<pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>>> GetCollidedPairs() { return _collidedPairs; }
 
 private:

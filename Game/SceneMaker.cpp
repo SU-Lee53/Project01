@@ -75,6 +75,7 @@ void SceneMaker::Init()
 	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj2->GetCollider()));
 	CUR_SCENE->AddCollisionSet(make_pair(testObj2->GetCollider(), testObj3->GetCollider()));
 	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj3->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj3->GetCollider(), testObj2->GetCollider()));
 
 
 	auto _cam = make_shared<GameObject>();
@@ -104,11 +105,7 @@ void SceneMaker::Init()
 			data.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
 			data.direction = Vec3(0.0f, -1.0f, 1.0f);
 		}
-
 		_light->GetComponent<GlobalLight>()->SetData(data);
-
-		auto _lightScript = make_shared<LightScript>();
-		_light->AddScript(_lightScript);
 		_light->SetName("globalLight");
 	}
 	CUR_SCENE->SetGlobalLight(_light);

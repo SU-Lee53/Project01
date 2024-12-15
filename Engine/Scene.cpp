@@ -120,6 +120,14 @@ void Scene::AddScript(shared_ptr<Script<Scene>> script)
 
 void Scene::AddCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair)
 {
+	// already in pcp, but diffrent order
+	if (std::find_if(_possibleCollisionPairs.begin(), _possibleCollisionPairs.end(),
+		[&pair](std::pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> p)->bool
+		{
+			if (p.first == pair.second and p.second == pair.first) return true;
+			return false;
+		}) != _possibleCollisionPairs.end()) return;
+
 	_possibleCollisionPairs.insert(pair);
 }
 
