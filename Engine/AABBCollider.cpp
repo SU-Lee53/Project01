@@ -37,7 +37,7 @@ void AABBCollider::UpdateCollider()
 	_boundingBox.Extents.x = _extentsOrigin.x * scale.x;
 	_boundingBox.Extents.y = _extentsOrigin.y * scale.y;
 	_boundingBox.Extents.z = _extentsOrigin.z * scale.z;
-	_boundingBox.Center = Vec3::Transform(_centerOrigin, Matrix::CreateScale(Vec3(_boundingBox.Extents.x, _boundingBox.Extents.y, _boundingBox.Extents.z)) * Matrix::CreateTranslation(translate));
+	_boundingBox.Center = Vec3::Transform(_centerOrigin, Matrix::CreateScale(Vec3(scale)) * Matrix::CreateTranslation(Vec3(translate)));
 	_debugMesh->transfom = Matrix::CreateScale(_boundingBox.Extents) * Matrix::CreateTranslation(_boundingBox.Center);
 
 	RENDER->PushToDebugMesh(_debugMesh);
@@ -99,23 +99,29 @@ void AABBCollider::ShrinkToFit()
 	Vec3 center = Vec3((xMin.x + xMax.x) / 2, (yMin.y + yMax.y) / 2, (zMin.z + zMax.z) / 2);
 	_centerOrigin = center;
 
+	float xDiff = std::fabs(center.x - xMax.x);
+	float yDiff = std::fabs(center.y - yMax.y);
+	float zDiff = std::fabs(center.z - zMax.z);
+
+	_extentsOrigin = Vec3(xDiff, yDiff, zDiff);
+
 
 	// Something wrong
-	float xMinDistSq = (xMin - center).LengthSquared();
-	float xMaxDistSq = (xMax - center).LengthSquared();
-	float xDistBig = std::sqrtf(std::max(xMinDistSq, xMaxDistSq));
-	
-	float yMinDistSq = (yMin - center).LengthSquared();
-	float yMaxDistSq = (yMax - center).LengthSquared();
-	float yDistBig = std::sqrtf(std::max(yMinDistSq, yMaxDistSq));
-	
-	float zMinDistSq = (zMin - center).LengthSquared();
-	float zMaxDistSq = (zMax - center).LengthSquared();
-	float zDistBig = std::sqrtf(std::max(zMinDistSq, zMaxDistSq));
-	
-	_extentsOrigin.x = xDistBig;
-	_extentsOrigin.y = yDistBig;
-	_extentsOrigin.z = zDistBig;
+	//float xMinDistSq = (xMin - center).LengthSquared();
+	//float xMaxDistSq = (xMax - center).LengthSquared();
+	//float xDistBig = std::sqrtf(std::max(xMinDistSq, xMaxDistSq));
+	//
+	//float yMinDistSq = (yMin - center).LengthSquared();
+	//float yMaxDistSq = (yMax - center).LengthSquared();
+	//float yDistBig = std::sqrtf(std::max(yMinDistSq, yMaxDistSq));
+	//
+	//float zMinDistSq = (zMin - center).LengthSquared();
+	//float zMaxDistSq = (zMax - center).LengthSquared();
+	//float zDistBig = std::sqrtf(std::max(zMinDistSq, zMaxDistSq));
+	//
+	//_extentsOrigin.x = xDistBig;
+	//_extentsOrigin.y = yDistBig;
+	//_extentsOrigin.z = zDistBig;
 
 }
 

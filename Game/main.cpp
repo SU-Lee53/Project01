@@ -11,8 +11,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	GameDesc desc;
 	{
-		desc.width = 1280;
-		desc.height = 720;
+		desc.width = 1930;
+		desc.height = 1080;
 		desc.clearColor = Color{ 0.f, 0.f, 0.f, 1.f };
 		desc.windowName = L"Billards";
 		desc.hInstance = hInstance;
