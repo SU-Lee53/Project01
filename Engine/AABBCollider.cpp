@@ -100,9 +100,6 @@ void AABBCollider::ShrinkToFit()
 	_centerOrigin = center;
 
 
-
-
-
 	// Something wrong
 	float xMinDistSq = (xMin - center).LengthSquared();
 	float xMaxDistSq = (xMax - center).LengthSquared();
