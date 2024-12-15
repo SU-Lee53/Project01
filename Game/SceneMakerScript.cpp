@@ -74,6 +74,17 @@ void SceneMakerScript::Update()
 
 	}
 	ImGui::End();
+
+	// test
+	ImGui::Begin("Collision");
+	{
+		auto cps = CUR_SCENE->GetCollidedPairs();
+		for (const auto& p : cps)
+		{
+			ImGui::Text("(%s : %s)", p.first->GetOwner()->GetName().c_str(), p.second->GetOwner()->GetName().c_str());
+		}
+	}
+	ImGui::End();
 }
 
 void SceneMakerScript::SaveScene()
@@ -203,6 +214,18 @@ void SceneMakerScript::SceneController()
 		{
 			auto light = CUR_SCENE->GetGlobalLight();
 			ControlGlobalLight(light);
+
+			ImGui::EndTabItem();
+		}
+		
+		if (ImGui::BeginTabItem("Collisions"))
+		{
+			auto cps = CUR_SCENE->GetCollidedPairs();
+			for (const auto& p : cps)
+			{
+				ImGui::Text(p.first->GetOwner()->GetName().c_str());
+				ImGui::Text(p.second->GetOwner()->GetName().c_str());
+			}
 
 			ImGui::EndTabItem();
 		}

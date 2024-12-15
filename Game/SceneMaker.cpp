@@ -21,7 +21,7 @@ void SceneMaker::Init()
 	{
 		testObj->AddComponent<Transform>();
 		testObj->AddComponent<MeshRenderer>();
-		testObj->AddComponent<AABBCollider>();
+		testObj->AddComponent<SphereCollider>();
 
 		auto m = make_shared<Model>();
 		m->LoadFromFiles(L"pool_ball_7.mesh");
@@ -38,19 +38,44 @@ void SceneMaker::Init()
 	{
 		testObj2->AddComponent<Transform>();
 		testObj2->AddComponent<MeshRenderer>();
-		testObj2->AddComponent<OBBCollider>();
+		testObj2->AddComponent<SphereCollider>();
 
 		auto m = make_shared<Model>();
-		m->LoadFromFiles(L"pool_cue.mesh");
+		m->LoadFromFiles(L"pool_ball_9.mesh");
 		testObj2->AddComponent<MeshRenderer>();
 		testObj2->GetComponent<MeshRenderer>()->SetModel(m);
 
 		testObj2->GetComponent<Transform>()->SetPosition(Vec3(15.f, 0.f, 0.f));
+		testObj2->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
 		//testObj2->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
 
 		testObj2->SetName("testObj2");
 	}
 	CUR_SCENE->AddObject(testObj2);
+	
+	auto testObj3 = make_shared<GameObject>();
+	{
+		testObj3->AddComponent<Transform>();
+		testObj3->AddComponent<MeshRenderer>();
+		testObj3->AddComponent<SphereCollider>();
+
+		auto m = make_shared<Model>();
+		m->LoadFromFiles(L"pool_objectball.mesh");
+		testObj3->AddComponent<MeshRenderer>();
+		testObj3->GetComponent<MeshRenderer>()->SetModel(m);
+
+		testObj3->GetComponent<Transform>()->SetPosition(Vec3(30.f, 0.f, 0.f));
+		testObj3->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
+		//testObj2->GetComponent<Transform>()->SetScale(Vec3(0.1f, 0.1f, 0.1f));
+
+		testObj3->SetName("testObj3");
+	}
+	CUR_SCENE->AddObject(testObj3);
+
+	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj2->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj2->GetCollider(), testObj3->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj3->GetCollider()));
+
 
 	auto _cam = make_shared<GameObject>();
 	{

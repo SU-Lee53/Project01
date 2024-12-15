@@ -15,11 +15,7 @@ struct DebugMesh
 
 	void Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFunc);
 
-	void SetColor(Color c)
-	{
-		color = c;
-		colorData->PushData(color);
-	}
+	void SetColor(Color c) { color = c; }
 
 	shared_ptr<Geometry<DebugType>> geometry;
 	shared_ptr<VertexBuffer> vertexBuffer;

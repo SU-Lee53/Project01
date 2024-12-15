@@ -30,8 +30,11 @@ public:
 	shared_ptr<GameObject> GetGlobalLight() { return _globalLight; }
 
 public:
-	//void AddCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2);
-	//void RemoveCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2);
+	void AddCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair);
+	void RemoveCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair);
+	void CheckCollision();
+
+	set<pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>>> GetCollidedPairs() { return _collidedPairs; }
 
 private:
 	unordered_set<shared_ptr<GameObject>> _objects;
@@ -39,10 +42,14 @@ private:
 	weak_ptr<GameObject> _currentCamera;
 	shared_ptr<GameObject> _globalLight;
 
-
 private:
 	//Script for Scene
 	vector<shared_ptr<Script<Scene>>> _scripts;
-	//shared_ptr<CollisionHandler> _collider;
+
+private:
+	set<pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>>> _possibleCollisionPairs;
+	set<pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>>> _collidedPairs;
+
+
 };
 

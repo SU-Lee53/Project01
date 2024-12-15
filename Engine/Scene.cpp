@@ -32,8 +32,6 @@ void Scene::Init()
 
 	if (_globalLight)
 		_globalLight->Init();
-
-	//_collider->Init();
 }
 
 void Scene::Update()
@@ -52,6 +50,8 @@ void Scene::Update()
 
 	if (_globalLight)
 		_globalLight->Update();
+
+	CheckCollision();
 
 }
 
@@ -118,25 +118,46 @@ void Scene::AddScript(shared_ptr<Script<Scene>> script)
 	_scripts.push_back(script);
 }
 
-//void Scene::AddCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2)
-//{
-//	if (obj1->GetComponent<Collider>() == nullptr
-//		or obj2->GetComponent<Collider>() == nullptr)
-//	{
-//		assert(false);
-//		return;
-//	}
-//	_collider->Add(obj1, obj2);
-//}
-//
-//void Scene::RemoveCollsionSet(shared_ptr<GameObject> obj1, shared_ptr<GameObject> obj2)
-//{
-//	if (obj1->GetComponent<Collider>() == nullptr
-//		or obj2->GetComponent<Collider>() == nullptr)
-//	{
-//		assert(false);
-//		return;
-//	}
-//
-//	_collider->Remove(obj1, obj2);
-//}
+void Scene::AddCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair)
+{
+	_possibleCollisionPairs.insert(pair);
+}
+
+void Scene::RemoveCollisionSet(pair<shared_ptr<BaseCollider>, shared_ptr<BaseCollider>> pair)
+{
+}
+
+void Scene::CheckCollision()
+{
+	for (auto& p : _possibleCollisionPairs)
+	{
+		if (p.first->CheckCollision(p.second))
+		{
+			if (std::find(_collidedPairs.begin(), _collidedPairs.end(), p) == _collidedPairs.end())
+			{
+				// begin collision
+				_collidedPairs.insert(p);
+				p.first->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
+				p.second->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
+			}
+			else 
+			{
+				// in collision
+				p.first->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
+				p.second->GetDebugMesh()->SetColor(Color(0.f, 1.f, 0.f, 1.f));
+			}
+		}
+		else
+		{
+			if (std::find(_collidedPairs.begin(), _collidedPairs.end(), p) != _collidedPairs.end())
+			{
+				// end collision
+				_collidedPairs.erase(p);
+			}
+			else
+			{
+				// no collision
+			}
+		}
+	}
+}

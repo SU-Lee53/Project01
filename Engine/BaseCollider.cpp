@@ -32,9 +32,5 @@ void DebugMesh::Create(function<void(shared_ptr<Geometry<DebugType>>)> _createFu
 	shader->SetPixelShader(SHADER->GetPixelShader("ColliderDebug.hlsl"));
 
 	colorData->Create();
-	colorData->PushData(color);
-
-
-
 
 }

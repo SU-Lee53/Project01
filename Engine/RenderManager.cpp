@@ -198,6 +198,8 @@ void RenderManager::RenderColliderDebugMesh(shared_ptr<DebugMesh> mesh)
 	_transformData.matWorld = mesh->transfom;
 	PushTransformData();
 
+	mesh->colorData->PushData(mesh->color);
+
 	PipelineDesc desc;
 	{
 		desc.inputLayout = mesh->shader->GetInputLayout();
