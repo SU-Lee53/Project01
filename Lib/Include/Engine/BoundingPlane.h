@@ -26,6 +26,7 @@ struct BoundingPlane
 
 	bool Intersects(_In_ const BoundingSphere& sh) const noexcept;
 	bool Intersects(_In_ const BoundingBox& box) const noexcept;
+	bool Intersects(_In_ const BoundingOrientedBox& box) const noexcept;
 	bool Intersects(_In_ const BoundingPlane& box) const noexcept;
 
 	static Vec3 ClosestPoint(const BoundingPlane& plane, const Vec3& point);

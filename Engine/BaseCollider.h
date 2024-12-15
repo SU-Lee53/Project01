@@ -5,6 +5,7 @@ enum class COLLIDER_TYPE
 {
 	Sphere,
 	AABB,
+	OBB,
 	Plane
 };
 

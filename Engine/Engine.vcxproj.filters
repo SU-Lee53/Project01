@@ -260,6 +260,9 @@
     <ClCompile Include="GeometryHelper.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="OBBCollider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -443,6 +446,7 @@
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="GeometryHelper.h" />
+    <ClInclude Include="OBBCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

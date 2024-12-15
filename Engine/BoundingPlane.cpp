@@ -21,6 +21,12 @@ bool BoundingPlane::Intersects(_In_ const BoundingBox& box) const noexcept
     return fabsf(dist) <= pLen;
 }
 
+bool BoundingPlane::Intersects(const BoundingOrientedBox& box) const noexcept
+{
+    // TODO : Fill 
+    return false;
+}
+
 bool BoundingPlane::Intersects(_In_ const BoundingPlane& p) const noexcept
 {
     Vec3 d = Normal.Cross(p.Normal);

@@ -600,6 +600,11 @@ void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 				break;
 
 			case 2:
+				target->AddComponent<OBBCollider>();
+				target->GetCollider()->Init();
+				break;
+				
+			case 3:
 				target->AddComponent<PlaneCollider>();
 				target->GetCollider()->Init();
 				break;
@@ -620,6 +625,10 @@ void SceneMakerScript::ColliderModifier(shared_ptr<GameObject> target)
 
 		case COLLIDER_TYPE::AABB:
 			AABBColliderModifier(col);
+			break;
+			
+		case COLLIDER_TYPE::OBB:
+			OBBColliderModifier(col);
 			break;
 
 		case COLLIDER_TYPE::Plane:
@@ -643,6 +652,11 @@ void SceneMakerScript::SphereColliderModifier(shared_ptr<BaseCollider> target)
 void SceneMakerScript::AABBColliderModifier(shared_ptr<BaseCollider> target)
 {
 	ImGui::Text("AABB");
+}
+
+void SceneMakerScript::OBBColliderModifier(shared_ptr<BaseCollider> col)
+{
+	ImGui::Text("OBB");
 }
 
 void SceneMakerScript::PlaneColliderModifier(shared_ptr<BaseCollider> target)

@@ -74,6 +74,7 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelTypes.cpp" />
+    <ClCompile Include="OBBCollider.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="RasterizerState.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelTypes.h" />
+    <ClInclude Include="OBBCollider.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="RasterizerState.h" />

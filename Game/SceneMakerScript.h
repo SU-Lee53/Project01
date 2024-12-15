@@ -60,6 +60,7 @@ private:
 	
 	void SphereColliderModifier(shared_ptr<BaseCollider> col);
 	void AABBColliderModifier(shared_ptr<BaseCollider> col);
+	void OBBColliderModifier(shared_ptr<BaseCollider> col);
 	void PlaneColliderModifier(shared_ptr<BaseCollider> col);
 
 	
@@ -71,7 +72,7 @@ private:
 	int32 mm_itemHighlightedIdx = 0;
 	bool mm_renderOnOff = true;
 
-	const char* cm_items[3] = { "Sphere", "AABB", "Plane" };
+	const char* cm_items[4] = { "Sphere", "AABB", "OBB", "Plane" };
 	int32 cm_itemSelected = 0;
 	bool cm_itemHighlighted = 0;
 	int32 cm_itemHighlightedIdx = 0;

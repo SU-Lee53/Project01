@@ -11,7 +11,6 @@
 #include "SceneMaker.h"
 #include "GlobalLight.h"
 #include "BaseCollider.h"
-#include "SphereCollider.h"
 #include "Scene.h"
 #include "SceneModelController.h"
 #include "SceneMakerScript.h"
@@ -39,7 +38,7 @@ void SceneMaker::Init()
 	{
 		testObj2->AddComponent<Transform>();
 		testObj2->AddComponent<MeshRenderer>();
-		testObj2->AddComponent<AABBCollider>();
+		testObj2->AddComponent<OBBCollider>();
 
 		auto m = make_shared<Model>();
 		m->LoadFromFiles(L"pool_cue.mesh");

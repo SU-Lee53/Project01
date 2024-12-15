@@ -67,6 +67,8 @@ bool SphereCollider::CheckCollision(shared_ptr<BaseCollider> other)
 		return _boundingSphere.Intersects(dynamic_pointer_cast<SphereCollider>(other)->GetBoundingSphere());
 	case COLLIDER_TYPE::AABB:
 		return _boundingSphere.Intersects(dynamic_pointer_cast<AABBCollider>(other)->GetBoundingBox());
+	case COLLIDER_TYPE::OBB:
+		return _boundingSphere.Intersects(dynamic_pointer_cast<OBBCollider>(other)->GetBoundingBox());
 	case COLLIDER_TYPE::Plane:
 		return CheckIntersectWithPlane(dynamic_pointer_cast<PlaneCollider>(other)->GetBoundingPlane());
 	}

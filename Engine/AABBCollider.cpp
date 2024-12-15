@@ -53,6 +53,8 @@ bool AABBCollider::CheckCollision(shared_ptr<BaseCollider> other)
 		return _boundingBox.Intersects(dynamic_pointer_cast<SphereCollider>(other)->GetBoundingSphere());
 	case COLLIDER_TYPE::AABB:
 		return _boundingBox.Intersects(dynamic_pointer_cast<AABBCollider>(other)->GetBoundingBox());
+	case COLLIDER_TYPE::OBB:
+		return _boundingBox.Intersects(dynamic_pointer_cast<OBBCollider>(other)->GetBoundingBox());
 	case COLLIDER_TYPE::Plane:
 		return CheckIntersectWithPlane(dynamic_pointer_cast<PlaneCollider>(other)->GetBoundingPlane());
 	}
@@ -104,24 +106,6 @@ void AABBCollider::ShrinkToFit()
 	float zDiff = std::fabs(center.z - zMax.z);
 
 	_extentsOrigin = Vec3(xDiff, yDiff, zDiff);
-
-
-	// Something wrong
-	//float xMinDistSq = (xMin - center).LengthSquared();
-	//float xMaxDistSq = (xMax - center).LengthSquared();
-	//float xDistBig = std::sqrtf(std::max(xMinDistSq, xMaxDistSq));
-	//
-	//float yMinDistSq = (yMin - center).LengthSquared();
-	//float yMaxDistSq = (yMax - center).LengthSquared();
-	//float yDistBig = std::sqrtf(std::max(yMinDistSq, yMaxDistSq));
-	//
-	//float zMinDistSq = (zMin - center).LengthSquared();
-	//float zMaxDistSq = (zMax - center).LengthSquared();
-	//float zDistBig = std::sqrtf(std::max(zMinDistSq, zMaxDistSq));
-	//
-	//_extentsOrigin.x = xDistBig;
-	//_extentsOrigin.y = yDistBig;
-	//_extentsOrigin.z = zDistBig;
 
 }
 
