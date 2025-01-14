@@ -81,7 +81,7 @@
       <Filter>소스 파일\Execute</Filter>
     </ClCompile>
     <ClCompile Include="SceneMakerScript.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +124,8 @@
     <ClInclude Include="SceneMaker.h">
       <Filter>소스 파일\Execute</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMakerScript.h" />
+    <ClInclude Include="SceneMakerScript.h">
+      <Filter>소스 파일\Script</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

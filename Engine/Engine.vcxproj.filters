@@ -261,7 +261,7 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="OBBCollider.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\04. Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -446,7 +446,9 @@
       <Filter>소스 파일\04. Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="GeometryHelper.h" />
-    <ClInclude Include="OBBCollider.h" />
+    <ClInclude Include="OBBCollider.h">
+      <Filter>소스 파일\04. Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

@@ -51,7 +51,7 @@ void MouseScript::Update()
 	screenCenterX = rMyRect.left + GAME.GetDesc().width / 2;
 	screenCenterY = rMyRect.top + GAME.GetDesc().height / 2;
 
-	if(INPUT->GetButton(KEY_TYPE::RBUTTON))
+	if(INPUT->GetButton(KEY_TYPE::E))
 	{
 		//if (!_mouseHidden)
 		//{

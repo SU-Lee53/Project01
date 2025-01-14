@@ -72,10 +72,31 @@ void SceneMaker::Init()
 	}
 	CUR_SCENE->AddObject(testObj3);
 
+	auto testObj4 = make_shared<GameObject>();
+	{
+		testObj4->AddComponent<Transform>();
+		testObj4->AddComponent<MeshRenderer>();
+		testObj4->AddComponent<OBBCollider>();
+
+		auto m = make_shared<Model>();
+		m->LoadFromFiles(L"pool_cue.mesh");
+		testObj4->GetComponent<MeshRenderer>()->SetModel(m);
+
+		testObj4->GetComponent<Transform>()->SetPosition(Vec3(-15.f, 0.f, 0.f));
+		testObj4->GetComponent<Transform>()->SetScale(Vec3(1.f, 1.f, 0.25f));
+		
+		testObj4->SetName("Cue");
+
+	}
+	CUR_SCENE->AddObject(testObj4);
+
 	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj2->GetCollider()));
 	CUR_SCENE->AddCollisionSet(make_pair(testObj2->GetCollider(), testObj3->GetCollider()));
 	CUR_SCENE->AddCollisionSet(make_pair(testObj->GetCollider(), testObj3->GetCollider()));
 	CUR_SCENE->AddCollisionSet(make_pair(testObj3->GetCollider(), testObj2->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj4->GetCollider(), testObj->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj4->GetCollider(), testObj2->GetCollider()));
+	CUR_SCENE->AddCollisionSet(make_pair(testObj4->GetCollider(), testObj3->GetCollider()));
 
 
 	auto _cam = make_shared<GameObject>();
